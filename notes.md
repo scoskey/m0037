@@ -1,6 +1,7 @@
 ---
 fontsize: 11pt
 header-includes: |
+  \usepackage{mathpazo}
   \usepackage{setspace}\onehalfspacing
   \usepackage{geometry}
   \usepackage{hyperref}
@@ -143,21 +144,23 @@ The compactness theorem has many interesting applications, to give a taste of th
 
 *Proof idea*: In lectures we will show how to encode proper colorability using well-formed formulas. We will then see how the claims in the theorem statement correspond directly to the statement of the compactness theorem. $\square$
 
-
-
 ### 2. Naive set theory and the proof of compactness
 
-In this section we introduce set theory.
+In this section we introduce set theory, because it is another improtant area of mathematical logic, it is very beautiful, and it will be useful in a few of the things we do.
+
+...
 
 ### 3. Set theory as a foundation
 
 We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
 
+...
+
 ## Part II: First order logic and completeness
 
-The propositional logic we have studied is a mathematical language that captures some portion of the reasoning we do as mathematicians. However the language of boolean connectives leaves out something very important, which is the quantifiers "for all" and "there exists".
+The propositional logic we studied in the previous part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. However the language of boolean connectives leaves out something very important, which is the quantifiers "for all" and "there exists".
 
-"First order" means we have quantifiers and they range over elements of a universe. "Second order" means the quantifiers may range over sets and functions, but we will not study this.
+In this section we introduce first order logic, which reintroduces these quantifiers. The term "first order" means the quantifiers range over elements of a given universe. "Second order" would mean the quantifiers may range over sets and functions, but we will not study this.
 
 ### 4. Syntax and theories
 
