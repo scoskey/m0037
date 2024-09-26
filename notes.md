@@ -11,7 +11,9 @@ header-includes: |
 
 # MATH0037 Lecture Notes
 
-## Part I: Introduction to propositional logic and set theory
+Samuel Coskey
+
+## Part I: Introduction to logic and set theory
 
 *Logic* is the area of study that concerns reasoning. It has of course been studied by both philosophers and mathematicians for several millennia.
 
@@ -22,7 +24,6 @@ Mathematical logic helps us understand what language we can use when discussing 
 The modern field of mathematical logic now consists of three interconnected subfields: first order logic, set theory, and computability theory.
 
 In this module we will focus primarily on first order logic. However we will begin our study with the much simpler propositional logic, along with some elementary set theory to support our studies. We will conclude with an introduction to computability theory and the incompleteness phenomenon.
-
 
 ### 1. Propositional logic
 
@@ -152,13 +153,13 @@ In this section we introduce set theory.
 
 We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
 
-## Part II: First order logic
+## Part II: First order logic and completeness
 
 The propositional logic we have studied is a mathematical language that captures some portion of the reasoning we do as mathematicians. However the language of boolean connectives leaves out something very important, which is the quantifiers "for all" and "there exists".
 
 "First order" means we have quantifiers and they range over elements of a universe. "Second order" means the quantifiers may range over sets and functions, but we will not study this.
 
-### 4. Syntax
+### 4. Syntax and theories
 
 
 
@@ -234,7 +235,7 @@ In order to read such an expression, the reader will have to know the arity of e
 * Thus we will not define whether a given sentence $\sigma$ is true or false in general, but whether it is true or false in a given structure $\mathcal A$. We will say that $\mathcal A$ satisfies $\sigma$, and write $\mathcal A\models\sigma$, when $\sigma$ is true in $\mathcal A$.
 * The formal definiton of satisfaction is somewhat involved, but will work the way you want it to! For example, returning to the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
 
-### 5. Satisfaction
+### 5. Semantics, structures, and satisfaction
 
 In this section we give a formal definition of the satisfaction relation $\mathcal A\models\sigma$. Unsurprisindly, the definition will once again be by induction on the construction of the sentence $\sigma$. Of course all the subformulas of $\phi$ are terms and formulas, not sentences, so we will need to handle the case when formulas $\phi$ have free variables.
 
@@ -380,7 +381,7 @@ The last two rules formalize common proof notions. The UG rule is for proofs tha
     g. $\forall y P(y)$ (UG)
 2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ (Deduction, 1)
 
-### 6. Completeness I
+### 6. Compactness and completeness
 
 Recall that we have proved the Soundness Theorem, which states that any syntactic consequence of $T$ is also a semantic consequence of $T$, that is, if $T\vdash\sigma$ then $T\models\sigma$. In this section we will prove the converse.
 
@@ -525,7 +526,7 @@ This simple idea can also be used to derive the following consequences of compac
 
 We will leave the proofs as exercises.
 
-### 7. More applications of compactness
+### 7. Applications of compactness, more about theories
 
 For the next result, recall that the theory of simple graphs is the theory of a single binary relation $\sim$ which is irreflexive and transitive. Further recall that a graph $G$ is *bipartite* if it can be partitioned into subsets $P,Q$ such that no two vertices of $P$ are adjacent and no two vertices of $Q$ are adjacent. For example, a hexagon is bipartite but a heptagon is not.
 
@@ -619,7 +620,7 @@ A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for 
 
 ## Part III: Computability theory and incompleteness
 
-### 8. Definability and absoluteness
+### 8. Definability, absoluteness, and computability
 
 Consider the structure $(\mathbb N,+,0)$, and compare it with the structure $(\mathbb N,+)$. The second structure has a reduced language, but is it really weaker in the sense that fewer concepts are expressible?
 
@@ -708,7 +709,7 @@ Complementation is clear because $\Sigma_1$ and $\Pi_1$ are dual to one another.
 
 For bounded quantification, we will show that $\Sigma_1$ is closed under bounded quantification. The argument for $\Pi_1$ is similar, and the fact for $\Delta_1$ follows. For this, first observe that $\exists x\in y\exists z\alpha$ is equivalent to $\exists z\exists x\in y\alpha$ which is clearly $\Sigma_1$. Next we claim that $\forall x\in y\exists z\alpha$ is equivalent to $\exists u\forall x\in y\exists z\in u\alpha$. The backward implication is trivial. For the forward implication we create a set $u$ which contains a witness $z_x$ for all possible $x\in y$. $\square$
 
-### 9. Computable functions and recursion
+### 9. Computable functions, recursion, undecidable sets
 
 **Definition** Let $f$ be a function from HF to HF. Then $f$ is *computable* if its graph is decidable.
 
@@ -760,7 +761,7 @@ In the following result, fix any model computation you like, and fix some way of
 
 In this proof we defined a function $r\colon HF\to HF$ with the property that $x\in A\iff r(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$, and it implies that the complexity of $H$ is no simpler than that of $A$. If one wishes to prove that a given set is undecidable, the most common proof technique is to find a reduction from some known undecidable set to the given set.
 
-### 10. Decidability in logic, incompleteness
+### 10. Decidability in logic and incompleteness
 
 In this section we apply our understanding of diagonalization and undecidability in the setting of logical proof. The result will be Godel's incompleteness theorems.
 
