@@ -136,13 +136,13 @@ The compactness theorem can be restated as a statement about consistency.
 
 We leave it to the reader to establish an equivalence between the two statements of the compactness theorem.
 
-The compactness theorem has many interesting applications, to give a taste of this we explore just one of them.
+The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory.
 
 **Theorem** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ can be properly colored using $n$ colors. Then $G$ can be properly colored using $n$ colors. In particular, every finite or infinite planar graph can be properly colored using $4$ colors.
 
-*Proof*: 
+*Proof idea*: In lectures we will show how to encode proper colorability using well-formed formulas. We will then see how the claims in the theorem statement correspond directly to the statement of the compactness theorem. $\square$
 
-#### Deductions
+
 
 ### 2. Naive set theory and the proof of compactness
 
