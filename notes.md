@@ -38,7 +38,7 @@ We begin by introducing the *language* of propositional logic. Every language ha
 * propositional variable symbols: $P_1,P_2,P_3,\ldots$ (or sometimes $P,Q,R,\ldots$, $A,B,C,\ldots$, etc)
 * brackets, also called parentheses: '$($', '$)$'
 
-We will see later on that the connective symbols $\vee,\rightarrow,\leftrightarrow$ may all be avoided. Moreover, even the brackets may be avoided if one uses prefix notation instead of infix notation. (That is, if one writes $\wedge PQ$ instead of $(P\wedge Q)$.) For the moment we will continue with the more familiar infix notation.
+We will see later on that the connective symbols $\vee,\rightarrow,\leftrightarrow$ may all be avoided. Moreover, even the brackets may be avoided if one uses prefix notation instead of infix notation. (That is, if one writes $\mathord{\wedge}PQ$ instead of $(P\wedge Q)$.) For the moment we will continue with the more familiar infix notation.
 
 Next, a language should tell us how to put symbols from the alphabet together.
 
@@ -144,17 +144,66 @@ The compactness theorem has many interesting applications, to give a taste of th
 
 *Proof idea*: In lectures we will show how to encode proper colorability using well-formed formulas. We will then see how the claims in the theorem statement correspond directly to the statement of the compactness theorem. $\square$
 
+#### Deductions
+
+The concept of $\Sigma\models\alpha$ is a kind of implication, that is, we understand it to mean that if the formulas in $\Sigma$ are taken as true, then $\alpha$ is true. But the "proof" of $\alpha$ is tedious and unenlightening: go through every prossible truth assignment $v$, check whether $v$ satisfies each of the well-formed formulas in $\Sigma$, and if so, check whether $v$ satisfies $\alpha$.
+
+How can we show that the truth of $\Sigma$ implies the truth of $\alpha$ using logical reasoning. The answer is a *deduction*, which is a sequence of steps, together with justification that each step follows from the previous ones. 
+
+**Definition** Let $\alpha,\beta$ be well-formed formulas. *Modus ponens* is the deductive rule that if $\alpha$ is true, and $\alpha\rightarrow\beta$ is true, then $\beta$ is true.
+
+We leave it to the reader to verify that the modus ponens rule is true semantically, that is, $\set{\alpha,\alpha\rightarrow\beta}\models\beta$.
+
+**Definition** Let $\Sigma$ be a set of well-formed formulas, and let $\alpha$ be a well-formed formula. We define $\Sigma\vdash\alpha$, read "$\Sigma$ syntactically implies $\alpha$", if there exists a sequence of well-formed formulas $\alpha_1,\ldots,\alpha_n$
+
 ### 2. Naive set theory and the proof of compactness
 
 In this section we introduce set theory, because it is another improtant area of mathematical logic, it is very beautiful, and it will be useful in a few of the things we do.
 
-...
+* We have promised that set theory is somehow the theory of everything, meaning all other objects of mathematical study can be regarded as sets. Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets?
+* Von Neumann ordinals: an ordinal is a counting number (as opposed to a quantity measuring number). Define $0,1,2,3,\ldots$ as particular hereditarily finite sets.
+* We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
+* In general, an ordinal is equal to the collection of ordinals that came before it. Thus the Von Neumann ordinals will be extended into the infinite by setting $\omega=\set{0,1,2,3,\ldots}$, $\omega+1=\set{0,1,2,3,\ldots,\omega}$ and so on. Infinity plus one!
+* Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
+* Another of the most important mathematical objects is a function. You may have seen the definition of a function as a set of ordered pairs (input,output).
+* Ordered pair: $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$. We have to check this "works". Observe that other more naive attempts don't work.
+* Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$. Example: less than
+* Function: 
+* In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph.
+* Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
+* Injective, surjective, and bijective: ...
+* Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
+* In order to show that the cartisian product exists, we actually need a new axiom!
+* Replacement Axiom: For each logical formula $\phi(x,y)$ satisfying $\phi(x,y)$ and $\phi(x,y')$ implies $y=y'$, the following is an axiom: For all A, there exists B which is the image of phi restricted to the domain $A$.
+* Once again, the replacement axiom is an axiom scheme.
+* Theorem. For any sets $A,B$ we can construct the cartesian product $A\times B$.
+* Proof: First, for each $b\in B$ we can use replacement with $\phi(x,y)$ being "$(x,b)=y$" and domain $A$ to construct each $A\times\set{b}$. Then use replacement with phi(x,y) being "$A\times\set{x}=y$" to construct the set $\set{A\times\set{b}\mid b\in B}$. Finally apply union to this to get $AxB$.
+* For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
 
 ### 3. Set theory as a foundation
 
 We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
 
-...
+* We have said that set theory can be used as a foundation for essentially all of mathematics. So far we have explicitly constructed the natural numbers and alluded to the construction of the real numbers.
+* Now we do so more explicitly.
+* Def. $\mathbb N=\omega$.
+* Def. $\mathbb Q$ is the set of triples $(i,m,n)$ in $2\times\omega\times\omega$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
+* Here we intrepret $i=0$ as positivet, $i=1$ as negative, $m$ as the numerator, and $n$ as the denominator.
+* Def. $\mathbb Z$ is the subset of $\mathbb Q$ where $n=1$.
+* It is an exercise to define the operations $+,\times$ and the $<$ relation on $\mathbb Q$ with this definition. For instance $(0,m,n)\times(0,m',n')=$ the result of canceling common factors from $(0,mm',nn')$.
+* Observe that with this definiton we don't have $\mathbb N\subset\mathbb Z$. However we can identify $\mathbb N$ with the subset of $(0,m,1)$. This identification would be cumbersome to write explicitly, but once we agree it can be done in principle, we abuse notation and pretend it is being done behind the scenes.
+* So far everything constructed is contained in $V_\omega$.
+* Def. $\mathbb R$ is the set of dedekind cuts of $\mathbb Q$. Here $C\subset\mathbb Q$ is a cut if
+  * $C\neq\emptyset,\mathbb Q$
+  * $C$ is closed downwards
+  * $C$ has no last element
+* Again one must define the opertaions $+,\times$ and $<$ relation. For instance $C+C'=\set{q+q'\mid q\in C,q'\in C'}$.
+* Def. $\mathbb C=\mathbb R\times\mathbb R$.
+* Def. $\mathbb R[x]$ is the set $\mathbb R^{<\omega}=\bigcup_n\mathbb R^n$. Each sequence $a_0,\ldots,a_n$ is interpreted as the polynomial $a_0+a_1x+\cdots+a_nx^n$.
+* Def. $\mathbb R[[x]]$ is the set $\mathrm{Fun}(\omega,\mathbb R)$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal series $\sum a_nx^n$.
+* There are also algebraic descriptions of these constructions: $\mathbb N$ is a semigroup, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
+* We can also express logic in set theory! A logical expression is a sequence of logical symbols $\wedge,\vee,\forall,\exists,\ldots$ and variables and non-logical symbols. We can use even numbers $2k$ for variables $x_1,x_2,\ldots$, and use odd numbers for the other symbols. Thus a logical expression is a finite sequence of natural numbers, or element of $\omega^{<\omega}$.
+* A proof is sequence of logical expressions, where each one follows from the previous by simple deductive rules. Thus a proof is a finite sequence of elements of $\omega^{<\omega}$, or an element of $()\omega^{<\omega})^{<\omega}$. It is still an element of $V_\omega$!
 
 ## Part II: First order logic and completeness
 
