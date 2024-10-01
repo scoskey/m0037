@@ -66,9 +66,9 @@ The following are not well-formed formulas:
 * $((P\rightarrow)$
 * $P\wedge Q\mathbin{\neg} R$
 
-The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well-formed formula, but we can infer it intends to mean the same as $((P\wedge Q)\vee R)$. When there is no cause for confusion we will sometimes write such incorrect expressions, and ask the reader to insert brackets in their mind.
+The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well-formed formula because it has too few brackets. As humans we can infer it intends to mean the same as $((P\wedge Q)\vee R)$. When there is no cause for confusion we will sometimes write such incorrect expressions, and ask the reader to mentally insert the needed brackets.
 
-Many authors introduce an order of operations, for instance $\wedge$ takes precedence over $\vee$. Thus for example $P\wedge Q\vee R$ may be also interpreted as $((P\wedge Q)\vee R)$. Again we will sometimes let the reader insert these brackets in their mind.
+Many authors introduce an order of operations. For example if we state that $\wedge$ takes precedence over $\vee$ (which is standard for many authors), then $P\wedge Q\vee R$ may again be interpreted as $((P\wedge Q)\vee R)$. We will try to avoid this and include enough brackets to make it clear .
 
 In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is all about rules, you can think of it as analogous to grammar for languages. for example, what is and isn’t considered a well-formed formula, much like grammar. On the other hand, semantics is all about meaning, for example, which formulas might be considered true or false.
 
@@ -134,15 +134,25 @@ The compactness theorem can be restated as a statement about consistency.
 
 **Definition** Let $\Sigma$ be a set of well-formed formulas. We say $\Sigma$ is *consistent* if there exists a truth assignment $v$ such that $v\models\Sigma$.
 
+We invite the reader to verify that $\Sigma$ is consistent if and only if $\Sigma\not\models (P\wedge\neg P)$. Sometimes the symbol $\bot$ is used for a tautologically false formula such as $P\wedge\neg P$. Thus we may say $\Sigma$ is consistent if and only if $\Sigma\not\models\bot$.
+
 **Theorem** (The compactness theorem again). Let $\Sigma$ be a set of well-formed formulas. If every finite subset of $\Sigma$ is consistent, then $\Sigma$ is consistent.
 
 We leave it to the reader to establish an equivalence between the two statements of the compactness theorem.
 
-The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory.
+The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to \set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
 
-**Theorem** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ can be properly colored using $n$ colors. Then $G$ can be properly colored using $n$ colors. In particular, every finite or infinite planar graph can be properly colored using $4$ colors.
+**Theorem** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring using $n$ colors. Then $G$ has a proper coloring using $n$ colors. In particular, every planar graph (finite or infinite) has a proper coloring using $4$ colors.
 
-*Proof idea*: In lectures we will show how to encode proper colorability using well-formed formulas. We will then see how the claims in the theorem statement correspond directly to the statement of the compactness theorem. $\square$
+*Proof*: They key is that proper colorability can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_{v,i}$, where $v$ ranges over the vertices $V$ and $i\in 1,\ldots,n$. We then let $\Sigma$ consist of the following axioms:
+* $P_{v,1}\wedge\cdots\wedge P_{v,n}$ for each $v\in V$
+* ...
+
+The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a proper coloring $\chi$ using $n$ colors.
+
+We claim that every finite subset of $\Sigma$ is satisfiable...
+
+Therefore by the compactness theorem, $\Sigma$ is satisfiable. As we have seen, this implies the desired result. $\square$
 
 #### Deductions
 
@@ -152,9 +162,41 @@ How can we show that the truth of $\Sigma$ implies the truth of $\alpha$ using l
 
 **Definition** Let $\alpha,\beta$ be well-formed formulas. *Modus ponens* is the deductive rule that if $\alpha$ is true, and $\alpha\rightarrow\beta$ is true, then $\beta$ is true.
 
-We leave it to the reader to verify that the modus ponens rule is true semantically, that is, $\set{\alpha,\alpha\rightarrow\beta}\models\beta$.
+We leave it to the reader to verify that the modus ponens rule is true semantically, that is, $\set{\alpha,\alpha\rightarrow\beta}\models\beta$. This should help shed some light on the reasons for the truth table for the connective $\rightarrow$.
 
-**Definition** Let $\Sigma$ be a set of well-formed formulas, and let $\alpha$ be a well-formed formula. We define $\Sigma\vdash\alpha$, read "$\Sigma$ syntactically implies $\alpha$", if there exists a sequence of well-formed formulas $\alpha_1,\ldots,\alpha_n$
+**Definition** Let $\Sigma$ be a set of well-formed formulas, and let $\alpha$ be a well-formed formula. We define $\Sigma\vdash\alpha$, read "$\Sigma$ syntactically implies $\alpha$", if there exists a sequence of well-formed formulas $\alpha_1,\ldots,\alpha_n$ such that $\alpha_n=\alpha$, and for every $i\leq n$ at least one of the following is true:
+
+> (a) $\alpha_i$ is a hypothesis, that is, an element of $\Sigma$  
+(b) $\alpha_i$ is a tautology  
+(c) $\alpha_i$ follows from two of the previous formulas in $\alpha_1,\ldots,\alpha_{i-1}$ by modus ponens
+
+In other words, a deduction is a very simple kind of proof that the hypotheses $\Sigma$ imply the conclusion $\alpha$. While $\Sigma\models\alpha$ must be verified abstractly using truth tables, $\Sigma\vdash\alpha$ may be verified by checking the steps. The deduction includes its own reasoning.
+
+We remark that it is overkill to allow *all* tautologies to be included in part (b) of the definition. Those who study deductions typically include only tautologies from a selected list of approved templates. For example, you can imagine including $\neg(\neg\alpha)\leftrightarrow\alpha$, $(\alpha\wedge\beta)\rightarrow\alpha$, and so on. By the same token, some authors use a minimal set of tautologies in (b) but expand the deductive rules allowed in (c). 
+
+Since studying propositional logic is not our primary goal, we will stick with the simple definition (a)–(c) above in order to exposit a few key results. We invite the interested reader to to look up other standard deductive systems.
+
+**Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$ and let $\alpha=P$. We show that $\Sigma\vdash\alpha$ using the following deduction.
+
+1. $(\neg S)\vee R$ — (hypothesis)
+2. $((\neg S)\vee R)\rightarrow (S\rightarrow R)$ — (tautology)
+3. $S\to R$ — (modus ponens)
+4. $S$ — (hypothesis)
+5. $R$ (modus ponens)
+6. $R\rightarrow P$ (hypothesis)
+7. $P$ (modus ponens)
+
+We have now introduced two distinct ways of understanding logical consequence, semantic implication $\Sigma\models\alpha$ and syntactic implication $\Sigma\vdash\alpha$. We should naturally try to understand how the two are connected, and in fact we will see that the two are equivalent. What's provable is true, and what's true is provable.
+
+**Theorem** (Soundness and completeness theorems) Let $\Sigma$ be a set of well-formed formulas and $\alpha$ a well-formed formula. Then $\Sigma\models\alpha$ if and only if $\Sigma\vdash\alpha$. 
+
+*Proof*: The soundness portion says that if $\Sigma\vdash\alpha$ then $\Sigma\models\alpha$, that is, deductions are valid or *sound*. This is due to the fact that every step in a deduction is valid. The steps of the form (a) and (b) are evidently valid, and the reader should have already checked that modus ponens (c) is valid. The result follows using induction along the length of the deduction.
+
+The completeness portion says that if $\Sigma\models\alpha$ then $\Sigma\vdash\alpha$, that is, the deductions witness all the semantic implications and so are *complete*. To accomplish this, we first note that if $\Sigma\models\alpha$ then by the compactness theorem there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\models\alpha$.
+
+Since $\Sigma_0$ is finite, we may enumerate now the well-formed formulas in $\Sigma_0$ as $\sigma_1,\ldots,\sigma_n$. We leave it to the reader to show there is a deduction from $\Sigma_0$ of the well-formed formula $\sigma_1\wedge\cdots\wedge\sigma_n$ (insert brackets appropriately). Furthermore, it follows from $\Sigma_0\models\alpha$ that $(\sigma_1\wedge\cdots\wedge\sigma_n)\rightarrow\alpha$ is a tautology. The last two claims plus modus ponens show that $\Sigma_0\vdash\alpha$, and therefore that $\Sigma\vdash\alpha$. $\square$
+
+We see from the proof above that the compactness theorem implies the completeness theorem. We invite the reader to prove that the reverse is also true. The key is that $\vdash$ automatically satisfies the compactness-like property: if $\Sigma\vdash\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\vdash\alpha$. This is true because any deduction of $\alpha$ from $\Sigma$ has finitely many steps, and therefore may only use finitely many of the well-formed formulas in $\Sigma$.
 
 ### 2. Naive set theory and the proof of compactness
 
