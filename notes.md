@@ -102,7 +102,7 @@ For the record, we state that the above definition is *well-defined*, meaning th
 
 When $v\models\alpha$ we think to ourselves that $\alpha$ is true under the assumptions contained within $v$. This is the semantic meaning of a well-formed formula $\alpha$: if we know the truth values of the propositional symbols then we can use the structure of $\alpha$ to derive the truth value of $\alpha$.
 
-**Example** In lectures we will give examples of how to inductively decide whether $v\models\alpha$ for various truth assignments $v$ and well-formed formulas $\alpha$.
+**Example** Let $\alpha$ be the well-formed formula $((P\leftrightarrow Q)\wedge(Q\rightarrow R))\rightarrow P$. In lecture we will consider several truth assignments $v$ and analyse in each case whether $v\models\alpha$.
 
 Typically, different truth assignments will give rise to different truth values for $\alpha$. However for some very special formulas $\alpha$, the truth assignment may have no impact on the outcome. For instance, if $\alpha$ is the formula $P\vee\neg P$, then it is easy to check that every truth assignment $v$ results in $v\models\alpha$.
 
@@ -114,7 +114,7 @@ The tautologies are thus little bits of reasoning that are always true, regardle
 
 Semantic implication in propositional logic is sometimes also called "tautological implication". We invite the reader to verify that $\alpha\models\beta$ if and only if $\alpha\to\beta$ is a tautology.
 
-**Example** In lectures we will present one or two examples of semantic implications.
+**Example** Let $\alpha=(P\leftrightarrow Q)\wedge(Q\rightarrow R)$ and $\beta=P\rightarrow R$. In lecture we will run through the possibilities for $v$ and thereby conclude that $\alpha\models\beta$.
 
 We next generalise the $\models$ notation once more to allow sets of formulas to be used.
 
@@ -122,7 +122,7 @@ We next generalise the $\models$ notation once more to allow sets of formulas to
 
 **Definition** Let $\Sigma$ be a set of well-formed formulas, and $\alpha$ be a well-formed formula. We say $\Sigma\models\alpha$ if for every truth assignment $v$, if $v\models\Sigma$ then $v\models\alpha$.
 
-**Example** In lectures we will present one or two examples of semantic implications where the left-hand side is a set of formulas.
+**Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$, and let $\alpha=P$. In lecture we will show that $\Sigma\models\alpha$.
 
 The semantic implication $\Sigma\models\alpha$ is more interesting when $\Sigma$ is infinite (why is this?). The next result states that even when $\Sigma$ is infinite, just a finite subset of $\Sigma$ is needed.
 
