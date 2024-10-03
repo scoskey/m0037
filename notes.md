@@ -20,7 +20,7 @@ Samuel Coskey
 
 In this module we will study *mathematical logic*, which has been studied since late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
 
-Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and understand mathematical structures like groups, rings, graphs, and so on.
+Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like groups, rings, graphs, and so on.
 
 The modern field of mathematical logic now consists of three interconnected subfields: first order logic, set theory, and computability theory.
 
