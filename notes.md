@@ -14,7 +14,11 @@ header-includes: |
 
 Samuel Coskey
 
+Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and more.
+
 ## Part I: Introduction to logic and set theory
+
+### Introduction
 
 *Logic* is the area of study that concerns reasoning. It has of course been studied by both philosophers and mathematicians for several millennia.
 
@@ -202,33 +206,56 @@ We see from the proof above that the compactness theorem implies the completenes
 
 ### 2. Naive set theory and the proof of compactness
 
-In this section we introduce set theory, because it is another improtant area of mathematical logic, it is very beautiful, and it will be useful in a few of the things we do.
+We begin this section with a brief break from propositional logic to study set theory. There are several reasons for this detour. Set theory is very beautiful, and relevant to many areas of mathematics including analysis and algebra. Importantly for us, some set theory will also be useful in our further studies of logic.
 
-* We have promised that set theory is somehow the theory of everything, meaning all other objects of mathematical study can be regarded as sets. Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets?
+#### Set theory
+
+In set theory, everything is a set. The primary rule is that two sets are equal whenever they have the same elements. That is, $x=y$ if and only if for all other sets $z$, we have $z\in x\leftrightarrow z\in y$. That way a set is a collection of objects (which are also sets by the way) where order and repetition don't matter.
+
+The starting point for set theory is therefore the empty set, denoted $\emptyset$. The empty set has the property that $x\in\emptyset$ is always fales. We leave it to the reader to verify that the empty set is unique.
+
+
+#### Pairs, relations, and functions
+
+* Ordered pair: $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$. We have to check this "works". Observe that other more naive attempts don't work.
+* Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$. Example: less than
+* Another of the most important mathematical objects is a function. You may have seen the definition of a function as a set of ordered pairs (input,output).
+* In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph.
+* Function: 
+* Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
+* Injective, surjective, and bijective: ...
+* Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
+* For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
+
+#### Rooted trees and Konig's lemma
+
+In combinatorics a tree is a special kind of graph. In set theory we view trees slightly differently, with the nodes labeled by elements of a set $X$.
+
+**Defintion**. Let $X$ be any set.
+* The set of sequences on $X$, denoted $X^{\mathbb N}$ is the set of all functions $f\colon\mathbb N\to X$.
+* The set of *partial sequences* on $X$, denoted $X^{<\mathbb N}$ is the set of all functions $t\colon n\to X$ where $n\in\mathbb N$.
+* If $s,t$ are partial sequences, we say $s$ is an *initial segment* of $t$, or $t$ *extends* $s$, if $s\subset t$.
+* A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ which is closed under initial segments, that is, if $s\subset t\in T$ then $s\in T$.
+* A sequence $f\in X^{\mathbb N}$ is called a *branch* through $T$ if for every partial sequence $t$ such that $t\subset f$, $t\in T$.
+
+**Example** In lectures we will give several examples of rooted trees and branches.
+
+
+
+
+### 3. Set theory as a foundation
+
+We have promised that set theory is somehow the theory of everything, meaning all other objects of mathematical study can be regarded as sets. Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets?
+
+We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
+
+We have said that set theory can be used as a foundation for essentially all of mathematics. So far we have explicitly constructed the natural numbers and alluded to the construction of the real numbers.
+
 * Von Neumann ordinals: an ordinal is a counting number (as opposed to a quantity measuring number). Define $0,1,2,3,\ldots$ as particular hereditarily finite sets.
 * We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
 * In general, an ordinal is equal to the collection of ordinals that came before it. Thus the Von Neumann ordinals will be extended into the infinite by setting $\omega=\set{0,1,2,3,\ldots}$, $\omega+1=\set{0,1,2,3,\ldots,\omega}$ and so on. Infinity plus one!
 * Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
-* Another of the most important mathematical objects is a function. You may have seen the definition of a function as a set of ordered pairs (input,output).
-* Ordered pair: $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$. We have to check this "works". Observe that other more naive attempts don't work.
-* Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$. Example: less than
-* Function: 
-* In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph.
-* Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
-* Injective, surjective, and bijective: ...
-* Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
-* In order to show that the cartisian product exists, we actually need a new axiom!
-* Replacement Axiom: For each logical formula $\phi(x,y)$ satisfying $\phi(x,y)$ and $\phi(x,y')$ implies $y=y'$, the following is an axiom: For all A, there exists B which is the image of phi restricted to the domain $A$.
-* Once again, the replacement axiom is an axiom scheme.
-* Theorem. For any sets $A,B$ we can construct the cartesian product $A\times B$.
-* Proof: First, for each $b\in B$ we can use replacement with $\phi(x,y)$ being "$(x,b)=y$" and domain $A$ to construct each $A\times\set{b}$. Then use replacement with phi(x,y) being "$A\times\set{x}=y$" to construct the set $\set{A\times\set{b}\mid b\in B}$. Finally apply union to this to get $AxB$.
-* For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
 
-### 3. Set theory as a foundation
-
-We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
-
-* We have said that set theory can be used as a foundation for essentially all of mathematics. So far we have explicitly constructed the natural numbers and alluded to the construction of the real numbers.
 * Now we do so more explicitly.
 * Def. $\mathbb N=\omega$.
 * Def. $\mathbb Q$ is the set of triples $(i,m,n)$ in $2\times\omega\times\omega$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
