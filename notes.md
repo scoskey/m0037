@@ -210,22 +210,38 @@ We begin this section with a brief break from propositional logic to study set t
 
 #### Set theory
 
-In set theory, everything is a set. The primary rule is that two sets are equal whenever they have the same elements. That is, $x=y$ if and only if for all other sets $z$, we have $z\in x\leftrightarrow z\in y$. That way a set is a collection of objects (which are also sets by the way) where order and repetition don't matter.
+Beginning informally, a *set* is a collection of mathematical objects which we call its *elements*. For instance $\mathbb Q$ is a set whose elements are the rational numbers. We use $\in$ for the element relation, so for instance $\frac35\in\mathbb Q$ and $\sqrt2\notin\mathbb Q$.
 
-The starting point for set theory is therefore the empty set, denoted $\emptyset$. The empty set has the property that $x\in\emptyset$ is always fales. We leave it to the reader to verify that the empty set is unique.
+For finite sets we use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We can also use the *set-builder* notation $x=\set{z:\text{some property of }z}$ to abbreviate that $x$ is the set of all $z$ such that some property of $z$ is true. For instance we may write $\mathbb Q=\set{z:z\text{ is a rational number}}$.
 
+The foundation of set theory is the *extensionality axiom*, which states that two sets are equal whenever they have the same elements. Formally, if $x,y$ are sets then $x=y$ if and only if for all sets $z$, we have $z\in x\leftrightarrow z\in y$.
+
+This axiom distinguishes sets from other similar objects like lists and multisets by enforcing that the order or repetition of elements doesn't matter. Thus if $x=\set{1,2,3}$ and $y=\set{3,2,2,1}$ then $x=y$.
+
+You may be aware that this informal or "naive" approach is not entirely sound, as it can lead to falsehoods such as Russell's paradox. In this section we will proceed anyway, in the next section we will be more careful.
 
 #### Pairs, relations, and functions
 
-* Ordered pair: $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$. We have to check this "works". Observe that other more naive attempts don't work.
-* Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$. Example: less than
-* Another of the most important mathematical objects is a function. You may have seen the definition of a function as a set of ordered pairs (input,output).
-* In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph.
-* Function: 
-* Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
-* Injective, surjective, and bijective: ...
-* Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
-* For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
+Here we introduce some foundational notation and constructs using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, $\smallsetminus$, and $\triangle$.
+
+**Definition** Given obects $a,b$, the *ordered pair* $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$.
+
+We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\{a\},\{b\}}$.
+
+**Definition** Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
+
+
+**Definition** Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$.
+
+For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
+
+Another of the most important mathematical objects is a function. In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph, a set of ordered pairs (input, output).
+
+**Definition** Function, Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
+
+**Definition** Injective, surjective, and bijective: ...
+
+
 
 #### Rooted trees and Konig's lemma
 
@@ -238,9 +254,45 @@ In combinatorics a tree is a special kind of graph. In set theory we view trees 
 * A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ which is closed under initial segments, that is, if $s\subset t\in T$ then $s\in T$.
 * A sequence $f\in X^{\mathbb N}$ is called a *branch* through $T$ if for every partial sequence $t$ such that $t\subset f$, $t\in T$.
 
+Predecessors and successors and immediate successors
+
 **Example** In lectures we will give several examples of rooted trees and branches.
 
+We now give a fundamental application of the propositional compactness theorem to the study of rooted trees.
 
+**Theorem** (Konig's lemma) Let $T$ be a rooted tree such that every $t\in T$ has just finitely many immediate successors and such that $T$ is infinite. Then $T$ has a branch.
+
+*Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
+
+* $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$
+* $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, and $i\neq j$
+* $P_{n,i}\rightarrow P_{m,j})$ for each $n,i,m,j$ such that $t_{n,i}\subset t_{n,j}$
+
+The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a branch through $T$.
+
+...
+
+$\blacksquare$
+
+Konig's lemma has many important applications, we present just one. We first note that the space $2^{\mathbb N}$ has a metric in which two sequences are close together if they agree on a long partial sequence. Formally we may let $d(x,y)=1/N$, where $N$ is the largest number such that $x\restriction N=y\restriction N$. Thus a sequence of sequences $x_n$ converges to $x$ if the length of agreement between $x_n$ and $x$ goes to infinity.
+
+**Theorem** $2^{\mathbb N}$ is compact.
+
+*Proof*: Copy lars use Konig's lemma or leave as an exercise with hints $\blacksquare$
+
+The previous result is not entirely relevant to our module, but helps explain the use of the term "compactness" in the propositional compactness theorem.
+
+As we saw above, the proposional compactness theorem implies Konig's lemma. We now show that the reverse is also true.
+
+**Theorem** Assuming Konig's lemma is true, the propositional compactness theorem is true.
+
+*Proof*:
+
+$\blacksquare$
+
+We close our discussion of compactness by proving Konig's lemma directly. This therefore completes the proof of the propositional compactness theorem.
+
+*Direct proof of Konig's lemma*: Let $T$ be a tree such that every level of $T$ is finite and $T$ is infinite. We recursively define 
 
 
 ### 3. Set theory as a foundation
@@ -250,6 +302,10 @@ We have promised that set theory is somehow the theory of everything, meaning al
 We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
 
 We have said that set theory can be used as a foundation for essentially all of mathematics. So far we have explicitly constructed the natural numbers and alluded to the construction of the real numbers.
+
+In set theory, **everything** is a set, meaning we do not distinguish between sets and elements.
+
+The starting point for set theory is therefore the empty set, denoted $\emptyset$. The empty set has the property that $x\in\emptyset$ is always fales. We leave it to the reader to verify that the empty set is unique.
 
 * Von Neumann ordinals: an ordinal is a counting number (as opposed to a quantity measuring number). Define $0,1,2,3,\ldots$ as particular hereditarily finite sets.
 * We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
