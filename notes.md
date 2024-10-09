@@ -235,7 +235,9 @@ For instance, $\mathbb R\times\mathbb R$ is the Cartesian plane, and $\mathbb Z\
 
 For example, the $<$ relation on real numbers is a binary relation between $\mathbb R$ and itself. Formally, $<$ is the set of all pairs $(m,n)\in\mathbb R\times\mathbb R$ such that $m$ is less than $n$. Thus $<$ is "physically" a region in the plane.
 
-Functions are special examples of binary relations. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
+Many important types of mathematical objects are binary relations. All of the following are binary relations: partial orders, linear orders, equivalence relations, combinatorial graphs, and so on. The $<$ example above is a linear order.
+
+Another special example of a binary relation is a functions. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
 
 **Definition** Let $A$ and $B$ be sets.
 * A *function* from $A$ to $B$ is a binary relation $f\subset A\times B$ with the property: for all $a\in A$ there exists a unique $b\in B$ such that $(a,b)\in f$.
@@ -251,13 +253,19 @@ When $f$ is a function from $A$ to $B$ we may write $f\colon A\to B$, and when $
 
 We note that in other resources the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
 
+When the exponent set is finite, we can think of $B^A$ as tuples of elements of $B$. In more detail, for each natural number $n$, let the symbol $n$ stand for the set $\{0,\ldots,n-1\}$. Then $B^n$ consists of all functions $f\colon\{0,\ldots,n-1\}\to B$. Given such a function $f$, we can think of it as an ordered $n$-tuple $(f(0),\ldots,f(n-1))$, which is a generalisation of an ordered pair.
+
+**Definition** Let $X$ be a set. Then An $n$-ary *relation* on $X$ is a subset $R\subset X^n$.
+
+For example, if $G$ is a group then it possesses a multiplication operation $g\cdot h$. We can think of $\cdot$ as a function $G\times G\to G$. We can also think of $\cdot$ as the ternary relation $R\subset G^3$ consisting of all triples $(g,h,j)\in R$ such that $g\cdot h=j$.
+
 #### Rooted trees, Konig's lemma, and compactness
 
 In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
 
 **Defintion**. Let $X$ be any set.
-* The *full tree* on $X$, denoted $X^{<\mathbb N}$ is the set of all functions $t$ whose domain is an initial segment of $\mathbb N$ and whose range is contained in $X$, that is, $t\colon\set{0,\ldots,n-1}\to X$ for some $n\in\mathbb N$.
-* The $n$th *level* of $X^{<\mathbb N}$ is the set of all $t$ of length $n$, that is, $|t|=n$.
+* The *full tree* on $X$, denoted $X^{<\mathbb N}$, is defined as $\bigcup_{n\in\mathbb N}X^n$.
+* The $n$th *level* of $X^{<\mathbb N}$ is $X^n$; we say elements on this level have *length* $n$.
 * If $s,t\in X^{<\mathbb N}$, we say $s$ is a *predecessor* of $t$, or $t$ is a *successor* of $s$, if $s\subset t$.
 * $t$ is an *immediate successor* of $s$ if $t$ is a successor of $s$ and $|t|=|s|+1$.
 
@@ -298,7 +306,7 @@ Konig's lemma has many important applications, we present just one. We first rec
 
 Let $T$ be the set of all $s\in 2^{<\mathbb N}$ such that $s\subset f_n$ for infinitely many $n\in\mathbb N$. Then it is easy to verify that $T$ is a tree. Moreover, the pigeonhole principle implies that the levels of $T$ are nonempty. Thirdly, since $T\subset 2^{<\mathbb N}$, the levels of $T$ are obviously finite. Therefore by Konig's lemma there exists a branch $f$ through $T$.
 
-We now construct a subsequence of $f_n$ which converges to $f$. To do so, first observe that for every $k$ there are infinitely many $n\in\mathbb N$ such that $d(f,f_n)\leq1/k$. We can therefore inductively choose indices $n_k$ such that (1) $d(f,f_{n_k})\leq1/k$ and (2) $n_k>n_{k-1}$. We have therefore found a subsequence of $f_n$ which converges to $f$. $\blacksquare$
+We now construct a subsequence of $f_n$ which converges to $f$. To do so, first observe that for every $k$ there are infinitely many $n\in\mathbb N$ such that $d(f,f_n)\leq1/k$. We can therefore inductively choose indices $n_k$ such that: (1) $d(f,f_{n_k})\leq1/k$, and (2) $n_k>n_{k-1}$. We have therefore found a subsequence $f_{n_k}$ of $f_n$ which converges to $f$. $\blacksquare$
 
 We are now ready to return from our detour into set theory (and some light analysis) to the propositional compactness theorem. 
 
