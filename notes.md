@@ -251,7 +251,7 @@ When $f$ is a function from $A$ to $B$ we may write $f\colon A\to B$, and when $
 
 We note that in other resources the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
 
-#### Rooted trees and Konig's lemma
+#### Rooted trees, Konig's lemma, and compactness
 
 In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
 
@@ -294,25 +294,25 @@ Konig's lemma has many important applications, we present just one. We first rec
 
 **Theorem** Let $2=\{0,1\}$. The metric space $2^{\mathbb N}$ is compact.
 
-*Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence $f_{n_k}$ which converges to some $f\in 2^{\mathbb N}$ in the sense of the metric described above.
+*Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence of $f_n$ which converges to some limit $f\in 2^{\mathbb N}$ in the sense of the metric described above.
 
-Copy lars use Konig's lemma or leave as an exercise with hints
+Let $T$ be the set of all $s\in 2^{<\mathbb N}$ such that $s\subset f_n$ for infinitely many $n\in\mathbb N$. Then it is easy to verify that $T$ is a tree. Moreover, the pigeonhole principle implies that the levels of $T$ are nonempty. Thirdly, since $T\subset 2^{<\mathbb N}$, the levels of $T$ are obviously finite. Therefore by Konig's lemma there exists a branch $f$ through $T$.
 
-$\blacksquare$
+We now construct a subsequence of $f_n$ which converges to $f$. To do so, first observe that for every $k$ there are infinitely many $n\in\mathbb N$ such that $d(f,f_n)\leq1/k$. We can therefore inductively choose indices $n_k$ such that (1) $d(f,f_{n_k})\leq1/k$ and (2) $n_k>n_{k-1}$. We have therefore found a subsequence of $f_n$ which converges to $f$. $\blacksquare$
+
+We are now ready to return from our detour into set theory (and some light analysis) to the propositional compactness theorem. 
+
+Recall that a truth assignment is a function $v\colon\set{P_1,P_2,\ldots}\to\{T,F\}$. We observe that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\{T,F\}$ with $\{0,1\}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. In what follows we will use this equivalence freely, and in particular we will use the same metric of agreement that we used in the previous result.
+
+We invite the reader to verify that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such that $v\models A$ is a closed subset of $2^{\mathbb N}$ also.
 
 **Theorem** (Compactness theorem) Let $\Sigma$ be a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent. Then $\Sigma$ is consistent.
 
-*Proof*: We observe that if we identify $\{T,F\}$ with $\{0,1\}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$, and therefore has the metric described above.
+*Proof*: We recall the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (In fact this may be taken as the definition of a compact metric space.)
 
-We invite the reader to verify that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such taht $v\models A$ is a closed subset of $2^{\mathbb N}$.
+Working in the space $2^{\mathbb N}$, we let $\mathcal F$ be the family of all $V_A$ where $A$ is a finite subset of $\Sigma$. Observe that if $V_{A_1},\ldots, V_{A_n}\in\mathcal F$ then $V_{A_1}\cap\cdots\cap V_{A_n}=V_{A_1\cup\cdots\cup A_n}$. Since $A_1\cup\cdots\cup A_n$ is a finite subset of $\Sigma$, it is consistent, and therefore there exists $v$ such that $v\models A_1\cup\cdots\cup A_n$. By definition this implies $v\in V_{A_1}\cap\cdots\cap V_{A_n}$, so $V_{A_1}\cap\cdots\cap V_{A_n}\neq\emptyset$.
 
-We further recall the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (Indeed this may be taken as the definition of a compact metric space.)
-
-Now let $\Sigma$ be a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent. Let $\mathcal F$ be the family of all $V_A$ where $A$ is a finite subset of $\Sigma$.
-
-We observe that if $V_{A_1},\ldots, V_{A_n}\in\mathcal F$ then $V_{A_1}\cap\cdots\cap V_{A_n}=V_{A_1\cup\cdots\cup A_n}$. Since $A_1\cup\cdots\cup A_n$ is a finite subset of $\Sigma$, it is consistent, and therefore there exists $v$ such that $v\models A_1\cup\cdots\cup A_n$. By definition this implies $v\in V_{A_1}\cap\cdots\cap V_{A_n}$, so $V_{A_1}\cap\cdots\cap V_{A_n}\neq\emptyset$.
-
-It follows from the fact from analysis that there exists $v\in\bigcap\mathcal F$. Again by definition this means that $v\models\Sigma$. Thus, $\Sigma$ is consistent. $\blacksquare$
+It follows from the fact from analysis that there exists $v\in\bigcap_{V_A\in\mathcal F}V_A$. Again by definition this means that $v\models\Sigma$. Thus, $\Sigma$ is consistent. $\blacksquare$
 
 We remark that the results of this section show that the following three statements are all equivalent:
 
@@ -320,9 +320,9 @@ We remark that the results of this section show that the following three stateme
 2. Konig's lemma
 3. The space $2^{\mathbb N}$ is compact
 
-This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly.
+This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly. We invite the reader to find such proofs in our references or else look for them yourself.
 
-We remark that we have only proved the compactness theorem when there are a *countable* number of propositional variable symbols in our language $P_1,P_2,\ldots$. The compactness theorem remains true when there are an uncountable number of propositional symbols, but this result is stronger and the proof is different.
+We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols in our language $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional symbols. This statement is stronger, and some of the steps of the proof will be different.
 
 ### 3. Set theory as a foundation
 
