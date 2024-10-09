@@ -206,94 +206,123 @@ We see from the proof above that the compactness theorem implies the completenes
 
 ### 2. Naive set theory and the proof of compactness
 
-We begin this section with a brief break from propositional logic to study set theory. There are several reasons for this detour. Set theory is very beautiful, and relevant to many areas of mathematics including analysis and algebra. Importantly for us, some set theory will also be useful in our further studies of logic.
+In this section we take a short detour through set theory before returning to propositional logic and the compactness theorem. The primary reason is that some elementary set theory will be used in our further studies of logic. Moreover, set theory is very beautiful in its own right, and relevant to many areas of mathematics including analysis and algebra.
 
-#### Set theory
+Beginning informally, a *set* is a collection of mathematical objects which we call *elements*. When $x$ is an element of the set $A$, we write $x\in A$. For instance $\mathbb Q$ is a set whose elements are the rational numbers, so for instance $\frac35\in\mathbb Q$ and $\sqrt2\notin\mathbb Q$.
 
-Beginning informally, a *set* is a collection of mathematical objects which we call its *elements*. For instance $\mathbb Q$ is a set whose elements are the rational numbers. We use $\in$ for the element relation, so for instance $\frac35\in\mathbb Q$ and $\sqrt2\notin\mathbb Q$.
+For finite sets we may use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We sometimes extend this to large sets and infinite sets using $\ldots$ notation, which means to continue a clear pattern. So for example $\mathbb N=\set{0,1,2,\ldots}$. We may also use the *set-builder* notation $A=\set{z:\text{some property of }z}$ to abbreviate that $A$ is the set of all elements $z$ that satisfy some property. For instance we may write $\mathbb N=\set{z:z\text{ is a natural number}}$.
 
-For finite sets we use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We can also use the *set-builder* notation $x=\set{z:\text{some property of }z}$ to abbreviate that $x$ is the set of all $z$ such that some property of $z$ is true. For instance we may write $\mathbb Q=\set{z:z\text{ is a rational number}}$.
+The foundation of set theory is the *extensionality axiom*, which states that two sets are equal if and only if they have the same elements. Formally, if $A,B$ are sets then $A=B$ if and only if for all $x$, we have $x\in A\leftrightarrow x\in B$. This axiom distinguishes sets from other similar mathematical objects such as lists and multisets, by enforcing that the order of elements and the repetition of elements do not matter. For instance, if $A=\set{1,2,3}$ and $B=\set{3,2,2,1}$ then $A=B$.
 
-The foundation of set theory is the *extensionality axiom*, which states that two sets are equal whenever they have the same elements. Formally, if $x,y$ are sets then $x=y$ if and only if for all sets $z$, we have $z\in x\leftrightarrow z\in y$.
-
-This axiom distinguishes sets from other similar objects like lists and multisets by enforcing that the order or repetition of elements doesn't matter. Thus if $x=\set{1,2,3}$ and $y=\set{3,2,2,1}$ then $x=y$.
-
-You may be aware that this informal or "naive" approach is not entirely sound, as it can lead to falsehoods such as Russell's paradox. In this section we will proceed anyway, in the next section we will be more careful.
+You may be aware that this informal or "naive" approach is not entirely sound, as it can lead to falsehoods such as Russell's paradox. In this section no such paradoxes will arise, so we can proceed for now without worrying. In the next section, we will be more careful.
 
 #### Pairs, relations, and functions
 
-Here we introduce some foundational notation and constructs using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, $\smallsetminus$, and $\triangle$.
+Here we introduce some foundational notation and constructs using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, and $\triangle$. We note that "complement" $\bar{A}$ is not an operation because we are not working with a universal set in which to take the complement. We may however use the set difference $B\smallsetminus A$, which means all elements of $B$ which are not in $A$.
 
-**Definition** Given obects $a,b$, the *ordered pair* $(a,b)$ is defined to be $\set{\set{a},\set{a,b}}$.
+**Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
 
-We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\{a\},\{b\}}$.
+We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\{a\},\{b\}}$ or $\set{a,\set{a,b}}$.
 
-**Definition** Cartesian product: Most binary relations, and thus most functions, are constructed as a subset of a cartesian product $A\times B=\set{(a,b)\mid a\in A, b\in B}$.
+**Definition** Let $A,B$ be sets. The *cartesian product* of $A$ and $B$ is defined as $A\times B=\set{(a,b):a\in A,\ b\in B}$.
 
+For instance, $\mathbb R\times\mathbb R$ is the Cartesian plane, and $\mathbb Z\times\mathbb Z$ is the grid points of the Cartesian plane.
 
-**Definition** Binary relation: any set whose elements are ordered pairs. If $R$ is a set of ordered pairs $(a,b)$ then we write $aRb$ to mean that $(a,b)$ is an element of $R$.
+**Definition** Let $A,B$ be sets.
+* A *binary relation* between $A$ and $B$ is any subset $R\subset A\times B$. We sometimes write $aRb$ to mean that $(a,b)\in R$.
+* The *domain* of $R$ is $\set{a\in A:(\exists b)(a,b)\in R}$
+* The *range* of $R$ is $\set{b\in B:(\exists a)(a,b)\in R}$
 
-For example, suppose we have constructed the set $\mathbb N$ of natural numbers. Then we can construct the cartesian product $\mathbb N\times\mathbb N$. We can further construct the less than binary relation on $\mathbb N$. If we have already constructed the $+$ and $x$ operations (which we'll do still later), we can further construct functions such as $f(n)=n^2+2n+5$.
+For example, the $<$ relation on real numbers is a binary relation between $\mathbb R$ and itself. Formally, $<$ is the set of all pairs $(m,n)\in\mathbb R\times\mathbb R$ such that $m$ is less than $n$. Thus $<$ is "physically" a region in the plane.
 
-Another of the most important mathematical objects is a function. In elementary mathematics, we usually teach that a function is a formula or rule. But in formal mathematics, a function is really its graph, a set of ordered pairs (input, output).
+Functions are special examples of binary relations. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
 
-**Definition** Function, Domain and range: these concepts are valid for binary relations (and in particular for functions). Note both the domain and range of $R$ are subsets of $\bigcup\bigcup R$.
+**Definition** Let $A$ and $B$ be sets.
+* A *function* from $A$ to $B$ is a binary relation $f\subset A\times B$ with the property: for all $a\in A$ there exists a unique $b\in B$ such that $(a,b)\in f$.
+* $f$ is *injective* or *one-to-one* if $(a,b),(a',b)\in f$ implies $a=a'$
+* $f$ is *surjective onto* $B$ (or simply *surjective* when $B$ is clear from context) if the range of $f$ is equal to $B$.
+* $f$ is *bijective* between $A$ and $B$ if it is injective and surjective onto $B$.
 
-**Definition** Injective, surjective, and bijective: ...
+When $f$ is a function from $A$ to $B$ we may write $f\colon A\to B$, and when $(a,b)\in f$ we may write $f(a)=b$.
 
+**Example** In lectures we will give some examples of functions, their graphs, and their properties.
 
+**Definition** Let $A,B$ be sets. Then $B^A$ denotes the set of functions from $A$ to $B$.
+
+We note that in other resources the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
 
 #### Rooted trees and Konig's lemma
 
-In combinatorics a tree is a special kind of graph. In set theory we view trees slightly differently, with the nodes labeled by elements of a set $X$.
+In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
 
 **Defintion**. Let $X$ be any set.
+* The *full tree* on $X$, denoted $X^{<\mathbb N}$ is the set of all functions $t$ whose domain is an initial segment of $\mathbb N$ and whose range is contained in $X$, that is, $t\colon\set{0,\ldots,n-1}\to X$ for some $n\in\mathbb N$.
+* The $n$th *level* of $X^{<\mathbb N}$ is the set of all $t$ of length $n$, that is, $|t|=n$.
+* If $s,t\in X^{<\mathbb N}$, we say $s$ is a *predecessor* of $t$, or $t$ is a *successor* of $s$, if $s\subset t$.
+* $t$ is an *immediate successor* of $s$ if $t$ is a successor of $s$ and $|t|=|s|+1$.
+
+**Definition** Let $X$ be any set. A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ of the full tree on $X$ which is closed under predecessors, that is, for all $s,t\in X^{<\mathbb N}$, if $s\subset t\in T$ then $s\in T$.
+
+In lectures we will give several examples of set-theoretic trees.
+
+**Definition** Let $X$ be any set.
 * The set of sequences on $X$, denoted $X^{\mathbb N}$ is the set of all functions $f\colon\mathbb N\to X$.
-* The set of *partial sequences* on $X$, denoted $X^{<\mathbb N}$ is the set of all functions $t\colon n\to X$ where $n\in\mathbb N$.
-* If $s,t$ are partial sequences, we say $s$ is an *initial segment* of $t$, or $t$ *extends* $s$, if $s\subset t$.
-* A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ which is closed under initial segments, that is, if $s\subset t\in T$ then $s\in T$.
-* A sequence $f\in X^{\mathbb N}$ is called a *branch* through $T$ if for every partial sequence $t$ such that $t\subset f$, $t\in T$.
+* For any sequence $f\in X^{\mathbb N}$ and any $n\in\mathbb N$ the *restriction* of $f$ to $n$, denoted $f\restriction n$, is the initial segment of $f$ with domain $\set{0,\ldots,n-1}$.
+* Let $T$ be a tree on $X$. A sequence $f\in X^{\mathbb N}$ is a *branch* through $T$ if for all $n\in\mathbb N$ we have $f\restriction n\in T$.
 
-Predecessors and successors and immediate successors
+IN lectures we will give several examples of branches through set-theoretic trees.
 
-**Example** In lectures we will give several examples of rooted trees and branches.
+We now give a fundamental application of the propositional compactness theorem to the study of trees and branches.
 
-We now give a fundamental application of the propositional compactness theorem to the study of rooted trees.
+**Theorem** (Konig's lemma) Let $T$ be a tree on $X$ such that every level of $T$ is nonempty and finite. Then there exists a branch through $T$.
 
-**Theorem** (Konig's lemma) Let $T$ be a rooted tree such that every $t\in T$ has just finitely many immediate successors and such that $T$ is infinite. Then $T$ has a branch.
+We invite the reader to give an example of a tree $T$ such that every level of $T$ is nonempty but there are no branches through $T$.
 
 *Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
 
 * $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$
-* $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, and $i\neq j$
-* $P_{n,i}\rightarrow P_{m,j})$ for each $n,i,m,j$ such that $t_{n,i}\subset t_{n,j}$
+* $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$ and each $i\neq j$
+* $P_t\rightarrow P_s$ where $s,t\in T$ and $s\subset t$
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a branch through $T$.
 
-...
+We claim $\Sigma$ is finitely satisfiable. Let $\Sigma_0\subset\Sigma$ be a finite subset, and note that there exists a maximum level $n\in\mathbb N$ which is the length of an element appearing in the subscript of a propositional symbol in $\Sigma_0$. Since $T$ is infinite, $T$ certainly contains a partial branch up to level $n$, and this implies that $\Sigma_0$ is consistent.
+
+Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there exists a branch through $T$. $\blacksquare$
+
+Konig's lemma has many important applications, we present just one. We first recall that the set $X^{\mathbb N}$ is a metric space, where two sequences are close together if they agree on a long partial sequence. Formally we let $d(f,g)=1/N$, where $N$ is the maximum number such that $f\restriction N=g\restriction N$. Thus a sequence of elements $f_n\in X^{\mathbb N}$ converges to $f\in X^{\mathbb N}$ if the length of agreement between $f_n$ and $f$ goes to infinity.
+
+**Theorem** Let $2=\{0,1\}$. The metric space $2^{\mathbb N}$ is compact.
+
+*Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence $f_{n_k}$ which converges to some $f\in 2^{\mathbb N}$ in the sense of the metric described above.
+
+Copy lars use Konig's lemma or leave as an exercise with hints
 
 $\blacksquare$
 
-Konig's lemma has many important applications, we present just one. We first note that the space $2^{\mathbb N}$ has a metric in which two sequences are close together if they agree on a long partial sequence. Formally we may let $d(x,y)=1/N$, where $N$ is the largest number such that $x\restriction N=y\restriction N$. Thus a sequence of sequences $x_n$ converges to $x$ if the length of agreement between $x_n$ and $x$ goes to infinity.
+**Theorem** (Compactness theorem) Let $\Sigma$ be a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent. Then $\Sigma$ is consistent.
 
-**Theorem** $2^{\mathbb N}$ is compact.
+*Proof*: We observe that if we identify $\{T,F\}$ with $\{0,1\}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$, and therefore has the metric described above.
 
-*Proof*: Copy lars use Konig's lemma or leave as an exercise with hints $\blacksquare$
+We invite the reader to verify that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such taht $v\models A$ is a closed subset of $2^{\mathbb N}$.
 
-The previous result is not entirely relevant to our module, but helps explain the use of the term "compactness" in the propositional compactness theorem.
+We further recall the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (Indeed this may be taken as the definition of a compact metric space.)
 
-As we saw above, the proposional compactness theorem implies Konig's lemma. We now show that the reverse is also true.
+Now let $\Sigma$ be a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent. Let $\mathcal F$ be the family of all $V_A$ where $A$ is a finite subset of $\Sigma$.
 
-**Theorem** Assuming Konig's lemma is true, the propositional compactness theorem is true.
+We observe that if $V_{A_1},\ldots, V_{A_n}\in\mathcal F$ then $V_{A_1}\cap\cdots\cap V_{A_n}=V_{A_1\cup\cdots\cup A_n}$. Since $A_1\cup\cdots\cup A_n$ is a finite subset of $\Sigma$, it is consistent, and therefore there exists $v$ such that $v\models A_1\cup\cdots\cup A_n$. By definition this implies $v\in V_{A_1}\cap\cdots\cap V_{A_n}$, so $V_{A_1}\cap\cdots\cap V_{A_n}\neq\emptyset$.
 
-*Proof*:
+It follows from the fact from analysis that there exists $v\in\bigcap\mathcal F$. Again by definition this means that $v\models\Sigma$. Thus, $\Sigma$ is consistent. $\blacksquare$
 
-$\blacksquare$
+We remark that the results of this section show that the following three statements are all equivalent:
 
-We close our discussion of compactness by proving Konig's lemma directly. This therefore completes the proof of the propositional compactness theorem.
+1. The compactness theorem
+2. Konig's lemma
+3. The space $2^{\mathbb N}$ is compact
 
-*Direct proof of Konig's lemma*: Let $T$ be a tree such that every level of $T$ is finite and $T$ is infinite. We recursively define 
+This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly.
 
+We remark that we have only proved the compactness theorem when there are a *countable* number of propositional variable symbols in our language $P_1,P_2,\ldots$. The compactness theorem remains true when there are an uncountable number of propositional symbols, but this result is stronger and the proof is different.
 
 ### 3. Set theory as a foundation
 
