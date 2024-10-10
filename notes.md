@@ -278,7 +278,7 @@ In lectures we will give several examples of set-theoretic trees.
 * For any sequence $f\in X^{\mathbb N}$ and any $n\in\mathbb N$ the *restriction* of $f$ to $n$, denoted $f\restriction n$, is the initial segment of $f$ with domain $\set{0,\ldots,n-1}$.
 * Let $T$ be a tree on $X$. A sequence $f\in X^{\mathbb N}$ is a *branch* through $T$ if for all $n\in\mathbb N$ we have $f\restriction n\in T$.
 
-IN lectures we will give several examples of branches through set-theoretic trees.
+In lectures we will give several examples of branches through set-theoretic trees.
 
 We now give a fundamental application of the propositional compactness theorem to the study of trees and branches.
 
