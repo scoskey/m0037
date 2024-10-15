@@ -332,17 +332,70 @@ This gives some some explanation of the reason for the name of the compactness t
 
 We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols in our language $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional symbols. This statement is stronger, and some of the steps of the proof will be different.
 
-### 3. Set theory as a foundation
+### 3. Axiomatic set theory and foundations
 
-We have promised that set theory is somehow the theory of everything, meaning all other objects of mathematical study can be regarded as sets. Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets?
+We have said informally that a set is a collection of mathematical objects which are its elements. But what is a set and what is an element, really? In this section we introduce *axiomatic set theory*, which tells us more formally where sets come from, what constructions are permitted, and thus helps us better understand what sets really are.
 
-We have talked about how set theory is a foundation for the construction of mathematical objects. But the actual development of set theory used the same ordinary mathematical reasoning as one would use in any other area of mathematics: definitions, theorems, and proofs.
+We then go on to show that set theory is in some sense a "theory of everything", meaning nearly all mathematical objects can be defined using sets. We have already seen this to some extent, for instance we showed that relations and functions may actually be defined as special kinds of sets. In this section we will continue these constructions so show how important mathematical objects such as number systems may be constructed. The possibilities are endless, and by the end you will be able to imagine how to extend these constructions much further.
 
-We have said that set theory can be used as a foundation for essentially all of mathematics. So far we have explicitly constructed the natural numbers and alluded to the construction of the real numbers.
+#### Axiomatic set theory
 
-In set theory, **everything** is a set, meaning we do not distinguish between sets and elements.
+The starting point for axiomatic set theory is the following big idea: **everything** is a set! We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, objects that aren't themselves sets? To a pure set theorist, everything is a set.
 
-The starting point for set theory is therefore the empty set, denoted $\emptyset$. The empty set has the property that $x\in\emptyset$ is always fales. We leave it to the reader to verify that the empty set is unique.
+We have already introduced the key axiom of set theory, which explains the relationship between $\in$ and $=$.
+
+**Axiom** (Extensionality) $x=y$ iff for all $z$, $z\in x\iff z\in y$.
+
+The next several axioms of set theory are construction axioms, that is, axioms that tell us certain constructions using sets may be used.
+
+**Axiom** (Strong pairing) If $a_1,\ldots,a_n$ are sets, then $\{a_1,\ldots,a_n\}$ is a set.
+
+For one thing, the strong pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$ which we also call the empty set $\emptyset$. We invite the reader to verify that the strong pairing axiom implies that ordered pairs may be constructed.
+
+We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the strong pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as partially ordered by the $\in$ relation.
+
+Without any other axioms, the strong pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
+
+**Axiom** (Infinity) There exists a set $HF$ such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the strong pairing axiom).
+
+Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\{HF\}$. However, the axioms so far do not help us construct an infinite set besides $HF$.
+
+In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal! Recalling that everything is a set, imagine if we define the set $A=\set{x:x\notin x}$. Then we invite you to check that both $A\in A$ and $A\notin A$ are false, which is a contradiction. This is known as *Russell's paradox*, and as we define our axioms we must navigate around this issue.
+
+The correct axiom is the following, which allows us to construct subsets of an existing set.
+
+**Axiom** (Separation) If $A$ is a set and $P(x)$ is a property of sets $x$, then the set $\set{x\in A:P(x)\text{ is true}}$ exists.
+
+In the next part, we will elaborate further on the exact nature of the properties $P(x)$ which may be used. For now, we will continue to be *somewhat* informal and use standard mathematical language to express these properties.
+
+For instance we could let $E=\set{x\in HF:x\text{ has an even number of elements}}$. Then $E$ is a new infinite set which is a subset of $HF$.
+
+The Separation axiom allows us to construct sets which are contained in a set we have already. What about constructing sets which are larger? One way to do this is the following.
+
+**Axiom** (Power Set) If $A$ is a set then there exists a set $\mathcal P(A)$ called the *power set* of $x$ which consists of all subsets of $A$.
+
+We invite the reader to verify that the Power Set axiom, together with the other axioms thus far, may also be used for other constructions such as $A\times B$ and $B^A$.
+
+One familiar operation on sets that we haven't mentioned so far is the union $A\cup B$. Although they are powerful, surprisingly, the axioms we have listed so far do not allow us to construct unions.
+
+**Axiom** (Union) If $\mathcal F$ is a set, then there exists a set $\bigcup\mathcal F$ called the *union* of $\mathcal F$, which consists of all $x$ such that $x\in F$ for some $F\in\mathcal F$.
+
+In particular, if $A,B$ are sets we can construct $A\cup B$ by first using Pairing to construct $\{A,B\}$, and then using Union to construct $\bigcup\{A,B\}$, which is simply another way of writing $A\cup B$.
+
+Of course we have introduced several operations on sets besides unions, including intersections $\cap$, set difference $\smallsetminus$, and symmetric difference $\triangle$. We invite the reader to verify that these constructions may be carried out using the axioms we have introduced, and do not require separate axioms.
+
+There is one more construction axiom called the *Replacement* axiom, which we will not cover here. It allows one to construct new sets by recursively applying a simpler construction. This allows the construction of very long orderings, as well as sets of large cardinality.
+
+There are several more axioms which are not explicit constructions like those above, but which instead help define the structure of the sets. The first of these is the *Choice* axiom or *AC*, which states that if $\mathcal F$ is a set of nonempty, pairwise disjoint sets, then there exists a set $C$ which contains exactly one element from each $F\in\mathcal F$.
+
+AC is famously equivalent to a list of other nonconstructive statements which are widely used throughout mathematics: Zorn's lemma, every set can be well-ordered, every equivalence relation has a system of representatives, every vector space has a basis, and more. We will not cover these equivalences here, but we will use AC when necessary.
+
+The last axiom is the *Regularity* axiom, which states that there does not exist an infinitely descending $\in$-sequence. That is, there does not exist a sequence of sets $x_1,x_2,x_3,\ldots$ such that $x_{n+1}\in x_n$ for all $n$. This axiom ensures, among other things, that circular relationships such as $x\in x$ or $x\in y\in x$ are never true.
+
+#### Constructions
+
+Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets? What about rael numbers?
+
 
 * Von Neumann ordinals: an ordinal is a counting number (as opposed to a quantity measuring number). Define $0,1,2,3,\ldots$ as particular hereditarily finite sets.
 * We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
@@ -356,7 +409,7 @@ The starting point for set theory is therefore the empty set, denoted $\emptyset
 * Def. $\mathbb Z$ is the subset of $\mathbb Q$ where $n=1$.
 * It is an exercise to define the operations $+,\times$ and the $<$ relation on $\mathbb Q$ with this definition. For instance $(0,m,n)\times(0,m',n')=$ the result of canceling common factors from $(0,mm',nn')$.
 * Observe that with this definiton we don't have $\mathbb N\subset\mathbb Z$. However we can identify $\mathbb N$ with the subset of $(0,m,1)$. This identification would be cumbersome to write explicitly, but once we agree it can be done in principle, we abuse notation and pretend it is being done behind the scenes.
-* So far everything constructed is contained in $V_\omega$.
+* So far everything constructed is contained in $HF$.
 * Def. $\mathbb R$ is the set of dedekind cuts of $\mathbb Q$. Here $C\subset\mathbb Q$ is a cut if
   * $C\neq\emptyset,\mathbb Q$
   * $C$ is closed downwards
@@ -367,7 +420,7 @@ The starting point for set theory is therefore the empty set, denoted $\emptyset
 * Def. $\mathbb R[[x]]$ is the set $\mathrm{Fun}(\omega,\mathbb R)$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal series $\sum a_nx^n$.
 * There are also algebraic descriptions of these constructions: $\mathbb N$ is a semigroup, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
 * We can also express logic in set theory! A logical expression is a sequence of logical symbols $\wedge,\vee,\forall,\exists,\ldots$ and variables and non-logical symbols. We can use even numbers $2k$ for variables $x_1,x_2,\ldots$, and use odd numbers for the other symbols. Thus a logical expression is a finite sequence of natural numbers, or element of $\omega^{<\omega}$.
-* A proof is sequence of logical expressions, where each one follows from the previous by simple deductive rules. Thus a proof is a finite sequence of elements of $\omega^{<\omega}$, or an element of $()\omega^{<\omega})^{<\omega}$. It is still an element of $V_\omega$!
+* A proof is sequence of logical expressions, where each one follows from the previous by simple deductive rules. Thus a proof is a finite sequence of elements of $\omega^{<\omega}$, or an element of $(\omega^{<\omega})^{<\omega}$. It is still an element of $HF$!
 
 ## Part II: First order logic and completeness
 
