@@ -340,29 +340,33 @@ We then go on to show that set theory is in some sense a "theory of everything",
 
 #### Axiomatic set theory
 
-The starting point for axiomatic set theory is the following big idea: **everything** is a set! We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, objects that aren't themselves sets? To a pure set theorist, everything is a set.
+The starting point for axiomatic set theory is the following big idea: **everything** is a set! We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, are there any objects that aren't themselves sets? To a pure set theorist, everything is a set.
 
-We have already introduced the key axiom of set theory, which explains the relationship between $\in$ and $=$.
+What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* of sets, which govern how sets behave and how we can construct them. Historically it took some time and debate for mathematicians to agree on axioms. Here we elaborate the axioms of *Zermelo–Fraenkel–Choice* set theory or ZFC, which is the officially accepted list.
+
+We have already introduced the key axiom of ZFC, which explains the relationship between $\in$ and $=$.
 
 **Axiom** (Extensionality) $x=y$ iff for all $z$, $z\in x\iff z\in y$.
 
-The next several axioms of set theory are construction axioms, that is, axioms that tell us certain constructions using sets may be used.
+The next several axioms of set theory are construction axioms, that is, axioms that tell us we can do certain operations or constructions using sets.
 
-**Axiom** (Strong pairing) If $a_1,\ldots,a_n$ are sets, then $\{a_1,\ldots,a_n\}$ is a set.
+**Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\{a_1,\ldots,a_n\}$ is a set.
 
-For one thing, the strong pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$ which we also call the empty set $\emptyset$. We invite the reader to verify that the strong pairing axiom implies that ordered pairs may be constructed.
+For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
 
-We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the strong pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as partially ordered by the $\in$ relation.
+We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the Strong Pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as partially ordered by the $\in$ relation.
 
-Without any other axioms, the strong pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
+Without any other axioms, the Strong Pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
 
-**Axiom** (Infinity) There exists a set $HF$ such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the strong pairing axiom).
+**Axiom** (Infinity) There exists a set $HF$ such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the Strong Pairing axiom).
 
 Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\{HF\}$. However, the axioms so far do not help us construct an infinite set besides $HF$.
 
-In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal! Recalling that everything is a set, imagine if we define the set $A=\set{x:x\notin x}$. Then we invite you to check that both $A\in A$ and $A\notin A$ are false, which is a contradiction. This is known as *Russell's paradox*, and as we define our axioms we must navigate around this issue.
+In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal!
 
-The correct axiom is the following, which allows us to construct subsets of an existing set.
+Indeed we cannot construct a set of the form $A=\set{x:x\notin x}$. If you haven't done it before, we invite you to check that the definition of $A$ implies both $A\in A$ and $A\notin A$ are false, which is a contradiction. This is known as *Russell's paradox*, and as we define our axioms we must navigate around this issue.
+
+While we can't expect to use general set-builder constructions, the following axiom states we can use *bounded* set-builder constructions, meaning set-builder constructions taking place inside a given set.
 
 **Axiom** (Separation) If $A$ is a set and $P(x)$ is a property of sets $x$, then the set $\set{x\in A:P(x)\text{ is true}}$ exists.
 
@@ -1038,7 +1042,7 @@ Recall that if $T$ is a theory then its deductive closure is the set $\bar T=\se
 
 For example it is not difficult to decide whether or not a given sentence $\sigma$ is in ZFC, but it is much more decide whether $\sigma$ is a theorem of ZFC. OF course ZFC is very powerful, so this may not be too surprising. But we can study the same questions about deductive closure in the context of much simpler theories.
 
-**Definition** Core set theory, or CST, is the theory consisting of the Axiom of Extensionality, Axiom of Pairing, Axiom of Union, Axiom of Comprehension, and the Axiom of Foundation.
+**Definition** Core set theory, or CST, is the theory consisting of the Extensionality, Pairing, Union, Separation, and Regularity.
 
 This theory may seem weak compared to ZFC, but it is strong enough to do finite set theory plus induction. It is also possible to work Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$ including the induction scheme.
 
