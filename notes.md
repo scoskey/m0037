@@ -396,33 +396,68 @@ AC is famously equivalent to a list of other nonconstructive statements which ar
 
 The last axiom is the *Regularity* axiom, which states that there does not exist an infinitely descending $\in$-sequence. That is, there does not exist a sequence of sets $x_1,x_2,x_3,\ldots$ such that $x_{n+1}\in x_n$ for all $n$. This axiom ensures, among other things, that circular relationships such as $x\in x$ or $x\in y\in x$ are never true.
 
-#### Constructions
+#### Foundations
 
-Perhaps the most important objects in mathematics are natural numbers. How can these be regarded as objects in the universe of sets? What about rael numbers?
+We now proceed to use the axioms to show how many familiar objects in mathematics may in fact be encoded as sets.
 
+Perhaps the simplest and most important objects are the natural numbers $0,1,2,\ldots$ or sometimes $1,2,\ldots$. Previously we have used the natural numbers informally, such as when we introduced the propositional variable symbols $P_1,P_2,\ldots$, or when we stated the Pairing axiom starting from given sets $a_1,\ldots,a_n$. But how are natural numbers defined?
 
-* Von Neumann ordinals: an ordinal is a counting number (as opposed to a quantity measuring number). Define $0,1,2,3,\ldots$ as particular hereditarily finite sets.
-* We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
-* In general, an ordinal is equal to the collection of ordinals that came before it. Thus the Von Neumann ordinals will be extended into the infinite by setting $\omega=\set{0,1,2,3,\ldots}$, $\omega+1=\set{0,1,2,3,\ldots,\omega}$ and so on. Infinity plus one!
-* Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
+The first answer is that we will actually *continue* to allow ourselves to use them informally and without definition. This is part of what's called *metatheory*, or a basis of reasoning so primitive that we never formalise it. Metatheory also includes concepts like "symbol" and "finite sequence of symbols", and is necessary to prevent an unending series of questions of the form, "And how is *that* defined?".
 
-* Now we do so more explicitly.
-* Def. $\mathbb N=\omega$.
-* Def. $\mathbb Q$ is the set of triples $(i,m,n)$ in $2\times\omega\times\omega$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
-* Here we intrepret $i=0$ as positivet, $i=1$ as negative, $m$ as the numerator, and $n$ as the denominator.
-* Def. $\mathbb Z$ is the subset of $\mathbb Q$ where $n=1$.
-* It is an exercise to define the operations $+,\times$ and the $<$ relation on $\mathbb Q$ with this definition. For instance $(0,m,n)\times(0,m',n')=$ the result of canceling common factors from $(0,mm',nn')$.
-* Observe that with this definiton we don't have $\mathbb N\subset\mathbb Z$. However we can identify $\mathbb N$ with the subset of $(0,m,1)$. This identification would be cumbersome to write explicitly, but once we agree it can be done in principle, we abuse notation and pretend it is being done behind the scenes.
-* So far everything constructed is contained in $HF$.
-* Def. $\mathbb R$ is the set of dedekind cuts of $\mathbb Q$. Here $C\subset\mathbb Q$ is a cut if
+The second answer is that we will also construct the natural numbers using set theory. Thus the informal natural numbers in the metatheory will have formal analogs in set theory. This is necessary to allow us to progress forwards and construct the *set* of natural numbers, something not present in the metatheory.
+
+The *von Neumann* natural numbers are constructed as follows:
+
+* $0=\emptyset=\{\}$
+* $1=\{0\}=\{\{\}\}$
+* $2=\{0,1\}=\{\{\},\{\{\}\}\}$
+* $3=\{0,1,2\}=\{\{\},\{\{\}\},\{\{\},\{\{\}\}\}\}$
+* etc
+
+In general, we recursively define:
+
+* $n+1=n\cup\{n\}$
+
+We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\{0,\ldots,n-1\}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
+
+From the above definition we see that natural numbers are all elements of $HF$. Thus we can use the Separation axiom to construct the set of natural numbers.
+
+**Definition** $\mathbb N=\set{x\in HF:x\text{ is a von Neumann natural number}}$.
+
+We remark that because the definition of von Neumann natural number is recursive, some work is required to show that it is valid to use the property "$x$ is a von Neumann natural number" in the Separation axiom. We refer the interested reader to the *principle of recursion*, which is the relevant fact; it follows from the axioms of set theory.
+
+In order to complete the construction of $\mathbb N$, it is also necessary to define the functions $+$ and $\times$. We may think of these as ternary relations, so for instance $+$ is really the set of all ordered triples $(m,n,s)\in\mathbb N^3$ such that $m+n=s$. The definition of $+$ is again recursive: if $(m,n,s)\in+$ then $(m+1,n,s+1)\in +$ and $(m,n+1,s+1)\in +$. Once again the principle of recursion tells us $+$ exists.
+
+Now that we have achieved the construction of $\mathbb N$ in set theory, it is possible to construct further number systems.
+
+**Definition** $\mathbb Q$ is the set of ordered triples $(i,m,n)$ in $2\times\omega\times\omega$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
+
+Of course, we think of $(0,m,n)$ as representing $\frac mn$ and $(1,m,n)$ as representing $-\frac mn$. (Or vice versa if you like.) Using several cases, it is an exercise to define $+$, $\times$, and $<$ on $\mathbb Q$. For instance $(0,m,n)\times(0,m',n')=$ the result of canceling common factors from $(0,mm',nn')$.
+
+**Definition** $\mathbb Z$ is the set of all $(i,m,n)\in\mathbb Q$ satisfying $n=1$.
+
+With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to establish a bijection between $\mathbb N$ and a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
+
+So far everything constructed is contained in $HF$.
+
+**Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
   * $C\neq\emptyset,\mathbb Q$
   * $C$ is closed downwards
   * $C$ has no last element
-* Again one must define the opertaions $+,\times$ and $<$ relation. For instance $C+C'=\set{q+q'\mid q\in C,q'\in C'}$.
-* Def. $\mathbb C=\mathbb R\times\mathbb R$.
-* Def. $\mathbb R[x]$ is the set $\mathbb R^{<\omega}=\bigcup_n\mathbb R^n$. Each sequence $a_0,\ldots,a_n$ is interpreted as the polynomial $a_0+a_1x+\cdots+a_nx^n$.
-* Def. $\mathbb R[[x]]$ is the set $\mathrm{Fun}(\omega,\mathbb R)$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal series $\sum a_nx^n$.
-* There are also algebraic descriptions of these constructions: $\mathbb N$ is a semigroup, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
+
+Again one must define the opertaions $+,\times$ and $<$ relation. For instance $C+C'=\set{q+q'\mid q\in C,q'\in C'}$.
+
+**Definition** 
+* $\mathbb C$ is the set $\mathbb R\times\mathbb R$. Each ordered pair $(x,y)$ is interpreted as the complex number $x+iy$.
+* $\mathbb R[x]$ is the set $\mathbb R^{<\mathbb N}$. Each sequence $a_0,\ldots,a_n$ is interpreted as the polynomial $a_0+a_1x+\cdots+a_nx^n$.
+* $\mathbb R[[x]]$ is the set $\mathbb R^{\mathbb N}$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal power series $\sum a_nx^n$.
+
+There are also algebraic descriptions of these constructions: $\mathbb N$ is a free semigroup on a single generator, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
+
+* We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
+* In general, an ordinal is equal to the collection of ordinals that came before it. Thus the Von Neumann ordinals will be extended into the infinite by setting $\omega=\set{0,1,2,3,\ldots}$, $\omega+1=\set{0,1,2,3,\ldots,\omega}$ and so on. Infinity plus one!
+* Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
+* Observe that with this definiton we don't have $\mathbb N\subset\mathbb Z$. However we can identify $\mathbb N$ with the subset of $(0,m,1)$. This identification would be cumbersome to write explicitly, but once we agree it can be done in principle, we abuse notation and pretend it is being done behind the scenes.
 * We can also express logic in set theory! A logical expression is a sequence of logical symbols $\wedge,\vee,\forall,\exists,\ldots$ and variables and non-logical symbols. We can use even numbers $2k$ for variables $x_1,x_2,\ldots$, and use odd numbers for the other symbols. Thus a logical expression is a finite sequence of natural numbers, or element of $\omega^{<\omega}$.
 * A proof is sequence of logical expressions, where each one follows from the previous by simple deductive rules. Thus a proof is a finite sequence of elements of $\omega^{<\omega}$, or an element of $(\omega^{<\omega})^{<\omega}$. It is still an element of $HF$!
 
