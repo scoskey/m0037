@@ -412,7 +412,7 @@ The *von Neumann* natural numbers are constructed as follows:
 * $1=\{0\}=\{\{\}\}$
 * $2=\{0,1\}=\{\{\},\{\{\}\}\}$
 * $3=\{0,1,2\}=\{\{\},\{\{\}\},\{\{\},\{\{\}\}\}\}$
-* etc
+* $\vdots$
 
 In general, we recursively define:
 
@@ -456,14 +456,36 @@ Having defined the real numbers, we can now continue to define nearly all famili
 * $C(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are continuous (use the $\epsilon,\delta$ definition!)
 * $D(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are differentiable (use the limit definition!)
 
-There are also algebraic descriptions of these constructions: $\mathbb N$ is a free semigroup on a single generator, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
+While it may appear that the definitions we have given are universal or absolute, in truth there are a wide variety of different approaches to carrying out these constructions. For instance it's possible to construct $\mathbb R$ using Cauchy sequences, or to construct $\mathbb C$ as the algebraic closure of $\mathbb R$. The key is to check that the construction satisfies the desired properties, and that any two such constructions are isomorphic.
 
-* We have also promised that set theory is somehow the theory of the infinite, meaning we can study different kinds of infinity using sets. The axiom of infinity will allow us to count into the infinite.
-* In general, an ordinal is equal to the collection of ordinals that came before it. Thus the Von Neumann ordinals will be extended into the infinite by setting $\omega=\set{0,1,2,3,\ldots}$, $\omega+1=\set{0,1,2,3,\ldots,\omega}$ and so on. Infinity plus one!
-* Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
-* Observe that with this definiton we don't have $\mathbb N\subset\mathbb Z$. However we can identify $\mathbb N$ with the subset of $(0,m,1)$. This identification would be cumbersome to write explicitly, but once we agree it can be done in principle, we abuse notation and pretend it is being done behind the scenes.
-* We can also express logic in set theory! A logical expression is a sequence of logical symbols $\wedge,\vee,\forall,\exists,\ldots$ and variables and non-logical symbols. We can use even numbers $2k$ for variables $x_1,x_2,\ldots$, and use odd numbers for the other symbols. Thus a logical expression is a finite sequence of natural numbers, or element of $\omega^{<\omega}$.
-* A proof is sequence of logical expressions, where each one follows from the previous by simple deductive rules. Thus a proof is a finite sequence of elements of $\omega^{<\omega}$, or an element of $(\omega^{<\omega})^{<\omega}$. It is still an element of $HF$!
+Another area that can be formalised in set theory is logic itself. Indeed, we have said that mathematical logic is just another area of mathematics, so for set theory to be an appropriate foundation it should include logic too. Once again there is an initial portion of logic which can be carried out using the metatheory, but it will also be mirrored in the formal theory.
+
+We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of $HF$!
+
+We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
+
+The key is to recognise that the von Neumann natural numbers into the transfinite. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is the same as $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting sequence is called the *ordinals*:
+
+* $0$
+* $1$
+* $\vdots$
+* $n$
+* $\omega=\bigcup_{n\in\mathbb N}n$
+* $\omega+1=\omega\bigcup\{\omega\}$
+* $\omega+2=(\omega+1)\cup\{\omega+1\}$
+* $\vdots$
+* $\omega+\omega=\bigcup_{n\in\mathbb N}(\omega+n)$
+* $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
+* $\vdots$
+
+Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
+
+* The ordinal successor operation: $S(\alpha)$ or $\alpha+1$ = $\alpha \cup \set{\alpha}$. In principal this may be carried out on any set, but it is most useful on ordinals because then it always produced another ordinal.
+* What about alpha-1? Our discussion suggests that there will be two kinds of ordinals.
+* Def: an ordinal $\alpha$ is a successor of $\alpha=S(\beta)$ for some $\beta$.
+* Def: an ordinal $\alpha$ is a limit if it is not 0 and not a successor.
+* The ordinal we have called $\omega$ will be our first limit ordinal. We are now just about ready to go to $\omega$ and beyond.
+
 
 ## Part II: First order logic and completeness
 
@@ -545,7 +567,7 @@ In order to read such an expression, the reader will have to know the arity of e
 * For example, $(\mathbb Q;<)$ is a structure in the language of linear orders.
 * For example, $(\mathbb R;0,1,+,\cdot,<)$ is a structure in the language of ordered fields.
 * Thus we will not define whether a given sentence $\sigma$ is true or false in general, but whether it is true or false in a given structure $\mathcal A$. We will say that $\mathcal A$ satisfies $\sigma$, and write $\mathcal A\models\sigma$, when $\sigma$ is true in $\mathcal A$.
-* The formal definiton of satisfaction is somewhat involved, but will work the way you want it to! For example, returning to the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
+* The formal definiton of satisfaction is somewhat involved, but will work the way you want it to! For example,` returning to the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
 
 ### 5. Semantics, structures, and satisfaction
 
