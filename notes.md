@@ -438,19 +438,23 @@ Of course, we think of $(0,m,n)$ as representing $\frac mn$ and $(1,m,n)$ as rep
 
 With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to establish a bijection between $\mathbb N$ and a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
 
-So far everything constructed is contained in $HF$.
+So far, all the numbers we have constructed are elements of $HF$ and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of $HF$, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
 
 **Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
-  * $C\neq\emptyset,\mathbb Q$
+  * $C\neq\emptyset$, $\mathbb Q$
   * $C$ is closed downwards
   * $C$ has no last element
 
-Again one must define the opertaions $+,\times$ and $<$ relation. For instance $C+C'=\set{q+q'\mid q\in C,q'\in C'}$.
+Once again $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
+
+Having defined the real numbers, we can now continue to define nearly all familiar objects in mathematics.
 
 **Definition** 
 * $\mathbb C$ is the set $\mathbb R\times\mathbb R$. Each ordered pair $(x,y)$ is interpreted as the complex number $x+iy$.
 * $\mathbb R[x]$ is the set $\mathbb R^{<\mathbb N}$. Each sequence $a_0,\ldots,a_n$ is interpreted as the polynomial $a_0+a_1x+\cdots+a_nx^n$.
 * $\mathbb R[[x]]$ is the set $\mathbb R^{\mathbb N}$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal power series $\sum a_nx^n$.
+* $C(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are continuous (use the $\epsilon,\delta$ definition!)
+* $D(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are differentiable (use the limit definition!)
 
 There are also algebraic descriptions of these constructions: $\mathbb N$ is a free semigroup on a single generator, $\mathbb Z$ is the group completion of that, $\mathbb Q$ is the field of fractions of that, $\mathbb R$ is the real closure of that, $\mathbb C$ is its algebraic closure of that.
 
