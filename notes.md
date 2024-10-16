@@ -478,14 +478,14 @@ The key is to recognise that the von Neumann natural numbers into the transfinit
 * $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
 * $\vdots$
 
-Thus we have a successor function $S(\alpha)$ or $\alpha+1$ is equal to $\alpha\cup\set{\alpha}$. 
+The stages of the sequence come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. At these stages we take the union of what has come before.
 
-* The ordinal successor operation: $S(\alpha)$ or $\alpha+1$ = $\alpha \cup \set{\alpha}$. In principal this may be carried out on any set, but it is most useful on ordinals because then it always produced another ordinal.
-* What about alpha-1? Our discussion suggests that there will be two kinds of ordinals.
-* Def: an ordinal $\alpha$ is a successor of $\alpha=S(\beta)$ for some $\beta$.
-* Def: an ordinal $\alpha$ is a limit if it is not 0 and not a successor.
-* The ordinal we have called $\omega$ will be our first limit ordinal. We are now just about ready to go to $\omega$ and beyond.
+Thus the three rules of ordinals are the following:
+* The first ordinal is $0=\emptyset$
+* For every ordinal $\alpha$, $\alpha+1$ is an ordinal
+* For every limit ordinal $\lambda$, $\lambda=\bigcup_{\beta<\lambda}\beta$
 
+We will not cover ordinals further here, except to remark that the last equation is not a definition. It is circular in the sense that $\lambda$ appears on both the left and right-hand sides. To eliminate the circularity, a more formal definition of ordinal is needed.
 
 ## Part II: First order logic and completeness
 
