@@ -462,6 +462,10 @@ Another area that can be formalised in set theory is logic itself. Indeed, we ha
 
 We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of $HF$!
 
+We
+
+#### Infinity
+
 We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
 
 The fisrt key observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is the same as $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting sequence is called the *ordinals*:
@@ -480,9 +484,9 @@ The fisrt key observation is that we can extend the von Neumann natural numbers 
 
 The stages of the sequence come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. A limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup_{\beta<\lambda}\beta$.
 
-We will not cover ordinals further here, except to remark that the last equation is not a definition. It is circular in the sense that $\lambda$ appears on both the left and right-hand sides. To eliminate the circularity, a more formal definition of ordinal would be needed.
+This last equation is not a definition, since it is circular. To define ordinals properly, somewhat more work is needed. (An ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
 
-
+With ordinals it is possible to count as far into the transfinite as we can imagine. It follows from the axioms (with AC necessary here) that every set can be enumerated using an ordinal as the set of indices. So for instance even though $\mathbb R$ is uncountable, AC implies that there exists an ordinal $\beta$ such that $\mathbb R$ can be enumerated $\set{r_\alpha:\alpha\in\beta}$. The same is true of $\mathcal P(\mathbb R)$, though of course it would require a larger ordinal!
 
 ## Part II: First order logic and completeness
 
