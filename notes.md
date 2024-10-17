@@ -354,7 +354,7 @@ The next several axioms of set theory are construction axioms, that is, axioms t
 
 For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
 
-We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the Strong Pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as partially ordered by the $\in$ relation.
+We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the Strong Pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as they are related by the $\in$ relation. (That is, when $x\in y$ draw an upwards arrow from $x$ to $y$.)
 
 Without any other axioms, the Strong Pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
 
@@ -370,7 +370,7 @@ While we can't expect to use general set-builder constructions, the following ax
 
 **Axiom** (Separation) If $A$ is a set and $P(x)$ is a property of sets $x$, then the set $\set{x\in A:P(x)\text{ is true}}$ exists.
 
-In the next part, we will elaborate further on the exact nature of the properties $P(x)$ which may be used. For now, we will continue to be *somewhat* informal and use standard mathematical language to express these properties.
+The axiom is also sometimes called Specification or (restricted) Comprehension. In the next part, we will elaborate further on the exact nature of the properties $P(x)$ which may be used. For now, we will continue to be *somewhat* informal and use standard mathematical language to express these properties.
 
 For instance we could let $E=\set{x\in HF:x\text{ has an even number of elements}}$. Then $E$ is a new infinite set which is a subset of $HF$.
 
@@ -481,6 +481,7 @@ The key is to recognise that the von Neumann natural numbers into the transfinit
 The stages of the sequence come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. At these stages we take the union of what has come before.
 
 Thus the three rules of ordinals are the following:
+
 * The first ordinal is $0=\emptyset$
 * For every ordinal $\alpha$, $\alpha+1$ is an ordinal
 * For every limit ordinal $\lambda$, $\lambda=\bigcup_{\beta<\lambda}\beta$
