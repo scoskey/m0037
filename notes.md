@@ -464,7 +464,7 @@ We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\
 
 We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
 
-The key is to recognise that the von Neumann natural numbers into the transfinite. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is the same as $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting sequence is called the *ordinals*:
+The fisrt key observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is the same as $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting sequence is called the *ordinals*:
 
 * $0$
 * $1$
@@ -478,15 +478,11 @@ The key is to recognise that the von Neumann natural numbers into the transfinit
 * $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
 * $\vdots$
 
-The stages of the sequence come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. At these stages we take the union of what has come before.
+The stages of the sequence come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. A limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup_{\beta<\lambda}\beta$.
 
-Thus the three rules of ordinals are the following:
+We will not cover ordinals further here, except to remark that the last equation is not a definition. It is circular in the sense that $\lambda$ appears on both the left and right-hand sides. To eliminate the circularity, a more formal definition of ordinal would be needed.
 
-* The first ordinal is $0=\emptyset$
-* For every ordinal $\alpha$, $\alpha+1$ is an ordinal
-* For every limit ordinal $\lambda$, $\lambda=\bigcup_{\beta<\lambda}\beta$
 
-We will not cover ordinals further here, except to remark that the last equation is not a definition. It is circular in the sense that $\lambda$ appears on both the left and right-hand sides. To eliminate the circularity, a more formal definition of ordinal is needed.
 
 ## Part II: First order logic and completeness
 
