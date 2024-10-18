@@ -336,7 +336,9 @@ We should acknowledge that we have only proved the compactness theorem when ther
 
 We have said informally that a set is a collection of mathematical objects which are its elements. But what is a set and what is an element, really? In this section we introduce *axiomatic set theory*, which tells us more formally where sets come from, what constructions are permitted, and thus helps us better understand what sets really are.
 
-We then go on to show that set theory is in some sense a "theory of everything", meaning nearly all mathematical objects can be defined using sets. We have already seen this to some extent, for instance we showed that relations and functions may actually be defined as special kinds of sets. In this section we will continue these constructions so show how important mathematical objects such as number systems may be constructed. The possibilities are endless, and by the end you will be able to imagine how to extend these constructions much further.
+We then go on to show that set theory is in some sense a "theory of everything", meaning nearly all mathematical objects can be defined using sets. We have already seen this to some extent, for instance we showed that relations and functions may actually be defined as special kinds of sets. We can additionally construct mathematical objects of central importance such as number systems, metric spaces, measure spaces and so forth. The possibilities are endless, and by the end you will be able to imagine how to extend these constructions much further.
+
+Lastly set theory is the key to studying the infinite. We will conclude the section with a brief introduction to ordinals.
 
 #### Axiomatic set theory
 
@@ -388,7 +390,7 @@ In particular, if $A,B$ are sets we can construct $A\cup B$ by first using Pairi
 
 Of course we have introduced several operations on sets besides unions, including intersections $\cap$, set difference $\smallsetminus$, and symmetric difference $\triangle$. We invite the reader to verify that these constructions may be carried out using the axioms we have introduced, and do not require separate axioms.
 
-There is one more construction axiom called the *Replacement* axiom, which we will not cover here. It allows one to construct new sets by recursively applying a simpler construction. This allows the construction of very long orderings, as well as sets of large cardinality.
+There is one more construction axiom called the *Replacement* axiom, which we will not cover here. This axiom implies the principle of recursive definitions, which states that we can define a set by iteratively applying a simpler construction. For instance this is how the function $f(n)=n!$ is constructed. It also allows the construction of sets of very large cardinality.
 
 There are several more axioms which are not explicit constructions like those above, but which instead help define the structure of the sets. The first of these is the *Choice* axiom or *AC*, which states that if $\mathcal F$ is a set of nonempty, pairwise disjoint sets, then there exists a set $C$ which contains exactly one element from each $F\in\mathcal F$.
 
@@ -462,8 +464,6 @@ Another area that can be formalised in set theory is logic itself. Indeed, we ha
 
 We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of $HF$!
 
-We
-
 #### Infinity
 
 We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
@@ -482,11 +482,11 @@ The fisrt key observation is that we can extend the von Neumann natural numbers 
 * $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
 * $\vdots$
 
-The ordinal numbers come in two different varieties. Usually we use the *ordinal successor* operation $S(\alpha)$ or $\alpha+1$, which is defined as $\alpha\cup\set{\alpha}$. Ordinal of the form $\alpha+1$ for some other ordinal $\alpha$ are called a *successor ordinals*. Ordinals which are not successor ordinals, such as $\omega$ and $\omega+\omega$, are called *limit ordinals*. A limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup_{\beta<\lambda}\beta$.
+Each ordinal in the sequence falls into one of two types. The *successor* ordinals are those $\alpha$ of the form $\beta\cup\{\beta\}$$ for some ordinal $\beta$. We sometimes use the notation $S(\beta)$ or $\beta+1$ for the set $\beta\cup\{\beta\}$ because it is the successor of $\beta$. The *limit* ordinals are those $\lambda$ which are not the successor of any ordinal, such as $\omega$ and $\omega+\omega$. Instead a limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup\set{\beta:\beta<\lambda}$.
 
-This last equation is not a definition, since it is circular. To define ordinals properly, somewhat more work is needed. (An ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
+(This last equation is a fact and not a definition or construction. It isn't suitable as a definition because it is circular with $\lambda$ on both sides. To construct ordinals properly, somewhat more work is needed: an ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
 
-With ordinals it is possible to count as far into the transfinite as we can imagine. It follows from the axioms (with AC necessary here) that every set can be enumerated using an ordinal as the set of indices. So for instance even though $\mathbb R$ is uncountable, AC implies that there exists an ordinal $\beta$ such that $\mathbb R$ can be enumerated $\set{r_\alpha:\alpha\in\beta}$. The same is true of $\mathcal P(\mathbb R)$, though of course it would require a larger ordinal!
+With ordinals it is possible to count as far into the transfinite as we can imagine. It follows from the axioms (AC is necessary here) that every set $A$ can be enumerated using some ordinal $\alpha$ as the set of indices. That is, it is possible to write $A=\set{a_\beta:\beta<\alpha}$. When the set $A$ is countable, the ordinal $\alpha$ can simply be taken to be $\omega$. When $A$ is uncountable, a larger ordinal is needed. So for instance even though $\mathbb R$ is uncountable, there exists an ordinal $\alpha$ such that $\mathbb R=\set{r_\beta:\beta\in\alpha}$. The same is true of $\mathcal P(\mathbb R)$, though of course it requires an even larger ordinal!
 
 ## Part II: First order logic and completeness
 
