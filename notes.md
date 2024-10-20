@@ -1,18 +1,6 @@
----
-fontsize: 11pt
-header-includes: |
-  \usepackage{mathpazo}
-  \usepackage{setspace}\onehalfspacing
-  \usepackage{geometry}
-  \usepackage{hyperref}
-  \def\set#1{{\left\{#1\right\}}}
-  \def\abs#1{{\left|#1\right|}}
-  \def\lt{<}
----
-
 # MATH0037 Lecture Notes
 
-Samuel Coskey
+### Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and more.
 
@@ -390,7 +378,7 @@ In particular, if $A,B$ are sets we can construct $A\cup B$ by first using Pairi
 
 Of course we have introduced several operations on sets besides unions, including intersections $\cap$, set difference $\smallsetminus$, and symmetric difference $\triangle$. We invite the reader to verify that these constructions may be carried out using the axioms we have introduced, and do not require separate axioms.
 
-There is one more construction axiom called the *Replacement* axiom, which we will not cover here. This axiom implies the principle of recursive definitions, which states that we can define a set by iteratively applying a simpler construction. For instance this is how the function $f(n)=n!$ is constructed. It also allows the construction of sets of very large cardinality.
+There is one more construction axiom called the *Replacement* axiom, which we will not cover here. This axiom allows the construction of orderings of very long length and sets of very large cardinality.
 
 There are several more axioms which are not explicit constructions like those above, but which instead help define the structure of the sets. The first of these is the *Choice* axiom or *AC*, which states that if $\mathcal F$ is a set of nonempty, pairwise disjoint sets, then there exists a set $C$ which contains exactly one element from each $F\in\mathcal F$.
 
@@ -426,7 +414,7 @@ From the above definition we see that natural numbers are all elements of $HF$. 
 
 **Definition** $\mathbb N=\set{x\in HF:x\text{ is a von Neumann natural number}}$.
 
-We remark that because the definition of von Neumann natural number is recursive, some work is required to show that it is valid to use the property "$x$ is a von Neumann natural number" in the Separation axiom. We refer the interested reader to the *principle of recursion*, which is the relevant fact; it follows from the axioms of set theory.
+We remark that because the definition of von Neumann natural number is recursive, some work is required to show that it is valid to use the property "$x$ is a von Neumann natural number" in the Separation axiom. We refer the interested reader to the *principle of recursive definitions*, which follows from the axioms.
 
 In order to complete the construction of $\mathbb N$, it is also necessary to define the functions $+$ and $\times$. We may think of these as ternary relations, so for instance $+$ is really the set of all ordered triples $(m,n,s)\in\mathbb N^3$ such that $m+n=s$. The definition of $+$ is again recursive: if $(m,n,s)\in+$ then $(m+1,n,s+1)\in +$ and $(m,n+1,s+1)\in +$. Once again the principle of recursion tells us $+$ exists.
 
@@ -468,7 +456,7 @@ We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\
 
 We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
 
-The fisrt key observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is identical to $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting objects are called the *ordinal numbers*:
+The first key observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is identical to $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting objects are called the *ordinal numbers*:
 
 * $0$
 * $1$

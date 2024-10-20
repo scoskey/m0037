@@ -1,0 +1,11 @@
+---
+fontsize: 11pt
+header-includes: |
+  \usepackage{mathpazo}
+  \usepackage{setspace}\onehalfspacing
+  \usepackage{geometry}
+  \usepackage{hyperref}
+  \def\set#1{{\left\{#1\right\}}}
+  \def\abs#1{{\left|#1\right|}}
+  \def\lt{<}
+---
