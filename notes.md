@@ -2,7 +2,7 @@
 
 ### Samuel Coskey
 
-Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and more.
+Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
 ## Part I: Introduction to logic and set theory
 
@@ -478,49 +478,60 @@ With ordinals it is possible to count as far into the transfinite as we can imag
 
 ## Part II: First order logic and completeness
 
-The propositional logic we studied in the previous part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. However the language of boolean connectives leaves out something very important, which is the quantifiers "for all" and "there exists".
+### Introduction
 
-In this section we introduce first order logic, which reintroduces these quantifiers. The term "first order" means the quantifiers range over elements of a given universe. "Second order" would mean the quantifiers may range over sets and functions, but we will not study this.
+The propositional logic we studied in the first part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. It captures the conditional $\rightarrow$ particularly well, and helped us with meaningful applications including graph coloring and Konig's lemma.
+
+However the propositional language with its boolean connectives still leaves much of mathematical reasoning out. For example it is impossible to imagine codifying real analysis or set theory using propositional logic alone. For example the definition of limit begins "for all $\epsilon$\ldots". Similarly the axiom of Infinity begins "there exists a set $HF$ such that\ldots". The key concepts that we still need are the *quantifiers* "for all" and "there exists".
+
+In this part we introduce and elaborate on first order logic, which is logic with boolean connectives and quantifiers. The term "first order" means the quantifiers range over elements of a given universe. We will not study "second order" logic, but in case you're curious it means the quantifiers may range over sets and functions as well.
+
+We will see that first order logic is powerful enough to express nearly all mathematical concepts. But it strikes a balance, because it is also simple enough that we can reason and prove thoerems about it.
 
 ### 4. Syntax and theories
 
+<!-- First order logic has two parts: proof theory and model theory. In proof theory we study what it means to give a correct proof of a statement from a set of given axioms. In model theory we study a given set of axioms and the possible universes where the axioms are true.
 
-
-While one can imagine making a wide variety of choices for the language, it is natural to restrict to the "first order" logic we have been using in this course and in ordinary mathematics. We have seen that this language is powerful enough to express almost all mathematical concepts, and we will see that it is simple enough that we can reason and prove thoerems about it.
-
-
-First order logic has two parts: proof theory and model theory. In proof theory we study what it means to give a correct proof of a statement from a set of given axioms. In model theory we study a given set of axioms and the possible universes where the axioms are true.
 * For example, group theory consists of the axioms
   * $(\forall x,y,z)(xy)z=x(yz)$
   * $(\exists u)(\forall x)xu=x\wedge ux=x\wedge(\exists y)xy=u$
 * If we let $\phi$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$ then $\phi$ is a theorem of group theory. Proof theory says we can find a proof of $\phi$ from the axioms. Model theory says that $\phi$ is true in every universe of the axioms (group).
 
-Until now we have been fairly informal with logic, mixing the official symbols with english and additional ad-hoc symbols. Now it is time to be perfectly formal.
+Until now we have been fairly informal with logic, mixing the official symbols with english and additional ad-hoc symbols. Now it is time to be perfectly formal. -->
 
-In the first section we introduced the syntax of propositional logic.
+In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
 
-In math we often mix prefix ($\neg P$, $f(x)$, $-3$), infix ($x+y$, $x>y$, $P\rightarrow Q$), and postfix ($n!$, $f'$, $\kappa^+$) notations.
+**Definition** An *expression* in the alphabet $A$ is a finite sequence of symbols of $A$.
 
-For this part of the module, we officially adopt prefix notation for everything. This helps us reduce ambiguity such as $P\rightarrow Q\rightarrow R$. It also eliminates the need for parentheses.
+Our intension is to let the alphabet include logical symbols as before, in addition to operation symbols (relations or functions) such as $+$, $\times$, and $<$.
 
-For example the expression $f(n!,x)>5$ will be written $>f!nx5$. Take a minute to think about that!
+In mathematics there are several notations for expressing an operation with one or more inputs. In *prefix* notation, the operation goes first, for instance $\neg P$, $f(x)$, $-3$. In *infix* notation, the operation goes in the middle, for instance $P\rightarrow Q$, $x+y$, $x>y$. In *postfix* notation the operation goes at the end, for instance $n!$, $f'$, $x^\ast$. (There are more concepts such at $\bar x$, but let's leave it at that.)
 
-In order to read such an expression, the reader will have to know the arity of each symbol, that is, how many inputs the symbol is supposed to eat.
+To avoid difficulties caused by parentheses, we officially adopt prefix notation for everything. For instance we can write $P\rightarrow (Q\rightarrow R)$ without parentheses as $\mathord{\rightarrow}P\mathord{\rightarrow}QR$. And we can write $(P\rightarrow Q)\rightarrow R$ without parentheses as $\mathord{\rightarrow}\mathord{\rightarrow}PQR$. It also eliminates the need for parentheses.
 
-**Definition** An *alphabet* is a set $\Sigma$ of symbols.
+It will be the same way with operations as well as logical symbols like $\rightarrow$. For example the expression $n!+n>5$ will be written $>+!nn5$. It is worth spending a minute think about this!
 
-**Definition** An *expression* in a given alphabet is a finite sequence of symbols of the alphabet.
+In order to interpret prefix expressions, a person would need to know that the $!$ operation takes just one input, while $>$ and $+$ each take two inputs. The number of inputs for a given symbol is called its *arity*. The next definition incorporates arity into our language.
 
-* Def. A lexicon consists of an alphabet together with an arity function $a\colon\Sigma\to\omega$.
-* Def. An expression is well-formed if it is of the form $s\tau_1\cdots\tau_n$ where $\tau_i$ are well-formed expressions.
-* Example. The lexicon for expressing polynomials with coefficients $1--4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $+\cdot\cdot xx+\cdot2x1$ is one way to represent the polynomial $3x^2+2x+1$. This begins with $s=+$ and is followed by $\tau_1=\cdot3\times xx$ and $\tau_2=+\cdot2x1$. Each of these may then be further broken down. (There are several other representations due to associativity and commutativity.)
-* Example. The expression $+\cdot+\cdot$ is not well-formed.
-* We now wish to argue that well-formed expressions can only be parsed or read in one way. That is, there are not different $\tau_i$'s that do the job. This is in contrast to $P\rightarrow Q\rightarrow R$, which needs parentheses, which makes the following harder to state and prove.
-* Theorem. Let $\sigma$ be a well-formed expression. (1) No proper initial segment of $\sigma$ is well-formed. (2) If $\sigma$ starts with the symbol $s$ of arity $n$ then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\sigma=s\tau_1\cdots\tau_n$.
-* Proof. Assume the theorem is true for all expressions which are shorter than $\sigma$. By definition of well-formed, there exist $\tau_i$ such that $\sigma=s\tau_1\cdots\tau_n$. Let $\sigma'$ be a well-formed initial segment of $\sigma$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\sigma'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, and contradicting the inductive hypothesis. Similarly $\tau_i=\tau'_i$ for all $i$. Thus $\sigma'=\sigma$ and the $\tau_i$ are unique, establishing both (1) and (2).
-* Cor. If $\sigma$ is well-formed, then every symbol of $\sigma$ is the beginning of a unique well-formed subexpression called the scope of the occurrence of the symbol.
-* Proof. Assume the theorem is true for expressions shorter than $\sigma$. The first symbol of $\sigma$ has scope $\sigma$. Any other symbol appears in some $\tau_i$ and we can apply the inductive hypothesis.
-* Activity: Play around with the statement "there are infinitely many primes". Write it in traditional syntax, prefix, and parse tree.
+**Definition** A *lexicon* consists of an alphabet $A$ together with an arity function $a\colon A\to\mathbb N$.
+
+**Definition** An expression is *well-formed* if it is of the form $s\tau_1\cdots\tau_n$ where $\tau_i$ are well-formed expressions.
+
+**Example** The lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. This begins with $s=\mathord{+}$ and is followed by $\tau_1=\mathord{\cdot}3\mathord{\cdot}xx$ and $\tau_2=\mathord{+}\mathord{\cdot}2x1$. Each of these may then be further broken down. (There are several other equivalent representations due to associativity and commutativity.)
+
+**Example** In the same lexicon above, the expression $\mathord{+}\mathord{\cdot}\mathord{+}\mathord{\cdot}$ is not well-formed.
+
+We now wish to argue that well-formed expressions can only be parsed or read in one way. That is, there are not different $\tau_i$'s that do the job. This is in contrast to $P\rightarrow Q\rightarrow R$, which needs parentheses, which makes the following harder to state and prove.
+
+**Theorem** Let $\sigma$ be a well-formed expression. (1) No proper initial segment of $\sigma$ is well-formed. (2) If $\sigma$ starts with the symbol $s$ of arity $n$ then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\sigma=s\tau_1\cdots\tau_n$.
+
+*Proof*: Assume the theorem is true for all expressions which are shorter than $\sigma$. By definition of well-formed, there exist $\tau_i$ such that $\sigma=s\tau_1\cdots\tau_n$. Let $\sigma'$ be a well-formed initial segment of $\sigma$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\sigma'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, and contradicting the inductive hypothesis. Similarly $\tau_i=\tau'_i$ for all $i$. Thus $\sigma'=\sigma$ and the $\tau_i$ are unique, establishing both (1) and (2).
+
+**Corollary** If $\sigma$ is well-formed, then every symbol of $\sigma$ is the beginning of a unique well-formed subexpression called the scope of the occurrence of the symbol.
+
+*Proof*: Assume the theorem is true for expressions shorter than $\sigma$. The first symbol of $\sigma$ has scope $\sigma$. Any other symbol appears in some $\tau_i$ and we can apply the inductive hypothesis.
+
+**Activity** Play around with the statement "there are infinitely many primes". Write it in traditional syntax, prefix, and parse tree.
 
 #### First order syntax
 
