@@ -497,7 +497,7 @@ We will see that first order logic is powerful enough to express nearly all math
   * $(\exists u)(\forall x)xu=x\wedge ux=x\wedge(\exists y)xy=u$
 * If we let $\phi$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$ then $\phi$ is a theorem of group theory. Proof theory says we can find a proof of $\phi$ from the axioms. Model theory says that $\phi$ is true in every universe of the axioms (group).
 
-Until now we have been fairly informal with logic, mixing the official symbols with english and additional ad-hoc symbols. Now it is time to be perfectly formal. -->
+-->
 
 In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
 
@@ -519,31 +519,40 @@ In order to interpret prefix expressions, a person would need to know that the 
 
 **Example** The lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. This begins with $s=\mathord{+}$ and is followed by $\tau_1=\mathord{\cdot}3\mathord{\cdot}xx$ and $\tau_2=\mathord{+}\mathord{\cdot}2x1$. Each of these may then be further broken down. (There are several other equivalent representations due to associativity and commutativity.)
 
-**Example** In the same lexicon above, the expression $\mathord{+}\mathord{\cdot}\mathord{+}\mathord{\cdot}$ is not well-formed.
+**Example** In the same lexicon as above, the expression $\mathord{+}\mathord{\cdot}xx$ is not well-formed.
 
-We now wish to argue that well-formed expressions can only be parsed or read in one way. That is, there are not different $\tau_i$'s that do the job. This is in contrast to $P\rightarrow Q\rightarrow R$, which needs parentheses, which makes the following harder to state and prove.
+Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$, it is natural to ask, can this string of symbols be read in two different ways? We know the first $+$ symbol should be followed by two arguments, but is there only one way to break the rest of the expression up into two arguments? This is a subtle but important question, and the next theorem tells us the answer is Yes.
 
-**Theorem** Let $\sigma$ be a well-formed expression. (1) No proper initial segment of $\sigma$ is well-formed. (2) If $\sigma$ starts with the symbol $s$ of arity $n$ then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\sigma=s\tau_1\cdots\tau_n$.
+**Theorem** (Unique readability) Let $\alpha$ be a well-formed expression.
 
-*Proof*: Assume the theorem is true for all expressions which are shorter than $\sigma$. By definition of well-formed, there exist $\tau_i$ such that $\sigma=s\tau_1\cdots\tau_n$. Let $\sigma'$ be a well-formed initial segment of $\sigma$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\sigma'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, and contradicting the inductive hypothesis. Similarly $\tau_i=\tau'_i$ for all $i$. Thus $\sigma'=\sigma$ and the $\tau_i$ are unique, establishing both (1) and (2).
+1. No proper initial segment of $\alpha$ is well-formed.
+2. If $\alpha$ starts with the symbol $s$, and $s$ is of arity $n$, then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\alpha=s\tau_1\cdots\tau_n$.
 
-**Corollary** If $\sigma$ is well-formed, then every symbol of $\sigma$ is the beginning of a unique well-formed subexpression called the scope of the occurrence of the symbol.
+*Proof*: Assume (1) and (2) are true for all expressions which are shorter than $\alpha$. By definition of well-formed, there exist $\tau_i$ such that $\alpha=s\tau_1\cdots\tau_n$. Let $\alpha'$ be a well-formed initial segment of $\alpha$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\alpha'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, contradicting the inductive hypothesis. Similarly we can argue $\tau_i=\tau'_i$ for all $i$. Thus $\alpha'=\alpha$ and the $\tau_i$ are unique, establishing both (1) and (2).
 
-*Proof*: Assume the theorem is true for expressions shorter than $\sigma$. The first symbol of $\sigma$ has scope $\sigma$. Any other symbol appears in some $\tau_i$ and we can apply the inductive hypothesis.
+**Corollary** If $\alpha$ is well-formed, then every symbol of $\alpha$ is the beginning of a unique well-formed subexpression. We call this subexpression the *scope* of the occurrence of the symbol.
 
-**Activity** Play around with the statement "there are infinitely many primes". Write it in traditional syntax, prefix, and parse tree.
+*Proof*: Assume the theorem is true for expressions shorter than $\alpha$. By the previous theorem, the first symbol of $\alpha$ has scope $\alpha$. Any other symbol of $\alpha$ appears in some $\tau_i$. Since $\tau_i$ is shorter than $\alpha$, we can apply the inductive hypothesis.
 
 #### First order syntax
 
-* In the first part of the course, we have used first-order logic and logical notation in a somewhat informal way. That is, we introduced the symbols and said what they mean, but we left it to intuition to express and interpret formulas properly.
-* In the previous class, we defined lexicon, prefix notation, and the concept of well-formed expression. We proved that well-formed expressions are not at risk for having multiple interpretations, as well as some other useful facts.
-* Now it is time to apply the concept of well-formed expressions to first-order logic, thus finally making the logic a formal system.
-* The lexicon of first-order logic consists of the alphabet $\Sigma=\set{\forall,\exists,\wedge,\vee,\rightarrow,\leftrightarrow,=,\neg}\cup\set{x_n\mid n\in\omega}$. The arity function is defined as $a(x_i)=0$, $a(\neg)=1$, and all others are $2$.
-* In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. Examples include $+,\cdot,<$.
-* Def. A signature $\mathcal L$ of first-order logic consists of function symbols $f_i$ and relation symbols $R_j$ as well as arity values $a(f_i)$ and $a(R_j)$. This is the context described above.
-* Def. Given a signature $\mathcal L$, the corresponding first-order lexicon consists of $\mathcal L$ together with the first-order lexicon described above.
-* We next wish to define the well-formed formulas of first-order logic. Note that this is not as simple as saying that a well-formed formula is a well-formed expression in the lexicon of first-order logic. While it is true that we want our formulas to be well-formed expressions, there are actually some well-formed expressions that should not be formulas. For example consider the expressions $\forall xy$, or $\forall>xyz$.
-* Def. Let $\mathcal L=\set{f_i,R_j}$ be a signature of first-order logic.
+We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\forall,\exists,\wedge,\vee,\rightarrow,\leftrightarrow,=,\neg}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and $a$ of all the rest is equal to $2$.
+
+In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. Examples include $+,\cdot,<$.
+
+**Definition** A *signature* $\mathcal L$ of first order logic consists of function symbols $f_i$ and relation symbols $R_j$ as well as arity values $a(f_i)$ and $a(R_j)$. This is the context described above.
+
+Given a signature $\mathcal L$, the corresponding first order lexicon consists of $\mathcal L$ together with the first order lexicon described above.
+
+For example, if we are studying group theory then our signature should include a $\cdot$ symbol of arity $2$, if we are studying order theory then our signature should include a $<$ symbol of arity $2$, etc.
+
+
+With the definition of well-formed in hand, we may now focus on just the well-formed expressions of first order logic. We next seek to assign meaning to such expressions. Unfortunately this is still not always possible. To see this consider the well-formed expression $+x\forall y$, which in infix notation translates to $x+(\forall y)$. It is well-formed because $+$ has arity $2$ and $\forall$ has arity $1$ and $x,y$ have arity $0$. But it is nevertheless meaningless. (Contrast this with the simpler situation in propositional logic.)
+
+
+* We next wish to define the well-formed formulas of first order logic. Note that this is not as simple as saying that a well-formed formula is a well-formed expression in the lexicon of first order logic. While it is true that we want our formulas to be well-formed expressions, there are actually some well-formed expressions that should not be formulas. For example consider the expressions $\forall xy$, or $\forall>xyz$.
+
+* Def. Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
   * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the $f_i$ and $x_n$.
   * The *atomic formulas* of $\mathcal L$ are the expressions of the form (1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms, or; (2) $=\tau_1\tau_2$ where $\tau_i$ are terms.
   * The *well-formed formulas* of $\mathcal L$ are the expressions of the form (1) an atomic formula; (2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a wff; (3) $\neg\phi$ where $\phi$ is a wff, or; (4) $\wedge\phi\psi$, $\vee\phi\psi$, $\rightarrow\phi\psi$, $\leftrightarrow\phi\psi$, where $\phi,\psi$ are wffs.
@@ -557,7 +566,7 @@ We now wish to argue that well-formed expressions can only be parsed or read in 
 * For another example consider $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$. This is true of real numbers but false of rational numbers.
 * In order to decide the truth value of a sentence, we need to be told the context of the variables. The first example above says "the universe has an upper bound," but what is the universe?
 * The question of what is the universe leads us to model theory. We have seen that set theory is a foundational theory, which means that essentially all mathematical structures can be built using sets. Given a language $\mathcal L$, we can use set theory to study the special sets that can serve as universes for well-formed formulas of $\mathcal L$.
-* If $\mathcal L$ is a language of first-order logic, an $\mathcal L$-structure $\mathcal A$ consists of:
+* If $\mathcal L$ is a language of first order logic, an $\mathcal L$-structure $\mathcal A$ consists of:
   * A set $A$, the universe of the structure
   * For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
   * For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
@@ -579,7 +588,7 @@ However, if $\phi(x)$ has free variable $x$, then the statement $\mathcal A\mode
 
 We begin our recursive definiton of satisfaction by showing how to evaluate the terms.
 
-**Definition** Let $\mathcal L$ be a language of first-order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions $x\to a$ of variables being used by elements of $A$ (in other words, a function from the set of variables being used to $A$). Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions $x\to a$ of variables being used by elements of $A$ (in other words, a function from the set of variables being used to $A$). Then:
 
 * If $x$ is a variable of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(x)[s]$ to be $s(x)$
 * If $c$ is a constant symbol of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
@@ -589,7 +598,7 @@ We begin our recursive definiton of satisfaction by showing how to evaluate the 
 
 We next define satisfaction for atomic formulas.
 
-**Definition** Let $\mathcal L$ be a language of first-order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
 
 * If $\phi$ is the formula $R\tau_1\cdots\tau_n$ then $\mathcal A\models\phi[s]$ is true if and only if $(\mathop{\mathrm{val}}_{\mathcal A}(\tau_1)[s],\ldots,\mathop{\mathrm{val}}_{\mathcal A}(\tau_n)[s])\in R^{\mathcal A}$.
 * If $\phi$ is the formula $=\tau_1\tau_2$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathop{\mathrm{val}}_{\mathcal A}(\tau_1)[s]=\mathop{\mathrm{val}}_{\mathcal A}(\tau_2)[s]$
@@ -599,7 +608,7 @@ Note that in this definition the equality relation is treated specially. This gu
 
 We finally define satisfaction for general formulas.
 
-**Definition** Let $\mathcal L$ be a language of first-order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
 
 * If $\phi$ is $\alpha\wedge\beta$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
 * Similarly use the truth tables for $\wedge,\to,\leftrightarrow$
@@ -613,7 +622,7 @@ Note that if $\sigma$ is a sentence, then no substitution function $s$ is needed
 
 We often apply the satisfaction relation to a set of sentences.
 
-**Definition** If $\mathcal L$ is a language of first-order logic, then an $\mathcal L$-theory is a set of $\mathcal L$-sentences.
+**Definition** If $\mathcal L$ is a language of first order logic, then an $\mathcal L$-theory is a set of $\mathcal L$-sentences.
 
 **Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A\models T$ if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. In this case we also say that $\mathcal A$ is a *model* of $T$.
 
@@ -637,9 +646,9 @@ Returning to the semantically valid sentences, we proceed with several examples.
 
 **Example** Every propositional tautology is a semantically valid sentence in the appropriate language. Recall that a propositional tautology is a sentence involving just $0$-ary relations which can be verified by truth tables. For examples, the following are propositional tautologies: $P\wedge Q\to P$; $(P\to Q)\leftrightarrow (\neg P\vee Q)$; $(P\wedge(\mathcal P\to Q))\to Q$.
 
-Similarly, if one begins with a propositional tautology and replaces each propositional variable with a first-order sentence, one obtains a semantically valid sentence.
+Similarly, if one begins with a propositional tautology and replaces each propositional variable with a first order sentence, one obtains a semantically valid sentence.
 
-There are many more examples of semantically valid statements that are genuinely first-order, and don't derive from propositional tautologies.
+There are many more examples of semantically valid statements that are genuinely first order, and don't derive from propositional tautologies.
 
 **Example** The following are semantically valid: $\forall x x=x$; $\forall x R(x)\to\neg\exists x\neg R(x)$; $\forall x\phi(x)\to\phi(\tau)$; $\phi(\tau)\to\exists x\phi(x)$.
 
@@ -920,7 +929,7 @@ But how can one show that a given theory $T$ is complete? In general this can be
 
 **Definition** Structures $\mathcal A,\mathcal B$ are *elementarily equivalent* if they satisfy the same sentences: $\mathcal A\models\sigma\iff\mathcal B\models\sigma$. In other words, the two structures are models of the same complete theory.
 
-It is clear that if structures $\mathcal A,\mathcal B$ are isomorphic then they are elementarily equivalent. However the converse is false, since for example if $T$ is any complete theory with infinite models then $T$ has models of distinct cardinalities. This means that structures can have properties that are not described by first-order logic!
+It is clear that if structures $\mathcal A,\mathcal B$ are isomorphic then they are elementarily equivalent. However the converse is false, since for example if $T$ is any complete theory with infinite models then $T$ has models of distinct cardinalities. This means that structures can have properties that are not described by first order logic!
 
 In light of the example in the previous paragraph, it is natural to ask whether a complete theory can have distinct models of the same cardinality. In general this is not the case, but when it is true we give it a name. 
 
