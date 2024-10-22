@@ -551,18 +551,26 @@ With the lexicon established, we naturally wish to focus on just the well-formed
 **Definition** Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
 
 * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the symbols $f_i$ and $x_n$.
-* The *atomic formulas* of $\mathcal L$ are the expressions of the form (1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms, or; (2) $=\tau_1\tau_2$ where $\tau_i$ are terms.
-* The *well-formed formulas* of $\mathcal L$ are the expressions of the form (1) an atomic formula; (2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a wff; (3) $\neg\phi$ where $\phi$ is a wff, or; (4) $\wedge\phi\psi$, $\vee\phi\psi$, $\rightarrow\phi\psi$, $\leftrightarrow\phi\psi$, where $\phi,\psi$ are wffs.
+* The *atomic formulas* of $\mathcal L$ are the expressions of the form:  
+(1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms;  
+(2) $\mathord{=}\tau_1\tau_2$ where $\tau_i$ are terms.
+* The *well-formed formulas* of $\mathcal L$ are the expressions of the form:  
+(1) an atomic formula;  
+(2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a well-formed formula;
+(3) $\neg\phi$, $\wedge\phi\psi$, $\vee\phi\psi$, $\mathord{\rightarrow}\phi\psi$, $\mathord{\leftrightarrow}\phi\psi$, where $\phi,\psi$ are well-formed formulas.
 
 Like the definition of well-formed expression, this definition is recursive. The recursive rules serve to place further limitations on precisely which expressions are legal. Our goal is to show that we can assign meaning to the well-formed formulas.
 
-**Example** In lectures we will give several examples of terms, atomic formulas, and more general well-formed formulas. One example would be $\forall x\forall y\wedge=++xy\cdot\cdot zzw\cdot3x>\cdot xy\cdot xz$, which in infix translates to $\forall x\forall y(x+y)+z^2w=3x\wedge xy>xz$. We will analyse which parts are terms, atomic formulas, and well-formed formulas.
+**Example** In lectures we will give several examples of terms, atomic formulas, and more general well-formed formulas. One example would be $\forall x\forall y\mathord{\wedge}\mathord{=}\mathord{+}\mathord{+}xy\mathord{\cdot}\mathord{\cdot} zzw\mathord{\cdot}3x\mathord{>}\mathord{\cdot}xy\mathord{\cdot}xz$, which in infix translates to $(\forall x)(\forall y)(((x+y)+z^2w=3x)\wedge(xy>xz))$. We will analyse which parts are terms, atomic formulas, and well-formed formulas.
 
-There are still a few barriers before we can think of assigning a truth value to a wff. First, some wffs have free variables, that is, variables that are never quantified. Consider the statement of real numbers $\forall x x\cdot x\geq y$. This would be true if $y=0$, but it would be false if $y=1$. We can repair this by quantifying the $y$, for example, $\exists y\forall x x\cdot x\geq y$ is true of real numbers.
+In well-formed formulas, as in mathematical statements generally, some of the variables act as parameters while others act as dummy variables. For example consider the statement $(\forall x) x^2\geq y$. This statement is true if $y=0$ and false if $y=1$. But we wouldn't ask what $x$ is, it's just a dummy variable because it's bound by a quantifier.
 
-* Def. If $\phi$ is a wff, an occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and free otherwise.
-* Def. If $\phi$ is a wff, $\phi$ is called a *sentence* if it has no free variables occurring.
-* The sentences are the well-formed formulas for which we can conceivable assign a truth value. But we may not be able to yet. For example consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$.
+**Definition**
+* If $\phi$ is a wff, an occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and free otherwise.
+* If $\phi$ is a wff, $\phi$ is called a *sentence* if it has no free variables occurring.
+
+The sentences are the well-formed formulas for which we can conceivably assign a truth value. But we may not be able to yet. For example consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$.
+
 * For another example consider $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$. This is true of real numbers but false of rational numbers.
 * In order to decide the truth value of a sentence, we need to be told the context of the variables. The first example above says "the universe has an upper bound," but what is the universe?
 * The question of what is the universe leads us to model theory. We have seen that set theory is a foundational theory, which means that essentially all mathematical structures can be built using sets. Given a language $\mathcal L$, we can use set theory to study the special sets that can serve as universes for well-formed formulas of $\mathcal L$.
