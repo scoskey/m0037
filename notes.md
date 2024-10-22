@@ -84,7 +84,7 @@ While these truth tables are certainly familiar, we still need to describe how t
 
 In other words, a truth assignment $v$ says whether each propositional symbol is true or false. Since the propositional symbols are the simplest well-formed formulas, intuitively we should be able to use $v$ together with the truth tables for the boolean connectives to determine whether $v$ says any well-formed formula $\alpha$ is true or false. The following definition makes this idea formal.
 
-**Definition** Let $v$ be a truth assignment and $\alpha$ be a well-formed formula. We define $v\models\alpha$, read aloud "$v$ satisfies $\alpha$", using the following base case and recursive rules.
+**Definition** Let $v$ be a truth assignment and $\alpha$ be a well-formed formula. We define $v\models\alpha$, read aloud "$v$ satisfies $\alpha$", using the following base case and recursive rules:
 * If $\alpha=P$ and $v(P)=T$, let $v\models\alpha$. If $v(P)=F$ let $v\not\models\alpha$.
 * If $\alpha=\neg\beta$ and $v\models\beta$ then let $v\not\models\alpha$. If $v\not\models\beta$ then let $v\models\alpha$.
 * If $\alpha=\beta\wedge\gamma$ and $v\models\beta$ and $v\models\gamma$ then let $v\models\alpha$; otherwise let $v\not\models\alpha$.
@@ -241,7 +241,7 @@ When $f$ is a function from $A$ to $B$ we may write $f\colon A\to B$, and when $
 
 We note that in other resources the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
 
-When the exponent set is finite, we can think of $B^A$ as tuples of elements of $B$. In more detail, for each natural number $n$, let the symbol $n$ stand for the set $\{0,\ldots,n-1\}$. Then $B^n$ consists of all functions $f\colon\{0,\ldots,n-1\}\to B$. Given such a function $f$, we can think of it as an ordered $n$-tuple $(f(0),\ldots,f(n-1))$, which is a generalisation of an ordered pair.
+When the exponent set is finite, we can think of $B^A$ as tuples of elements of $B$. In more detail, for each natural number $n$, let the symbol $n$ stand for the set $\set{0,\ldots,n-1}$. Then $B^n$ consists of all functions $f\colon\set{0,\ldots,n-1}\to B$. Given such a function $f$, we can think of it as an ordered $n$-tuple $(f(0),\ldots,f(n-1))$, which is a generalisation of an ordered pair.
 
 **Definition** Let $X$ be a set. Then An $n$-ary *relation* on $X$ is a subset $R\subset X^n$.
 
@@ -288,7 +288,7 @@ Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there
 
 Konig's lemma has many important applications, we present just one. We first recall that the set $X^{\mathbb N}$ is a metric space, where two sequences are close together if they agree on a long partial sequence. Formally we let $d(f,g)=1/N$, where $N$ is the maximum number such that $f\restriction N=g\restriction N$. Thus a sequence of elements $f_n\in X^{\mathbb N}$ converges to $f\in X^{\mathbb N}$ if the length of agreement between $f_n$ and $f$ goes to infinity.
 
-**Theorem** Let $2=\{0,1\}$. The metric space $2^{\mathbb N}$ is compact.
+**Theorem** Let $2=\set{0,1}$. The metric space $2^{\mathbb N}$ is compact.
 
 *Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence of $f_n$ which converges to some limit $f\in 2^{\mathbb N}$ in the sense of the metric described above.
 
@@ -298,7 +298,7 @@ We now construct a subsequence of $f_n$ which converges to $f$. To do so, first 
 
 We are now ready to return from our detour into set theory (and some light analysis) to the propositional compactness theorem. 
 
-Recall that a truth assignment is a function $v\colon\set{P_1,P_2,\ldots}\to\{T,F\}$. We observe that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\{T,F\}$ with $\{0,1\}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. In what follows we will use this equivalence freely, and in particular we will use the same metric of agreement that we used in the previous result.
+Recall that a truth assignment is a function $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$. We observe that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\set{T,F}$ with $\set{0,1}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. In what follows we will use this equivalence freely, and in particular we will use the same metric of agreement that we used in the previous result.
 
 We invite the reader to verify that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such that $v\models A$ is a closed subset of $2^{\mathbb N}$ also.
 
@@ -374,7 +374,7 @@ One familiar operation on sets that we haven't mentioned so far is the union $A\
 
 **Axiom** (Union) If $\mathcal F$ is a set, then there exists a set $\bigcup\mathcal F$ called the *union* of $\mathcal F$, which consists of all $x$ such that $x\in F$ for some $F\in\mathcal F$.
 
-In particular, if $A,B$ are sets we can construct $A\cup B$ by first using Pairing to construct $\{A,B\}$, and then using Union to construct $\bigcup\{A,B\}$, which is simply another way of writing $A\cup B$.
+In particular, if $A,B$ are sets we can construct $A\cup B$ by first using Pairing to construct $\set{A,B}$, and then using Union to construct $\bigcup\set{A,B}$, which is simply another way of writing $A\cup B$.
 
 Of course we have introduced several operations on sets besides unions, including intersections $\cap$, set difference $\smallsetminus$, and symmetric difference $\triangle$. We invite the reader to verify that these constructions may be carried out using the axioms we have introduced, and do not require separate axioms.
 
@@ -408,7 +408,7 @@ In general, we recursively define:
 
 * $n+1=n\cup\{n\}$
 
-We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\{0,\ldots,n-1\}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
+We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\set{0,\ldots,n-1}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
 
 From the above definition we see that natural numbers are all elements of $HF$. Thus we can use the Separation axiom to construct the set of natural numbers.
 
@@ -589,7 +589,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 **Example** Let $\mathcal L=\{\cdot\}$ be the language with one binary function symbol. Then any group $(G;\cdot)$ is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\{0,1,+,\cdot,<\}$ be the language with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the language with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
 
 If $\mathcal L$ is a language, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
 
@@ -679,7 +679,7 @@ The most obvious way to justify a statement is when it is something we are assum
 
 * $\sigma_i$ is an element of $T$;
 * $\sigma_i$ is an instance of a logical axiom (described below);
-* there exist $j,k\lt i$ such that $\sigma_k$ is $\sigma_j\to\phi_i$.
+* there exist $j,k<i$ such that $\sigma_k$ is $\sigma_j\to\phi_i$.
 
 We must say what it means for a sentence to be a logical axiom. Given our discussion of valid sentences, it may seem natural to define the logical axioms to be the valid sentences. However this has some disadvantages, since it can be difficult to tell whether a given sentence is valid. Instead we define the logical axioms to be a sufficiently powerful but still easy-to-describe subset of the valid sentences.
 
@@ -707,7 +707,7 @@ Recall our distinction between semantic truth (satisfaction) and syntactic truth
 
 **Soundness Theorem** If $T\vdash\sigma$ then $T\models\sigma$.
 
-*Proof*. Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j\lt i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$.
+*Proof*. Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j<i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$.
 
 The completeness theorem is the converse of the soundness theorem. Thus it says that everything that is true can be proved. We will prove the completeness theorem in the next section.
 
@@ -719,7 +719,7 @@ One common tactic in mathematics is to prove a lemma and use it as a step in a t
 
 *Proof*. The forward implication is just modus ponens. For the reverse implication, assume that $T\cup\set{\alpha}\vdash\beta$ and let $\sigma_1,\ldots\sigma_n$ be a proof. We will show by induction that for all $i$ we have $T\vdash\alpha\to\sigma_i$.
 
-As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j\lt i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction.
+As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction.
 
 **Proof by contradiction** If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then $T\vdash\sigma$.
 
@@ -759,7 +759,7 @@ Thus proving the completeness theorem is really about building models. If $T$ is
 
 The BIG IDEA is to build the model using the terms of the language. In order to illustrate
 
-**Example** Let $\mathcal L=\set{+,\times,0,1,\lt}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, and so on, pretty good substitutes for the actual natural numbers! Of course there are many other terms such as $1+0+0+1$, but our theory knows that this one is really equivalent to $1+1$. In other words, there is an equivalence relation on terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
+**Example** Let $\mathcal L=\set{+,\times,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, and so on, pretty good substitutes for the actual natural numbers! Of course there are many other terms such as $1+0+0+1$, but our theory knows that this one is really equivalent to $1+1$. In other words, there is an equivalence relation on terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
 
 This example worked smoothly, but we should wonder what we would do if the constant symbol $1$ was not present in the language. We can make a theory in this language that is equivalent to $T$ by defining $1$ as the least natural number greater than $0$. But this language doesn't have any interesting terms. In general when building a model of $T$ we will use the terms of an expanded language where constant symbols have been added for each possible definition.
 
@@ -787,7 +787,7 @@ One must check that this definition is well-defined, that is, the function value
 
 We are clearly on our way to obtaining a model of $T$. But quantifiers are still a big problem.
 
-**Example** Let $\mathcal L=\set{\lt,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of $\omega$. Then $\mathcal H$ has domain $\set{a,b}$ but the model does not decide whether $a\lt b$ or $b\lt a$. Thus the theory $T$ includes trichotomy but the model $\mathcal H$ does not satisfy trichotomy.
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of $\omega$. Then $\mathcal H$ has domain $\set{a,b}$ but the model does not decide whether $a<b$ or $b<a$. Thus the theory $T$ includes trichotomy but the model $\mathcal H$ does not satisfy trichotomy.
 
 To fix this problem, we will work only with complete theories $T$.
 
@@ -799,9 +799,9 @@ To fix this problem, we will work only with complete theories $T$.
 
 By Zorn's lemma, there exists a maximal consistent theory $\bar T$. such that $T\subset\bar T$. We claim that $\bar T$ is complete. Indeed, if $\sigma\notin\bar T$, then $\bar T\cup\set{\sigma}$ is inconsistent, so by our theorem about proofs by contradiction, $\bar T\vdash\neg\sigma$. Since $\bar T$ is maximal, it follows that $\neg\sigma\in T$. $\blacksquare$
 
-We remark that if $T$ is a complete theory $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Thus if we revisit the above example and complete $T$ before building $\mathcal H$, we will either have $a\lt b$ or $b\leq a$, whichever Zorn's lemma picks for us.
+We remark that if $T$ is a complete theory $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Thus if we revisit the above example and complete $T$ before building $\mathcal H$, we will either have $a<b$ or $b\leq a$, whichever Zorn's lemma picks for us.
 
-But there is still one big issue left to address. Continuing the above example, let $T$ be the theory of $\omega$ together with the sentences $a$ has three predecessors and $b$ has four. Then our model $\mathcal H$ will satisfy $a\lt b$, but it still will not satisfy the sentence $\exists x x\lt a$.
+But there is still one big issue left to address. Continuing the above example, let $T$ be the theory of $\omega$ together with the sentences $a$ has three predecessors and $b$ has four. Then our model $\mathcal H$ will satisfy $a<b$, but it still will not satisfy the sentence $\exists x x<a$.
 
 Generally speaking, a given language may not have enough terms to make $\mathcal H$ a real model of $T$. In order to fix this, we need to add new terms, constant symbols, that witness existential formulas.
 
@@ -880,9 +880,9 @@ The compactness theorem is a powerful tool for generalizing proofs about finite 
 
 This simple idea can also be used to derive the following consequences of compactness. The first is key in the theory of *nonstandard arithmetic*, where one studies models of number theory with infinite elements, and the second fact is key in *nonstandard analysis* where one studies models of analysis with infinitesimal elements.
 
-**Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,0,1,\lt)$. There is a model of $T$ with an element $N$ such that $n\lt N$ for all $n\in\mathbb N$.
+**Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,0,1,<)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
 
-**Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,0,1,\lt)$. There is a model of $T$ with an element $\epsilon$ such that for all $0\lt r\in\mathbb R$ we have $0\lt\epsilon\lt r$.
+**Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,0,1,<)$. There is a model of $T$ with an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
 
 We will leave the proofs as exercises.
 
@@ -914,15 +914,15 @@ Recall that a graph is *connected* if for any two vertices $x,y$, there exists a
 
 **Corollary** The class of well-orders is not axiomatizable.
 
-*Proof*. Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n\lt\ldots\lt c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,\lt)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
+*Proof*. Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\ldots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
 
 Recall we have shown that theories with arbitrarily large finite models have infinite models. It is natural to ask what cardinalities will occur. Our final corollary addresses this question with the most generous possible answer.
 
-**Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq\abs{\mathcal L}\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
+**Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq|\mathcal L|\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
 
-*Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $\abs{\mathcal L}\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin/Herbrand model $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
+*Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $|\mathcal L|\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin/Herbrand model $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
 
-For the upwards direction, assume $T$ has a model of size $\abs{\mathcal L}\cdot\aleph_0$ and let $\kappa\geq\abs{\mathcal L}\cdot\aleph_0$ be given. Expand the language to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha\lt\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta\mid\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows from the compactness theorem that $T'$ is consistent, and so has a model. The resulting model must have cardinality at least $\kappa$. If it has cardinality greater than $\kappa$, we can use the downwards direction of the theorem to produce a model of cardinality exactly $\kappa$. $\blacksquare$
+For the upwards direction, assume $T$ has a model of size $|\mathcal L|\cdot\aleph_0$ and let $\kappa\geq|\mathcal L|\cdot\aleph_0$ be given. Expand the language to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta\mid\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows from the compactness theorem that $T'$ is consistent, and so has a model. The resulting model must have cardinality at least $\kappa$. If it has cardinality greater than $\kappa$, we can use the downwards direction of the theorem to produce a model of cardinality exactly $\kappa$. $\blacksquare$
 
 The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is consistent, then ZFC has a countable model. Since we know that ZFC implies there exist uncountable sets, we appear to have reached a paradox: an uncountable object is contained in a countable object. The resolution to this apparent contradiction is that the countable model only believes its sets are uncountable because it lacks the bijections to prove they are countable. These bijections do exist but externally to the model.
 
@@ -952,7 +952,7 @@ In light of the example in the previous paragraph, it is natural to ask whether 
 
 **Definition** Let $T$ be a theory and let $\kappa$ be a cardinal. Then $T$ is called *$\kappa$-categorical* if all models of $T$ of cardinality $\kappa$ are isomorphic to one another.
 
-The following is the most famous example of a categorical theory. The theory of dense linear orders without endpoints consists of the theory of linear orders (irreflexivity, transitivity, trichotomy) plus the axioms $\forall x\forall y\exists z x\lt y\rightarrow x\lt z\lt y$ and $\forall x\exists y\exists z y\lt x\lt z$. Thus the rational order is an example of a dense linear order without endpoints.
+The following is the most famous example of a categorical theory. The theory of dense linear orders without endpoints consists of the theory of linear orders (irreflexivity, transitivity, trichotomy) plus the axioms $\forall x\forall y\exists z x<y\rightarrow x<z<y$ and $\forall x\exists y\exists z y<x<z$. Thus the rational order is an example of a dense linear order without endpoints.
 
 **Proposition** The theory $T$ of dense linear orders without endpoints is $\aleph_0$-categorical.
 
@@ -972,7 +972,7 @@ The following result shows the connection between categorical and complete theor
 
 *Proof*. Suppose that $T$ is $\kappa$-categorical but not complete. Then there is a sentence $\sigma$ such that both $T\cup\set{\sigma}$ and $T\cup\set{\neg\sigma}$ are consistent. By the Lowenheim–Skolem theorem, there are models $\mathcal A,\mathcal B$ of $T\cup\set{\sigma},T\cup\set{\neg\sigma}$ respectively, of cardinality $\kappa$. This contradicts that $T$ is $\kappa$-categorical. $\blacksquare$
 
-**Corollary** The theory of dense linear orders without endpoints is complete. In particular, $(\mathbb Q,\lt)$ and $(\mathbb R,\lt)$ are elementarily equivalent.
+**Corollary** The theory of dense linear orders without endpoints is complete. In particular, $(\mathbb Q,<)$ and $(\mathbb R,<)$ are elementarily equivalent.
 
 **Corollary** The theory of torsion-free divisible abelian groups is complete. In particular, $(\mathbb Q,+)$ and $(\mathbb R,+)$ are elementarily equivalent.
 
@@ -986,7 +986,7 @@ Consider the structure $(\mathbb N,+,0)$, and compare it with the structure $(\m
 
 **Definition** Let $\mathcal A$ be a structure. An $n$-ary relation $R\subset A^n$ is *definable* in $\mathcal A$ if there is a formula $\phi(x_1,\ldots,x_n)$ such that $(a_1,\ldots,a_n)\in R\iff\mathcal A\models\phi[x_i=a_i]$. A function $f\colon A^n\to A$ is definable if its graph is a definable $n+1$-ary relation. Finally an element $c\in A$ is definable if $\set{c}$ is a definable unary relation.
 
-For example, if $\mathcal A=(\mathbb N,+)$. Then the constant $0$ is definable using $x+x=x$, and $\lt$ is definable using $\exists z x+z=y$.
+For example, if $\mathcal A=(\mathbb N,+)$. Then the constant $0$ is definable using $x+x=x$, and $<$ is definable using $\exists z x+z=y$.
 
 **Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula. Then the corresponding *expansion by definitions* of $T$ is the theory $T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n}$, where $R$ is a new $n$-ary relation symbol.
 
@@ -1043,7 +1043,7 @@ On the other hand, there are sets that are intuitively computable but not $\Delt
 
 (In fact there is a whole hierarchy of Sigma, Pi, and Delta definability, but this is all we will need for now.)
 
-For example, the set $A$ of even natural numbers is a $\Delta_1$-definable subset of HF. We have already said that the property of being a natural number is $\Delta_0$-definable in HF. Thus the formula $\alpha(n,e)$ which says "$n$ is a natural number and $e$ is the set of even numbers $\lt n$" is $\Delta_0$. Then $x\in A$ if and only if $\exists n,e\alpha(n,e)\wedge x\in e$, and $x\in A$ if and only if $\forall n,e\alpha(n,e)\wedge x\in n\rightarrow x\in e$.
+For example, the set $A$ of even natural numbers is a $\Delta_1$-definable subset of HF. We have already said that the property of being a natural number is $\Delta_0$-definable in HF. Thus the formula $\alpha(n,e)$ which says "$n$ is a natural number and $e$ is the set of even numbers $<n$" is $\Delta_0$. Then $x\in A$ if and only if $\exists n,e\alpha(n,e)\wedge x\in e$, and $x\in A$ if and only if $\forall n,e\alpha(n,e)\wedge x\in n\rightarrow x\in e$.
 
 Like the $\Delta_0$-formulas, the $\Delta_1$-decidable sets enjoy a degree of absoluteness.
 
@@ -1077,11 +1077,11 @@ The Church–Turing thesis implies that we can informally say that $f$ is comput
 
 The simplest example of a computable function is the characteristic function $\chi_A$ of any decidable set $A$. Indeed $(x,i)\in\chi_A$ if and only if $i=1$ and $x\in A$ or else $i=0$ and $x\notin A$. This statement is a boolean combination of $\Delta_1$-formulas.
 
-Another example of a computable function is the cardinality function $f(x)=\abs{x}$. Here $\abs{x}=y$ if and only if $y\in\omega$ and there exists a bijection between $x$ and $y$, and $\abs{x}=y$ if and only if $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
+Another example of a computable function is the cardinality function $f(x)=|x|$. Here $|x|=y$ if and only if $y\in\omega$ and there exists a bijection between $x$ and $y$, and $|x|=y$ if and only if $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
 
 Some more interesting examples of computable functions are $+,\cdot$. However to prove this we will need the recursion theorem. You may recall that we have proved the classical recursion theorm and the transfinite recursion theorem. What we need is the computable version of the recursion theorem.
 
-**Theorem** If $G\colon\mathbb N^{\lt\omega}\to\mathbb N$ is computable, then there exists a computable function $F\colon\mathbb N\to\mathbb N$ such that $F(n)=G(F\restriction n)$.
+**Theorem** If $G\colon\mathbb N^{<\omega}\to\mathbb N$ is computable, then there exists a computable function $F\colon\mathbb N\to\mathbb N$ such that $F(n)=G(F\restriction n)$.
 
 *Proof idea*. The ordinary recursion theorem implies that the function $F$ exists. To see that $F$ is computable observe that $F(n)=y$ if and only if there exists a finite partial function $f$ obeying the recursion and satisfying $f(n)=y$, and $F(n)=y$ if and only if for all finite partial functions $f$ obeying the recursion if $n$ is in the domain then $f(n)=y$. Thus the graph of $F$ is $\Delta_1$-definable. $\blacksquare$
 
@@ -1155,13 +1155,13 @@ The claim that $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi[a
 
 *Proof*. Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $\exists y\alpha(a,y)$ iff $\forall z\beta(a,z)$. Note that we cannot use either of these two expressions directly to represent $A$, because they may be true without being witnessed in HF (that is, they may be witnessed by nonstandard elements). Instead we let $\psi(x)$ be the formula:
 
-$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)\lt \mathrm{rk}(y)\rightarrow\beta(x,z)\right]$
+$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right]$
 
 We claim that $a\in A\iff T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_0$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
 
 Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is,
 
-$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)\lt \mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right]$
+$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right]$
 
 Indeed first find $z$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle z\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
