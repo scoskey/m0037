@@ -495,9 +495,7 @@ We will see that first order logic is powerful enough to express nearly all math
 * For example, group theory consists of the axioms
   * $(\forall x,y,z)(xy)z=x(yz)$
   * $(\exists u)(\forall x)xu=x\wedge ux=x\wedge(\exists y)xy=u$
-* If we let $\phi$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$ then $\phi$ is a theorem of group theory. Proof theory says we can find a proof of $\phi$ from the axioms. Model theory says that $\phi$ is true in every universe of the axioms (group).
-
--->
+* If we let $\phi$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$ then $\phi$ is a theorem of group theory. Proof theory says we can find a proof of $\phi$ from the axioms. Model theory says that $\phi$ is true in every universe of the axioms (group).-->
 
 In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
 
@@ -1058,7 +1056,7 @@ For bounded quantification, we will show that $\Sigma_1$ is closed under bounded
 
 **Definition** Let $f$ be a function from HF to HF. Then $f$ is *computable* if its graph is decidable.
 
-The Church--Turing thesis implies that we can informally say that $f$ is computable if and only if there is a procedure which, given any input $x$, halts and outputs $f(x)$. To see this equivalence, first if the graph of $f$ is decidable then given $x$ we can search through all possible values $y$ until we find one with $(x,y)\in f$ and then we can halt and output $y$. Conversely if there is such a procedure for evaluating $f$ then given $(x,y)$ we can decide whether $(x,y)\in f$ by calculating $f(x)$ and asking whether $f(x)=y$.
+The Church–Turing thesis implies that we can informally say that $f$ is computable if and only if there is a procedure which, given any input $x$, halts and outputs $f(x)$. To see this equivalence, first if the graph of $f$ is decidable then given $x$ we can search through all possible values $y$ until we find one with $(x,y)\in f$ and then we can halt and output $y$. Conversely if there is such a procedure for evaluating $f$ then given $(x,y)$ we can decide whether $(x,y)\in f$ by calculating $f(x)$ and asking whether $f(x)=y$.
 
 The simplest example of a computable function is the characteristic function $\chi_A$ of any decidable set $A$. Indeed $(x,i)\in\chi_A$ if and only if $i=1$ and $x\in A$ or else $i=0$ and $x\notin A$. This statement is a boolean combination of $\Delta_1$-formulas.
 
@@ -1118,7 +1116,7 @@ For example it is not difficult to decide whether or not a given sentence $\sigm
 
 This theory may seem weak compared to ZFC, but it is strong enough to do finite set theory plus induction. It is also possible to work Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$ including the induction scheme.
 
-**First incompleteness theorem** If $T$ is any consistent extension of CST then $\bar T$ is undecidable.
+**Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST then $\bar T$ is undecidable.
 
 In our proof of the first incompleteness theorem, we once again return to a diagonalization argument. This time we will need to "represent" subsets of HF inside $T$ itself.
 
@@ -1168,7 +1166,7 @@ The corollary is rather stunning, since it implies mathematicians will never kno
 
 The corollary provides conditions under which there exists a sentence that is neither provable nor disprovable from $T$. However it does not provide an example of such a sentence $\sigma$. The second incompleteness theorem gives an explicit and relevant example of such a sentence $\sigma$.
 
-**Second incompleteness theorem** If $T$ is any consistent, decidable extension of CST then, and $\sigma$ is the sentence which asserts that $T$ is consistent, then $T\not\vdash\sigma$.
+**Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\sigma$ is the sentence which asserts that $T$ is consistent, then $T\not\vdash\sigma$.
 
 *Proof idea*. It is possible to formalize consistency and provability in CST. It is further possible to construct a diagonal sentence $\tau$ which asserts in the formalization that "$T\not\vdash\tau$", that is, there is no proof from $T$ of $\tau$ itself. We omit the details—it is like the liar paradox statement "this sentence is false", but with truth replaced by provability. Then $T\vdash\tau$ implies $T\not\vdash\tau$ and vice versa. This is a contradiction! $\blacksquare$
 
