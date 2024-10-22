@@ -556,8 +556,8 @@ With the lexicon established, we naturally wish to focus on just the well-formed
 (2) $\mathord{=}\tau_1\tau_2$ where $\tau_i$ are terms.
 * The *well-formed formulas* of $\mathcal L$ are the expressions of the form:  
 (1) an atomic formula;  
-(2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a well-formed formula;
-(3) $\neg\phi$, $\wedge\phi\psi$, $\vee\phi\psi$, $\mathord{\rightarrow}\phi\psi$, $\mathord{\leftrightarrow}\phi\psi$, where $\phi,\psi$ are well-formed formulas.
+(2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a well-formed formula;  
+(3) $\neg\phi$, $\wedge\phi\psi$, $\vee\phi\psi$, $\mathord{\rightarrow}\phi\psi$, or $\mathord{\leftrightarrow}\phi\psi$, where $\phi,\psi$ are well-formed formulas.
 
 Like the definition of well-formed expression, this definition is recursive. The recursive rules serve to place further limitations on precisely which expressions are legal. Our goal is to show that we can assign meaning to the well-formed formulas.
 
@@ -565,26 +565,35 @@ Like the definition of well-formed expression, this definition is recursive. The
 
 In well-formed formulas, as in mathematical statements generally, some of the variables act as parameters while others act as dummy variables. For example consider the statement $(\forall x) x^2\geq y$. This statement is true if $y=0$ and false if $y=1$. But we wouldn't ask what $x$ is, it's just a dummy variable because it's bound by a quantifier.
 
-**Definition**
-* If $\phi$ is a wff, an occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and free otherwise.
-* If $\phi$ is a wff, $\phi$ is called a *sentence* if it has no free variables occurring.
+**Definition** Let $\phi$ be a well-formed formula.
 
-The sentences are the well-formed formulas for which we can conceivably assign a truth value. But we may not be able to yet. For example consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$.
+* An occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and *free* otherwise.
+* $\phi$ is called a *sentence* if it has no free occurrence of a variable.
 
-* For another example consider $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$. This is true of real numbers but false of rational numbers.
-* In order to decide the truth value of a sentence, we need to be told the context of the variables. The first example above says "the universe has an upper bound," but what is the universe?
-* The question of what is the universe leads us to model theory. We have seen that set theory is a foundational theory, which means that essentially all mathematical structures can be built using sets. Given a language $\mathcal L$, we can use set theory to study the special sets that can serve as universes for well-formed formulas of $\mathcal L$.
-* If $\mathcal L$ is a language of first order logic, an $\mathcal L$-structure $\mathcal A$ consists of:
+The sentences are the well-formed formulas for which we can conceivably assign a truth value. But as the next examples show, some further context is still needed.
+
+**Example** Consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. This example says something like "the universe as it is ordering has an upper bound," but what is the universe and its ordering?
+
+**Example** Consider the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
+
+In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols of the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms a possible universe for a given language.
+
+**Definition** Let $\mathcal L$ be a language of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
   * A set $A$, the universe of the structure
   * For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
   * For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
-  * For each $0$-ary function symbol $c$ a constant $c^{\mathcal A}\in A$
+  * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
   * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
-* For example, all the models in the first week's set theory homework are structures for $\mathcal L=\set{\in}$.
-* For example, $(\mathbb Q;<)$ is a structure in the language of linear orders.
-* For example, $(\mathbb R;0,1,+,\cdot,<)$ is a structure in the language of ordered fields.
-* Thus we will not define whether a given sentence $\sigma$ is true or false in general, but whether it is true or false in a given structure $\mathcal A$. We will say that $\mathcal A$ satisfies $\sigma$, and write $\mathcal A\models\sigma$, when $\sigma$ is true in $\mathcal A$.
-* The formal definiton of satisfaction is somewhat involved, but will work the way you want it to! For example,` returning to the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
+
+**Example** Let $\mathcal L=\{<\}$ be the language with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
+
+**Example** Let $\mathcal L=\{\cdot\}$ be the language with one binary function symbol. Then any group $(G;\cdot)$ is an $\mathcal L$-structure.
+
+**Example** Let $\mathcal L=\{0,1,+,\cdot,<\}$ be the language with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
+
+If $\mathcal L$ is a language, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
+
+The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
 
 ### 5. Semantics, structures, and satisfaction
 
