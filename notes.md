@@ -511,15 +511,17 @@ To avoid difficulties caused by parentheses, we officially adopt prefix notation
 
 It will be the same way with operations as well as logical symbols like $\rightarrow$. For example the expression $n!+n>5$ will be written $>+!nn5$. It is worth spending a minute think about this!
 
+While prefix expressions are our official standard, we will often write infix expressions with the understanding that the reader may imagine them converted to prefix appropriately.
+
 In order to interpret prefix expressions, a person would need to know that the $!$ operation takes just one input, while $>$ and $+$ each take two inputs. The number of inputs for a given symbol is called its *arity*. The next definition incorporates arity into our language.
 
 **Definition** A *lexicon* consists of an alphabet $A$ together with an arity function $a\colon A\to\mathbb N$.
 
+For example, a lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. (There are several other equivalent representations due to associativity and commutativity.)
+
 **Definition** An expression is *well-formed* if it is of the form $s\tau_1\cdots\tau_n$ where $\tau_i$ are well-formed expressions.
 
-**Example** The lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. This begins with $s=\mathord{+}$ and is followed by $\tau_1=\mathord{\cdot}3\mathord{\cdot}xx$ and $\tau_2=\mathord{+}\mathord{\cdot}2x1$. Each of these may then be further broken down. (There are several other equivalent representations due to associativity and commutativity.)
-
-**Example** In the same lexicon as above, the expression $\mathord{+}\mathord{\cdot}xx$ is not well-formed.
+**Example** In lectures we will give examples of will-formed and non well-formed expressions. One example is the expression above, which begins with $s=\mathord{+}$ and is followed by $\tau_1=\mathord{\cdot}3\mathord{\cdot}xx$ and $\tau_2=\mathord{+}\mathord{\cdot}2x1$. Each of these may then be further broken down in a tree-like fashion. The expression $\mathord{+}\mathord{\cdot}xx$ is not well-formed.
 
 Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$, it is natural to ask, can this string of symbols be read in two different ways? We know the first $+$ symbol should be followed by two arguments, but is there only one way to break the rest of the expression up into two arguments? This is a subtle but important question, and the next theorem tells us the answer is Yes.
 
@@ -536,30 +538,30 @@ Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}
 
 #### First order syntax
 
-We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\forall,\exists,\wedge,\vee,\rightarrow,\leftrightarrow,=,\neg}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and $a$ of all the rest is equal to $2$.
+We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and $a(\wedge)=a(\vee)=a(\rightarrow)=a(\leftrightarrow)=2$.
 
 In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. Examples include $+,\cdot,<$.
 
 **Definition** A *signature* $\mathcal L$ of first order logic consists of function symbols $f_i$ and relation symbols $R_j$ as well as arity values $a(f_i)$ and $a(R_j)$. This is the context described above.
 
-Given a signature $\mathcal L$, the corresponding first order lexicon consists of $\mathcal L$ together with the first order lexicon described above.
+Given a signature $\mathcal L$, the corresponding *first order lexicon* consists of $\mathcal L$ together with the basic lexicon described above.
 
 For example, if we are studying group theory then our signature should include a $\cdot$ symbol of arity $2$, if we are studying order theory then our signature should include a $<$ symbol of arity $2$, etc.
 
+With the lexicon established, we naturally wish to focus on just the well-formed expressions in that lexicon, and assign meaning to these well-formed expressions. Unfortunately this is still not always possible. To see this, consider the well-formed expression $+x\forall y$, which in infix notation translates to $x+(\forall y)$. Although this is meaningless, you may check that it uses each symbol's arity correctly. (Contrast this with the simpler situation in propositional logic.)
 
-With the definition of well-formed in hand, we may now focus on just the well-formed expressions of first order logic. We next seek to assign meaning to such expressions. Unfortunately this is still not always possible. To see this consider the well-formed expression $+x\forall y$, which in infix notation translates to $x+(\forall y)$. It is well-formed because $+$ has arity $2$ and $\forall$ has arity $1$ and $x,y$ have arity $0$. But it is nevertheless meaningless. (Contrast this with the simpler situation in propositional logic.)
+**Definition** Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
 
+* The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the symbols $f_i$ and $x_n$.
+* The *atomic formulas* of $\mathcal L$ are the expressions of the form (1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms, or; (2) $=\tau_1\tau_2$ where $\tau_i$ are terms.
+* The *well-formed formulas* of $\mathcal L$ are the expressions of the form (1) an atomic formula; (2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a wff; (3) $\neg\phi$ where $\phi$ is a wff, or; (4) $\wedge\phi\psi$, $\vee\phi\psi$, $\rightarrow\phi\psi$, $\leftrightarrow\phi\psi$, where $\phi,\psi$ are wffs.
 
-* We next wish to define the well-formed formulas of first order logic. Note that this is not as simple as saying that a well-formed formula is a well-formed expression in the lexicon of first order logic. While it is true that we want our formulas to be well-formed expressions, there are actually some well-formed expressions that should not be formulas. For example consider the expressions $\forall xy$, or $\forall>xyz$.
+Like the definition of well-formed expression, this definition is recursive. The recursive rules serve to place further limitations on precisely which expressions are legal. Our goal is to show that we can assign meaning to the well-formed formulas.
 
-* Def. Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
-  * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the $f_i$ and $x_n$.
-  * The *atomic formulas* of $\mathcal L$ are the expressions of the form (1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms, or; (2) $=\tau_1\tau_2$ where $\tau_i$ are terms.
-  * The *well-formed formulas* of $\mathcal L$ are the expressions of the form (1) an atomic formula; (2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a wff; (3) $\neg\phi$ where $\phi$ is a wff, or; (4) $\wedge\phi\psi$, $\vee\phi\psi$, $\rightarrow\phi\psi$, $\leftrightarrow\phi\psi$, where $\phi,\psi$ are wffs.
-* Like the definition of well-formed expression, this definition is recursive. But unlike the definition of well-formed expression, we have placed further limitations on precisely which well-formed expressions are legal.
-* For example, $\forall x\forall y\wedge=++xy\cdot\cdot zzw\cdot3x>\cdot xy\cdot xz$. Put another way $\forall x\forall y(x+y)+z^2w=3x\wedge xy>xz$. Evaluate which are terms, atomics, and general formulas.
-* We are claiming that the well-formed formulas are the expressions that can be given meaning. However there are still a few barriers before we can think of assigning a truth value to a wff.
-* First, some wffs have free variables, that is, variables that are never quantified. Consider the statement of real numbers $\forall x x\cdot x\geq y$. This would be true if $y=0$, but it would be false if $y=1$. We can repair this by quantifying the $y$, for example, $\exists y\forall x x\cdot x\geq y$ is true of real numbers.
+**Example** In lectures we will give several examples of terms, atomic formulas, and more general well-formed formulas. One example would be $\forall x\forall y\wedge=++xy\cdot\cdot zzw\cdot3x>\cdot xy\cdot xz$, which in infix translates to $\forall x\forall y(x+y)+z^2w=3x\wedge xy>xz$. We will analyse which parts are terms, atomic formulas, and well-formed formulas.
+
+There are still a few barriers before we can think of assigning a truth value to a wff. First, some wffs have free variables, that is, variables that are never quantified. Consider the statement of real numbers $\forall x x\cdot x\geq y$. This would be true if $y=0$, but it would be false if $y=1$. We can repair this by quantifying the $y$, for example, $\exists y\forall x x\cdot x\geq y$ is true of real numbers.
+
 * Def. If $\phi$ is a wff, an occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and free otherwise.
 * Def. If $\phi$ is a wff, $\phi$ is called a *sentence* if it has no free variables occurring.
 * The sentences are the well-formed formulas for which we can conceivable assign a truth value. But we may not be able to yet. For example consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$.
