@@ -262,6 +262,7 @@ In combinatorics a tree is a special kind of combinatorial graph, one without cy
 In lectures we will give several examples of set-theoretic trees.
 
 **Definition** Let $X$ be any set.
+
 * The set of sequences on $X$, denoted $X^{\mathbb N}$ is the set of all functions $f\colon\mathbb N\to X$.
 * For any sequence $f\in X^{\mathbb N}$ and any $n\in\mathbb N$ the *restriction* of $f$ to $n$, denoted $f\restriction n$, is the initial segment of $f$ with domain $\set{0,\ldots,n-1}$.
 * Let $T$ be a tree on $X$. A sequence $f\in X^{\mathbb N}$ is a *branch* through $T$ if for all $n\in\mathbb N$ we have $f\restriction n\in T$.
@@ -528,11 +529,11 @@ Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}
 1. No proper initial segment of $\alpha$ is well-formed.
 2. If $\alpha$ starts with the symbol $s$, and $s$ is of arity $n$, then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\alpha=s\tau_1\cdots\tau_n$.
 
-*Proof*: Assume (1) and (2) are true for all expressions which are shorter than $\alpha$. By definition of well-formed, there exist $\tau_i$ such that $\alpha=s\tau_1\cdots\tau_n$. Let $\alpha'$ be a well-formed initial segment of $\alpha$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\alpha'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, contradicting the inductive hypothesis. Similarly we can argue $\tau_i=\tau'_i$ for all $i$. Thus $\alpha'=\alpha$ and the $\tau_i$ are unique, establishing both (1) and (2).
+*Proof*: Assume (1) and (2) are true for all expressions which are shorter than $\alpha$. By definition of well-formed, there exist $\tau_i$ such that $\alpha=s\tau_1\cdots\tau_n$. Let $\alpha'$ be a well-formed initial segment of $\alpha$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\alpha'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, contradicting the inductive hypothesis. Similarly we can argue $\tau_i=\tau'_i$ for all $i$. Thus $\alpha'=\alpha$ and the $\tau_i$ are unique, establishing both (1) and (2). $\blacksquare$
 
 **Corollary** If $\alpha$ is well-formed, then every symbol of $\alpha$ is the beginning of a unique well-formed subexpression. We call this subexpression the *scope* of the occurrence of the symbol.
 
-*Proof*: Assume the theorem is true for expressions shorter than $\alpha$. By the previous theorem, the first symbol of $\alpha$ has scope $\alpha$. Any other symbol of $\alpha$ appears in some $\tau_i$. Since $\tau_i$ is shorter than $\alpha$, we can apply the inductive hypothesis.
+*Proof*: Assume the theorem is true for expressions shorter than $\alpha$. By the previous theorem, the first symbol of $\alpha$ has scope $\alpha$. Any other symbol of $\alpha$ appears in some $\tau_i$. Since $\tau_i$ is shorter than $\alpha$, we can apply the inductive hypothesis. $\blacksquare$
 
 #### First order syntax
 
@@ -647,15 +648,17 @@ This fulfills the notion that model theory provides the universes where a given 
 
 With the concept of satisfaction in hand, we may further define many semantic notions.
 
-* Semantic validity: A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
-* Semantic implication: A sentence $\sigma$ *semantically implies* a sentence $\tau$ if for every model $\mathcal A$ we have $\mathcal A\models \sigma$ implies $\mathcal A\models\tau$.
-* Semantic consistency: A theory $T$ is *semantically consistent* if it admits a model $\mathcal A\models T$.
+**Definition**
+* A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
+* A sentence $\sigma$ *semantically implies* a sentence $\tau$ if for every model $\mathcal A$ we have $\mathcal A\models \sigma$ implies $\mathcal A\models\tau$.
+* A theory $T$ is *semantically consistent* if it admits a model $\mathcal A\models T$.
 
 Each of these has syntactic versions involving proofs.
 
-* Syntactic validity: A sentence $\sigma$ is *semantically valid* if there is a proof of $\sigma$.
-* Syntactic implication: A sentence $\sigma$ *syntactically implies* a sentence $\tau$ if there is a proof using $\sigma$ of $\tau$.
-* Syntactic consistency: A theory $T$ is *semantically consistent* if it cannot be used to derive a falsehood.
+**Definition**
+* A sentence $\sigma$ is *semantically valid* if there is a proof of $\sigma$.
+* A sentence $\sigma$ *syntactically implies* a sentence $\tau$ if there is a proof using $\sigma$ of $\tau$.
+* A theory $T$ is *semantically consistent* if it cannot be used to derive a falsehood.
 
 We will see that in each case the semantic and syntactic notions are equivalent. Of course this means we have to be very careful to define proof itself properly, something we will do in the next section.
 
@@ -707,7 +710,7 @@ Recall our distinction between semantic truth (satisfaction) and syntactic truth
 
 **Soundness Theorem** If $T\vdash\sigma$ then $T\models\sigma$.
 
-*Proof*: Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j<i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$.
+*Proof*: Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j<i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$. $\blacksquare$
 
 The completeness theorem is the converse of the soundness theorem. Thus it says that everything that is true can be proved. We will prove the completeness theorem in the next section.
 
@@ -715,23 +718,23 @@ The definition of proof that we have given is of theoretical value, but not of g
 
 One common tactic in mathematics is to prove a lemma and use it as a step in a theorem. The next result makes this easy to do.
 
-**Deduction theorem** $T\vdash\alpha\to\beta$ if and only if $T\cup\set{\alpha}\vdash\beta$.
+**Theorem** (Deduction theorem) $T\vdash\alpha\to\beta$ if and only if $T\cup\set{\alpha}\vdash\beta$.
 
 *Proof*: The forward implication is just modus ponens. For the reverse implication, assume that $T\cup\set{\alpha}\vdash\beta$ and let $\sigma_1,\ldots\sigma_n$ be a proof. We will show by induction that for all $i$ we have $T\vdash\alpha\to\sigma_i$.
 
-As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction.
+As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction. $\blacksquare$
 
-**Proof by contradiction** If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then $T\vdash\sigma$.
+**Theorem** (Proofs by contradiction) If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then $T\vdash\sigma$.
 
-*Proof*: If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then using tautologies we have $T\cup\set{\neg\sigma}\vdash\sigma$. By the deduction theorem, $T\vdash \neg\sigma\to\sigma$. By a tautology, $T\vdash\sigma\vee\sigma$ and therefore $T\vdash\sigma$.
+*Proof*: If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then using tautologies we have $T\cup\set{\neg\sigma}\vdash\sigma$. By the deduction theorem, $T\vdash \neg\sigma\to\sigma$. By a tautology, $T\vdash\sigma\vee\sigma$ and therefore $T\vdash\sigma$. $\blacksquare$
 
-**Universal generalization and existential instantiation** Let $c$ be a constant symbol not in $\mathcal L$. If $T\vdash\phi(c)$ then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
+**Theorem** (Universal generalization and existential instantiation) Let $c$ be a constant symbol not in $\mathcal L$. If $T\vdash\phi(c)$ then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
-*Proof*: In lectures.
+*Proof*: We will discuss this in the lecture.
 
 The last two rules formalize common proof notions. The UG rule is for proofs that end "...but c was arbitrary". The EI rule is for proofs that begin "Fix a constant c such that...". In the future we will also use the abbreviations UI and EG as deductive rules corresponding to the logical axioms of the corresponding name.
 
-**Example** We will prove that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
+**Example** We will show that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
 
 1. We will prove the lemma $\forall x P(x)\wedge Q(x)$ proves $\forall y P(y)$.  
     a. $\forall x P(x)\wedge Q(x)$ (Given)  
@@ -745,11 +748,11 @@ The last two rules formalize common proof notions. The UG rule is for proofs tha
 
 Recall that we have proved the Soundness Theorem, which states that any syntactic consequence of $T$ is also a semantic consequence of $T$, that is, if $T\vdash\sigma$ then $T\models\sigma$. In this section we will prove the converse.
 
-**Completeness Theorem, version I** If $T\models\sigma$ then $T\vdash\sigma$.
+**Theorem** (Completeness Theorem, version I) If $T\models\sigma$ then $T\vdash\sigma$.
 
 We will actually prove the completeness theorem in another form. Recall that a theory $T$ is semantically consistent if there is a model of $T$. Recall also that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$.
 
-**Completeness Theorem, version II** If $T$ is syntactically consistent, then $T$ has a model.
+**Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
 
 To see the two statements are equivalent, first suppose that version I is true and let $T$ be a syntactically consistent theory. If $T$ has no models, then $T\models\sigma\wedge\neg\sigma$ is vacuously true, hence $T\vdash\sigma\wedge\neg\sigma$, a contradiction.
 
@@ -757,7 +760,7 @@ Conversely suppose that version II is true and let $T\models\sigma$. Then there 
 
 Thus proving the completeness theorem is really about building models. If $T$ is reasonable in the sense that it doesn't lead us to a contradiction, then it should be possible to build a universe in which $T$ is true. This sounds like a somewhat tall order!
 
-The BIG IDEA is to build the model using the terms of the language. In order to illustrate
+The BIG IDEA is to build the model using the terms of the language. In order to illustrate:
 
 **Example** Let $\mathcal L=\set{+,\times,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, and so on, pretty good substitutes for the actual natural numbers! Of course there are many other terms such as $1+0+0+1$, but our theory knows that this one is really equivalent to $1+1$. In other words, there is an equivalence relation on terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
 
@@ -799,7 +802,7 @@ To fix this problem, we will work only with complete theories $T$.
 
 By Zorn's lemma, there exists a maximal consistent theory $\bar T$. such that $T\subset\bar T$. We claim that $\bar T$ is complete. Indeed, if $\sigma\notin\bar T$, then $\bar T\cup\set{\sigma}$ is inconsistent, so by our theorem about proofs by contradiction, $\bar T\vdash\neg\sigma$. Since $\bar T$ is maximal, it follows that $\neg\sigma\in T$. $\blacksquare$
 
-We remark that if $T$ is a complete theory $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Thus if we revisit the above example and complete $T$ before building $\mathcal H$, we will either have $a<b$ or $b\leq a$, whichever Zorn's lemma picks for us.
+We remark that if $T$ is a complete theory and $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Thus if we revisit the above example and complete $T$ before building $\mathcal H$, we will either have $a<b$ or $b\leq a$, whichever Zorn's lemma picks for us.
 
 But there is still one big issue left to address. Continuing the above example, let $T$ be the theory of $\omega$ together with the sentences $a$ has three predecessors and $b$ has four. Then our model $\mathcal H$ will satisfy $a<b$, but it still will not satisfy the sentence $\exists x x<a$.
 
