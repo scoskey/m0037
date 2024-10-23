@@ -457,7 +457,7 @@ We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\
 
 We close this section with a discussion of the infinite. Set theory is not only appropriate as a foundation of "real-world" mathematics like calculus and analysis. It is also appropriate as a foundation for the study of the infinite. The key is that the axiom of infinity not only opens the door to infinite sets like $\mathbb Q$ and $\mathbb R$, but also to infinite sets of much larger cardinality.
 
-The first key observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (which is identical to $\mathbb N$). We can continue this again with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting objects are called the *ordinal numbers*:
+The starting observation is that we can extend the von Neumann natural numbers into transfinite counting numbers. Recalling that every von Neumann natural number is equal to the collection of numbers that came before it, we can continue the pattern by setting $\omega=\set{0,1,2,3,\ldots}$ (infinity?) and continuing with $\omega+1=\set{0,1,2,3,\ldots,\omega}$ (infinity plus one?). The resulting objects are called the *ordinal numbers*:
 
 * $0$
 * $1$
@@ -471,7 +471,7 @@ The first key observation is that we can extend the von Neumann natural numbers 
 * $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
 * $\vdots$
 
-Each ordinal in the sequence falls into one of two types. The *successor* ordinals are those $\alpha$ of the form $\beta\cup\{\beta\}$$ for some ordinal $\beta$. We sometimes use the notation $S(\beta)$ or $\beta+1$ for the set $\beta\cup\{\beta\}$ because it is the successor of $\beta$. The *limit* ordinals are those $\lambda$ which are not the successor of any ordinal, such as $\omega$ and $\omega+\omega$. Instead a limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup\set{\beta:\beta<\lambda}$.
+Each ordinal in the sequence falls into one of two types. The *successor* ordinals are those $\alpha$ of the form $\beta\cup\{\beta\}$ for some ordinal $\beta$. We sometimes use the notation $S(\beta)$ or $\beta+1$ for the set $\beta\cup\{\beta\}$ because it is the successor of $\beta$. The *limit* ordinals are those $\lambda$ which are not the successor of any ordinal, such as $\omega$ and $\omega+\omega$. Instead a limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup\set{\beta:\beta<\lambda}$.
 
 (This last equation is a fact and not a definition or construction. It isn't suitable as a definition because it is circular with $\lambda$ on both sides. To construct ordinals properly, somewhat more work is needed: an ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
 
