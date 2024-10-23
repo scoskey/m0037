@@ -1,8 +1,22 @@
 \usepackage[fontsize=11pt]{scrextend}
 \usepackage{mathpazo}
 \usepackage{setspace}\onehalfspacing
-\usepackage{geometry}
+\usepackage[paper=a4paper,margin=2cm]{geometry}
 \usepackage{hyperref}
 \newcommand{\abs}[1]{\left|\,#1\,\right|}
 \newcommand{\set}[1]{\left\{\,#1\,\right\}}
 \newcommand{\lt}{<}
+
+
+\usepackage{etoolbox}
+\newtoggle{afterpart}
+\pretocmd{\subsection}
+  {\iftoggle{afterpart}
+    {\global\togglefalse{afterpart}}% we're after a part
+    {\clearpage}% we're not immediately after a part
+  }{}{}
+\pretocmd{\section}
+  {\clearpage % do a page break
+   \global\toggletrue{afterpart}% tell \section we're just after a part
+  }
+  {}{}

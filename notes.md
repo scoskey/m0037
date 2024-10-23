@@ -1,12 +1,12 @@
 # MATH0037 Lecture Notes
 
-### Samuel Coskey
+By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
 ## Part I: Introduction to logic and set theory
 
-### Introduction
+#### Introduction
 
 *Logic* is the area of study that concerns reasoning. It has of course been studied by both philosophers and mathematicians for several millennia.
 
@@ -478,7 +478,7 @@ With ordinals it is possible to count as far into the transfinite as we can imag
 
 ## Part II: First order logic and completeness
 
-### Introduction
+#### Introduction
 
 The propositional logic we studied in the first part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. It captures the conditional $\rightarrow$ particularly well, and helped us with meaningful applications including graph coloring and Konig's lemma.
 
