@@ -12,7 +12,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 
 In this module we will study *mathematical logic*, which has been studied since late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
 
-Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like groups, rings, graphs, and so on.
+Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like groups, rings, graphs, and so on.
 
 The modern field of mathematical logic now consists of three interconnected subfields: first order logic, set theory, and computability theory.
 
@@ -62,19 +62,19 @@ The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well
 
 Many authors introduce an order of operations. For example if we state that $\wedge$ takes precedence over $\vee$ (which is standard for many authors), then $P\wedge Q\vee R$ may again be interpreted as $((P\wedge Q)\vee R)$. We will try to avoid this and include enough brackets to make it clear .
 
-In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is all about rules, you can think of it as analogous to grammar for languages. for example, what is and isn’t considered a well-formed formula, much like grammar. On the other hand, semantics is all about meaning, for example, which formulas might be considered true or false.
+In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is all about rules, you can think of it as analogous to grammar for languages. for example, what is and isn't considered a well-formed formula, much like grammar. On the other hand, semantics is all about meaning, for example, which formulas might be considered true or false.
 
 The semantics of propositional logic is governed by truth tables. In the following, let $\alpha$ and $\beta$ be well-formed formulas.
 
-$\begin{array}{c|c}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$
+$\begin{array}{cc}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$
 
-$\begin{array}{cc|c}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$
+$\begin{array}{ccc}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$
 
 The boolean connective $\rightarrow$ always sparks a little bit of discussion.
 
-$\begin{array}{cc|c}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$
+$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$
 
-Sometimes called *material conditional*, the truth table is meant to capture the idea of “P implies Q”, but without any of the causation one would normally understand from natural language. Instead the formula $\alpha\rightarrow\beta$ may be thought of as a kind of promise, that if $\alpha$ is true then $\beta$ will be true also. If $\alpha$ is not true, then the promise will not be broken, so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
+Sometimes called *material conditional*, the truth table is meant to capture the idea of "P implies Q", but without any of the causation one would normally understand from natural language. Instead the formula $\alpha\rightarrow\beta$ may be thought of as a kind of promise, that if $\alpha$ is true then $\beta$ will be true also. If $\alpha$ is not true, then the promise will not be broken, so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
 
 We invite the reader to fill in truth tables for the rest of the boolean connectives.
 
@@ -255,7 +255,7 @@ In combinatorics a tree is a special kind of combinatorial graph, one without cy
 * The *full tree* on $X$, denoted $X^{<\mathbb N}$, is defined as $\bigcup_{n\in\mathbb N}X^n$.
 * The $n$th *level* of $X^{<\mathbb N}$ is $X^n$; we say elements on this level have *length* $n$.
 * If $s,t\in X^{<\mathbb N}$, we say $s$ is a *predecessor* of $t$, or $t$ is a *successor* of $s$, if $s\subset t$.
-* $t$ is an *immediate successor* of $s$ if $t$ is a successor of $s$ and $|t|=|s|+1$.
+* $t$ is an *immediate successor* of $s$ if $t$ is a successor of $s$ and $\vert t\vert=\vert s\vert+1$.
 
 **Definition** Let $X$ be any set. A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ of the full tree on $X$ which is closed under predecessors, that is, for all $s,t\in X^{<\mathbb N}$, if $s\subset t\in T$ then $s\in T$.
 
@@ -552,7 +552,7 @@ With the lexicon established, we naturally wish to focus on just the well-formed
 
 * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the symbols $f_i$ and $x_n$.
 * The *atomic formulas* of $\mathcal L$ are the expressions of the form:  
-(1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $tau_i$ are terms;  
+(1) $R\tau_1\cdots\tau_n$, where $R$ is an $n$-ary relation symbol and $\tau_i$ are terms;  
 (2) $\mathord{=}\tau_1\tau_2$ where $\tau_i$ are terms.
 * The *well-formed formulas* of $\mathcal L$ are the expressions of the form:  
 (1) an atomic formula;  
@@ -727,18 +727,18 @@ As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all 
 
 **Universal generalization and existential instantiation** Let $c$ be a constant symbol not in $\mathcal L$. If $T\vdash\phi(c)$ then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
-*Proof*. Bleh.
+*Proof*. In lectures.
 
 The last two rules formalize common proof notions. The UG rule is for proofs that end "...but c was arbitrary". The EI rule is for proofs that begin "Fix a constant c such that...". In the future we will also use the abbreviations UI and EG as deductive rules corresponding to the logical axioms of the corresponding name.
 
 **Example** We will prove that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
 
-1. We will prove the lemma $\forall x P(x)\wedge Q(x)$ proves $\forall y P(y)$. 
-    a. $\forall x P(x)\wedge Q(x)$ (Given)
-    c. $P(c)\wedge Q(c)$ (UI)
-    d. $P(c)\wedge Q(c)\to P(c)$ (Tautology)
-    e. $P(c)$ (MP c,d)
-    g. $\forall y P(y)$ (UG)
+1. We will prove the lemma $\forall x P(x)\wedge Q(x)$ proves $\forall y P(y)$.  
+    a. $\forall x P(x)\wedge Q(x)$ (Given)  
+    c. $P(c)\wedge Q(c)$ (UI)  
+    d. $P(c)\wedge Q(c)\to P(c)$ (Tautology)  
+    e. $P(c)$ (MP c,d)  
+    g. $\forall y P(y)$ (UG)  
 2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ (Deduction, 1)
 
 ### 6. Compactness and completeness
@@ -918,11 +918,11 @@ Recall that a graph is *connected* if for any two vertices $x,y$, there exists a
 
 Recall we have shown that theories with arbitrarily large finite models have infinite models. It is natural to ask what cardinalities will occur. Our final corollary addresses this question with the most generous possible answer.
 
-**Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq|\mathcal L|\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
+**Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
 
-*Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $|\mathcal L|\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin/Herbrand model $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
+*Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $\vert\mathcal L\vert\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin/Herbrand model $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
 
-For the upwards direction, assume $T$ has a model of size $|\mathcal L|\cdot\aleph_0$ and let $\kappa\geq|\mathcal L|\cdot\aleph_0$ be given. Expand the language to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta\mid\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows from the compactness theorem that $T'$ is consistent, and so has a model. The resulting model must have cardinality at least $\kappa$. If it has cardinality greater than $\kappa$, we can use the downwards direction of the theorem to produce a model of cardinality exactly $\kappa$. $\blacksquare$
+For the upwards direction, assume $T$ has a model of size $\vert\mathcal L\vert\cdot\aleph_0$ and let $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$ be given. Expand the language to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta\mid\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows from the compactness theorem that $T'$ is consistent, and so has a model. The resulting model must have cardinality at least $\kappa$. If it has cardinality greater than $\kappa$, we can use the downwards direction of the theorem to produce a model of cardinality exactly $\kappa$. $\blacksquare$
 
 The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is consistent, then ZFC has a countable model. Since we know that ZFC implies there exist uncountable sets, we appear to have reached a paradox: an uncountable object is contained in a countable object. The resolution to this apparent contradiction is that the countable model only believes its sets are uncountable because it lacks the bijections to prove they are countable. These bijections do exist but externally to the model.
 
@@ -1077,7 +1077,7 @@ The Church–Turing thesis implies that we can informally say that $f$ is comput
 
 The simplest example of a computable function is the characteristic function $\chi_A$ of any decidable set $A$. Indeed $(x,i)\in\chi_A$ if and only if $i=1$ and $x\in A$ or else $i=0$ and $x\notin A$. This statement is a boolean combination of $\Delta_1$-formulas.
 
-Another example of a computable function is the cardinality function $f(x)=|x|$. Here $|x|=y$ if and only if $y\in\omega$ and there exists a bijection between $x$ and $y$, and $|x|=y$ if and only if $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
+Another example of a computable function is the cardinality function $f(x)=\vert x\vert$. Here $\vert x\vert=y$ if and only if $y\in\omega$ and there exists a bijection between $x$ and $y$, and $\vert x\vert=y$ if and only if $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
 
 Some more interesting examples of computable functions are $+,\cdot$. However to prove this we will need the recursion theorem. You may recall that we have proved the classical recursion theorm and the transfinite recursion theorem. What we need is the computable version of the recursion theorem.
 
