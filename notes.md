@@ -132,15 +132,15 @@ We invite the reader to verify that $\Sigma$ is consistent if and only if $\Sigm
 
 We leave it to the reader to establish an equivalence between the two statements of the compactness theorem.
 
-The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to \set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
+The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to\set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
 
 **Theorem** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring using $n$ colors. Then $G$ has a proper coloring using $n$ colors. In particular, every planar graph (finite or infinite) has a proper coloring using $4$ colors.
 
 *Proof*: They key is that proper colorability can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_{v,i}$, where $v$ ranges over the vertices $V$ and $i\in 1,\ldots,n$. We then let $\Sigma$ consist of the following axioms:
 
-* $P_{v,1}\vee\cdots\vee P_{v,n}$ for each $v\in V$ and each $i$
-* $\neg(P_{v,i}\wedge P_{v,j})$ for each $v\in V$ and each $i.j$ such that $i\neq j$
-* $\neg(P_{v,i}\wedge P_{w,i})$ for each $v,w\in V$ such that $(v,w)\in E$ and each $i$
+> * $P_{v,1}\vee\cdots\vee P_{v,n}$ for each $v\in V$ and each $i$
+> * $\neg(P_{v,i}\wedge P_{v,j})$ for each $v\in V$ and each $i.j$ such that $i\neq j$
+> * $\neg(P_{v,i}\wedge P_{w,i})$ for each $v,w\in V$ such that $(v,w)\in E$ and each $i$
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a proper coloring $\chi$ using $n$ colors.
 
@@ -172,13 +172,13 @@ Since studying propositional logic is not our primary goal, we will stick with t
 
 **Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$ and let $\alpha=P$. We show that $\Sigma\vdash\alpha$ using the following deduction.
 
-1. $(\neg S)\vee R$ — (hypothesis)
-2. $((\neg S)\vee R)\rightarrow (S\rightarrow R)$ — (tautology)
-3. $S\to R$ — (modus ponens)
-4. $S$ — (hypothesis)
-5. $R$ (modus ponens)
-6. $R\rightarrow P$ (hypothesis)
-7. $P$ (modus ponens)
+> 1. $(\neg S)\vee R$ — (hypothesis)
+> 2. $((\neg S)\vee R)\rightarrow (S\rightarrow R)$ — (tautology)
+> 3. $S\to R$ — (modus ponens)
+> 4. $S$ — (hypothesis)
+> 5. $R$ (modus ponens)
+> 6. $R\rightarrow P$ (hypothesis)
+> 7. $P$ (modus ponens)
 
 We have now introduced two distinct ways of understanding logical consequence, semantic implication $\Sigma\models\alpha$ and syntactic implication $\Sigma\vdash\alpha$. We should naturally try to understand how the two are connected, and in fact we will see that the two are equivalent. What's provable is true, and what's true is provable.
 
@@ -277,9 +277,9 @@ We invite the reader to give an example of a tree $T$ such that every level of $
 
 *Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
 
-* $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$
-* $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$ and each $i\neq j$
-* $P_t\rightarrow P_s$ where $s,t\in T$ and $s\subset t$
+> * $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$
+> * $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$ and each $i\neq j$
+> * $P_t\rightarrow P_s$ where $s,t\in T$ and $s\subset t$
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a branch through $T$.
 
@@ -313,9 +313,9 @@ It follows from the fact from analysis that there exists $v\in\bigcap_{V_A\in\ma
 
 We remark that the results of this section show that the following three statements are all equivalent:
 
-1. The compactness theorem
-2. Konig's lemma
-3. The space $2^{\mathbb N}$ is compact
+> * The compactness theorem
+> * Konig's lemma
+> * The space $2^{\mathbb N}$ is compact
 
 This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly. We invite the reader to find such proofs in our references or else look for them yourself.
 
@@ -341,7 +341,7 @@ We have already introduced the key axiom of ZFC, which explains the relationship
 
 The next several axioms of set theory are construction axioms, that is, axioms that tell us we can do certain operations or constructions using sets.
 
-**Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\{a_1,\ldots,a_n\}$ is a set.
+**Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\set{a_1,\ldots,a_n}$ is a set.
 
 For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
 
@@ -432,9 +432,9 @@ With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unf
 So far, all the numbers we have constructed are elements of $HF$ and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of $HF$, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
 
 **Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
-  * $C\neq\emptyset$, $\mathbb Q$
-  * $C$ is closed downwards
-  * $C$ has no last element
+> * $C\neq\emptyset$, $\mathbb Q$
+> * $C$ is closed downwards
+> * $C$ has no last element
 
 Once again $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
 
@@ -573,9 +573,9 @@ In well-formed formulas, as in mathematical statements generally, some of the va
 
 The sentences are the well-formed formulas for which we can conceivably assign a truth value. But as the next examples show, some further context is still needed.
 
-**Example** Consider the sentence $\exists y\forall x x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. This example says something like "the universe as it is ordering has an upper bound," but what is the universe and its ordering?
+**Example** Consider the sentence $\exists y\forall x x\mathord{\leq}y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. This example says something like "the universe as it is ordering has an upper bound," but what is the universe and its ordering?
 
-**Example** Consider the sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
+**Example** Consider the sentence $\forall x x\mathord{\geq}0\mathord{\rightarrow}\exists yy\mathord{\cdot} y\mathord{=}x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
 
 In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols of the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms a possible universe for a given language.
 
@@ -594,7 +594,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 If $\mathcal L$ is a language, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
 
-The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\forall x x\geq 0\rightarrow \exists y y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
+The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\forall xx\mathord{\geq}0\mathord{\rightarrow}\exists yy\mathord{\cdot} y\mathord{=}x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
 
 ### 5. Semantics, structures, and satisfaction
 
