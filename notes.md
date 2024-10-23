@@ -1188,12 +1188,16 @@ The corollary provides conditions under which there exists a sentence that is ne
 *Proof idea*: It is possible to formalize consistency and provability in CST. It is further possible to construct a diagonal sentence $\tau$ which asserts in the formalization that "$T\not\vdash\tau$", that is, there is no proof from $T$ of $\tau$ itself. We omit the details—it is like the liar paradox statement "this sentence is false", but with truth replaced by provability. Then $T\vdash\tau$ implies $T\not\vdash\tau$ and vice versa. This is a contradiction! $\blacksquare$
 
 <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
+MathJax = { 
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+  },
+  output: {
+    linebreaks: {
+      inline: true,
+    },
+};
 </script>
-<script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-svg.js">
 </script>
