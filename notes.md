@@ -66,13 +66,13 @@ In logic we often separate the *syntax* and the *semantics* of formulas. Syntax 
 
 The semantics of propositional logic is governed by truth tables. In the following, let $\alpha$ and $\beta$ be well-formed formulas.
 
-$\begin{array}{cc}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$
+$$\begin{array}{cc}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$$
 
-$\begin{array}{ccc}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$
+$$\begin{array}{ccc}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$$
 
 The boolean connective $\rightarrow$ always sparks a little bit of discussion.
 
-$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$
+$$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$$
 
 Sometimes called *material conditional*, the truth table is meant to capture the idea of "P implies Q", but without any of the causation one would normally understand from natural language. Instead the formula $\alpha\rightarrow\beta$ may be thought of as a kind of promise, that if $\alpha$ is true then $\beta$ will be true also. If $\alpha$ is not true, then the promise will not be broken, so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
 
@@ -1187,3 +1187,13 @@ The corollary provides conditions under which there exists a sentence that is ne
 
 *Proof idea*. It is possible to formalize consistency and provability in CST. It is further possible to construct a diagonal sentence $\tau$ which asserts in the formalization that "$T\not\vdash\tau$", that is, there is no proof from $T$ of $\tau$ itself. We omit the details—it is like the liar paradox statement "this sentence is false", but with truth replaced by provability. Then $T\vdash\tau$ implies $T\not\vdash\tau$ and vice versa. This is a contradiction! $\blacksquare$
 
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
