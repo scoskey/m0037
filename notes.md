@@ -575,11 +575,11 @@ In well-formed formulas, as in mathematical statements generally, some of the va
 
 The sentences are the well-formed formulas for which we can conceivably assign a truth value. But as the next examples show, some further context is still needed.
 
-**Example** Consider the sentence $\exists y\forall x x\mathord{\leq}y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. This example says something like "the universe as it is ordering has an upper bound," but what is the universe and its ordering?
+**Example** Consider the sentence $\exists y\forall x \mathord{\leq}xy$. This sentence is false of real numbers but true of the unit interval $[0,1]$. The sentence says something like, "the universe as it is ordered has an upper bound". But what is the universe, and what is its ordering?
 
 **Example** Consider the sentence $\forall x x\mathord{\geq}0\mathord{\rightarrow}\exists yy\mathord{\cdot} y\mathord{=}x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
 
-In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols of the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms a possible universe for a given language.
+In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols in the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms one possible universe for sentences in a given language.
 
 **Definition** Let $\mathcal L$ be a language of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
   * A set $A$, the universe of the structure
@@ -590,7 +590,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 **Example** Let $\mathcal L=\{<\}$ be the language with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\{\cdot\}$ be the language with one binary function symbol. Then any group $(G;\cdot)$ is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\{\cdot\}$ be the language with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
 
 **Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the language with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
 
