@@ -427,7 +427,7 @@ Of course, we think of $(0,m,n)$ as representing $\frac mn$ and $(1,m,n)$ as rep
 
 **Definition** $\mathbb Z$ is the set of all $(i,m,n)\in\mathbb Q$ satisfying $n=1$.
 
-With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to establish a bijection between $\mathbb N$ and a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
+With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to write a bijection from $\mathbb N$ to a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
 
 So far, all the numbers we have constructed are elements of $HF$ and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of $HF$, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
 
@@ -535,6 +535,8 @@ Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}
 
 *Proof*: Assume the theorem is true for expressions shorter than $\alpha$. By the previous theorem, the first symbol of $\alpha$ has scope $\alpha$. Any other symbol of $\alpha$ appears in some $\tau_i$. Since $\tau_i$ is shorter than $\alpha$, we can apply the inductive hypothesis. $\blacksquare$
 
+In lectures, we will give examples of the scope of several symbols in an expression.
+
 #### First order syntax
 
 We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and $a(\wedge)=a(\vee)=a(\rightarrow)=a(\leftrightarrow)=2$.
@@ -547,7 +549,7 @@ Given a signature $\mathcal L$, the corresponding *first order lexicon* consists
 
 For example, if we are studying group theory then our signature should include a $\cdot$ symbol of arity $2$, if we are studying order theory then our signature should include a $<$ symbol of arity $2$, etc.
 
-With the lexicon established, we naturally wish to focus on just the well-formed expressions in that lexicon, and assign meaning to these well-formed expressions. Unfortunately this is still not always possible. To see this, consider the well-formed expression $+x\forall y$, which in infix notation translates to $x+(\forall y)$. Although this is meaningless, you may check that it uses each symbol's arity correctly. (Contrast this with the simpler situation in propositional logic.)
+With the lexicon established, we naturally wish to focus on just the well-formed expressions in that lexicon, and assign meaning to these well-formed expressions. Unfortunately this is still not always possible. To see this, consider the well-formed expression $+x\forall yz$, which in infix notation translates to $x+(\forall yz)$. Although this is meaningless, you may check that it uses each symbol's arity correctly. (Contrast this with the simpler situation in propositional logic.)
 
 **Definition** Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
 
