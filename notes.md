@@ -518,7 +518,7 @@ In order to interpret prefix expressions, a person would need to know that the 
 
 For example, a lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. (There are several other equivalent representations due to associativity and commutativity.)
 
-**Definition** An expression is *well-formed* if it is of the form $s\tau_1\cdots\tau_n$ where $\tau_i$ are well-formed expressions.
+**Definition** An expression is *well-formed* if it is of the form $s\tau_1\cdots\tau_n$ where $a(s)=n$ and $\tau_1,\ldots,\tau_n$ are well-formed expressions.
 
 **Example** In lectures we will give examples of will-formed and non well-formed expressions. One example is the expression above, which begins with $s=\mathord{+}$ and is followed by $\tau_1=\mathord{\cdot}3\mathord{\cdot}xx$ and $\tau_2=\mathord{+}\mathord{\cdot}2x1$. Each of these may then be further broken down in a tree-like fashion. The expression $\mathord{+}\mathord{\cdot}xx$ is not well-formed.
 
