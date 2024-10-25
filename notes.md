@@ -575,9 +575,9 @@ In well-formed formulas, as in mathematical statements generally, some of the va
 
 The sentences are the well-formed formulas for which we can conceivably assign a truth value. But as the next examples show, some further context is still needed.
 
-**Example** Consider the sentence $\exists y\forall x \mathord{\leq}xy$. This sentence is false of real numbers but true of the unit interval $[0,1]$. The sentence says something like, "the universe as it is ordered has an upper bound". But what is the universe, and what is its ordering?
+**Example** Consider the (standard infix) sentence $(\exists y)(\forall x)x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. The sentence says something like, "the universe as it is ordered has an upper bound". But what is the universe, and what is its ordering?
 
-**Example** Consider the sentence $\forall x x\mathord{\geq}0\mathord{\rightarrow}\exists yy\mathord{\cdot} y\mathord{=}x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
+**Example** Consider the (standard infix) sentence $(\forall x)x\geq0\rightarrow(\exists y)y\cdot y=x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
 
 In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols in the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms one possible universe for sentences in a given language.
 
@@ -596,7 +596,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 If $\mathcal L$ is a language, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
 
-The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\forall xx\mathord{\geq}0\mathord{\rightarrow}\exists yy\mathord{\cdot} y\mathord{=}x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\sigma$ and $(\mathbb Q;+,\cdot,0,1)\not\models\sigma$.
+The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\alpha$ defined by $(\forall x)x\geq0\rightarrow(\exists y)y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\alpha$ and $(\mathbb Q;+,\cdot,0,1)\not\models\alpha$.
 
 ### 5. Semantics, structures, and satisfaction
 
