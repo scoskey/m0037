@@ -529,7 +529,7 @@ Considering the example $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}
 1. No proper initial segment of $\alpha$ is well-formed.
 2. If $\alpha$ starts with the symbol $s$, and $s$ is of arity $n$, then there exist unique well-formed expressions $\tau_1,\ldots,\tau_n$ such that $\alpha=s\tau_1\cdots\tau_n$.
 
-*Proof*: Assume (1) and (2) are true for all expressions which are shorter than $\alpha$. By definition of well-formed, there exist $\tau_i$ such that $\alpha=s\tau_1\cdots\tau_n$. Let $\alpha'$ be a well-formed initial segment of $\alpha$ (not necessarily proper). Then again there exist $\tau'_i$ such that $\alpha'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, contradicting the inductive hypothesis. Similarly we can argue $\tau_i=\tau'_i$ for all $i$. Thus $\alpha'=\alpha$ and the $\tau_i$ are unique, establishing both (1) and (2). $\blacksquare$
+*Proof*: Assume (1) and (2) are true for all expressions which are shorter than $\alpha$. By definition of well-formed, there exist well-formed $\tau_i$ such that $\alpha=s\tau_1\cdots\tau_n$. Let $\alpha'$ be a well-formed initial segment of $\alpha$ (not necessarily proper), and let $\tau'_1,\ldots\tau'_n$ be well-formed such that $\alpha'=s\tau'_1\cdots\tau'_n$. Then $\tau_1=\tau'_1$ since otherwise one would be an initial segment of the other, contradicting the inductive hypothesis. Similarly we can argue $\tau_i=\tau'_i$ for all $i$. Thus $\alpha'=\alpha$ and the $\tau_i$ are unique, establishing both (1) and (2). $\blacksquare$
 
 **Corollary** If $\alpha$ is well-formed, then every symbol of $\alpha$ is the beginning of a unique well-formed subexpression. We call this subexpression the *scope* of the occurrence of the symbol.
 
@@ -539,11 +539,11 @@ In lectures, we will give examples of the scope of several symbols in an express
 
 #### First order syntax
 
-We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and $a(\wedge)=a(\vee)=a(\rightarrow)=a(\leftrightarrow)=2$.
+We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,\forall,\exists,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and all the rest have arity $2$.
 
 In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. Examples include $+,\cdot,<$.
 
-**Definition** A *signature* $\mathcal L$ of first order logic consists of function symbols $f_i$ and relation symbols $R_j$ as well as arity values $a(f_i)$ and $a(R_j)$. This is the context described above.
+**Definition** A *signature* $\mathcal L$ of first order logic consists of a set of function symbols $\{f_i\}$, a set of relation symbols $\set{R_j}$, and the arities $a(f_i)$ and $a(R_j)$ for all $i,j$.
 
 Given a signature $\mathcal L$, the corresponding *first order lexicon* consists of $\mathcal L$ together with the basic lexicon described above.
 
@@ -551,7 +551,7 @@ For example, if we are studying group theory then our signature should include a
 
 With the lexicon established, we naturally wish to focus on just the well-formed expressions in that lexicon, and assign meaning to these well-formed expressions. Unfortunately this is still not always possible. To see this, consider the well-formed expression $+x\forall yz$, which in infix notation translates to $x+(\forall yz)$. Although this is meaningless, you may check that it uses each symbol's arity correctly. (Contrast this with the simpler situation in propositional logic.)
 
-**Definition** Let $\mathcal L=\set{f_i,R_j}$ be a signature of first order logic.
+**Definition** Let $\mathcal L=(\{f_i\},\{R_j\})$ be a signature of first order logic.
 
 * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the symbols $f_i$ and $x_n$.
 * The *atomic formulas* of $\mathcal L$ are the expressions of the form:  
@@ -600,15 +600,13 @@ The formal definiton of $\models$ is somewhat involved, but it will work the way
 
 ### 5. Semantics, structures, and satisfaction
 
-In this section we give a formal definition of the satisfaction relation $\mathcal A\models\sigma$. Unsurprisindly, the definition will once again be by induction on the construction of the sentence $\sigma$. Of course all the subformulas of $\phi$ are terms and formulas, not sentences, so we will need to handle the case when formulas $\phi$ have free variables.
+In this section will formally define of the satisfaction relation $\mathcal A\models\sigma$ for a $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
 
-However, if $\phi(x)$ has free variable $x$, then the statement $\mathcal A\models\phi(x)$ doesn't make sense because we don't know what $x$ is. We instead define the more complicated statement $\mathcal A\models\phi(x)[x\to a]$.
+**Example** Let $\mathcal A$ be the structure $(\mathbb N,+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. The statement $\mathcal A\models\phi$ doesn't make sense, even intuitively, because it should depend on the unknown and unquantified value of $x$. We instead define the more complicated statement $\mathcal A\models\phi[x\mapsto a]$, for any element $a\in A$. So for instance it should be true that $\mathcal A\models\phi[x\mapsto3]$, and $\mathcal A\not\models\phi[x\mapsto4]$.
 
-**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\phi(x)$ be the formula $x^2<10$. Then $\mathcal A\models\phi(x)[x\to3]$ and $\mathcal A\not\models\phi(x)[x\to4]$.
+Before we can deal properly with well-formed formulas and sentences, we will need to deal with terms. The next definition shows how to evaluate the terms.
 
-We begin our recursive definiton of satisfaction by showing how to evaluate the terms.
-
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions $x\to a$ of variables being used by elements of $A$ (in other words, a function from the set of variables being used to $A$). Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a list of substitutions $x\mapsto a$ of variables by elements of $A$ (in other words, $s$ is a function from a subset of the variables to $A$). Then:
 
 * If $x$ is a variable of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(x)[s]$ to be $s(x)$
 * If $c$ is a constant symbol of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
