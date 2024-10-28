@@ -606,13 +606,13 @@ In this section will formally define of the satisfaction relation $\mathcal A\mo
 
 Before we can deal properly with well-formed formulas and sentences, we will need to deal with terms. The next definition shows how to evaluate the terms.
 
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a list of substitutions $x\mapsto a$ of variables by elements of $A$ (in other words, $s$ is a function from a subset of the variables to $A$). Then:
+**Definition** Let $\mathcal L$ be a language of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be a list of substitutions $x\mapsto a$ where $x$ is a variable and $a\in A$. Assume $s$ includes substitutions for all the variables of $\tau$. Then:
 
 * If $x$ is a variable of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(x)[s]$ to be $s(x)$
 * If $c$ is a constant symbol of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
-* If $f$ is an $n$-ary function symbol and $\tau_1,\ldots,\tau_n$ are terms, define $\mathop{\mathrm{val}}\_{\mathcal A}(f\tau_1\cdots\tau_n)[s]=f^{\mathcal A}(\mathop{\mathrm{val}}\_{\mathcal A}(\tau_1)[s],\ldots,\mathop{\mathrm{val}}\_{\mathcal A}(\tau_n)[s])$.
+* If $\tau=f\tau_1,\ldots,\tau_n$ where $f$ is an $n$-ary function symbol and $\tau_i$ are terms, define $\mathop{\mathrm{val}}\_{\mathcal A}(\tau)[s]=f^{\mathcal A}(\mathop{\mathrm{val}}\_{\mathcal A}(\tau_1)[s],\ldots,\mathop{\mathrm{val}}\_{\mathcal A}(\tau_n)[s])$.
 
-**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution $x\to 3,y\to 4$. Then $\mathop{\mathrm{val}}\_{\mathcal A}(\tau)[s]=\mathop{\mathrm{val}}\_{\mathcal A}(x)[s]\cdot\mathop{\mathrm{val}}\_{\mathcal A}(y)[s]=3\cdot 4=12$.
+**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution $x\mapsto 3,y\mapsto 4$. Then $\mathop{\mathrm{val}}\_{\mathcal A}(\tau)[s]=\mathop{\mathrm{val}}\_{\mathcal A}(x)[s]\cdot\mathop{\mathrm{val}}\_{\mathcal A}(y)[s]=3\cdot 4=12$.
 
 We next define satisfaction for atomic formulas.
 
@@ -628,13 +628,13 @@ We finally define satisfaction for general formulas.
 
 **Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
 
-* If $\phi$ is $\alpha\wedge\beta$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
-* Similarly use the truth tables for $\wedge,\to,\leftrightarrow$
 * If $\phi$ is $\neg\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\not\models\alpha[s]$.
-* If $\phi$ is $\exists x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $t(x)=a$.
-* If $\phi$ is $\forall x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if for all $a\in A$ we have $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $t(x)=a$.
+* If $\phi$ is $\alpha\wedge\beta$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
+* Similarly use the truth tables for $\vee,\to,\leftrightarrow$
+* If $\phi$ is $\exists x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $x\mapsto a$.
+* If $\phi$ is $\forall x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if for all $a\in A$ we have $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $x\mapsto a$.
 
-Note that if $\sigma$ is a sentence, then no substitution function $s$ is needed (because anything it specifies will eventually be overwritten by the quantifiers). Thus we can write $\mathcal A\models\sigma$ without the $s$.
+Note that if $\sigma$ is a sentence, then no substitution function $s$ is needed (because anything it specifies will eventually be overwritten by the quantifiers). Thus we can write $\mathcal A\models\sigma$ without any $s$.
 
 **Example** Let $\mathcal A$ be the model $(\mathbb Q,<)$ and let $\sigma$ be the sentence $\forall x\forall y\exists z x>y\rightarrow x>z>y$. Then $\mathcal A\models\sigma$ if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ we have that there exists $c\in\mathbb Q$ such that $\mathcal A\models x>y\rightarrow x>z>y[x\to a,y\to b,z\to c]$. The latter is true if and only if for all $a,b$ there exists $c$ such that $a>b\implies a>c>b$. This is true since we can always let $c=(a+b)/2$.
 
