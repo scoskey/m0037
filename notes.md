@@ -672,7 +672,7 @@ We next give an example of semantic implication. Let $T$ be the theory of groups
 
 Finally we give examples of consistent and inconsistent theories...
 
-#### Formal proofs
+#### First order deductions
 
 Since we have defined semantic implication using satisfaction, you may expect that we will next define syntactic implication using deductions. This means it's time to define deductions or proofs in first order logic.
 
@@ -682,9 +682,9 @@ The most obvious way to justify a statement is when it is something we are assum
 
 **Definition** Let $T$ be a theory and $\sigma$ be a sentence of some fixed language $\mathcal L$. We say that $T$ *proves* $\sigma$, written $T\vdash\sigma$, if there exists a sequence of sentences $\sigma_1,\ldots,\sigma_n$ such that $\sigma_n$ is $\sigma$, and for all $i$ we have one of the following:
 
-* $\sigma_i$ is an element of $T$;
-* $\sigma_i$ is an instance of a logical axiom (described below);
-* there exist $j,k<i$ such that $\sigma_k$ is $\sigma_j\to\phi_i$.
+> (a) $\sigma_i$ is an element of $T$;  
+> (b) $\sigma_i$ is an instance of a logical axiom (described below);  
+> (c) $\sigma_i$ follows from earlier sentences by modus ponens.
 
 We must say what it means for a sentence to be a logical axiom. Given our discussion of valid sentences, it may seem natural to define the logical axioms to be the valid sentences. However this has some disadvantages, since it can be difficult to tell whether a given sentence is valid. Instead we define the logical axioms to be a sufficiently powerful but still easy-to-describe subset of the valid sentences.
 
@@ -693,14 +693,14 @@ We must say what it means for a sentence to be a logical axiom. Given our discus
 * Propositional tautologies
 * Universal instantiation: $\forall x\phi(x)\to\phi(\tau)$, for $\tau$ a term without $x$
 * Existential generalization: $\phi(\tau)\to\exists x\phi(x)$, for $\tau$ a term without $x$
-* Equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\to x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and ditto for all arities.
+* Equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\to x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and the analog for functon and relation symbols of higher arity
 * Quantifier duality: $\neg\forall x\phi\leftrightarrow \exists x\neg\phi$
 * Quantifier distribution: $\forall x(\phi\to\psi)\to(\forall x\phi\to\forall x\psi)$
 * Extra quantifier: $\phi\to\forall x\phi$ (where $x$ is not a free variable of $\phi$)
 
 It is easy to see that each of these logical axioms is a valid sentence. There are vastly more valid sentences not in the list. But we will eventually see that the list has enough power to prove the rest of the valid sentences. This was the main criteria used in choosing the axioms!
 
-**Example** We will prove that $T=\emptyset$ proves the sentence $\forall x\exists y x=y$.
+**Example** Let $T=\emptyset$ and let $\sigma$ be the sentence $\forall x\exists y x=y$. We will show that $T\vdash\sigma$. 
 
 1. $\forall x x=x$ (Equality)
 2. $\forall x x=x\to \exists y x=y$ (EG)
@@ -708,7 +708,7 @@ It is easy to see that each of these logical axioms is a valid sentence. There a
 4. $\forall x x=x\to \forall x\exists y x=y$ (Modus ponens 2,3)
 5. $\forall x\exists y x=y$ (Modus ponens 1,4)
 
-Recall we defined semantic implication using satisfaction. We may now define the syntactic implication usind deductions.
+Recall we defined semantic validity, implication, and consistency using the concept of satisfaction. We now define the syntactic analogues of these using the concept of deduction.
 
 **Definition**
 * A sentence $\sigma$ is *syntactically valid* if there is a proof from $\emptyset$ of $\sigma$.
@@ -719,7 +719,7 @@ For example, again let $T$ is group theory and $\sigma$ be the sentence $(\foral
 
 The next theorem states that anything we can prove is true. That is, it states that our concept of proof is *sound*.
 
-**Soundness Theorem** If $T\vdash\sigma$ then $T\models\sigma$.
+**Theorem** (Soundness) If $T\vdash\sigma$ then $T\models\sigma$.
 
 *Proof*: Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j<i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$. $\blacksquare$
 
@@ -739,11 +739,11 @@ As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all 
 
 *Proof*: If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then using tautologies we have $T\cup\set{\neg\sigma}\vdash\sigma$. By the deduction theorem, $T\vdash \neg\sigma\to\sigma$. By a tautology, $T\vdash\sigma\vee\sigma$ and therefore $T\vdash\sigma$. $\blacksquare$
 
-**Theorem** (Universal generalization and existential instantiation) Let $c$ be a constant symbol not in $\mathcal L$. If $T\vdash\phi(c)$ then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
+**Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$. If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
 *Proof*: We will discuss this in the lecture.
 
-The last two rules formalize common proof notions. The UG rule is for proofs that end "...but c was arbitrary". The EI rule is for proofs that begin "Fix a constant c such that...". In the future we will also use the abbreviations UI and EG as deductive rules corresponding to the logical axioms of the corresponding name.
+The last two rules formalize common proof notions. The UG rule is for proofs that end "... since $c$ was arbitrary, the result holds for all values". The EI rule is for proofs that begin "Since we know one exists, fix a constant $c$ with this property". In the future we will also use the abbreviations UI and EG as deductive rules corresponding to the logical axioms of the corresponding name.
 
 **Example** We will show that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
 
@@ -829,7 +829,7 @@ Assuming this lemma is true, let us outline the proof of the Completeness Theore
 
 Given a syntactically constistent theory, we first extend it to a theory with witnessing terms, and then to a complete theory $T^\ast$ in the expanded language. We let $\mathcal H$ be the Henkin model corresponding to $T^\ast$.
 
-We must prove that $\mathcal H$ is a model of $T^\ast$ and hence of $T$. This is done by induction on the complexity of the sentence (not the length). We have already addressed atomic sentences. The difficult part is the $\exists$ quantifier step, but noe can use the witnessing property in this part!
+We must prove that $\mathcal H$ is a model of $T^\ast$ and hence of $T$. This is done by induction on the complexity of the sentence (not the length). We have already addressed atomic sentences. The difficult part is the $\exists$ quantifier step, but now we can use the witnessing property in this part!
 
 #### Completeness and its consequences
 
@@ -843,7 +843,7 @@ We claim that $T'$ is syntactically consitent. If it isn't, then there is a proo
 
 Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. Firstlet $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $\mathcal T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup\mathcal T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
 
-**Completeness Theorem, version II** If $T$ is syntactically consistent, then $T$ has a model.
+**Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
 
 *Proof*: We apply the lemmas we have proved in sequence. Given $T$, we first extend it to a theory with witnessing terms and then further extend it to a complete theory $T^\ast$ in the expanded language. We then let $\mathcal H$ be the Henkin/Herbrand model of $T^\ast$. 
 
@@ -882,7 +882,7 @@ The completeness theorem has many consequences, one of which is to greatly simpl
 
 As a result we rarely need to discern between the semantic and syntactic notions. Another simple but powerful consequence is the following.
 
-**Compactness Theorem** If every finite subset of $T$ has a model, then $T$ has a model.
+**Theorem** (Compactness Theorem) If every finite subset of $T$ has a model, then $T$ has a model.
 
 *Proof*: It suffices to show that if every finite subset of $T$ is syntactically consistent, then $T$ is syntactically consistent. Taking the contrapositive, we must show that if $T$ is syntactically inconsistent then some finite subset of $T$ is syntactically inconsistent. This is clear from the fact that proofs are finite: if $T$ proves a contradictory sentence $\alpha\wedge\neg\alpha$, then the proof used just finitely many sentences of $T$, so there exists a finite subset $T_0\subset T$ that proves a $\alpha\wedge\neg\alpha$ too. $\blacksquare$
 
@@ -898,7 +898,7 @@ This simple idea can also be used to derive the following consequences of compac
 
 **Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,0,1,<)$. There is a model of $T$ with an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
 
-We will leave the proofs as exercises.
+We invite the reader to fill in the proofs of these results.
 
 ### 7. Applications of compactness, more about theories
 
