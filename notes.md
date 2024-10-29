@@ -491,13 +491,6 @@ We will see that first order logic is powerful enough to express nearly all math
 
 ### 4. Syntax and theories
 
-<!-- First order logic has two parts: proof theory and model theory. In proof theory we study what it means to give a correct proof of a statement from a set of given axioms. In model theory we study a given set of axioms and the possible universes where the axioms are true.
-
-* For example, group theory consists of the axioms
-  * $(\forall x,y,z)(xy)z=x(yz)$
-  * $(\exists u)(\forall x)xu=x\wedge ux=x\wedge(\exists y)xy=u$
-* If we let $\phi$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$ then $\phi$ is a theorem of group theory. Proof theory says we can find a proof of $\phi$ from the axioms. Model theory says that $\phi$ is true in every universe of the axioms (group).-->
-
 In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
 
 **Definition** An *expression* in the alphabet $A$ is a finite sequence of symbols of $A$.
@@ -640,39 +633,48 @@ Note that if $\sigma$ is a sentence, then no substitution function $s$ is needed
 
 We often apply the satisfaction relation to a set of sentences.
 
-**Definition** If $\mathcal L$ is a language of first order logic, then an $\mathcal L$-theory is a set of $\mathcal L$-sentences.
+**Definition** If $\mathcal L$ is a language of first order logic, then an *$\mathcal L$-theory* is any set of $\mathcal L$-sentences.
+
+**Example** Let $\mathcal L$ consist of one binary function symbol $\cdot$, and let $T$ consist of the following two sentences:
+> * $(\forall x)(\forall y)(\forall z)(x\cdot y)\cdot z=x\cdot(y\cdot z)$
+> * $(\exists u)(\forall x)x\cdot u=x\wedge u\cdot x=x\wedge(\exists y)x\cdot y=u$
+
+Then $T$ is the *theory of groups* (or group theory for short).
+
+**Example** Let $\mathcal L$ consist of one binary relation symbol $<$, and let $T$ consist of the following sentences:
+> * $(\forall x)x\not<x$
+> * $(\forall x)(\forall y)x<y\rightarrow y\not<x$
+> * $(\forall x)(\forall y)x=y\vee x<y\vee y<x$
+> * $(\forall x)(\forall y)(\forall z)x<y\wedge y<z\rightarrow x<z$
+
+Then $T$ is the *theory of linear orders*.
+
+**Example** Let $\mathcal L$ consist of one binary relation symbol $\in$. Let $T$ consist of the axioms of set theory described in section 3. Then $T$ is what we mean when we talk about ZFC.
 
 **Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A\models T$ if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. In this case we also say that $\mathcal A$ is a *model* of $T$.
 
 This fulfills the notion that model theory provides the universes where a given collection of axioms is true. For example if $T$ is group theory, the models of $T$ are groups. If $T$ is set theory, the models of $T$ are universes of set theory.
 
-With the concept of satisfaction in hand, we may further define many semantic notions.
+With the concept of satisfaction in hand, we can now define several key notions:
 
 **Definition**
 * A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
-* A sentence $\sigma$ *semantically implies* a sentence $\tau$ if for every model $\mathcal A$ we have $\mathcal A\models \sigma$ implies $\mathcal A\models\tau$.
-* A theory $T$ is *semantically consistent* if it admits a model $\mathcal A\models T$.
+* A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
+* A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
-Each of these has syntactic versions involving proofs.
-
-**Definition**
-* A sentence $\sigma$ is *semantically valid* if there is a proof of $\sigma$.
-* A sentence $\sigma$ *syntactically implies* a sentence $\tau$ if there is a proof using $\sigma$ of $\tau$.
-* A theory $T$ is *semantically consistent* if it cannot be used to derive a falsehood.
-
-We will see that in each case the semantic and syntactic notions are equivalent. Of course this means we have to be very careful to define proof itself properly, something we will do in the next section.
-
-Returning to the semantically valid sentences, we proceed with several examples.
-
-**Example** Every propositional tautology is a semantically valid sentence in the appropriate language. Recall that a propositional tautology is a sentence involving just $0$-ary relations which can be verified by truth tables. For examples, the following are propositional tautologies: $P\wedge Q\to P$; $(P\to Q)\leftrightarrow (\neg P\vee Q)$; $(P\wedge(\mathcal P\to Q))\to Q$.
+For example, every propositional tautology is a semantically valid sentence in the appropriate language. Recall that a propositional tautology is a sentence involving just $0$-ary relations which can be verified by truth tables. For examples, the following are propositional tautologies: $P\wedge Q\to P$; $(P\to Q)\leftrightarrow (\neg P\vee Q)$; $(P\wedge(\mathcal P\to Q))\to Q$.
 
 Similarly, if one begins with a propositional tautology and replaces each propositional variable with a first order sentence, one obtains a semantically valid sentence.
 
-There are many more examples of semantically valid statements that are genuinely first order, and don't derive from propositional tautologies.
+There are also sentences which are semantically valid in a genuinely first order way, that is, they do not just come from propositional tautologies. For example, all of the following are semantically valid: $\forall x x=x$; $\forall x R(x)\to\neg\exists x\neg R(x)$; $\forall x\phi(x)\to\phi(\tau)$; $\phi(\tau)\to\exists x\phi(x)$.
 
-**Example** The following are semantically valid: $\forall x x=x$; $\forall x R(x)\to\neg\exists x\neg R(x)$; $\forall x\phi(x)\to\phi(\tau)$; $\phi(\tau)\to\exists x\phi(x)$.
+We next give an example of semantic implication. Let $T$ be the theory of groups, and let $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. We can recognise $\sigma$ as something that is true in every group. Therefore $T\models\sigma$.
+
+Finally we give examples of consistent and inconsistent theories...
 
 #### Formal proofs
+
+Since we have defined semantic implication using satisfaction, you may expect that we will next define syntactic implication using deductions. This means it's time to define deductions or proofs in first order logic.
 
 An informal proof is an explanation. A formal proof is a sequence of sentences ending with a desired statement. In order to be a correct proof, it must be possible to justify each of the statements in the sequence in one of several ways.
 
@@ -706,7 +708,16 @@ It is easy to see that each of these logical axioms is a valid sentence. There a
 4. $\forall x x=x\to \forall x\exists y x=y$ (Modus ponens 2,3)
 5. $\forall x\exists y x=y$ (Modus ponens 1,4)
 
-Recall our distinction between semantic truth (satisfaction) and syntactic truth (proofs). The next theorem states that anything we can prove is true. That is, it states that our concept of proof is *sound*.
+Recall we defined semantic implication using satisfaction. We may now define the syntactic implication usind deductions.
+
+**Definition**
+* A sentence $\sigma$ is *syntactically valid* if there is a proof from $\emptyset$ of $\sigma$.
+* A theory $T$ *syntactically implies* a sentence $\sigma$ if there is a proof from $T$ of $\sigma$.
+* A theory $T$ is *syntactically consistent* if it cannot be used to derive a falsehood.
+
+For example, again let $T$ is group theory and $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. Then $\sigma$ is something which is proved at the start of any group theory textbook. This means that $T\vdash\sigma$.
+
+The next theorem states that anything we can prove is true. That is, it states that our concept of proof is *sound*.
 
 **Soundness Theorem** If $T\vdash\sigma$ then $T\models\sigma$.
 
