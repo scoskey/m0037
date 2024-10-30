@@ -534,7 +534,7 @@ In lectures, we will give examples of the scope of several symbols in an express
 
 We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,\forall,\exists,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and all the rest have arity $2$.
 
-In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. Examples include $+,\cdot,<$.
+In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. The most important examples include $+,\cdot,<,\in$ and so forth.
 
 **Definition** A *signature* $\mathcal L$ of first order logic consists of a set of function symbols $\{f_i\}$, a set of relation symbols $\set{R_j}$, and the arities $a(f_i)$ and $a(R_j)$ for all $i,j$.
 
@@ -595,41 +595,49 @@ The formal definiton of $\models$ is somewhat involved, but it will work the way
 
 In this section will formally define of the satisfaction relation $\mathcal A\models\sigma$ for a $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
 
-**Example** Let $\mathcal A$ be the structure $(\mathbb N,+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. The statement $\mathcal A\models\phi$ doesn't make sense, even intuitively, because it should depend on the unknown and unquantified value of $x$. We instead define the more complicated statement $\mathcal A\models\phi[x\mapsto a]$, for any element $a\in A$. So for instance it should be true that $\mathcal A\models\phi[x\mapsto3]$, and $\mathcal A\not\models\phi[x\mapsto4]$.
+To get an idea of how this should work, let $\mathcal A$ be the structure $(\mathbb N;+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. We shouldn't define $\mathcal A\models\phi$ to be true or false, because it should depend on the unknown and unquantified value of $x$. We instead define the more complicated statement $\mathcal A\models\phi[x\mapsto a]$, for any $a\in A$. So for instance it should be true that $\mathcal A\models\phi[x\mapsto3]$, and $\mathcal A\not\models\phi[x\mapsto4]$.
 
-Before we can deal properly with well-formed formulas and sentences, we will need to deal with terms. The next definition shows how to evaluate the terms.
+The first step in this process should be to deal with the term $x^2$. The definition should understand that $x^2$ evaluates to $9$ when $x\mapsto 3$, and $x^2$ evaluates to $16$ when $x\mapsto 4$. We now introduce notation for evaluating the terms and define how it works in general.
 
-**Definition** Let $\mathcal L$ be a language of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be a list of substitutions $x\mapsto a$ where $x$ is a variable and $a\in A$. Assume $s$ includes substitutions for all the variables of $\tau$. Then:
+**Definition** Let $\mathcal L$ be a language of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function whose domain includes the variables of $\tau$ and whose codomain is $A$. Then:
 
-* If $x$ is a variable of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(x)[s]$ to be $s(x)$
-* If $c$ is a constant symbol of $\tau$, define $\mathop{\mathrm{val}}_{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
-* If $\tau=f\tau_1,\ldots,\tau_n$ where $f$ is an $n$-ary function symbol and $\tau_i$ are terms, define $\mathop{\mathrm{val}}\_{\mathcal A}(\tau)[s]=f^{\mathcal A}(\mathop{\mathrm{val}}\_{\mathcal A}(\tau_1)[s],\ldots,\mathop{\mathrm{val}}\_{\mathcal A}(\tau_n)[s])$.
+* If $x$ is a variable of $\tau$, define $\mathrm{val}^{\mathcal A}(x)[s]$ to be $s(x)$
+* If $c$ is a constant symbol of $\tau$, define $\mathrm{val}^{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
+* If $\tau=f\tau_1,\ldots,\tau_n$ where $\tau_i$ are terms, define $\mathrm{val}^{\mathcal A}(\tau)[s]=f^{\mathcal A}(\mathrm{val}^{\mathcal A}(\tau_1)[s],\ldots,\mathrm{val}^{\mathcal A}(\tau_n)[s])$.
 
-**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution $x\mapsto 3,y\mapsto 4$. Then $\mathop{\mathrm{val}}\_{\mathcal A}(\tau)[s]=\mathop{\mathrm{val}}\_{\mathcal A}(x)[s]\cdot\mathop{\mathrm{val}}\_{\mathcal A}(y)[s]=3\cdot 4=12$.
+**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution function $x\mapsto 3,y\mapsto 4$. Then:
+
+$$\begin{aligned}
+  \mathrm{val}^{\mathcal A}(\tau)[s]
+  &=\mathrm{val}^{\mathcal A}(x\cdot y)[s]\\
+  &=\mathrm{val}^{\mathcal A}(x)[s]\cdot\mathrm{val}^{\mathcal A}(y)[s]\\
+  &=3\cdot 4\\
+  &=12
+\end{aligned}$$
 
 We next define satisfaction for atomic formulas.
 
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be an atomic formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
-* If $\phi$ is the formula $R\tau_1\cdots\tau_n$ then $\mathcal A\models\phi[s]$ is true if and only if $(\mathop{\mathrm{val}}\_{\mathcal A}(\tau_1)[s],\ldots,\mathop{\mathrm{val}}\_{\mathcal A}(\tau_n)[s])\in R^{\mathcal A}$.
-* If $\phi$ is the formula $=\tau_1\tau_2$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathop{\mathrm{val}}\_{\mathcal A}(\tau_1)[s]=\mathop{\mathrm{val}}\_{\mathcal A}(\tau_2)[s]$
-* If $\phi$ is the formula $P$, a propositional relation, then $\mathcal A\models\phi$ is true if and only if $P^{\mathcal A}=T$.
+* If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi[s]$ if and only if $\mathrm{val}^{\mathcal A}(\tau_1)[s]=\mathrm{val}^{\mathcal A}(\tau_2)[s]$.
+* If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi$ if and only if $P^{\mathcal A}=T$.
+* If $\phi$ is $R\tau_1\cdots\tau_n$, then $\mathcal A\models\phi[s]$ if and only if $(\mathrm{val}^{\mathcal A}(\tau_1)[s],\ldots,\mathrm{val}^{\mathcal A}(\tau_n)[s])\in R^{\mathcal A}$.
 
-Note that in this definition the equality relation is treated specially. This guarantees that the equality relation always represents true equality, and not some funny model-specific notion of equality.
+Note that in this definition the equality relation is treated specially. This guarantees that the equality relation always represents true equality, and not some alternative model-defined notion of equality.
 
 We finally define satisfaction for general formulas.
 
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $s$ be a set of substitutions. Then:
+**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be a well-formed formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
-* If $\phi$ is $\neg\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\not\models\alpha[s]$.
-* If $\phi$ is $\alpha\wedge\beta$ then $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
-* Similarly use the truth tables for $\vee,\to,\leftrightarrow$
-* If $\phi$ is $\exists x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $x\mapsto a$.
-* If $\phi$ is $\forall x\alpha$ then $\mathcal A\models\phi[s]$ is true if and only if for all $a\in A$ we have $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ where we let $x\mapsto a$.
+* If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\not\models\alpha[s]$.
+* If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
+* Similarly, use the truth tables for $\vee,\to,\leftrightarrow$
+* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ that sets $x\mapsto a$.
+* If $\phi$ is $\forall x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if for all $a\in A$ we have $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ that sets $x\mapsto a$.
 
-Note that if $\sigma$ is a sentence, then no substitution function $s$ is needed (because anything it specifies will eventually be overwritten by the quantifiers). Thus we can write $\mathcal A\models\sigma$ without any $s$.
+Observe that if $\sigma$ is a sentence, then no substitution function $s$ is needed. Indeed, anything $s$ specifies will eventually be overwritten by the quantifiers. Thus we can ask whether $\mathcal A\models\sigma$ or $\mathcal A\not\models\sigma$ without any $s$ provided.
 
-**Example** Let $\mathcal A$ be the model $(\mathbb Q,<)$ and let $\sigma$ be the sentence $\forall x\forall y\exists z x>y\rightarrow x>z>y$. Then $\mathcal A\models\sigma$ if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ we have that there exists $c\in\mathbb Q$ such that $\mathcal A\models x>y\rightarrow x>z>y[x\to a,y\to b,z\to c]$. The latter is true if and only if for all $a,b$ there exists $c$ such that $a>b\implies a>c>b$. This is true since we can always let $c=(a+b)/2$.
+**Example** Let $\mathcal A$ be the structure $(\mathbb Q;<)$ and let $\sigma$ be the sentence $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$. Then the definition implies that $\mathcal A\models\sigma$ if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ we have that there exists $c\in\mathbb Q$ such that $\mathcal A\models x<y\rightarrow x<z<y[x\mapsto a,y\mapsto b,z\mapsto c]$. The definition further implies that this will be true if and only if for all $a,b\in\mathbb Q$ there exists $c\in\mathbb Q$ such that $a<b\implies a<c<b$. Finally, this is true since given $a,b$ we can always choose $c=(a+b)/2$.
 
 We often apply the satisfaction relation to a set of sentences.
 
@@ -653,24 +661,24 @@ Then $T$ is the *theory of linear orders*.
 
 **Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A\models T$ if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. In this case we also say that $\mathcal A$ is a *model* of $T$.
 
-This fulfills the notion that model theory provides the universes where a given collection of axioms is true. For example if $T$ is group theory, the models of $T$ are groups. If $T$ is set theory, the models of $T$ are universes of set theory.
+For example if $T$ is the theory of groups, the models of $T$ are the groups. If $T$ is the theory of linear orders, the models of $T$ are the linear orders. If $T$ is ZFC, the models of $T$ are the possible universes of set theory. This fulfills the notion that model theory provides the universes where a given collection of axioms is true. 
 
-With the concept of satisfaction in hand, we can now define several key notions:
+With the concept of first order satisfaction in hand, we can now define several key semantic notions:
 
 **Definition**
 * A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
 * A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
-For example, every propositional tautology is a semantically valid sentence in the appropriate language. Recall that a propositional tautology is a sentence involving just $0$-ary relations which can be verified by truth tables. For examples, the following are propositional tautologies: $P\wedge Q\to P$; $(P\to Q)\leftrightarrow (\neg P\vee Q)$; $(P\wedge(\mathcal P\to Q))\to Q$.
+In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a language $\mathcal L=\{P_1,\ldots,P_n\}$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
 
-Similarly, if one begins with a propositional tautology and replaces each propositional variable with a first order sentence, one obtains a semantically valid sentence.
+More generally, we can start with a propositional tautology $\alpha$, and replace each propositional variable symbol with any first order sentence, and the result will be a semantically valid sentence. For example $((\forall x)(\forall y)x^2<y)\vee\neg((\forall x)(\forall y)x^2<y)$ is a valid sentence because it is of the *form* $P\vee\neg P$.
 
-There are also sentences which are semantically valid in a genuinely first order way, that is, they do not just come from propositional tautologies. For example, all of the following are semantically valid: $\forall x x=x$; $\forall x R(x)\to\neg\exists x\neg R(x)$; $\forall x\phi(x)\to\phi(\tau)$; $\phi(\tau)\to\exists x\phi(x)$.
+There are also sentences which are semantically valid in a genuinely first order way, that is, they do not just come from propositional tautologies. For example, all of the following are semantically valid: $(\forall x)x=x$; $((\forall x)R(x))\to\neg(\exists x)\neg R(x)$; $((\forall x)\phi(x))\to\phi(\tau)$.
 
-We next give an example of semantic implication. Let $T$ be the theory of groups, and let $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. We can recognise $\sigma$ as something that is true in every group. Therefore $T\models\sigma$.
+We next give an example of semantic implication. Let $T$ be the theory of groups, and let $\sigma$ be the sentence $(\forall x)(\forall y)(\forall z)xy=xz\rightarrow y=z$. We can recognise $\sigma$ as something that is true in every group. Therefore $T\models\sigma$.
 
-Finally we give examples of consistent and inconsistent theories...
+Finally we give examples of consistent and inconsistent theories. The theory of groups is consistent, because we can construct a group and prove that it satisfies the sentences in the theory. Similarly the theory of linear orders is consistent. On the other hand, the theory of non-abelian groups with 5 elements (write this down) is inconsistent, because no such group exists! 
 
 #### First order deductions
 
