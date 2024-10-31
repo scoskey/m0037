@@ -4,6 +4,24 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
+#### Table of contents
+
+[Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
+- [1. Propositional logic](#1-propositional-logic)
+- [2. Naive set theory and the proof of compactness](#2-naive-set-theory-and-the-proof-of-compactness)
+- [3. Axiomatic set theory and foundations](#3-axiomatic-set-theory-and-foundations)
+
+[Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
+- [4. Syntax and theories](#4-syntax-and-theories)
+- [5. Semantics, structures, and satisfaction](#5-semantics-structures-and-satisfaction)
+- [6. Compactness and completeness](#6-compactness-and-completeness)
+- [7. Applications of compactness, more about theories](#7-applications-of-compactness-more-about-theories)
+
+[Part III: Computability theory and incompleteness](#part-iii-computability-theory-and-incompleteness)
+- [8. Definability, absoluteness, and computability](#8-definability-absoluteness-and-computability)
+- [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
+- [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
+
 ## Part I: Introduction to logic and set theory
 
 #### Introduction
@@ -1091,7 +1109,7 @@ Complementation is clear because $\Sigma_1$ and $\Pi_1$ are dual to one another.
 
 For bounded quantification, we will show that $\Sigma_1$ is closed under bounded quantification. The argument for $\Pi_1$ is similar, and the fact for $\Delta_1$ follows. For this, first observe that $\exists x\in y\exists z\alpha$ is equivalent to $\exists z\exists x\in y\alpha$ which is clearly $\Sigma_1$. Next we claim that $\forall x\in y\exists z\alpha$ is equivalent to $\exists u\forall x\in y\exists z\in u\alpha$. The backward implication is trivial. For the forward implication we create a set $u$ which contains a witness $z_x$ for all possible $x\in y$. $\blacksquare$
 
-### 9. Computable functions, recursion, undecidable sets
+### 9. Computable functions, recursion, and undecidable sets
 
 **Definition** Let $f$ be a function from HF to HF. Then $f$ is *computable* if its graph is decidable.
 
