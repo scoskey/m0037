@@ -706,25 +706,25 @@ An informal proof is an explanation. A formal proof is a sequence of sentences e
 
 The most obvious way to justify a statement is when it is something we are assuming (an axiom). The next most obvious way is if it is logically apparent, such as a tautology. A somewhat more meaningful step of justification is *modus ponens*, which says that if $\alpha$ is true and $\alpha\to\beta$ is true then $\beta$ is true. 
 
-**Definition** Let $T$ be a theory and $\sigma$ be a sentence of some fixed language $\mathcal L$. We say that $T$ *proves* $\sigma$, written $T\vdash\sigma$, if there exists a sequence of sentences $\sigma_1,\ldots,\sigma_n$ such that $\sigma_n$ is $\sigma$, and for all $i$ we have one of the following:
+**Definition** Let $T$ be a theory, and let $\sigma$ be a sentence. We define $T\vdash\sigma$, read *syntactically implies* $\sigma$, if there exists a sequence of sentences $\sigma_1,\ldots,\sigma_n$ such that $\sigma_n$ is $\sigma$, and for every $i\leq n$ at least one of the following is true:
 
-> (a) $\sigma_i$ is an element of $T$;  
-> (b) $\sigma_i$ is an instance of a logical axiom (described below);  
-> (c) $\sigma_i$ follows from earlier sentences by modus ponens.
+> (a) $\sigma_i$ is a hypothesis, that is, an element of $T$  
+> (b) $\sigma_i$ is an instance of a logical axiom (described below)  
+> (c) $\sigma_i$ follows from two of the previous sentences in $\sigma_1,\ldots,\sigma_{i-1}$ by modus ponens
 
-We must say what it means for a sentence to be a logical axiom. Given our discussion of valid sentences, it may seem natural to define the logical axioms to be the valid sentences. However this has some disadvantages, since it can be difficult to tell whether a given sentence is valid. Instead we define the logical axioms to be a sufficiently powerful but still easy-to-describe subset of the valid sentences.
+Now we must say what it means for a sentence to be a logical axiom. Given our discussion of valid sentences, it may seem natural to define the logical axioms to be the valid sentences. However this has some disadvantages, since it can be difficult to tell whether a given sentence is valid. Instead we define the logical axioms to be a sufficiently powerful but still easy-to-describe subset of the valid sentences.
 
 **Definition** A sentence $\sigma$ is a *logical axiom* if it is of one of the following types:
 
 * Propositional tautologies
-* Universal instantiation: $\forall x\phi(x)\to\phi(\tau)$, for $\tau$ a term without $x$
-* Existential generalization: $\phi(\tau)\to\exists x\phi(x)$, for $\tau$ a term without $x$
+* Universal instantiation (UI): $\forall x\phi(x)\to\phi(\tau)$, for $\tau$ a term without $x$
+* Existential generalization (EG): $\phi(\tau)\to\exists x\phi(x)$, for $\tau$ a term without $x$
 * Equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\to x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and the analog for functon and relation symbols of higher arity
 * Quantifier duality: $\neg\forall x\phi\leftrightarrow \exists x\neg\phi$
 * Quantifier distribution: $\forall x(\phi\to\psi)\to(\forall x\phi\to\forall x\psi)$
 * Extra quantifier: $\phi\to\forall x\phi$ (where $x$ is not a free variable of $\phi$)
 
-It is easy to see that each of these logical axioms is a valid sentence. There are vastly more valid sentences not in the list. But we will eventually see that the list has enough power to prove the rest of the valid sentences. This was the main criteria used in choosing the axioms!
+It is easy to see that each of these logical axioms is a valid sentence. While there are vastly more valid sentences not included in the list, we will eventually show that they are all consequences of the ones in the list! Indeed, the list of axioms was selected with this result in mind.
 
 **Example** Let $T=\emptyset$ and let $\sigma$ be the sentence $\forall x\exists y x=y$. We will show that $T\vdash\sigma$. 
 
@@ -737,11 +737,10 @@ It is easy to see that each of these logical axioms is a valid sentence. There a
 Recall we defined semantic validity, implication, and consistency using the concept of satisfaction. We now define the syntactic analogues of these using the concept of deduction.
 
 **Definition**
-* A sentence $\sigma$ is *syntactically valid* if there is a proof from $\emptyset$ of $\sigma$.
-* A theory $T$ *syntactically implies* a sentence $\sigma$ if there is a proof from $T$ of $\sigma$.
-* A theory $T$ is *syntactically consistent* if it cannot be used to derive a falsehood.
+* A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$
+* A theory $T$ is *syntactically consistent* if $T\not\vdash \alpha\wedge\neg\alpha$. (Any negated of a tautology may be used as a generic falsehood.)
 
-For example, again let $T$ is group theory and $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. Then $\sigma$ is something which is proved at the start of any group theory textbook. This means that $T\vdash\sigma$.
+For example, let $T$ be the theory of groups and let $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. Then $\sigma$ is something which is proved at the start of any group theory textbook. This means that $T\vdash\sigma$.
 
 The next theorem states that anything we can prove is true. That is, it states that our concept of proof is *sound*.
 
@@ -765,11 +764,13 @@ As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all 
 
 *Proof*: If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then using tautologies we have $T\cup\set{\neg\sigma}\vdash\sigma$. By the deduction theorem, $T\vdash \neg\sigma\to\sigma$. By a tautology, $T\vdash\sigma\vee\sigma$ and therefore $T\vdash\sigma$. $\blacksquare$
 
-**Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$. If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$. If $T\cup\set{\phi(c)}\vdash\alpha$ then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
+In the next result, the UG rule is for proofs that end "... since $c$ was arbitrary, the result holds for all values". The EI rule is for proofs that begin "Since we know one exists, fix a constant $c$ with this property".
 
-*Proof*: We will discuss this in the lecture.
+**Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$.
+* (UG) If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$.
+* (EI) If $T\cup\set{\phi(c)}\vdash\alpha$, then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
-The last two rules formalize common proof notions. The UG rule is for proofs that end "... since $c$ was arbitrary, the result holds for all values". The EI rule is for proofs that begin "Since we know one exists, fix a constant $c$ with this property". In the future we will also use the abbreviations UI and EG as deductive rules corresponding to the logical axioms of the corresponding name.
+The proof of the theorem is tedious but not difficult, we refer the reader to one of our references.
 
 **Example** We will show that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
 
