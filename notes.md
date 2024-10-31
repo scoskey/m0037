@@ -337,7 +337,7 @@ We remark that the results of this section show that the following three stateme
 
 This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly. We invite the reader to find such proofs in our references or else look for them yourself.
 
-We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols in our language $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional symbols. This statement is stronger, and some of the steps of the proof will be different.
+We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
 
 ### 3. Axiomatic set theory and foundations
 
@@ -556,7 +556,7 @@ In a given context, we will extend the lexicon to include additional function an
 
 **Definition** A *signature* $\mathcal L$ of first order logic consists of a set of function symbols $\{f_i\}$, a set of relation symbols $\set{R_j}$, and the arities $a(f_i)$ and $a(R_j)$ for all $i,j$.
 
-Given a signature $\mathcal L$, the corresponding *first order lexicon* consists of $\mathcal L$ together with the basic lexicon described above.
+Given a signature $\mathcal L$, the corresponding *first order lexicon* consists of $\mathcal L$ together with the basic lexicon described above. A first order lexicon is sometimes also called a *language*.
 
 For example, if we are studying group theory then our signature should include a $\cdot$ symbol of arity $2$, if we are studying order theory then our signature should include a $<$ symbol of arity $2$, etc.
 
@@ -570,8 +570,8 @@ With the lexicon established, we naturally wish to focus on just the well-formed
 (2) $\mathord{=}\tau_1\tau_2$ where $\tau_i$ are terms.
 * The *well-formed formulas* of $\mathcal L$ are the expressions of the form:  
 (1) an atomic formula;  
-(2) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a well-formed formula;  
-(3) $\neg\phi$, $\wedge\phi\psi$, $\vee\phi\psi$, $\mathord{\rightarrow}\phi\psi$, or $\mathord{\leftrightarrow}\phi\psi$, where $\phi,\psi$ are well-formed formulas.
+(2) $\neg\phi$, $\wedge\phi\psi$, $\vee\phi\psi$, $\mathord{\rightarrow}\phi\psi$, or $\mathord{\leftrightarrow}\phi\psi$, where $\phi,\psi$ are well-formed formulas;  
+(3) $\forall x\phi$ or $\exists x\phi$ where $x$ is a variable and $\phi$ is a well-formed formula.
 
 Like the definition of well-formed expression, this definition is recursive. The recursive rules serve to place further limitations on precisely which expressions are legal. Our goal is to show that we can assign meaning to the well-formed formulas.
 
@@ -581,31 +581,31 @@ In well-formed formulas, as in mathematical statements generally, some of the va
 
 **Definition** Let $\phi$ be a well-formed formula.
 
-* An occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$, and *free* otherwise.
-* $\phi$ is called a *sentence* if it has no free occurrence of a variable.
+* An occurrence of $x$ in $\phi$ is said to be *bound* if it lies inside the scope of a $\forall x$ or $\exists x$, and *free* otherwise.
+* $\phi$ is called a *sentence* if none of the occurrences of variables in $\phi$ are free.
 
 The sentences are the well-formed formulas for which we can conceivably assign a truth value. But as the next examples show, some further context is still needed.
 
 **Example** Consider the (standard infix) sentence $(\exists y)(\forall x)x\leq y$. This sentence is false of real numbers but true of the unit interval $[0,1]$. The sentence says something like, "the universe as it is ordered has an upper bound". But what is the universe, and what is its ordering?
 
-**Example** Consider the (standard infix) sentence $(\forall x)x\geq0\rightarrow(\exists y)y\cdot y=x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
+**Example** Consider the (standard infix) sentence $(\forall x)x\geq0\rightarrow(\exists y)y^2=x$. This is true of real numbers but false of rational numbers. This example says "every element of the universe has a square root", but what is the universe and what is a square number?
 
-In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols in the language. This package of information is called a *structure* or *model*. A structure is a special type of set which forms one possible universe for sentences in a given language.
+In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols in the signature. This package of information is called a *structure* or *model*. A structure is a special type of set which forms one possible universe for sentences in a given signature.
 
-**Definition** Let $\mathcal L$ be a language of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
+**Definition** Let $\mathcal L$ be a signature of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
   * A set $A$, the universe of the structure
   * For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
   * For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
   * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
   * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
 
-**Example** Let $\mathcal L=\{<\}$ be the language with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\{<\}$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\{\cdot\}$ be the language with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\{\cdot\}$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the language with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the signature with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
 
-If $\mathcal L$ is a language, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
+If $\mathcal L$ is a signature, $\alpha$ is an $\mathcal L$-sentence, and $\mathcal A$ is an $\mathcal L$-structure, we can decide whether $\alpha$ is true or false in $\mathcal A$. Thus structures play the same role in first order logic that truth assignments played in propositional logic. We will even use the same symbol $\mathcal A\models\alpha$ when $\alpha$ is true in $\mathcal A$.
 
 The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\alpha$ defined by $(\forall x)x\geq0\rightarrow(\exists y)y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\alpha$ and $(\mathbb Q;+,\cdot,0,1)\not\models\alpha$.
 
@@ -617,7 +617,7 @@ To get an idea of how this should work, let $\mathcal A$ be the structure $(\mat
 
 The first step in this process should be to deal with the term $x^2$. The definition should understand that $x^2$ evaluates to $9$ when $x\mapsto 3$, and $x^2$ evaluates to $16$ when $x\mapsto 4$. We now introduce notation for evaluating the terms and define how it works in general.
 
-**Definition** Let $\mathcal L$ be a language of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function whose domain includes the variables of $\tau$ and whose codomain is $A$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function whose domain includes the variables of $\tau$ and whose codomain is $A$. Then:
 
 * If $x$ is a variable of $\tau$, define $\mathrm{val}^{\mathcal A}(x)[s]$ to be $s(x)$
 * If $c$ is a constant symbol of $\tau$, define $\mathrm{val}^{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
@@ -635,7 +635,7 @@ $$\begin{aligned}
 
 We next define satisfaction for atomic formulas.
 
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be an atomic formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be an atomic formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
 * If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi[s]$ if and only if $\mathrm{val}^{\mathcal A}(\tau_1)[s]=\mathrm{val}^{\mathcal A}(\tau_2)[s]$.
 * If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi$ if and only if $P^{\mathcal A}=T$.
@@ -645,7 +645,7 @@ Note that in this definition the equality relation is treated specially. This gu
 
 We finally define satisfaction for general formulas.
 
-**Definition** Let $\mathcal L$ be a language of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be a well-formed formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be a well-formed formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
 * If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\not\models\alpha[s]$.
 * If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
@@ -659,7 +659,7 @@ Observe that if $\sigma$ is a sentence, then no substitution function $s$ is nee
 
 We often apply the satisfaction relation to a set of sentences.
 
-**Definition** If $\mathcal L$ is a language of first order logic, then an *$\mathcal L$-theory* is any set of $\mathcal L$-sentences.
+**Definition** If $\mathcal L$ is a signature of first order logic, then an *$\mathcal L$-theory* is any set of $\mathcal L$-sentences.
 
 **Example** Let $\mathcal L$ consist of one binary function symbol $\cdot$, and let $T$ consist of the following two sentences:
 > * $(\forall x)(\forall y)(\forall z)(x\cdot y)\cdot z=x\cdot(y\cdot z)$
@@ -688,7 +688,7 @@ With the concept of first order satisfaction in hand, we can now define several 
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
 * A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
-In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a language $\mathcal L=\{P_1,\ldots,P_n\}$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
+In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a signature $\mathcal L=\{P_1,\ldots,P_n\}$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
 
 More generally, we can start with a propositional tautology $\alpha$, and replace each propositional variable symbol with any first order sentence, and the result will be a semantically valid sentence. For example $((\forall x)(\forall y)x^2<y)\vee\neg((\forall x)(\forall y)x^2<y)$ is a valid sentence because it is of the *form* $P\vee\neg P$.
 
