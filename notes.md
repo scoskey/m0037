@@ -700,29 +700,31 @@ Finally we give examples of consistent and inconsistent theories. The theory of 
 
 #### First order deductions
 
-Since we have defined semantic implication using satisfaction, you may expect that we will next define syntactic implication using deductions. This means it's time to define deductions or proofs in first order logic.
+Since we have defined semantic implication using satisfaction, you may expect that we will next define syntactic implication using deductions. This means it's time to define deductions or proofs in first order logic. The first order deductions are similar in spirit to the propositional deductions, with the only difference being that the propositional tautologies are replaced by a longer list of valid sentence templates.
 
-An informal proof is an explanation. A formal proof is a sequence of sentences ending with a desired statement. In order to be a correct proof, it must be possible to justify each of the statements in the sequence in one of several ways.
+<!-- An informal proof is an explanation. A formal proof is a sequence of sentences ending with a desired statement. In order to be a correct proof, it must be possible to justify each of the statements in the sequence in one of several ways. -->
 
-The most obvious way to justify a statement is when it is something we are assuming (an axiom). The next most obvious way is if it is logically apparent, such as a tautology. A somewhat more meaningful step of justification is *modus ponens*, which says that if $\alpha$ is true and $\alpha\to\beta$ is true then $\beta$ is true. 
+<!-- The most obvious way to justify a statement is when it is something we are assuming (an axiom). The next most obvious way is if it is logically apparent, such as a tautology. A somewhat more meaningful step of justification is *modus ponens*, which says that if $\alpha$ is true and $\alpha\to\beta$ is true then $\beta$ is true.  -->
 
 **Definition** Let $T$ be a theory, and let $\sigma$ be a sentence. We define $T\vdash\sigma$, read *syntactically implies* $\sigma$, if there exists a sequence of sentences $\sigma_1,\ldots,\sigma_n$ such that $\sigma_n$ is $\sigma$, and for every $i\leq n$ at least one of the following is true:
 
 > (a) $\sigma_i$ is a hypothesis, that is, an element of $T$  
-> (b) $\sigma_i$ is an instance of a logical axiom (described below)  
+> (b) $\sigma_i$ is an instance of a deductive axiom (described below)  
 > (c) $\sigma_i$ follows from two of the previous sentences in $\sigma_1,\ldots,\sigma_{i-1}$ by modus ponens
 
-Now we must say what it means for a sentence to be a logical axiom. Given our discussion of valid sentences, it may seem natural to define the logical axioms to be the valid sentences. However this has some disadvantages, since it can be difficult to tell whether a given sentence is valid. Instead we define the logical axioms to be a sufficiently powerful but still easy-to-describe subset of the valid sentences.
+Next we must state what it means for a sentence to be a deductive axiom. Given our discussion of valid sentences, it might seem natural to allow the deductive axioms to include all the valid sentences. However this has some disadvantages, since it can be difficult to know whether a given sentence is valid or not. Instead we define the deductive axioms to be a selection of the valid sentences which is simultaneously powerful and simple to describe explicitly.
 
-**Definition** A sentence $\sigma$ is a *logical axiom* if it is of one of the following types:
+**Definition** A sentence $\sigma$ is a *logical axiom* if it is of one of the following types, plus any number of universal quantifiers at the front.
 
-* Propositional tautologies
-* Universal instantiation (UI): $\forall x\phi(x)\to\phi(\tau)$, for $\tau$ a term without $x$
-* Existential generalization (EG): $\phi(\tau)\to\exists x\phi(x)$, for $\tau$ a term without $x$
-* Equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\to x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and the analog for functon and relation symbols of higher arity
+* A propositional tautology
+* Universal instantiation (UI): $\forall x\phi(x)\rightarrow\phi(\tau)$, where $x$ does not occur in $\tau$
+* Existential generalization (EG): $\phi(\tau)\to\exists x\phi(x)$, where $x$ does not occur in $\tau$
+* Properties of equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\rightarrow x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and the same for symbols of higher arity
 * Quantifier duality: $\neg\forall x\phi\leftrightarrow \exists x\neg\phi$
 * Quantifier distribution: $\forall x(\phi\to\psi)\to(\forall x\phi\to\forall x\psi)$
-* Extra quantifier: $\phi\to\forall x\phi$ (where $x$ is not a free variable of $\phi$)
+* Extra quantifier: $\phi\to\forall x\phi$, where $x$ does not occur free in $\phi$
+
+To illustrate the need for additional universal quantifiers sometimes, consider the following formula: $(\forall x\exists y x\cdot y=z)\rightarrow(\exists y 5\cdot y=z)$. This looks like a formula of type UI, but it isn't a sentence. The definition then says that the following is a sentence of type UI: $\forall z((\forall x\exists y x\cdot y=z)\rightarrow(\exists y 5\cdot y=z))$.
 
 It is easy to see that each of these logical axioms is a valid sentence. While there are vastly more valid sentences not included in the list, we will eventually show that they are all consequences of the ones in the list! Indeed, the list of axioms was selected with this result in mind.
 
@@ -804,11 +806,11 @@ The BIG IDEA is to build the model using the terms of the language. In order to 
 
 This example worked smoothly, but we should wonder what we would do if the constant symbol $1$ was not present in the language. We can make a theory in this language that is equivalent to $T$ by defining $1$ as the least natural number greater than $0$. But this language doesn't have any interesting terms. In general when building a model of $T$ we will use the terms of an expanded language where constant symbols have been added for each possible definition.
 
-This idea is called a Henkin construction. In order to begin, we first make a structure from terms.
+This idea is called a *Henkin construction*. In order to begin, we first make a structure from terms.
 
 **Definition** Let $T$ be a theory. The structure $\mathcal H_0=\mathcal H_0(T)$ is defined as follows.
 
-* The domain of $\mathcal H_0$ consists of the terms of $\mathcal L$ with no  variables.
+* The universe of $\mathcal H_0$ consists of the terms of $\mathcal L$ with no  variables.
 * If $f$ is a function symbol, then $f^{\mathcal H_0}\tau_1\cdots\tau_n$ is defined to be the term $f\tau_1\cdots\tau_n$.
 * If $R$ is a relation symbol, then $R^{\mathcal H_0}\tau_1\cdots\tau_n$ is defined to be true if and only if $T\vdash R\tau_1\cdots\tau_n$.
 
