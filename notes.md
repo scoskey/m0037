@@ -772,7 +772,7 @@ In the next result, the UG rule is for proofs that end "... since $c$ was arbitr
 * (UG) If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$.
 * (EI) If $T\cup\set{\phi(c)}\vdash\alpha$, then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
-The proof of the theorem is tedious but not difficult, we refer the reader to one of our references.
+The proof of the theorem is tedious but not conceptually difficult, we invite you to find it in a reference such as Kunen's book.
 
 **Example** We will show that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
 
@@ -784,23 +784,23 @@ The proof of the theorem is tedious but not difficult, we refer the reader to on
     g. $\forall y P(y)$ (UG)  
 2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ (Deduction, 1)
 
-### 6. Compactness and completeness
+### 6. Completeness and compactness
 
 Recall that we have proved the Soundness Theorem, which states that any syntactic consequence of $T$ is also a semantic consequence of $T$, that is, if $T\vdash\sigma$ then $T\models\sigma$. In this section we will prove the converse.
 
 **Theorem** (Completeness Theorem, version I) If $T\models\sigma$ then $T\vdash\sigma$.
 
-We will actually prove the completeness theorem in another form. Recall that a theory $T$ is semantically consistent if there is a model of $T$. Recall also that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$.
+We will actually prove the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
 
-**Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
+**Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ is semantically consistent.
 
 To see the two statements are equivalent, first suppose that version I is true and let $T$ be a syntactically consistent theory. If $T$ has no models, then $T\models\sigma\wedge\neg\sigma$ is vacuously true, hence $T\vdash\sigma\wedge\neg\sigma$, a contradiction.
 
 Conversely suppose that version II is true and let $T\models\sigma$. Then there is no model of $T\cup\set{\neg\sigma}$, so $T\cup\set{\neg\sigma}$ is syntactically inconsistent. From our proposition on proofs by contradiction, we conclude that $T\vdash\sigma$.
 
-Thus proving the completeness theorem is really about building models. If $T$ is reasonable in the sense that it doesn't lead us to a contradiction, then it should be possible to build a universe in which $T$ is true. This sounds like a somewhat tall order!
+Thus, proving the completeness theorem is really about building a model. If $T$ is reasonable in the sense that we can't use the sentences of $T$ to deduce a contradiction, then it should be possible to *construct* a model of $T$, that is, a universe in which the sentences of $T$ are true.
 
-The BIG IDEA is to build the model using the terms of the language. In order to illustrate:
+Maybe this makes some intuitive sense to you, but it should also sound like a difficult request. How will we begin to build the model of $T$? The BIG IDEA is to build the model using the terms of the language. In order to illustrate:
 
 **Example** Let $\mathcal L=\set{+,\times,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, and so on, pretty good substitutes for the actual natural numbers! Of course there are many other terms such as $1+0+0+1$, but our theory knows that this one is really equivalent to $1+1$. In other words, there is an equivalence relation on terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
 
