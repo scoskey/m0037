@@ -14,7 +14,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 [Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
 - [4. Syntax and theories](#4-syntax-and-theories)
 - [5. Semantics, structures, and satisfaction](#5-semantics-structures-and-satisfaction)
-- [6. Compactness and completeness](#6-compactness-and-completeness)
+- [6. Compactness and completeness](#6-completeness-and-compactness)
 - [7. Applications of compactness, more about theories](#7-applications-of-compactness-more-about-theories)
 
 [Part III: Computability theory and incompleteness](#part-iii-computability-theory-and-incompleteness)
@@ -720,41 +720,29 @@ Next we must state what it means for a sentence to be a deductive axiom. Given o
 * Universal instantiation (UI): $\forall x\phi(x)\rightarrow\phi(\tau)$, where $x$ does not occur in $\tau$
 * Existential generalization (EG): $\phi(\tau)\to\exists x\phi(x)$, where $x$ does not occur in $\tau$
 * Properties of equality: $\forall x\forall y\forall z (x=x)\wedge(x=y\leftrightarrow y=x)\wedge(x=y\wedge y=z\rightarrow x=z)$, and $\forall x\forall y x=y\to f(x)=f(y)$, and $\forall x\forall y x=y\to R(x)\leftrightarrow R(y)$, and the same for symbols of higher arity
-* Quantifier duality: $\neg\forall x\phi\leftrightarrow \exists x\neg\phi$
+* Quantifier duality: $\forall x\neg\phi\leftrightarrow \neg\exists x\phi$
 * Quantifier distribution: $\forall x(\phi\to\psi)\to(\forall x\phi\to\forall x\psi)$
 * Extra quantifier: $\phi\to\forall x\phi$, where $x$ does not occur free in $\phi$
 
-To illustrate the need for additional universal quantifiers sometimes, consider the following formula: $(\forall x\exists y x\cdot y=z)\rightarrow(\exists y 5\cdot y=z)$. This looks like a formula of type UI, but it isn't a sentence. The definition then says that the following is a sentence of type UI: $\forall z((\forall x\exists y x\cdot y=z)\rightarrow(\exists y 5\cdot y=z))$.
+To illustrate the need for additional universal quantifiers sometimes, consider the following formula: $((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z)$. This looks like a formula of type UI, but it isn't a sentence. The definition then says that the following is a sentence of type UI: $(\forall z)(((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z))$.
 
 It is easy to see that each of these logical axioms is a valid sentence. While there are vastly more valid sentences not included in the list, we will eventually show that they are all consequences of the ones in the list! Indeed, the list of axioms was selected with this result in mind.
 
-**Example** Let $T=\emptyset$ and let $\sigma$ be the sentence $\forall x\exists y x=y$. We will show that $T\vdash\sigma$. 
-
-1. $\forall x x=x$ (Equality)
-2. $\forall x x=x\to \exists y x=y$ (EG)
-3. $[\forall x x=x\to \exists y x=y]\to [\forall x x=x\to \forall x\exists y x=y]$ (Quantifier distribution)
-4. $\forall x x=x\to \forall x\exists y x=y$ (Modus ponens 2,3)
-5. $\forall x\exists y x=y$ (Modus ponens 1,4)
-
-Recall we defined semantic validity, implication, and consistency using the concept of satisfaction. We now define the syntactic analogues of these using the concept of deduction.
+Recall we defined the trio of semantic validity, semantic implication, and semantic consistency using the concept of satisfaction. We have just defined syntactic implication using deductions, and the following completes the syntactic trio of concepts.
 
 **Definition**
 * A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$
-* A theory $T$ is *syntactically consistent* if $T\not\vdash \alpha\wedge\neg\alpha$. (Any negated of a tautology may be used as a generic falsehood.)
+* A theory $T$ is *syntactically consistent* if $T\not\vdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
 
-For example, let $T$ be the theory of groups and let $\sigma$ be the sentence $(\forall x,y,z)xy=xz\rightarrow y=z$. Then $\sigma$ is something which is proved at the start of any group theory textbook. This means that $T\vdash\sigma$.
+**Example** Let $\sigma$ be the sentence $(\forall x)(\exists y)x=y$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. 
 
-The next theorem states that anything we can prove is true. That is, it states that our concept of proof is *sound*.
+1. $(\forall x)x=x$ (Equality)
+2. $(\forall x)(x=x\to (\exists y)x=y)$ (EG)
+3. $[(\forall x)(x=x\to (\exists y)x=y)]\to [((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)]$ (Quantifier distribution)
+4. $((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)$ (Modus ponens 2,3)
+5. $(\forall x)(\exists y)x=y$ (Modus ponens 1,4)
 
-**Theorem** (Soundness) If $T\vdash\sigma$ then $T\models\sigma$.
-
-*Proof*: Assume that $\sigma_1,\ldots,\sigma_n$ is a proof from $T$ of $\sigma$. Assume that $\mathcal A\models T$. We will show that for all $i$, we have $\mathcal A\models\sigma_i$. For the base case $i=1$, we know that $\phi_1$ is either in $T$ or a logical axiom. In either case $\mathcal A\models\sigma_1$. Next assume inductively that $\mathcal A\models\sigma_j$ for all $j<i$. If $\sigma_i$ is in $T$ or a logical axiom we are done. Otherwise there is $j$ such that $\mathcal A\models\sigma_j$ and $\mathcal A\models \sigma_j\to\sigma_i$. By definition of $\models$ for $\to$, we must have $\mathcal A\models\sigma_i$. This completes the proof because now we know $\mathcal A\models\sigma_n$ which is $\sigma$. $\blacksquare$
-
-The completeness theorem is the converse of the soundness theorem. Thus it says that everything that is true can be proved. We will prove the completeness theorem in the next section.
-
-The definition of proof that we have given is of theoretical value, but not of great practical value. It can be very difficult to take substantial mathematical results and formalize them in this system. In the rest of the section we mention a few tactics for making the work of finding proofs at least somewhat more accessible.
-
-One common tactic in mathematics is to prove a lemma and use it as a step in a theorem. The next result makes this easy to do.
+The definition of deduction that we have given is of theoretical value, but not of great practical value. It can be very difficult to take substantial mathematical results and formalize them in this system. In the rest of the section we mention a few tactics for making the work of finding proofs at least somewhat more accessible.
 
 **Theorem** (Deduction theorem) $T\vdash\alpha\to\beta$ if and only if $T\cup\set{\alpha}\vdash\beta$.
 
@@ -762,21 +750,19 @@ One common tactic in mathematics is to prove a lemma and use it as a step in a t
 
 As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction. $\blacksquare$
 
-**Theorem** (Proofs by contradiction) If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then $T\vdash\sigma$.
+**Theorem** (Proofs by contradiction) If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then $T\vdash\alpha$.
 
-*Proof*: If $T\cup\set{\neg\sigma}\vdash\alpha\wedge\neg\alpha$, then using tautologies we have $T\cup\set{\neg\sigma}\vdash\sigma$. By the deduction theorem, $T\vdash \neg\sigma\to\sigma$. By a tautology, $T\vdash\sigma\vee\sigma$ and therefore $T\vdash\sigma$. $\blacksquare$
-
-In the next result, the UG rule is for proofs that end "... since $c$ was arbitrary, the result holds for all values". The EI rule is for proofs that begin "Since we know one exists, fix a constant $c$ with this property".
+*Proof*: If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then using propositional tautologies we have $T\cup\{\neg\alpha\}\vdash\alpha$. By the deduction theorem, $T\vdash\neg\alpha\rightarrow\alpha$. By a tautology, $T\vdash\alpha\vee\alpha$ and therefore $T\vdash\alpha$. $\blacksquare$
 
 **Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$.
 * (UG) If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$.
 * (EI) If $T\cup\set{\phi(c)}\vdash\alpha$, then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
-The proof of the theorem is tedious but not conceptually difficult, we invite you to find it in a reference such as Kunen's book.
+The UG rule is for proofs that end "... since $c$ was arbitrary, the result holds for all values". The EI rule is for proofs that begin "Since we know one exists, fix a constant $c$ with this property". The proof of the theorem is tedious but not conceptually difficult, we invite you to find it in a reference such as Kunen's book.
 
-**Example** We will show that $T=\emptyset$ proves the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$.
+**Example** Let $\sigma$ be the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. However rather than providing an explicit deduction, we will mix deduction steps with the results above to show that a deduction exists.
 
-1. We will prove the lemma $\forall x P(x)\wedge Q(x)$ proves $\forall y P(y)$.  
+1. We first prove that $\forall x P(x)\wedge Q(x)\vdash\forall y P(y)$.  
     a. $\forall x P(x)\wedge Q(x)$ (Given)  
     c. $P(c)\wedge Q(c)$ (UI)  
     d. $P(c)\wedge Q(c)\to P(c)$ (Tautology)  
@@ -786,17 +772,17 @@ The proof of the theorem is tedious but not conceptually difficult, we invite yo
 
 ### 6. Completeness and compactness
 
-Recall that we have proved the Soundness Theorem, which states that any syntactic consequence of $T$ is also a semantic consequence of $T$, that is, if $T\vdash\sigma$ then $T\models\sigma$. In this section we will prove the converse.
+Recall from propositional logic the soundness and completeness theorems, which linked semantic implication and syntactic implication. We now present the analogous result for first order logic.
 
-**Theorem** (Completeness Theorem, version I) If $T\models\sigma$ then $T\vdash\sigma$.
+**Theorem** (Soundness and completeness theorems, version I) Let $T$ be a theory and let $\sigma$ be a sentence. Then $T\models\sigma$ if and only if $T\vdash\sigma$.
 
-We will actually prove the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
+The right-to-left implication is the soundness theorem and says anything we can deduce is true, or that deductions are *sound*. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The right-to-left implication is the completeness theorem.
 
-**Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ is semantically consistent.
+We will actually study the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
 
-To see the two statements are equivalent, first suppose that version I is true and let $T$ be a syntactically consistent theory. If $T$ has no models, then $T\models\sigma\wedge\neg\sigma$ is vacuously true, hence $T\vdash\sigma\wedge\neg\sigma$, a contradiction.
+**Theorem** (Soundness and completeness theorems, version II) $T$ is syntactically consistent if and only if $T$ is semantically consistent.
 
-Conversely suppose that version II is true and let $T\models\sigma$. Then there is no model of $T\cup\set{\neg\sigma}$, so $T\cup\set{\neg\sigma}$ is syntactically inconsistent. From our proposition on proofs by contradiction, we conclude that $T\vdash\sigma$.
+To see version II implies version I, assume version II is true. Then $T\models\sigma$ if and only if there does not exist a model of $T\cup\{\neg\sigma\}$, which means $T\cup\{\neg\sigma\}$ is semantically inconsistent, which is true if and only if $T\cup\{\neg\sigma\}$ is syntactically inconsistent, which is equivalent to $T\vdash\sigma$ (see the proposition on proofs by contradiction). Thus version I is true. We invite the reader to prove that version I implies version II in a similar fashion.
 
 Thus, proving the completeness theorem is really about building a model. If $T$ is reasonable in the sense that we can't use the sentences of $T$ to deduce a contradiction, then it should be possible to *construct* a model of $T$, that is, a universe in which the sentences of $T$ are true.
 
@@ -909,13 +895,13 @@ The completeness theorem has many consequences, one of which is to greatly simpl
 * Semantic implication is equivalent to syntactic implication.
 * Semantic consistency is equivalent to syntactic consistency.
 
-As a result we rarely need to discern between the semantic and syntactic notions. Another simple but powerful consequence is the following.
+As a result we rarely need to discern between the semantic and syntactic notions. Another simple but powerful consequence is the compactness theorem for first order logic.
 
-**Theorem** (Compactness Theorem) If every finite subset of $T$ has a model, then $T$ has a model.
+**Theorem** (Compactness theorem) If every finite subset of $T$ has a model, then $T$ has a model.
 
-*Proof*: It suffices to show that if every finite subset of $T$ is syntactically consistent, then $T$ is syntactically consistent. Taking the contrapositive, we must show that if $T$ is syntactically inconsistent then some finite subset of $T$ is syntactically inconsistent. This is clear from the fact that proofs are finite: if $T$ proves a contradictory sentence $\alpha\wedge\neg\alpha$, then the proof used just finitely many sentences of $T$, so there exists a finite subset $T_0\subset T$ that proves a $\alpha\wedge\neg\alpha$ too. $\blacksquare$
+We invite the reader to verify that similarly to the propositional completeness and compactness theorems, the first order completeness and compactness theorems are equivalent to each other in the sense that there exist short proofs in both directions.
 
-The compactness theorem is a powerful tool for generalizing proofs about finite objects into proofs about infinite objects.
+As we have seen, the propositional compactness theorem is useful in taking statements about finite objects which are arbitrarily large to statements about infinite objects. The first order compactness theorem has a similar set of applications.
 
 **Corollary** Suppose $T$ has arbitrarily large finite models. Then $T$ has infinite models.
 
