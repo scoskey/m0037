@@ -702,10 +702,6 @@ Finally we give examples of consistent and inconsistent theories. The theory of 
 
 Since we have defined semantic implication using satisfaction, you may expect that we will next define syntactic implication using deductions. This means it's time to define deductions or proofs in first order logic. The first order deductions are similar in spirit to the propositional deductions, with the only difference being that the propositional tautologies are replaced by a longer list of valid sentence templates.
 
-<!-- An informal proof is an explanation. A formal proof is a sequence of sentences ending with a desired statement. In order to be a correct proof, it must be possible to justify each of the statements in the sequence in one of several ways. -->
-
-<!-- The most obvious way to justify a statement is when it is something we are assuming (an axiom). The next most obvious way is if it is logically apparent, such as a tautology. A somewhat more meaningful step of justification is *modus ponens*, which says that if $\alpha$ is true and $\alpha\to\beta$ is true then $\beta$ is true.  -->
-
 **Definition** Let $T$ be a theory, and let $\sigma$ be a sentence. We define $T\vdash\sigma$, read *syntactically implies* $\sigma$, if there exists a sequence of sentences $\sigma_1,\ldots,\sigma_n$ such that $\sigma_n$ is $\sigma$, and for every $i\leq n$ at least one of the following is true:
 
 > (a) $\sigma_i$ is a hypothesis, that is, an element of $T$  
@@ -714,7 +710,7 @@ Since we have defined semantic implication using satisfaction, you may expect th
 
 Next we must state what it means for a sentence to be a deductive axiom. Given our discussion of valid sentences, it might seem natural to allow the deductive axioms to include all the valid sentences. However this has some disadvantages, since it can be difficult to know whether a given sentence is valid or not. Instead we define the deductive axioms to be a selection of the valid sentences which is simultaneously powerful and simple to describe explicitly.
 
-**Definition** A sentence $\sigma$ is a *logical axiom* if it is of one of the following types, plus any number of universal quantifiers at the front.
+**Definition** A sentence $\sigma$ is a *logical axiom* if it is of one of the following types, plus universal quantifiers at the front.
 
 * A propositional tautology
 * Universal instantiation (UI): $\forall x\phi(x)\rightarrow\phi(\tau)$, where $x$ does not occur in $\tau$
@@ -724,7 +720,7 @@ Next we must state what it means for a sentence to be a deductive axiom. Given o
 * Quantifier distribution: $\forall x(\phi\to\psi)\to(\forall x\phi\to\forall x\psi)$
 * Extra quantifier: $\phi\to\forall x\phi$, where $x$ does not occur free in $\phi$
 
-To illustrate the need for additional universal quantifiers sometimes, consider the following formula: $((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z)$. This looks like a formula of type UI, but it isn't a sentence. The definition then says that the following is a sentence of type UI: $(\forall z)(((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z))$.
+To explain the statement about additional universal quantifiers at the front, consider the following formula: $((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z)$. This looks like a formula of type UI, but it isn't a sentence. The definition then says that the following is a sentence of type UI: $(\forall z)(((\forall x)(\exists y) x\cdot y=z)\rightarrow((\exists y) 5\cdot y=z))$.
 
 It is easy to see that each of these logical axioms is a valid sentence. While there are vastly more valid sentences not included in the list, we will eventually show that they are all consequences of the ones in the list! Indeed, the list of axioms was selected with this result in mind.
 
@@ -802,13 +798,13 @@ This idea is called a *Henkin construction*. In order to begin, we first make a 
 
 This is a good start, but we have seen this model may have several problems. First, it doesn't identify terms that the theory knows are equivalent. Second, if there aren't any constant symbols in the language, this model will be empty. And third, it still might not be a model of $T$.
 
-**Definition** Let $T$ be a theory. The structure $\mathcal H=\mathcal H(T)$ is defined as follows.
+**Definition** Let $T$ be a theory. The *Henkin/Herbrand structure* $\mathcal H=\mathcal H(T)$ is defined as follows.
 
 * The domain of $\mathcal H$ consists of the equivalence classes $[\tau]$ of elements of $\mathcal H_0$ with respect to the equivalence relation defined by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
 * If $f$ is a function symbol, then $f^{\mathcal H}[\tau_1]\cdots[\tau_n]$ is defined to be the equivalence class $[f\tau_1\cdots\tau_n]$.
 * If $R$ is a relation symbol, then $R^{\mathcal H}[\tau_1]\cdots[\tau_n]$ is defined to be true if and only if $T\vdash R\tau_1\cdots\tau_n$.
 
-One must check that this definition is well-defined, that is, the function values and relation values are independent of the equivalence class representatives. This can be done using the logical proof axioms pertaining to equality.
+We invite the reader to check that this definition is well-defined, that is, the function values and relation values are independent of the equivalence class representatives. This will use the logical proof axioms about equality.
 
 **Lemma** If $\sigma$ is an atomic sentence, then $\mathcal H\models\sigma$ if and only if $T\vdash\sigma$.
 
@@ -816,7 +812,7 @@ One must check that this definition is well-defined, that is, the function value
 
 We are clearly on our way to obtaining a model of $T$. But quantifiers are still a big problem.
 
-**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of $\omega$. Then $\mathcal H$ has domain $\set{a,b}$ but the model does not decide whether $a<b$ or $b<a$. Thus the theory $T$ includes trichotomy but the model $\mathcal H$ does not satisfy trichotomy.
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of $\mathbb N$. Then $\mathcal H$ has domain $\set{a,b}$ but the model does not decide whether $a<b$ or $b<a$. Thus the theory $T$ includes trichotomy but the model $\mathcal H$ does not satisfy trichotomy.
 
 To fix this problem, we will work only with complete theories $T$.
 
@@ -830,7 +826,7 @@ By Zorn's lemma, there exists a maximal consistent theory $\bar T$. such that $T
 
 We remark that if $T$ is a complete theory and $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Thus if we revisit the above example and complete $T$ before building $\mathcal H$, we will either have $a<b$ or $b\leq a$, whichever Zorn's lemma picks for us.
 
-But there is still one big issue left to address. Continuing the above example, let $T$ be the theory of $\omega$ together with the sentences $a$ has three predecessors and $b$ has four. Then our model $\mathcal H$ will satisfy $a<b$, but it still will not satisfy the sentence $\exists x x<a$.
+But there is still one big issue left to address. Continuing the above example, let $T$ be the theory of $\mathbb N$ together with sentences that say: $a$ has three predecessors, $b$ has four predecessors. Then our model $\mathcal H$ will satisfy $a<b$, but it still will not satisfy the sentence $\exists x x<a$.
 
 Generally speaking, a given language may not have enough terms to make $\mathcal H$ a real model of $T$. In order to fix this, we need to add new terms, constant symbols, that witness existential formulas.
 
@@ -846,13 +842,7 @@ Given a syntactically constistent theory, we first extend it to a theory with wi
 
 We must prove that $\mathcal H$ is a model of $T^\ast$ and hence of $T$. This is done by induction on the complexity of the sentence (not the length). We have already addressed atomic sentences. The difficult part is the $\exists$ quantifier step, but now we can use the witnessing property in this part!
 
-#### Completeness and its consequences
-
-We still owe the proof of the lemma.
-
-**Lemma** If $T$ is a syntactically consistent theory, then there exists a syntactially consistent theory $T'$ in an expanded language such that $T\subset T'$ and $T'$ has witnessing terms.
-
-*Proof*: We first show how to add a witnessing term for a single formula $\exists x\phi(x)$. To do this, we let $\mathcal L'=\mathcal L\cup\set{c}$, and let $T'=T\cup\set{\exists x\phi(x)\to\phi(c)}$.
+*Proof of the Lemma*: We first show how to add a witnessing term for a single formula $\exists x\phi(x)$. To do this, we let $\mathcal L'=\mathcal L\cup\set{c}$, and let $T'=T\cup\set{\exists x\phi(x)\to\phi(c)}$.
 
 We claim that $T'$ is syntactically consitent. If it isn't, then there is a proof from $T'$ of a contradictory sentence $\alpha\wedge\neg\alpha$. By the proof-by-contradiction theorem, there is a proof from $T$ of $\neg(\exists x\phi(x)\to\phi(c))$. Using a tautology, there is a proof from $T$ of $\exists x\phi(x)$ and a proof from $T$ of $\neg\phi(c)$. By UG, there is a proof from $T$ of $\forall x\neg\phi(x)$. This is clearly a contradiction, establishing the claim.
 
@@ -888,6 +878,8 @@ $$\begin{aligned}
 This completes the proof. $\blacksquare$.
 
 We remark that the :) follows from the definition of the Henkin/Herbrand model. Since we don't have control over the length of the term $\tau$, we had to do our induction over the complexity of $\sigma$ instead of the length of $\sigma$.
+
+#### Compactness
 
 The completeness theorem has many consequences, one of which is to greatly simplify our terminology.
 
