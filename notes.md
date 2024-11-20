@@ -152,7 +152,7 @@ We leave it to the reader to establish an equivalence between the two statements
 
 The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to\set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
 
-**Theorem** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring using $n$ colors. Then $G$ has a proper coloring using $n$ colors. In particular, every planar graph (finite or infinite) has a proper coloring using $4$ colors.
+**Corollary** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring with $n$ colors. Then $G$ has a proper coloring with $n$ colors.
 
 *Proof*: They key is that proper colorability can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_{v,i}$, where $v$ ranges over the vertices $V$ and $i\in 1,\ldots,n$. We then let $\Sigma$ consist of the following axioms:
 
@@ -160,11 +160,13 @@ The compactness theorem has many interesting applications, to give a taste of th
 > * $\neg(P_{v,i}\wedge P_{v,j})$ for each $v\in V$ and each $i.j$ such that $i\neq j$
 > * $\neg(P_{v,i}\wedge P_{w,i})$ for each $v,w\in V$ such that $(v,w)\in E$ and each $i$
 
-The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a proper coloring $\chi$ using $n$ colors.
+The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a proper coloring $\chi$ with $n$ colors.
 
-We claim $\Sigma$ is finitely satisfiable. To see this let $\Sigma_0\subset\Sigma$ be a finite subset. Note that since $\Sigma_0$ is finite and each sentence is finite in length, there exists a finite susbest $V_0\subset V$ of vertices appearing in the subscript of a propositional symbol in $\Sigma_0$. If we let $G_0$ be the subgraph of $G$ induced by $V_0$, then by hypothesis there exists a proper coloring $\chi_0$ of $G_0$ using $n$ colors. As observed in the previous paragraph, this implies that $\Sigma_0$ is consistent.
+We claim $\Sigma$ is finitely satisfiable. To see this let $\Sigma_0\subset\Sigma$ be a finite subset. Note that since $\Sigma_0$ is finite and each sentence is finite in length, there exists a finite susbest $V_0\subset V$ of vertices appearing in the subscript of a propositional symbol in $\Sigma_0$. If we let $G_0$ be the subgraph of $G$ induced by $V_0$, then by hypothesis there exists a proper coloring $\chi_0$ of $G_0$ with $n$ colors. As observed in the previous paragraph, this implies that $\Sigma_0$ is consistent.
 
-Therefore by the compactness theorem, $\Sigma$ is satisfiable. Again, as we have seen, this implies there exists a proper coloring of $G$ using $n$ colors. $\blacksquare$
+Therefore by the compactness theorem, $\Sigma$ is satisfiable. Again, as we have seen, this implies there exists a proper coloring of $G$ with $n$ colors. $\blacksquare$
+
+This corollary itself has several important consequences. Recall that a bipartite graph is just another word for a graph with a proper coloring with $2$ colors. Thus if every finite subgraph of $G$ is bipartite, then $G$ is bipartite. Next recall the major theorem that every finite planar graph has a proper coloring with $4$ colors. Thus every planar graph (finite or infinite) has a proper coloring with $4$ colors.
 
 #### Deductions
 
@@ -873,51 +875,54 @@ This completes the proof. $\blacksquare$.
 
 We remark that the :) follows from the definition of the Henkin structure. Since we don't have control over the length of the term $\tau$, we had to do our induction over the complexity of $\sigma$ instead of the length of $\sigma$.
 
-#### Compactness
-
-The completeness theorem has many consequences, one of which is to greatly simplify our terminology.
+The completeness theorem has many consequences, as we shall soon see. But the most obvious consequence is that it greatly simplifies our terminology:
 
 * Semantic validity is equivalent to syntactic validity.
 * Semantic implication is equivalent to syntactic implication.
 * Semantic consistency is equivalent to syntactic consistency.
 
-As a result we rarely need to discern between the semantic and syntactic notions. Another simple but powerful consequence is the compactness theorem for first order logic.
+As a result we rarely need to discern between the semantic and syntactic notions.
+
+#### Compactness
+
+To further explore the consequences of the completeness theorem, we now introduce the compactness theorem for first order logic.
 
 **Theorem** (Compactness theorem) If every finite subset of $T$ has a model, then $T$ has a model.
 
 We invite the reader to verify that similarly to the propositional completeness and compactness theorems, the first order completeness and compactness theorems are equivalent to each other in the sense that there exist short proofs in both directions.
 
-As we have seen, the propositional compactness theorem is useful in taking statements about finite objects which are arbitrarily large to statements about infinite objects. The first order compactness theorem has a similar set of applications.
+As we have seen, the propositional compactness theorem is useful in taking statements about finite objects which are arbitrarily large to statements about infinite objects. The first order compactness theorem has a similar set of applications. The following corollary was stated in Section 1; here we give a first order version of the same argument.
+
+**Corollary** Let $G$ be a combinatorial graph with adjacency relation $\sim$. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring with $n$ colors. Then $G$ has a proper coloring with $n$ colors.
+
+*Proof*: Let the language $\mathcal L$ consist of a binary relation $\sim$, constant symbols $c_v$ for every $v\in G$, and unary relation symbols $P_1,\ldots,P_n$. Let the theory $T$ consist of the following axioms:
+
+* $c_v\neq c_{v'}$ whenever $v\neq v'$
+* $c_v\sim c_{v'}$ whenever $v\sim v'$
+* $c_v\not\sim c_{v'}$ whenever $v\not\sim v'$
+* $\forall x P_1(x)\vee\cdots\vee P_n(x)$
+* $\forall x \bigwedge_{i\neq j} \neg P_i(x)\wedge P_j(x)$
+* $\forall x\forall y x\sim y\to \bigwedge_i\neg P_i(x)\wedge P_i(y)$
+
+Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subset of $T$, then $T_0$ mentions a certain subset $G_0\subset G$. The induced subgraph corresponding to $G_0$ is bipartite and thus gives rise to a model of $T_0$.
+
+By the compactness theorem, $T$ has a model, $G'$. Observe that $G$ is a subgraph of $G'$ via the function which sends any $v\in G$ to the interpretation of $c_v$ in $G'$. Since $G'$ is bipartite, it follows that $G$ is bipartite. $\blacksquare$
+
+### 7. Applications of compactness, more about theories
+
+We have just seen that the compactness theorem for first order logic has similar applications to the compactness theorem for propositional logic. In this section we begin by exploring some of the more distinctly first order applications of the first order compactness theorem.
 
 **Corollary** Suppose $T$ has arbitrarily large finite models. Then $T$ has infinite models.
 
 *Proof*: Let $\sigma_n$ be the sentence which says that there exist $n$ distinct elements of the universe. That is, $\sigma_n$ says that $\exists x_1\cdots\exists x_n\bigwedge x_i\neq x_j$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\mathbb N}$. Then every finite subset of $T'$ is consistent by our hypothesis. As a consequence $T'$ is consistent. Any model of $T'$ is a model of $T$ and is infinite. $\blacksquare$
 
-This simple idea can also be used to derive the following consequences of compactness. The first is key in the theory of *nonstandard arithmetic*, where one studies models of number theory with infinite elements, and the second fact is key in *nonstandard analysis* where one studies models of analysis with infinitesimal elements.
+This simple idea can also be used to derive many further consequences. The first is key in the theory of *nonstandard arithmetic*, where one studies models of number theory with infinite elements, and the second fact is key in *nonstandard analysis* where one studies models of analysis with infinitesimal elements.
 
 **Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,0,1,<)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
 
 **Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,0,1,<)$. There is a model of $T$ with an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
 
 We invite the reader to fill in the proofs of these results.
-
-### 7. Applications of compactness, more about theories
-
-For the next result, recall that the theory of simple graphs is the theory of a single binary relation $\sim$ which is irreflexive and transitive. Further recall that a graph $G$ is *bipartite* if it can be partitioned into subsets $P,Q$ such that no two vertices of $P$ are adjacent and no two vertices of $Q$ are adjacent. For example, a hexagon is bipartite but a heptagon is not.
-
-**Corollary** Let $G$ be a graph such that every finite subset of $G$ is bipartite. Then $G$ is bipartite.
-
-*Proof*: Let the language $\mathcal L$ consist of $\sim$ together with constant symbols $c_x$ for every $x\in G$ together with unary relation symbols $P$ and $Q$. Let the theory $T$ consist of the following axioms:
-
-* $c_x\neq c_{x'}$ whenever $x\neq x'$
-* $c_x\sim c_{x'}$ whenever $x\sim x'$
-* $c_x\not\sim c_{x'}$ whenever $x\not\sim x'$
-* $P,Q$ is a partition
-* $P,Q$ have no edges within them
-
-Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subset of $T$, then $T_0$ mentions a certain subset $G_0\subset G$. The induced subgraph corresponding to $G_0$ is bipartite and thus gives rise to a model of $T_0$.
-
-By the compactness theorem, $T$ has a model, $G'$. Observe that $G$ is a subgraph of $G'$ via the function which sends any $x\in G$ to the interpretation of $c_x$ in $G'$. Since $G'$ is bipartite, it follows that $G$ is bipartite. $\blacksquare$.
 
 For each theory $T$ there is a corresponding class of models of $T$. We will say that a class $\mathcal C$ of structures is *axiomatizable* if there exists a theory $T$ such that the models of $T$ are precisely the elements of $\mathcal C$. It is natural to ask whether every (reasonable) class of srtuctures is axiomatizable. Our next result says that the answer is no.
 
@@ -931,7 +936,9 @@ Recall that a graph is *connected* if for any two vertices $x,y$, there exists a
 
 *Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\ldots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
 
-Recall we have shown that theories with arbitrarily large finite models have infinite models. It is natural to ask what cardinalities will occur. Our final corollary addresses this question with the most generous possible answer.
+Before beginning the next series of results, we need a brief refresher on cardinality in set theory, which we will present in the lectures.
+
+We have shown that theories with arbitrarily large finite models have infinite models. It is natural to ask what cardinalities will occur. The next result addresses this question with the most generous possible answer.
 
 **Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
 
