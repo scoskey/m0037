@@ -842,13 +842,13 @@ For example consider $\mathbb R$ as a field. If $\phi(x)$ is $\forall y xy=y+y$ 
 
 We claim that $T'$ is syntactically consitent. If it isn't, then there is a proof from $T'$ of a contradictory sentence $\alpha\wedge\neg\alpha$. By the proof-by-contradiction theorem, there is a proof from $T$ of $\neg(\exists x\phi(x)\to\phi(c))$. Using a tautology, there is a proof from $T$ of $\exists x\phi(x)$ and a proof from $T$ of $\neg\phi(c)$. By UG, there is a proof from $T$ of $\forall x\neg\phi(x)$. This is clearly a contradiction, establishing the claim.
 
-Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. Firstlet $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $\mathcal T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup\mathcal T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
+Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. First let $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $\mathcal T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup\mathcal T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
 
 **Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
 
 *Proof*: We apply the lemmas we have proved in sequence. Given $T$, we first extend it to a theory with witnessing terms and then further extend it to a complete theory $T^\ast$ in the expanded language. We then let $\mathcal H$ be the Henkin structure of $T^\ast$. 
 
-We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only if $\mathcal H\models\sigma$, so that $\mathcal H$ really is a model of $T^\ast$. For this we proceed by induction on the *complexity* of $\sigma$. For this we can assume that the only connectives in $\sigma$ are $\wedge,\neg,\exists$ and proceed by indnuction on the number of occurrences of these symbols.
+We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only if $\mathcal H\models\sigma$, so that $\mathcal H$ really is a model of $T^\ast$. For this we proceed by induction on the *complexity* of $\sigma$. For this we can assume that the only connectives in $\sigma$ are $\wedge,\neg,\exists$ and proceed by induction on the number of occurrences of these symbols.
 
 We have already proved the result for atomic sentences $\sigma$ directly from the definition of $\mathcal H$.
 
@@ -936,11 +936,17 @@ Recall that a graph is *connected* if for any two vertices $x,y$, there exists a
 
 *Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\ldots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
 
-Before beginning the next series of results, we need a brief refresher on cardinality in set theory, which we will present in the lectures.
+Before beginning the next series of results, we need a brief refresher on cardinality in set theory. Before starting in on cardinality, first recall that the von Neumann natural numbers $0,1,2,\ldots$ may be followed up by von Neumann ordinal numbers $\omega,\omega+1,\ldots,\omega+\omega,\omega+\omega+1,\ldots$.
 
-We have shown that theories with arbitrarily large finite models have infinite models. It is natural to ask what cardinalities will occur. The next result addresses this question with the most generous possible answer.
+The von Neumann natural numbers have the property that each $n$ is not in bijection with any $m<n$, that is, its cardinality is larger. However $\omega+1$ is in bijection with $\omega$, and so are many more ordinals after it. How long will the sequence of ordinals continue until we reach an ordinal so large that it isn't in bijection with $\omega$? It's unclear but it must happen.
 
-**Lowenheim–Skolem Theorem** Suppose $T$ is a theory in a language $\mathcal L$ and $T$ has an infinite model. Then for any cardinal $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
+We say that an ordinal $\kappa$ is a *cardinal number* if $\kappa$ is not in bijection with any ordinal $\alpha<\kappa$. The cardinal numbers are thus very special ordinals that occur unboundedly but in some sense rarely.
+
+It is not difficult to prove using AC that for any set $A$, there exists an ordinal $\alpha$ such that $\alpha$ is in bijection with $A$. The *cardinality* of $A$ is the least ordinal $\kappa$ that is in bijection with $A$. We sometimes write $|A|=\kappa$. Thus if $A$ is infinite and countable we have $|A|=\omega$. But if $A$ is uncountable then there will be some larger cardinal $\kappa$ such that $|A|=\kappa$.
+
+Returning to theories in logic, we have shown above that theories with arbitrarily large finite models have infinite models. Now it is natural to ask what cardinalities will occur. The next result addresses this question with the most expansive answer possible.
+
+**Lowenheim–Skolem Theorem** Suppose $T$ is an $\mathcal L$-theory, and $T$ has an infinite model. Then for any cardinal $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
 
 *Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $\vert\mathcal L\vert\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin structure $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
 
@@ -952,17 +958,19 @@ The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is c
 
 Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$.
 
-For example, if $\mathcal A$ is any structure then the theory $T=Th(\mathcal A)$ consistening of all sentences $\sigma$ such that $\mathcal A\models\sigma$ is a complete theory. This follows simply from the definition of $\models$. Thus the theory of arithmetic $Th(\mathbb N,+,\times)$ and the theory of analysis $Th(\mathbb R,+,\times)$ are complete theories.
+**Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
 
-In accordance with common practice, we also say that $T$ is complete if the set of logical consequences of $T$ is complete. That is, $T$ is *complete* if it is consistent and for every sentence $\sigma$ either $T\models\sigma$ or $T\not\models\sigma$.
+It follows from the definition of $\models$ that $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of arithmetic $\mathrm{Th}(\mathbb N,+,\times)$ and the theory of real numbers $\mathrm{Th}(\mathbb R,+,\times)$ are complete theories.
+
+In accordance with common practice, we usually say that $T$ is complete if the set of logical consequences of $T$ is complete. That is, $T$ is *complete* if it is consistent and for every sentence $\sigma$ either $T\models\sigma$ or $T\not\models\sigma$.
 
 For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
 
-On the other hand, most theories are not complete. For example the theory of infinite linear orders (is there a last element? consider $(0,1)$ versus $(0,1]$), the theory of infinite abelian groups (are all elements divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$), and set theory (does CH hold?).
+On the other hand, most theories are not complete. For example, if $T$ is theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.)
 
-In these examples, we can find sentences $\sigma$ such that $T\cup\set{\sigma}$ has a model, so $\neg\sigma$ is not a consequence of $T$, and $T\cup\set{\neg\sigma}$ has a model, so $\sigma$ is not a consequence of $T$.
+In these examples, we show $T$ is not complete by finding sentences $\sigma$ such that $T\cup\set{\sigma}$ has a model, so $\neg\sigma$ is not a consequence of $T$, and $T\cup\set{\neg\sigma}$ has a model, so $\sigma$ is not a consequence of $T$.
 
-But how can one show that a given theory $T$ is complete? In general this can be a challenging problem, but in the rest of this section, we will give one relatively easy tool to prove that at theory is complete. We first need several new definitions.
+But how can one show that a given theory $T$ *is* complete? In general this can be a challenging problem, but in the rest of this section, we discuss one relatively easy tool to prove that at theory is complete. We first need several new definitions.
 
 **Definition** Structures $\mathcal A,\mathcal B$ are *isomorphic* if there is a bijection $\phi\colon A\to B$ such that for every function symbol $f$ we have $f^{\mathcal A}(a)=b\iff f^{\mathcal B}(\phi(a))=\phi(b)$ and for every relation symbol $R$ we have $R^{\mathcal A}(a)\iff R^{\mathcal B}(\phi(a))$.
 
