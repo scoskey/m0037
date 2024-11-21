@@ -795,18 +795,18 @@ This idea is called a *Henkin construction* or the *Herbrand construction*, name
 **Definition** Let $T$ be a theory. The structure $\mathcal H_0=\mathcal H_0(T)$ is defined as follows.
 
 * The universe of $\mathcal H_0$ consists of the terms of $\mathcal L$ with no  variables.
-* If $f$ is a function symbol, then $f^{\mathcal H_0}\tau_1\cdots\tau_n$ is defined to be the term $f\tau_1\cdots\tau_n$.
-* If $R$ is a relation symbol, then $R^{\mathcal H_0}\tau_1\cdots\tau_n$ is defined to be true if and only if $T\vdash R\tau_1\cdots\tau_n$.
+* If $f$ is a function symbol, then define $f^{\mathcal H_0}(\tau_1,\ldots,\tau_n)$ to equal the term $f\tau_1\cdots\tau_n$.
+* If $R$ is a relation symbol, then define $(\tau_1\ldots,\tau_n)\in R^{\mathcal H_0}$ if and only if $T\vdash R\tau_1\cdots\tau_n$.
 
 This is a good start, but we have seen this model may have several problems. First, it doesn't identify terms that the theory knows are equivalent. Second, if there aren't any constant symbols in the language, this model will be empty. And third, it still might not be a model of $T$.
 
 **Definition** Let $T$ be a theory. The *Henkin structure* $\mathcal H=\mathcal H(T)$ is defined as follows.
 
 * The domain of $\mathcal H$ consists of the equivalence classes $[\tau]$ of elements of $\mathcal H_0$ with respect to the equivalence relation defined by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
-* If $f$ is a function symbol, then $f^{\mathcal H}[\tau_1]\cdots[\tau_n]$ is defined to be the equivalence class $[f\tau_1\cdots\tau_n]$.
-* If $R$ is a relation symbol, then $R^{\mathcal H}[\tau_1]\cdots[\tau_n]$ is defined to be true if and only if $T\vdash R\tau_1\cdots\tau_n$.
+* If $f$ is a function symbol, then define $f^{\mathcal H}([\tau_1],\ldots,[\tau_n])$ to be the equivalence class $[f\tau_1\cdots\tau_n]$.
+* If $R$ is a relation symbol, then define $([\tau_1],\ldots,[\tau_n])\in R^{\mathcal H}$ if and only if $T\vdash R\tau_1\cdots\tau_n$.
 
-We invite the reader to check that this definition is well-defined, that is, the function values and relation values are independent of the equivalence class representatives. This will use the logical proof axioms about equality. We could equally call $\mathcal H$ the Herbrand structure.
+We invite the reader to check that this definition is well-defined, that is, the function values and relation tuples are independent of the equivalence class representatives. This will use the logical proof axioms about equality. We could equally call $\mathcal H$ the Herbrand structure.
 
 **Lemma** If $\sigma$ is an atomic sentence, then $\mathcal H\models\sigma$ if and only if $T\vdash\sigma$.
 
@@ -814,7 +814,7 @@ We invite the reader to check that this definition is well-defined, that is, the
 
 We are clearly on our way to obtaining a model of $T$. But quantifiers are still a big problem.
 
-**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of $(\mathbb N,<)$ together with $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $<^{\mathcal H}$ is empty. Thus $\mathcal H$ is not a model of $T$, because $T$ includes the trichotomy axiom, and $\mathcal H$ does not satisfy trichtomoy.
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders with no maximum, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $<^{\mathcal H}$ is empty. Thus $\mathcal H$ is not a model of $T$, because $T$ includes the trichotomy axiom, and $\mathcal H$ does not satisfy trichtomoy.
 
 To fix this problem, we will work only with complete theories $T$.
 
@@ -826,9 +826,9 @@ To fix this problem, we will work only with complete theories $T$.
 
 By Zorn's lemma, there exists a maximal consistent theory $\bar T$. such that $T\subset\bar T$. We claim that $\bar T$ is complete. Indeed, if $\sigma\notin\bar T$, then $\bar T\cup\set{\sigma}$ is inconsistent, so by our theorem about proofs by contradiction, $\bar T\vdash\neg\sigma$. Since $\bar T$ is maximal, it follows that $\neg\sigma\in T$. $\blacksquare$
 
-We remark that if $T$ is a complete theory and $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$. Continuing the above example, if we complete $T$, then since $a<b\vee b<a$ is true, we will have either $a<b$ or $b<a$ in $\bar{T}$, whichever one Zorn's lemma picks for us. Thus the model $\mathcal H$ will be a two-element linear order.
+We remark that if $T$ is a complete theory and $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$ (check this!). Continuing the above example, if we complete $T$, then since $a<b\vee b<a$ is true, we will have either $a<b$ or $b<a$ in $\bar{T}$, whichever one Zorn's lemma picks for us. Thus the model $\mathcal H$ will be a two-element linear order.
 
-Does this mean the structure $\mathcal H$ is a model of $T$? The answer is still "no", because the original $T$ included the sentence $\exists x a<x\wedge b<x$, and $\mathcal H$ does not satisfy this sentence. This example has some terms, but still too few terms to force $\mathcal H$ to be a model of $T$.
+Does this mean the structure $\mathcal H$ is a model of $T$? The answer is still "no", because the original $T$ included the sentence $(\exists x) a<x\wedge b<x$, and $\mathcal H$ does not satisfy this sentence. This example has some terms, but still too few terms to force $\mathcal H$ to be a model of $T$.
 
 In order to fix this, we add new terms to the language that witness existential formulas.
 
@@ -840,9 +840,9 @@ For example consider $\mathbb R$ as a field. If $\phi(x)$ is $\forall y xy=y+y$ 
 
 *Proof*: We first show how to add a witnessing term for a single formula $\exists x\phi(x)$. To do this, we let $\mathcal L'=\mathcal L\cup\set{c}$, and let $T'=T\cup\set{\exists x\phi(x)\to\phi(c)}$.
 
-We claim that $T'$ is syntactically consitent. If it isn't, then there is a proof from $T'$ of a contradictory sentence $\alpha\wedge\neg\alpha$. By the proof-by-contradiction theorem, there is a proof from $T$ of $\neg(\exists x\phi(x)\to\phi(c))$. Using a tautology, there is a proof from $T$ of $\exists x\phi(x)$ and a proof from $T$ of $\neg\phi(c)$. By UG, there is a proof from $T$ of $\forall x\neg\phi(x)$. This is clearly a contradiction, establishing the claim.
+We claim that $T'$ is syntactically consitent. If it isn't, then there is a proof from $T'$ of a contradictory sentence $\alpha\wedge\neg\alpha$. By the proof-by-contradiction theorem, there is a proof from $T$ of $\neg(\exists x\phi(x)\to\phi(c))$. Using a tautology, there is a proof from $T$ of $\exists x\phi(x)$ and a proof from $T$ of $\neg\phi(c)$. By UG, there is a proof from $T$ of $\forall x\neg\phi(x)$. This is clearly a contradiction (quantifier duality), establishing the claim.
 
-Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. First let $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $\mathcal T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup\mathcal T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
+Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. First let $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
 
 **Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
 
