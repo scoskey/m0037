@@ -918,9 +918,9 @@ We have just seen that the compactness theorem for first order logic has similar
 
 This simple idea can also be used to derive many further consequences. The first is key in the theory of *nonstandard arithmetic*, where one studies models of number theory with infinite elements, and the second fact is key in *nonstandard analysis* where one studies models of analysis with infinitesimal elements.
 
-**Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,0,1,<)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
+**Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,<,0,1)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
 
-**Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,0,1,<)$. There is a model of $T$ with an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
+**Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,<,0,1)$. There is a model of $T$ which contains $\mathbb R$ and an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
 
 We invite the reader to fill in the proofs of these results.
 
@@ -934,7 +934,7 @@ Recall that a graph is *connected* if for any two vertices $x,y$, there exists a
 
 **Corollary** The class of well-orders is not axiomatizable.
 
-*Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\ldots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
+*Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\cdots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
 
 Before beginning the next series of results, we need a brief refresher on cardinality in set theory. Before starting in on cardinality, first recall that the von Neumann natural numbers $0,1,2,\ldots$ may be followed up by von Neumann ordinal numbers $\omega,\omega+1,\ldots,\omega+\omega,\omega+\omega+1,\ldots$.
 
@@ -944,13 +944,19 @@ We say that an ordinal $\kappa$ is a *cardinal number* if $\kappa$ is not in bij
 
 It is not difficult to prove using AC that for any set $A$, there exists an ordinal $\alpha$ such that $\alpha$ is in bijection with $A$. The *cardinality* of $A$ is the least ordinal $\kappa$ that is in bijection with $A$. We sometimes write $|A|=\kappa$. Thus if $A$ is infinite and countable we have $|A|=\omega$. But if $A$ is uncountable then there will be some larger cardinal $\kappa$ such that $|A|=\kappa$.
 
+When talking about $\omega$ in the context of cardinality, we give it the special name $\aleph_0$, because it is the first in the sequence of infinite cardinals. We let $\aleph_1$ denote the second infinite cardinal, $\aleph_2$ the third, and so on.
+
+We say that a set $A$ is *countable* if its cardinality is $\leq\aleph_0$, and *uncountable* if its cardinality is $\geq\aleph_1$. (Sometimes people use the term countable to mean *countably infinite*, or cardinality exactly $\aleph_0$.)
+
+Cardinal numbers may be added using disjoint unions, and multiplied using cartesian products. For instance, if $\kappa$ and $\lambda$ are cardinals, then $\kappa\cdot\lambda$ is defined as the cardinality of the cartesian product $|\kappa\times\lambda|$. One should check that for finite cardinals (natural numbers), this gives the expected results. But if one of the two cardinals is infinite, $\kappa\cdot\lambda$ will always be $\max(\kappa,\lambda)$.
+
 Returning to theories in logic, we have shown above that theories with arbitrarily large finite models have infinite models. Now it is natural to ask what cardinalities will occur. The next result addresses this question with the most expansive answer possible.
 
-**Lowenheim–Skolem Theorem** Suppose $T$ is an $\mathcal L$-theory, and $T$ has an infinite model. Then for any cardinal $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$, $T$ has a model of cardinality $\kappa$.
+**Theorem** (Lowenheim–Skolem thoerem) Suppose $\mathcal L$ is a finite or countable signature, $T$ is an $\mathcal L$-theory, and $T$ has an infinite model. Then for any infinite cardinal $\kappa$, $T$ has a model of cardinality $\kappa$.
 
-*Proof*. We prove the theorem in two parts: a downwards direction and an upwards direction. To begin with downwards direction, we will prove that if $T$ has an infinite model then $T$ has a model of size $\vert\mathcal L\vert\cdot\aleph_0$. Reading the proof of the completeness theorem, we see that the Henkin structure $\mathcal H$ happens to have precisely this size. Indeed, it is constructed from terms, which are finite strings of elements of the given countable language.
+*Proof*. Assume $T$ has an infinite model and let $\kappa$ be given. Expand the signature to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta:\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows that $T'$ is consistent, and therefore by the compactness theorem $T'$ has a model. Clearly this model will have size at least $\kappa$.
 
-For the upwards direction, assume $T$ has a model of size $\vert\mathcal L\vert\cdot\aleph_0$ and let $\kappa\geq\vert\mathcal L\vert\cdot\aleph_0$ be given. Expand the language to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta\mid\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows from the compactness theorem that $T'$ is consistent, and so has a model. The resulting model must have cardinality at least $\kappa$. If it has cardinality greater than $\kappa$, we can use the downwards direction of the theorem to produce a model of cardinality exactly $\kappa$. $\blacksquare$
+But we want it to have size exactly $\kappa$. Instead of using compactness, use the proof of the completeness theorem to build the Henkin structure $\mathcal H$ in the expanded language. The expanded language has $\kappa$ many terms, and since the $c_\alpha$ will be in distinct equivalence classes, it has exactly $\kappa$ many terms. Thus $\mathcal H$ is a model of $T$ of size $\kappa$. $\blacksquare$
 
 The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is consistent, then ZFC has a countable model. Since we know that ZFC implies there exist uncountable sets, we appear to have reached a paradox: an uncountable object is contained in a countable object. The resolution to this apparent contradiction is that the countable model only believes its sets are uncountable because it lacks the bijections to prove they are countable. These bijections do exist but externally to the model.
 
@@ -960,13 +966,13 @@ Previously we said that a theory $T$ is complete if it is consistent, and for ev
 
 **Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
 
-It follows from the definition of $\models$ that $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of arithmetic $\mathrm{Th}(\mathbb N,+,\times)$ and the theory of real numbers $\mathrm{Th}(\mathbb R,+,\times)$ are complete theories.
+It follows from the definition of satisfaction that $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times)$ are complete theories.
 
 In accordance with common practice, we usually say that $T$ is complete if the set of logical consequences of $T$ is complete. That is, $T$ is *complete* if it is consistent and for every sentence $\sigma$ either $T\models\sigma$ or $T\not\models\sigma$.
 
 For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
 
-On the other hand, most theories are not complete. For example, if $T$ is theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.)
+On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.)
 
 In these examples, we show $T$ is not complete by finding sentences $\sigma$ such that $T\cup\set{\sigma}$ has a model, so $\neg\sigma$ is not a consequence of $T$, and $T\cup\set{\neg\sigma}$ has a model, so $\sigma$ is not a consequence of $T$.
 
@@ -982,7 +988,7 @@ In light of the example in the previous paragraph, it is natural to ask whether 
 
 **Definition** Let $T$ be a theory and let $\kappa$ be a cardinal. Then $T$ is called *$\kappa$-categorical* if all models of $T$ of cardinality $\kappa$ are isomorphic to one another.
 
-The following is the most famous example of a categorical theory. The theory of dense linear orders without endpoints consists of the theory of linear orders (irreflexivity, transitivity, trichotomy) plus the axioms $\forall x\forall y\exists z x<y\rightarrow x<z<y$ and $\forall x\exists y\exists z y<x<z$. Thus the rational order is an example of a dense linear order without endpoints.
+The following is the most famous example of a categorical theory. The theory of dense linear orders without endpoints consists of the theory of linear orders plus the axioms: $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$, and $(\forall x)(\exists y)(\exists z)y<x<z$. Thus the rational order $(\mathbb Q;<)$ is an example of a dense linear order without endpoints.
 
 **Proposition** The theory $T$ of dense linear orders without endpoints is $\aleph_0$-categorical.
 
@@ -998,9 +1004,9 @@ Next we describe an example of a theory that is $\kappa$-categorical for some un
 
 The following result shows the connection between categorical and complete theories.
 
-**Vaught Test Thoerem** Let $T$ be a consistent theory in a finite language with no finite models. If $T$ is $\kappa$-categorical for some $\kappa$, then $T$ is complete.
+**Thoerem** (Vaught test) Let $T$ be a consistent theory in a finite language with no finite models. If $T$ is $\kappa$-categorical for some $\kappa$, then $T$ is complete.
 
-*Proof*: Suppose that $T$ is $\kappa$-categorical but not complete. Then there is a sentence $\sigma$ such that both $T\cup\set{\sigma}$ and $T\cup\set{\neg\sigma}$ are consistent. By the Lowenheim–Skolem theorem, there are models $\mathcal A,\mathcal B$ of $T\cup\set{\sigma},T\cup\set{\neg\sigma}$ respectively, of cardinality $\kappa$. This contradicts that $T$ is $\kappa$-categorical. $\blacksquare$
+*Proof*: Suppose that $T$ is $\kappa$-categorical but not complete. Then there is a sentence $\sigma$ such that both $T\cup\{\sigma\}$ and $T\cup\{\neg\sigma\}$ are consistent. By the Lowenheim–Skolem theorem, there are models $\mathcal A,\mathcal B$ of $T\cup\{\sigma\},T\cup\{\neg\sigma\}$ respectively, of cardinality $\kappa$. This contradicts that $T$ is $\kappa$-categorical. $\blacksquare$
 
 **Corollary** The theory of dense linear orders without endpoints is complete. In particular, $(\mathbb Q,<)$ and $(\mathbb R,<)$ are elementarily equivalent.
 
@@ -1012,15 +1018,19 @@ A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for 
 
 ### 8. Definability, absoluteness, and computability
 
-Consider the structure $(\mathbb N,+,0)$, and compare it with the structure $(\mathbb N,+)$. The second structure has a reduced language, but is it really weaker in the sense that fewer concepts are expressible?
+Consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The second structure has an expanded signature, but is it really different in the sense that it contains more information?
 
-**Definition** Let $\mathcal A$ be a structure. An $n$-ary relation $R\subset A^n$ is *definable* in $\mathcal A$ if there is a formula $\phi(x_1,\ldots,x_n)$ such that $(a_1,\ldots,a_n)\in R\iff\mathcal A\models\phi[x_i=a_i]$. A function $f\colon A^n\to A$ is definable if its graph is a definable $n+1$-ary relation. Finally an element $c\in A$ is definable if $\set{c}$ is a definable unary relation.
+**Definition** Let $\mathcal A$ be a structure.
 
-For example, if $\mathcal A=(\mathbb N,+)$. Then the constant $0$ is definable using $x+x=x$, and $<$ is definable using $\exists z x+z=y$.
+* An $n$-ary relation $R\subset A^n$ is *definable* if there is a formula $\phi(x_1,\ldots,x_n)$ such that $(a_1,\ldots,a_n)\in R\iff\mathcal A\models\phi[x_i\mapsto a_i]$.
+* A function $f\colon A^n\to A$ is *definable* if its graph is a definable $n+1$-ary relation.
+* An element $c\in A$ is *definable* if $\{c\}$ is a definable unary relation.
+
+For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. It is worth thinking about the harder question: is $\times$ definable?
 
 **Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula. Then the corresponding *expansion by definitions* of $T$ is the theory $T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n}$, where $R$ is a new $n$-ary relation symbol.
 
-If $T'$ is an expansion by definitions of $T$, then $T,T$ prove exactly the same sentences of the original language. Moreover if $\phi$ is any formula of the expanded language then $T$ proves it is equivalent to a formula of the original language. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded to a model of $T'$.
+If $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same sentences of the original language. Moreover if $\phi$ is any formula of the expanded language then $T$ proves it is equivalent to a formula of the original language. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded to a model of $T'$.
 
 In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its fragments. Something potentially confusing happens when we study models of set theory that didn't happen in other theories: we can try use a set with its native $\epsilon$ relation as a model of set theory.
 
