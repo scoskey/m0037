@@ -1016,6 +1016,14 @@ A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for 
 
 ## Part III: Computability theory and incompleteness
 
+Let's agree a theory $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
+
+Most theories are obviously not complete, like the theory of linear orders and the theory of groups. In such cases the incompletness of the theory is a feature and not a bug, because in these examples we wish to study the diversity of models (dense vs discrete linear orders, abelian vs non-abelian groups, etc).
+
+On the other hand, when a theory is foundational it can be desirable that it should be complete. Some important theories in mathematics that are complete include the theory of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields (like $\mathbb C$).
+
+But the most important foundational theories like the theory of arithmetic with addition and multiplication (PA), and set theory (ZFC), are not be complete. In this section we discuss the incompleteness theorem, which explains why this is bound to be the case.
+
 ### 8. Definability, absoluteness, and computability
 
 Consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The second structure has an expanded signature, but is it really different in the sense that it contains more information?
@@ -1026,48 +1034,52 @@ Consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The secon
 * A function $f\colon A^n\to A$ is *definable* if its graph is a definable $n+1$-ary relation.
 * An element $c\in A$ is *definable* if $\{c\}$ is a definable unary relation.
 
-For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. It is worth thinking about the harder question: is $\times$ definable?
+For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. (It's also worth thinking about the harder question: is $\times$ definable?)
 
-**Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula. Then the corresponding *expansion by definitions* of $T$ is the theory $T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n}$, where $R$ is a new $n$-ary relation symbol.
+**Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula with free variables $x_1,\ldots,x_n$. Let $\mathcal L'=\mathcal L\cup\{R\}$, where $R$ is a new relation symbol. The *expansion by definitions* of $T$ with $\phi$ is the $\mathcal L'$-theory $T'=T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n)}$.
 
-If $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same sentences of the original language. Moreover if $\phi$ is any formula of the expanded language then $T$ proves it is equivalent to a formula of the original language. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded to a model of $T'$.
+It is not difficult to show using surgery on deductions that if $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same $\mathcal L$-sentences. Moreover if $\phi'$ is any $\mathcal L'$-formula then $T'$ proves that $\phi'$ equivalent to an $\mathcal L$-formula $\phi$. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded appropriately to a model of $T'$.
 
-In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its fragments. Something potentially confusing happens when we study models of set theory that didn't happen in other theories: we can try use a set with its native $\epsilon$ relation as a model of set theory.
+In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its fragments. Something potentially confusing happens when we study models of set theory that didn't happen in other theories: we can try to use a set with its native $\epsilon$ relation as a model of set theory.
 
 **Definition** Let $A$ be any set. Then $A$ gives rise to a *set model* $(A;\epsilon)$ with domain $A$ and binary relation $\epsilon$.
 
-When we work with set models, we elide the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all ZFC, but some subtheory of ZFC. For instance, every set model satisfies the Axiom of Extensionality.
+When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all axioms of ZFC, but some subtheory of ZFC. For instance, every set model satisfies Extensionality, but a hereditarily finite set will not satisfy Infinity.
 
-One of the most useful set models is the set HF of hereditarily finite sets, also denoted $V_\omega$. Observe that HF satisfies all of ZFC except the Axiom of Infinity. Similarly the model $HC$ consisting of the hereditarily countable sets satisfies all of ZFC 
+One of the most useful set models is the set HF of hereditarily finite sets. (In references, this may also be denoted $V_\omega$ or $\mathcal R_\omega$.) Observe that HF satisfies all of ZFC except the Axiom of Infinity. Similarly the set model $HC$ consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
 
-When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example $\omega\subset HF$, the two models agree on which object is the empty set, and disagree on whether $\epsilon$ is a linear order. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with HF about which object is the empty set!
+When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example consider $\mathbb N$ and HF. We have $\mathbb N\subset HF$. Both these set models agree on which object is the empty set, but they disagree on whether $\epsilon$ is a linear order or not. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with $\mathbb N$ and HF about which object is the empty set!
 
-**Definition** Let $A\subset B$ be sets. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon V\to A$ we have $\mathcal A\models\phi[s]\iff\mathcal B\models\phi[s]$.
+**Definition** Let $A\subset B$ be sets. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\{x_1,x_2,\ldots\}\to A$ we have $\mathcal A\models\phi[s]\iff\mathcal B\models\phi[s]$.
 
 Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive. Recall that a set $A$ is *transitive* if $b\in a\in A$ implies $b\in A$.
 
-**Definition** A formula $\phi$ is said to be a *$\Delta_0$-formula* if its quantifiers are bound, that is, every occurrence of $\exists$ is of the form $\exists y\in z$ and every occurrence of $\forall$ is of the form $\forall y\in z$.
+**Definition** A formula $\phi$ is called a *$\Delta_0$-formula* if its quantifiers are bound, that is, every occurrence of $\exists$ is of the form $\exists y\in z$ and every occurrence of $\forall$ is of the form $\forall y\in z$.
 
-For example, the proposition that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say $\exists y,z\in\bigcup x x=\langle y,z\rangle$.
+The notation $\exists y\in z$ and $\forall y\in z$ aren't technically part of our first order logic. Instead these are abbreviations: $(\exists y\in z)\cdots$ is short for $(\exists y)y\in z\wedge\cdots$, and $(\forall y\in z)\cdots$ is short for $(\forall y)y\in z\rightarrow\cdots$.
+
+**Example** The statement that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say something like $(\exists a)(\exists b) x=(a,b)$, but these quantifiers are not bound. In fact $a,b$ are found somewhere inside the structure of $x$: $(\exists y\in x)(\exists z\in x)(\exists a\in z)(\exists b\in z)x=\{y,z\}\wedge y=\{a\}\wedge z=\{a,b\}$.
 
 On the other hand, the proposition that $x$ is a power set of another set cannot (apparently) be expressed as a $\Delta_0$ formula.
 
 **Theorem** If $A,B$ are transitive sets and $A\subset B$, then for any $\Delta_0$-formula $\phi$ we have that $\phi$ is absolute between $A$ and $B$.
 
-*Proof*: We use induction on the complexity of $\phi$. If $\phi$ is atomic then it is of the form $x=y$ or $x\in y$. In each case the statement holds because both sets are using the true equality and element relations.
+*Proof*: We use induction on the complexity of $\phi$. If $\phi$ is atomic then it is of the form $x=y$ or $x\in y$. In each case the absoluteness holds because both $A$ and $B$ are using the true equality and element relations.
 
 If $\phi$ is $\neg\alpha$ then the inductive hypothesis for $\alpha$ clearly gives the corresponding statement for $\phi$. A similar argument holds for the binary connectives.
 
-If $\phi$ is $\exists y\in z\alpha$ and the statement is true of $\alpha$ then we have:
+If $\phi$ is $(\exists y\in z)\alpha$ and the statement is true of $\alpha$ then we have:
 
 $$\begin{aligned}
-A\models \exists y\in z\alpha(x,y,z)
-  &\iff \exists a\in A A\models \alpha(x,a,z)\wedge a\in z\\
-  &\iff \exists a\in B B\models \alpha(x,a,z)\wedge a\in z\\
-  &\iff B\models \exists y\in z\alpha(x,y,z)
+A\models (\exists y\in z)\alpha[s]
+  &\iff A\models (\exists y)y\in z\wedge\alpha[s]\\
+  &\iff \exists a\in A\ A\models y\in z\wedge\alpha[s,y\mapsto a]\\
+  &\iff \exists a\in B\ B\models y\in z\wedge\alpha[s,y\mapsto a]\\
+  &\iff B\models (\exists y)y\in z\wedge\alpha[s]\\
+  &\iff B\models (\exists y\in z)\alpha[s]
 \end{aligned}$$
 
-Here in the backwards direction we are using transitivity to say that if $a\in B$ and $a$ is required to be in $z\in A$, then $a\in A$. $\blacksquare$
+Here in the backwards direction we are using transitivity to say that if $a\in B$ and $a$ is required to be in $s(z)\in A$, then $a\in A$. $\blacksquare$
 
 #### Computability
 
