@@ -962,7 +962,7 @@ The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is c
 
 #### Complete theories
 
-Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$.
+Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$. We sometimes abuse the term and say that $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
 
 **Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
 
@@ -972,23 +972,25 @@ In accordance with common practice, we usually say that $T$ is complete if the s
 
 For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
 
-On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.)
+On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.) These theories are not meant to be complete because the point is to study the diversity of models.
 
-In these examples, we show $T$ is not complete by finding sentences $\sigma$ such that $T\cup\set{\sigma}$ has a model, so $\neg\sigma$ is not a consequence of $T$, and $T\cup\set{\neg\sigma}$ has a model, so $\sigma$ is not a consequence of $T$.
+Generally we can show $T$ is not complete by finding sentences $\sigma$ such that $T\cup\set{\sigma}$ has a model, so $\neg\sigma$ is not a consequence of $T$, and $T\cup\set{\neg\sigma}$ has a model, so $\sigma$ is not a consequence of $T$.
 
-But how can one show that a given theory $T$ *is* complete? In general this can be a challenging problem, but in the rest of this section, we discuss one relatively easy tool to prove that at theory is complete. We first need several new definitions.
+But how can one show that a given theory $T$ *is* complete? In general this can be a challenging problem, but in the rest of this section, we discuss one relatively easy tool to prove that a theory is complete. We first need several new definitions.
 
 **Definition** Structures $\mathcal A,\mathcal B$ are *isomorphic* if there is a bijection $\phi\colon A\to B$ such that for every function symbol $f$ we have $f^{\mathcal A}(a)=b\iff f^{\mathcal B}(\phi(a))=\phi(b)$ and for every relation symbol $R$ we have $R^{\mathcal A}(a)\iff R^{\mathcal B}(\phi(a))$.
 
-**Definition** Structures $\mathcal A,\mathcal B$ are *elementarily equivalent* if they satisfy the same sentences: $\mathcal A\models\sigma\iff\mathcal B\models\sigma$. In other words, the two structures are models of the same complete theory.
+**Definition** Structures $\mathcal A,\mathcal B$ are *elementarily equivalent* if they satisfy the same sentences: $\mathcal A\models\sigma\iff\mathcal B\models\sigma$. In other words, $\mathrm{Th}(\mathcal A)=\mathrm{Th}(\mathcal B)$.
 
-It is clear that if structures $\mathcal A,\mathcal B$ are isomorphic then they are elementarily equivalent. However the converse is false, since for example if $T$ is any complete theory with infinite models then $T$ has models of distinct cardinalities. This means that structures can have properties that are not described by first order logic!
+Since isomorphisms preserve every property of the structure, it is clear that if $\mathcal A,\mathcal B$ are isomorphic then they are elementarily equivalent. We also know that the converse is false as we have seen several examples of properties of a structure which cannot be described in logic. Of course, if $T$ is a complete theory with infinite models, then by Lowenheim--Skolem $T$ will have models of two different cardinalities, which must be non-isomorphic.
 
-In light of the example in the previous paragraph, it is natural to ask whether a complete theory can have distinct models of the same cardinality. In general this is not the case, but when it is true we give it a name. 
+This example suggests we should confine ourselves to looking at two different models of $T$ of the same cardinality, and ask whether they must be isomorphic to each other. This leads to the following definition.
 
-**Definition** Let $T$ be a theory and let $\kappa$ be a cardinal. Then $T$ is called *$\kappa$-categorical* if all models of $T$ of cardinality $\kappa$ are isomorphic to one another.
+**Definition** Let $T$ be a theory and let $\kappa$ be an infinite cardinal. Then $T$ is called *$\kappa$-categorical* if all models of $T$ of cardinality $\kappa$ are isomorphic to one another.
 
-The following is the most famous example of a categorical theory. The theory of dense linear orders without endpoints consists of the theory of linear orders plus the axioms: $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$, and $(\forall x)(\exists y)(\exists z)y<x<z$. Thus the rational order $(\mathbb Q;<)$ is an example of a dense linear order without endpoints.
+Most complete theories $T$ will not be $\kappa$-categorical for most $\kappa$. For example, we have seen the natural numbers and the "nonstandard" natural numbers are two models of the theory of natural numbers with very different properties.
+
+But some theories are categorical in one cardinality or another. The following is the most famous example of a categorical theory. The theory of *dense linear orders without endpoints* consists of the theory of linear orders plus the axioms: $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$, and $(\forall x)(\exists y)(\exists z)y<x<z$. Thus the rational order $(\mathbb Q;<)$ is an example of a dense linear order without endpoints.
 
 **Proposition** The theory $T$ of dense linear orders without endpoints is $\aleph_0$-categorical.
 
@@ -1000,7 +1002,7 @@ Next we describe an example of a theory that is $\kappa$-categorical for some un
 
 **Proposition.** The theory $T$ of torsion-free divisible abelian groups is $\aleph_1$-categorical.
 
-*Proof*: Any torsion-free divisible abelian group $G$ can be made into a rational vector space by defining $\frac mng=h$ iff $mg=nh$. Note that divisibility is used to show there is such an $h$, and torsion-free is used to show that $h$ is unique. Now any two uncountable vector spaces over a countable field must have the same dimension, and therefore are isomorphic to one another. $\blacksquare$
+*Proof*: Any torsion-free divisible abelian group $G$ can be made into a rational vector space by defining $\frac mng=h$ iff $mg=nh$. Note that divisibility is used to show there is such an $h$, and torsion-free is used to show that $h$ is unique. Now any two vector spaces of cardinality $\aleph_1$ over a field of cardinality $\aleph_0$ must have dimension $\aleph_1$, and therefore they are isomorphic to one another. $\blacksquare$
 
 The following result shows the connection between categorical and complete theories.
 
@@ -1016,13 +1018,11 @@ A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for 
 
 ## Part III: Computability theory and incompleteness
 
-Let's agree a theory $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
+In Part II we said that most theories $T$ are not complete, like the theory of linear orders and the theory of groups. In such cases the incompletness of the theory is a feature and not a bug, because in these examples we wish to study the diversity of models (dense vs discrete linear orders, abelian vs non-abelian groups, etc).
 
-Most theories are obviously not complete, like the theory of linear orders and the theory of groups. In such cases the incompletness of the theory is a feature and not a bug, because in these examples we wish to study the diversity of models (dense vs discrete linear orders, abelian vs non-abelian groups, etc).
+On the other hand, when a theory is foundational, it may be desirable for it to be complete. Some important theories in mathematics that are complete include the laws of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields of given characteristic (like $\mathbb C$).
 
-On the other hand, when a theory is foundational it can be desirable that it should be complete. Some important theories in mathematics that are complete include the theory of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields (like $\mathbb C$).
-
-But the most important foundational theories like the theory of arithmetic with addition and multiplication (PA), and set theory (ZFC), are not be complete. In this section we discuss the incompleteness theorem, which explains why this is bound to be the case.
+But the most important foundational theories, the theory of arithmetic and the theory of sets, turn out to be incomplete. In this section we will give a brief introduction to Godel's Incompleteness Theorem, which is a very general result that explains why this must be the case.
 
 ### 8. Definability, absoluteness, and decidability
 
