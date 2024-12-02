@@ -1125,15 +1125,21 @@ For bounded quantification, we will show that $\Sigma_1$ is closed under bounded
 
 ### 9. Computable functions, recursion, and undecidable sets
 
-**Definition** Let $f$ be a function from HF to HF. Then $f$ is *computable* if its graph is decidable.
+In this section we consider functions and consider decidability in this context. It is very common to say that a function $f$ is *computable* if it is decidable when considered as a set of pairs.
 
-The Church–Turing thesis implies that we can informally say that $f$ is computable if and only if there is a procedure which, given any input $x$, halts and outputs $f(x)$. To see this equivalence, first if the graph of $f$ is decidable then given $x$ we can search through all possible values $y$ until we find one with $(x,y)\in f$ and then we can halt and output $y$. Conversely if there is such a procedure for evaluating $f$ then given $(x,y)$ we can decide whether $(x,y)\in f$ by calculating $f(x)$ and asking whether $f(x)=y$.
+Informally, we can think of the computable functions as the functions $f$ such that there exists a procedure which, given any input $x$, halts and outputs $f(x)$. Here when we say "procedure", we are referring to the Church–Turing thesis.
 
-The simplest example of a computable function is the characteristic function $\chi_A$ of any decidable set $A$. Indeed $(x,i)\in\chi_A$ if and only if $i=1$ and $x\in A$ or else $i=0$ and $x\notin A$. This statement is a boolean combination of $\Delta_1$-formulas.
+To see this equivalence, first suppose $f$ is computable. Then we can create a procedure which, on input $x$, searches through all possible values $y$ and uses the decidability of $f$ to test whether $(x,y)\in f$. Since the domain of $f$ is $HF$, we know that one will eventually be found, at which the procedure halts with output $y$.
 
-Another example of a computable function is the cardinality function $f(x)=\vert x\vert$. Here $\vert x\vert=y$ if and only if $y\in\omega$ and there exists a bijection between $x$ and $y$, and $\vert x\vert=y$ if and only if $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
+Conversely, suppose there is a procedure for evaluating $f(x)$. Then $f$ is $\Sigma_1$ because $(x,y)\in f$ if and only if there exists a code for a run of the procedure with input $x$ and ouptup $y$. And $f$ is $\Pi_1$ because $(x,y)\in f$ if and only if every code for a run of the procedure on input $x$ halts with output $y$. Thus $f$ is $\Delta_1$ and so computable.
 
-Some more interesting examples of computable functions are $+,\cdot$. However to prove this we will need the recursion theorem. You may recall that we have proved the classical recursion theorm and the transfinite recursion theorem. What we need is the computable version of the recursion theorem.
+**Example** Suppose $A$ is a decidable set. Then the *characteristic function* $\chi_A$ of $A$ is a computable function. Indeed $(x,i)\in\chi_A$ if and only if $i=1$ and $x\in A$ or else $i=0$ and $x\notin A$. This statement is a boolean combination of $\Delta_1$-formulas.
+
+We invite the reader to check that the converse is true, that is, if some characteristic function $\chi_A$ is computable then $A$ is decidable.
+
+**Example** Let $f$ be the cardinality function $f(x)=\vert x\vert$. Then $f$ is $\Delta_1$ and so computable. Indeed, $f$ is $\Sigma_1$ because $\vert x\vert=y$ iff $y\in\omega$ and there exists a bijection between $x$ and $y$, and $f$ is $\Pi_1$ because $\vert x\vert=y$ iff $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
+
+Some more interesting examples of computable functions are the $+$ and $\times$ operations on pairs of natural numbers. However, to prove this we will need the recursion theorem. You may recall that the classical recursion theorem from set theory was previously studied in an exercise. What we neednow is the following computable version of the recursion theorem.
 
 **Theorem** If $G\colon\mathbb N^{<\omega}\to\mathbb N$ is computable, then there exists a computable function $F\colon\mathbb N\to\mathbb N$ such that $F(n)=G(F\restriction n)$.
 
@@ -1145,7 +1151,7 @@ Another application of the recursion theorem is the following.
 
 **Proposition** Let $A$ be the set consisting of all pairs $\phi,\sigma$, where $\phi$ is a code for a $\Delta_0$-formula and $\sigma$ is a substitution function, such that $HF\models\phi[\sigma]$. Then $A$ is decidable.
 
-The idea of the proof is to use the partial order of subformulas, and then to define a function $f$ which maps inputs $\phi,\sigma$ to values $T,F$ by recursion. The recursive definition $G$ is simply a formalizing our definition of satisfaction.
+The idea of the proof is to use the partial order of subformulas, and then to define a function $f$ which maps inputs $\phi,\sigma$ to values $T,F$ by recursion. The recursive definition $G$ is simply a formalisation of our definition of satisfaction.
 
 #### Undecidable sets
 
@@ -1183,7 +1189,7 @@ Recall that if $T$ is a theory then its deductive closure is the set $\bar T=\se
 
 For example it is not difficult to decide whether or not a given sentence $\sigma$ is in ZFC, but it is much more decide whether $\sigma$ is a theorem of ZFC. OF course ZFC is very powerful, so this may not be too surprising. But we can study the same questions about deductive closure in the context of much simpler theories.
 
-**Definition** Core set theory, or CST, is the theory consisting of the Extensionality, Pairing, Union, Separation, and Regularity.
+**Definition** Core set theory, or CST, is the theory consisting of the Extensionality, Pairing, Union, Separation, and Foundation.
 
 This theory may seem weak compared to ZFC, but it is strong enough to do finite set theory plus induction. It is also possible to work Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$ including the induction scheme.
 
@@ -1195,7 +1201,7 @@ In our proof of the first incompleteness theorem, we once again return to a diag
 
 The propostion says that we don't need to add terms for elements of HF, we can already represent these elements in the language.
 
-**Definition** Given a theory $T$ of $\in$, a formula $\phi$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$. CHECK
+**Definition** Given a theory $T$ of $\in$, a formula $\phi$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
 
 **Definition** Let $T$ be any theory of $\in$ and let $A\subset HF$. Then $A$ is *representable* in $T$ if there is a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(\langle a\rangle)$.
 
