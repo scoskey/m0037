@@ -369,9 +369,9 @@ We say that a set is *hereditarily finite* if it may be constructed using only r
 
 Without any other axioms, the Strong Pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
 
-**Axiom** (Infinity) There exists a set $HF$ such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the Strong Pairing axiom).
+**Axiom** (Infinity) There exists a set HF such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the Strong Pairing axiom).
 
-Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\{HF\}$. However, the axioms so far do not help us construct an infinite set besides $HF$.
+Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\{HF\}$. However, the axioms so far do not help us construct an infinite set besides HF.
 
 In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal!
 
@@ -383,7 +383,7 @@ While we can't expect to use general set-builder constructions, the following ax
 
 The axiom is also sometimes called Specification or (restricted) Comprehension. In the next part, we will elaborate further on the exact nature of the properties $P(x)$ which may be used. For now, we will continue to be *somewhat* informal and use standard mathematical language to express these properties.
 
-For instance we could let $E=\set{x\in HF:x\text{ has an even number of elements}}$. Then $E$ is a new infinite set which is a subset of $HF$.
+For instance we could let $E=\set{x\in HF:x\text{ has an even number of elements}}$. Then $E$ is a new infinite set which is a subset of HF.
 
 The Separation axiom allows us to construct sets which are contained in a set we have already. What about constructing sets which are larger? One way to do this is the following.
 
@@ -431,7 +431,7 @@ In general, we recursively define:
 
 We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\set{0,\ldots,n-1}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
 
-From the above definition we see that natural numbers are all elements of $HF$. Thus we can use the Separation axiom to construct the set of natural numbers.
+From the above definition we see that natural numbers are all elements of HF. Thus we can use the Separation axiom to construct the set of natural numbers.
 
 **Definition** $\mathbb N=\set{x\in HF:x\text{ is a von Neumann natural number}}$.
 
@@ -449,7 +449,7 @@ Of course, we think of $(0,m,n)$ as representing $\frac mn$ and $(1,m,n)$ as rep
 
 With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to write a bijection from $\mathbb N$ to a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
 
-So far, all the numbers we have constructed are elements of $HF$ and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of $HF$, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
+So far, all the numbers we have constructed are elements of HF and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of HF, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
 
 **Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
 > * $C\neq\emptyset$, $\mathbb Q$
@@ -471,7 +471,7 @@ While it may appear that the definitions we have given are universal or absolute
 
 Another area that can be formalised in set theory is logic itself. Indeed, we have said that mathematical logic is just another area of mathematics, so for set theory to be an appropriate foundation it should include logic too. Once again there is an initial portion of logic which can be carried out using the metatheory, but it will also be mirrored in the formal theory.
 
-We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of $HF$!
+We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of HF!
 
 #### Infinity
 
@@ -503,7 +503,7 @@ With ordinals it is possible to count as far into the transfinite as we can imag
 
 The propositional logic we studied in the first part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. It captures the conditional $\rightarrow$ particularly well, and helped us with meaningful applications including graph coloring and Konig's lemma.
 
-However the propositional language with its boolean connectives still leaves much of mathematical reasoning out. For example it is impossible to imagine codifying real analysis or set theory using propositional logic alone. For example the definition of limit begins "for all $\epsilon$...". Similarly the axiom of Infinity begins "there exists a set $HF$ such that...". The key concepts that we still need are the *quantifiers* "for all" and "there exists".
+However the propositional language with its boolean connectives still leaves much of mathematical reasoning out. For example it is impossible to imagine codifying real analysis or set theory using propositional logic alone. For example the definition of limit begins "for all $\epsilon$...". Similarly the axiom of Infinity begins "there exists a set HF such that...". The key concepts that we still need are the *quantifiers* "for all" and "there exists".
 
 In this part we introduce and elaborate on first order logic, which is logic with boolean connectives and quantifiers. The term "first order" means the quantifiers range over elements of a given universe. We will not study "second order" logic, but in case you're curious it means the quantifiers may range over sets and functions as well.
 
@@ -1018,23 +1018,21 @@ A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for 
 
 ## Part III: Computability theory and incompleteness
 
-In Part II we said that most theories $T$ are not complete, like the theory of linear orders and the theory of groups. In such cases the incompletness of the theory is a feature and not a bug, because in these examples we wish to study the diversity of models (dense vs discrete linear orders, abelian vs non-abelian groups, etc).
+In Part II we said that most theories $T$ are incomplete, like the theory of linear orders and the theory of groups. In these examples the incompletness is a feature and not a bug, because in these examples we wish to study the diversity of models.
 
-On the other hand, when a theory is foundational, it may be desirable for it to be complete. Some important theories in mathematics that are complete include the laws of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields of given characteristic (like $\mathbb C$).
+On the other hand, when a theory is foundational, it may be desirable for it to be complete. Some important theories in mathematics that are complete include the laws of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields of characteristic zero (like $\mathbb C$). (We won't prove these results here).
 
 But the most important foundational theories, the theory of arithmetic and the theory of sets, turn out to be incomplete. In this section we will give a brief introduction to Godel's Incompleteness Theorem, which is a very general result that explains why this must be the case.
 
 ### 8. Definability, absoluteness, and decidability
 
-Before we can state the incompleteness theorem, it's necessary to talk about definability and decidability in logic. We begin with definability.
-
-Consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The second structure has an expanded signature, but is it really different in the sense that it contains more information?
+Before we can state the incompleteness theorem, it's necessary to talk about definability in logic. To motivate this, consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The second structure has an expanded signature, but is it really different in the sense that it contains more information?
 
 **Definition** Let $\mathcal A$ be a structure.
 
 * An $n$-ary relation $R\subset A^n$ is *definable* if there is a formula $\phi(x_1,\ldots,x_n)$ such that $(a_1,\ldots,a_n)\in R\iff\mathcal A\models\phi[x_i\mapsto a_i]$.
-* A function $f\colon A^n\to A$ is *definable* if its graph is a definable $n+1$-ary relation.
-* An element $c\in A$ is *definable* if $\{c\}$ is a definable unary relation.
+* A function $f\colon A^n\to A$ is *definable* there is a formula $\phi(x_1,\ldots,x_n,y)$ such that $f(a_1,\ldots,a_n)=b\iff\mathcal A\models\phi[x_i\mapsto a_i,y\mapsto b]$.
+* An element $a\in A$ is *definable* if there is a formula $\phi(x)$ such that $b=a\iff A\models\phi[x\mapsto a]$.
 
 For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. (It's also worth thinking about the harder question: is $\times$ definable?)
 
@@ -1042,13 +1040,13 @@ For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the form
 
 It is not difficult to show using surgery on deductions that if $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same $\mathcal L$-sentences. Moreover if $\phi'$ is any $\mathcal L'$-formula then $T'$ proves that $\phi'$ equivalent to an $\mathcal L$-formula $\phi$. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded appropriately to a model of $T'$.
 
-In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its fragments. Something potentially confusing happens when we study models of set theory that didn't happen in other theories: we can try to use a set with its native $\epsilon$ relation as a model of set theory.
+In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its sub-theories. Something potentially confusing happens when we study models of set theory that doesn't happen with other theories: we can try to use a set with its true $\epsilon$ relation as a model of set theory.
 
 **Definition** Let $A$ be any set. Then $A$ gives rise to a *set model* $(A;\epsilon)$ with domain $A$ and binary relation $\epsilon$.
 
-When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all axioms of ZFC, but some subtheory of ZFC. For instance, every set model satisfies Extensionality, but a hereditarily finite set will not satisfy Infinity.
+When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all of ZFC, but some sub-theory of ZFC. For instance, every set model satisfies Extensionality. The set $\mathbb N$ doesn't satisfy pairing because for instance $(0,1)=\{1,2\}$ isn't a natural number.
 
-One of the most useful set models is the set HF of hereditarily finite sets. (In references, this may also be denoted $V_\omega$ or $\mathcal R_\omega$.) Observe that HF satisfies all of ZFC except the Axiom of Infinity. Similarly the set model $HC$ consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
+One of the most useful set models is HF, the set of hereditarily finite sets. (In references, this may also be denoted as $V_\omega$ or $\mathcal R_\omega$.) It is an exercise to check that HF satisfies all of ZFC except Infinity. Similarly the set model HC consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
 
 When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example consider $\mathbb N$ and HF. We have $\mathbb N\subset HF$. Both these set models agree on which object is the empty set, but they disagree on whether $\epsilon$ is a linear order or not. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with $\mathbb N$ and HF about which object is the empty set!
 
@@ -1056,13 +1054,13 @@ When $A,B$ are set models and $A\subset B$, both models believe they are talking
 
 Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive. Recall that a set $A$ is *transitive* if $b\in a\in A$ implies $b\in A$.
 
-**Definition** A formula $\phi$ is called a *$\Delta_0$-formula* if its quantifiers are bound, that is, every occurrence of $\exists$ is of the form $\exists y\in z$ and every occurrence of $\forall$ is of the form $\forall y\in z$.
+**Definition** A formula $\phi$ is called a *$\Delta_0$-formula* if its quantifiers are bounded, that is, every occurrence of $\exists$ is of the form $\exists y\in z$ and every occurrence of $\forall$ is of the form $\forall y\in z$.
 
 The notation $\exists y\in z$ and $\forall y\in z$ aren't technically part of our first order logic. Instead these are abbreviations: $(\exists y\in z)\cdots$ is short for $(\exists y)y\in z\wedge\cdots$, and $(\forall y\in z)\cdots$ is short for $(\forall y)y\in z\rightarrow\cdots$.
 
-**Example** The statement that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say something like $(\exists a)(\exists b) x=(a,b)$, but these quantifiers are not bound. In fact $a,b$ are found somewhere inside the structure of $x$: $(\exists y\in x)(\exists z\in x)(\exists a\in z)(\exists b\in z)x=\{y,z\}\wedge y=\{a\}\wedge z=\{a,b\}$.
+**Example** The statement that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say something like $(\exists a)(\exists b) x=(a,b)$, but these quantifiers are not bounded. In fact $a,b$ are found somewhere inside the structure of $x$: $(\exists y\in x)(\exists z\in x)(\exists a\in z)(\exists b\in z)x=\{y,z\}\wedge y=\{a\}\wedge z=\{a,b\}$.
 
-On the other hand, the proposition that $x$ is a power set of another set cannot (apparently) be expressed as a $\Delta_0$ formula.
+On the other hand, the proposition that $x$ is a power set of another set cannot (apparently) be expressed as a $\Delta_0$-formula. Here one wishes to let $\phi(x)$ say $(\exists y)(\forall z)(z\in y\leftrightarrow z\subset x)$ but these quantifiers are unbounded and in fact cannot be completely eliminated.
 
 **Theorem** If $A,B$ are transitive sets and $A\subset B$, then for any $\Delta_0$-formula $\phi$ we have that $\phi$ is absolute between $A$ and $B$.
 
@@ -1087,29 +1085,33 @@ Here in the backwards direction we are using transitivity to say that if $a\in B
 
 Let us now work with the set model HF. Informally, we say that $A$ is *decidable* if there is a procedure that decides given $x$ whether or not $x\in A$. In other words, there should be an algorithm or computer program which takes input $x$ and halts and outputs Yes if $x\in A$ and halts and outputs No if $x\notin A$.
 
-For example, if $\phi$ is a $\Delta_0$-formula. Let $A=\set{x\in HF\mid \phi(x)}$ be the  corresponding $\Delta_0$-definable subset. Then $A$ is very simple in the sense that there is a natural decision procedure to decide whether or not $x\in A$. One simply steps through the formula testing its conditions, and each time one encounters a bounded quantifier, one must initiate a finite search. (This wouldn't work for unbounded quantifiers, because a naive infinite search will never terminate.)
+For example, if $\phi$ is a $\Delta_0$-formula, let $A=\set{a\in HF\mid A\models\phi[x\mapsto a]}$ be the set corresponding $\Delta_0$-definable subset. Then $A$ is very simple in the sense that there is a natural decision procedure to decide whether or not $x\in A$. One simply steps through the formula testing its conditions, and each time one encounters a bounded quantifier, one must initiate a finite search. Note that this wouldn't work for unbounded quantifiers, because a naive infinite search will never terminate.
 
 On the other hand, there are sets that are intuitively computable but not $\Delta_0$-definable. For example, let $A$ be the set of even natural numbers. Then there is cleary a decision procedure for $A$: given $x$ first check whether it is totally ordered and transitive, then mark off elements in pairs until you have $0$ or $1$ left over. But $A$ is not $\Delta_0$-definable. To see this, note that if it were then since $\omega$ is transitive it would be definable in $\omega$. But using compactness, $\omega$ has an elementary extension with an automorphism that moves $A$. Thus $A$ is not definable in $\omega$, and hence it is not $\Delta_0$-definable in HF.
 
-**Definition** A formula $\phi$ is $\Sigma_1$ if it is of the form $\exists y\alpha$, where $\alpha$ is $\Delta_0$. A formula $\phi$ is $\Pi_1$ if it is of the form $\forall y\alpha$, where $\alpha$ is $\Delta_0$. (Here we also include iterated existentials or iterated universals.)
+**Definition** A formula $\phi$ is $\Sigma_1$ if it is of the form $\exists y\alpha$, where $\alpha$ is $\Delta_0$. A formula $\phi$ is $\Pi_1$ if it is of the form $\forall y\alpha$, where $\alpha$ is $\Delta_0$.
 
-**Definition** A subset $A$ of HF is $\Delta_1$-definable if it is both $\Sigma_1$-definable and $\Pi_1$-definable.
+We remark that it is also permitted to use several quantifiers of the same type, so if $\alpha$ is $\Delta_0$ then $\exists y\exists z\alpha$ is $\Sigma_1$ too. But it's technically not necessary because we could recduce the double quantifier to a single quantifier over a pair $(y,z)$. We invite the reader to elaborate these details.
 
-(In fact there is a whole hierarchy of Sigma, Pi, and Delta definability, but for now we do not need to go any further up this hierarchy.)
+**Definition** A subset $A$ of HF is *$\Delta_1$-definable* if it is both $\Sigma_1$-definable and $\Pi_1$-definable.
 
-**Example** Let $A$ be the set of even natural numbers. Then $A$ is a $\Delta_1$-definable subset of HF. We have already said that the property of being a natural number is $\Delta_0$-definable in HF. Thus the formula $\alpha(n,e)$ which says "$n$ is a natural number and $e$ is the set of even numbers $<n$" is $\Delta_0$. Then $x\in A$ if and only if $\exists n,e\alpha(n,e)\wedge x\in e$, and $x\in A$ if and only if $\forall n,e\alpha(n,e)\wedge x\in n\rightarrow x\in e$.
+In fact there is a whole hierarchy of Sigma, Pi, and Delta definability called the arithmetical hierarchy, but we don't need to pursue this any further.
+
+**Example** Let $A$ be the set of even natural numbers. Then $A$ is a $\Delta_1$-definable subset of HF. We have already said that the property of being a natural number is $\Delta_0$-definable in HF. Next, let $\alpha(n,e)$ be a formula which says "$n$ is a natural number and $e$ is the set of even numbers $<n$". This can be written in a $\Delta_0$ way. Then $A$ is $\Sigma_1$ because $x\in A$ iff $\exists n\exists e\alpha(n,e)\wedge x\in e$. And $A$ is $\Pi_1$ because $x\in A$ iff $\forall n\forall e\alpha(n,e)\wedge x\in n\rightarrow x\in e$.
 
 Like the $\Delta_0$-formulas, the $\Delta_1$-definable formulas enjoy a degree of absoluteness.
 
 **Proposition** Let $A,B$ be transitive sets and $A\subset B$. If $\phi$ is a $\Sigma_1$ sentence and $A\models\phi$ then $B\models\phi$. If $\phi$ is a $\Pi_1$ sentence and $B\models\phi$ then $A\models\phi$. If $\phi$ is $\Sigma_1$, $\psi$ is $\Pi_1$, and both $A,B$ satisfy $\phi\leftrightarrow\psi$, then $\phi,\psi$ are absolute between $A$ and $B$.
 
+We invite the reader to complete the details of this proposition.
+
 Like the $\Delta_0$-definable sets, the $\Delta_1$-definable sets are decidable, but by a more complex procedure. Suppose that $A$ is defined both by $\exists y\alpha(x,y)$ and by $\forall y\beta(x,y)$, where $\alpha,\beta$ are $\Delta_0$-formulas. Then $A^c$ is defined by $\exists y\neg\beta(x,y)$. Given an input $x$, we run through all possible values of $y$ and each time check whether $\alpha(x,y)$ holds and whether $\neg\beta(x,y)$ holds. Since $A$ and $A^c$ are complementary, one of these must eventually occur, at which point we can say whether $x\in A$ or $x\in A^c$. Note that this procedure will have to terminate, but our description provides no insight as to when.
 
-Conversely, if a set $A$ is decidable by some procedure, then $A$ should be $\Delta_1$-definable. To see this note that each run of the procedure should leave some record of its behavior. Thus we can say that $x\in A$ iff there exists a code for a run of the procedure on input $x$ that halted and output Yes. And we can say that $x\in A$ iff for all codes for a run of the procedure on input $x$, if the code halted, then the output was Yes.
+Conversely, if a set $A$ is decidable by some procedure, then $A$ should be $\Delta_1$-definable. To see this note that each run of the procedure leaves a record of its steps and its state at every step. Thus we can say that $x\in A$ iff there exists a code for a run of the procedure on input $x$ that halted and output Yes. And we can say that $x\in A$ iff for all codes for a run of the procedure on input $x$, if the code halted, then the output was Yes.
 
-**Church-Turing Thesis** A set is decidable by a procedure (in a finite amount of time, with finitary operations, without resource limitations) if and only if it is $\Delta_1$-definable.
+**Church–Turing Thesis** A set is decidable by a procedure (in a finite amount of time, with finitary operations, without resource limitations) if and only if it is $\Delta_1$-definable.
 
-In other words, all "reasonable" notions of being decidable by a procedure end up being equivalent to one another. The list of equivalent notions is long and includes decidable by a Turing machine, decidable by a python program, definable by recursion, and so forth. The point is that all of these possible choices lead to the same robust notion. For our class we will stick with $\Delta_1$-definable as the official definition.
+In other words, all "reasonable" notions of being decidable by a procedure end up being equivalent to one another. The list of equivalent notions is long and includes decidable by a Turing machine, decidable by a python program, definable by recursion, and so forth. The point is that all of these possible choices lead to the same robust notion. This justifies the following:
 
 **Definition** A subset $A$ of HF is *decidable* if it is $\Delta_1$-definable.
 
@@ -1125,11 +1127,11 @@ For bounded quantification, we will show that $\Sigma_1$ is closed under bounded
 
 ### 9. Computable functions, recursion, and undecidable sets
 
-In this section we consider functions and consider decidability in this context. It is very common to say that a function $f$ is *computable* if it is decidable when considered as a set of pairs.
+In the previous section we introduced decidable sets, and in this section we study decidable functions. Since a function is simply a set of pairs, we simply use the same definition: a function is decidable if it is $\Delta_1$-definable as a set of pairs. However when speaking of a function, we usually say that it is *computable* instead of decidable. So decidable is typically used for sets, and computable is used for functions, but both are technically correct.
 
-Informally, we can think of the computable functions as the functions $f$ such that there exists a procedure which, given any input $x$, halts and outputs $f(x)$. Here when we say "procedure", we are referring to the Church–Turing thesis.
+A function $f$ is computable if and only if there exists a procedure which, given any input $x$, halts and outputs $f(x)$. Here, when we say "procedure", we are referring to the Church–Turing thesis.
 
-To see this equivalence, first suppose $f$ is computable. Then we can create a procedure which, on input $x$, searches through all possible values $y$ and uses the decidability of $f$ to test whether $(x,y)\in f$. Since the domain of $f$ is $HF$, we know that one will eventually be found, at which the procedure halts with output $y$.
+To see this equivalence, first suppose $f$ is computable. Then we can create a procedure which, on input $x$, searches through all possible values $y$ and uses the decidability of $f$ to test whether $(x,y)\in f$. Since the domain of $f$ is HF, we know that one will eventually be found, at which the procedure halts with output $y$.
 
 Conversely, suppose there is a procedure for evaluating $f(x)$. Then $f$ is $\Sigma_1$ because $(x,y)\in f$ if and only if there exists a code for a run of the procedure with input $x$ and ouptup $y$. And $f$ is $\Pi_1$ because $(x,y)\in f$ if and only if every code for a run of the procedure on input $x$ halts with output $y$. Thus $f$ is $\Delta_1$ and so computable.
 
