@@ -1022,23 +1022,27 @@ In Part II we said that most theories $T$ are incomplete, like the theory of lin
 
 On the other hand, when a theory is foundational, it may be desirable for it to be complete. Some important theories in mathematics that are complete include the laws of addition of natural numbers, the theory of "real closed" fields (like $\mathbb R$), and the theory of algebraically closed fields of characteristic zero (like $\mathbb C$). (We won't prove these results here).
 
-But the most important foundational theories, the theory of arithmetic and the theory of sets, turn out to be incomplete. In this section we will give a brief introduction to Godel's Incompleteness Theorem, which is a very general result that explains why this must be the case.
+But the most general foundational theories, such as the theory of arithmetic and the theory of sets, turn out to be incomplete. In this part we give a brief introduction to Godel's Incompleteness Theorem, which is a very general result that explains why this must be the case.
 
 ### 8. Definability, absoluteness, and decidability
 
-Before we can state the incompleteness theorem, it's necessary to talk about definability in logic. To motivate this, consider the two structures $(\mathbb N;+)$ and $(\mathbb N;+,<,0,1)$. The second structure has an expanded signature, but is it really different in the sense that it contains more information?
+Before we can state the incompleteness theorem, we need to introduce the notions of definability and decidability.
+
+Beginning with definability, we first recall the following definition.
 
 **Definition** Let $\mathcal A$ be a structure.
 
 * An $n$-ary relation $R\subset A^n$ is *definable* if there is a formula $\phi(x_1,\ldots,x_n)$ such that $(a_1,\ldots,a_n)\in R\iff\mathcal A\models\phi[x_i\mapsto a_i]$.
-* A function $f\colon A^n\to A$ is *definable* there is a formula $\phi(x_1,\ldots,x_n,y)$ such that $f(a_1,\ldots,a_n)=b\iff\mathcal A\models\phi[x_i\mapsto a_i,y\mapsto b]$.
+* An $n$-ary function $f\colon A^n\to A$ is *definable* there is a formula $\phi(x_1,\ldots,x_n,y)$ such that $f(a_1,\ldots,a_n)=b\iff\mathcal A\models\phi[x_i\mapsto a_i,y\mapsto b]$.
 * An element $a\in A$ is *definable* if there is a formula $\phi(x)$ such that $b=a\iff A\models\phi[x\mapsto a]$.
 
-For example, if $\mathcal A=(\mathbb N;+)$, then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. (It's also worth thinking about the harder question: is $\times$ definable?)
+**Example** Let $\mathcal A=(\mathbb N;+)$. Then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. (It's also worth thinking about the harder question: is $\times$ definable?)
 
 **Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula with free variables $x_1,\ldots,x_n$. Let $\mathcal L'=\mathcal L\cup\{R\}$, where $R$ is a new relation symbol. The *expansion by definitions* of $T$ with $\phi$ is the $\mathcal L'$-theory $T'=T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n)}$.
 
-It is not difficult to show using surgery on deductions that if $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same $\mathcal L$-sentences. Moreover if $\phi'$ is any $\mathcal L'$-formula then $T'$ proves that $\phi'$ equivalent to an $\mathcal L$-formula $\phi$. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be expanded appropriately to a model of $T'$.
+It is not difficult to show using surgery on deductions that if $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same $\mathcal L$-sentences. Moreover if $\phi'$ is any $\mathcal L'$-formula then $T'$ proves that $\phi'$ equivalent to an $\mathcal L$-formula $\phi$. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be made into a model of $T'$ by interpreting the symbols of $\mathcal L'$ according to their definitions.
+
+**Example** Continuing the example above, the structure $(\mathbb N;+,<,0,1)$ is an expansion of the structure $(\mathbb N;+)$ using the definitions provided. In this sense it contains no more information than $(\mathbb N;+)$.
 
 In the rest of this section we study definability in models of set theory. That is, we will return to our favorite theory ZFC and its sub-theories. Something potentially confusing happens when we study models of set theory that doesn't happen with other theories: we can try to use a set with its true $\epsilon$ relation as a model of set theory.
 
