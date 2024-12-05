@@ -1054,7 +1054,7 @@ One of the most useful set models is HF, the set of hereditarily finite sets. (I
 
 When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example consider $\mathbb N$ and HF. We have $\mathbb N\subset HF$. Both these set models agree on which object is the empty set, but they disagree on whether $\epsilon$ is a linear order or not. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with $\mathbb N$ and HF about which object is the empty set!
 
-**Definition** Let $A\subset B$ be sets. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\{x_1,x_2,\ldots\}\to A$ we have $\mathcal A\models\phi[s]\iff\mathcal B\models\phi[s]$.
+**Definition** Let $A,B$ be sets such that $A\subset B$. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\{x_1,x_2,\ldots\}\to A$ we have $A\models\phi[s]\iff B\models\phi[s]$.
 
 Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive. Recall that a set $A$ is *transitive* if $b\in a\in A$ implies $b\in A$.
 
@@ -1089,9 +1089,13 @@ Here in the backwards direction we are using transitivity to say that if $a\in B
 
 Let us now work with the set model HF. Informally, we say that $A$ is *decidable* if there is a procedure that decides for any given $a\in HF$ whether $x\in A$ or $x\notin A$. In other words, there should be an algorithm or computer program which takes input $x$ and halts and outputs Yes if $x\in A$ and halts and outputs No if $x\notin A$.
 
-For example, if $\phi$ is a $\Delta_0$-formula, let $A=\set{a\in HF\mid A\models\phi[x\mapsto a]}$ be the set corresponding $\Delta_0$-definable subset. Then $A$ is very simple in the sense that there is a natural decision procedure to decide whether or not $x\in A$. One simply steps through the formula testing its conditions, and each time one encounters a bounded quantifier, one must initiate a finite search. Note that this wouldn't work for unbounded quantifiers, because a naive infinite search will never terminate.
+For example, if $\phi$ is a $\Delta_0$-formula, let $A=\set{a\in HF:A\models\phi[x\mapsto a]}$ be the set corresponding $\Delta_0$-definable subset. Then $A$ is very simple in the sense that there is a natural decision procedure to decide whether or not $x\in A$. One simply steps through the formula testing its conditions, and each time one encounters a bounded quantifier, one must initiate a finite search. Note that this wouldn't work for unbounded quantifiers, because a naive infinite search will never terminate.
 
-On the other hand, there are sets that are intuitively decidable but not $\Delta_0$-definable. For example, let $A$ be the set of even natural numbers. Then there is cleary a decision procedure for $A$: given $x$ first check whether it is totally ordered and transitive, then mark off elements in pairs until you have $0$ or $1$ left over. But $A$ is not $\Delta_0$-definable. To see this, note that if it were then since $\omega$ is transitive it would be definable in $\omega$. But using compactness, $\omega$ has an elementary extension with an automorphism that moves $A$. Thus $A$ is not definable in $\omega$, and hence it is not $\Delta_0$-definable in HF.
+On the other hand, there are sets that are intuitively decidable but not $\Delta_0$-definable. For example, let $A$ be the set of even natural numbers. Then there is cleary a decision procedure for $A$: given $a$ first check whether $a\in\mathbb N$ (that is, $a$ is totally ordered by $\in$ and a transitive set). Then mark off elements in pairs until you have $0$ or $1$ elements left over. But $A$ is not $\Delta_0$-definable. To show this, note that if it were, then since $\mathbb N\subset HF$ is transitive, $A$ would be definable in $\mathbb N$ using only $\in$.
+
+But this is impossible. We have seen using compactness that $\mathrm{Th}(\mathbb N)$ has a model $\mathcal N$ with "nonstandard" elements. In such a model, $A^{\mathcal N}$ still occupies "every other" standard and nonstandard element. But the model has an automorphism $f$ that shifts every non-standard element one unit to the right. Since $f(A^{\mathcal N})\neq A^{\mathcal N}$, we must have that $A^{\mathcal N}$ is not definable and finally that $A$ is not definable.
+
+The next definition helps us go beyong $\Delta_0$ to further levels of definability.
 
 **Definition** A formula $\phi$ is $\Sigma_1$ if it is of the form $\exists y\alpha$, where $\alpha$ is $\Delta_0$. A formula $\phi$ is $\Pi_1$ if it is of the form $\forall y\alpha$, where $\alpha$ is $\Delta_0$.
 
@@ -1115,9 +1119,9 @@ Conversely, if a set $A$ is decidable by some procedure, then $A$ should be $\De
 
 This informal argument leads to the following historical statement.
 
-**Church–Turing Thesis** A set is decidable by a procedure (in a finite amount of time, using finitary operations, without resource limitations) if and only if it is $\Delta_1$-definable.
+**Church–Turing Thesis** A set is decidable by a finitary procedure if and only if it is $\Delta_1$-definable.
 
-In other words, all "reasonable" notions of being decidable by a procedure end up being equivalent to one another. The list of equivalent notions is long and includes: decidable by a Turing machine, decidable by a python program, definable by recursion, and so forth. The point is that all of these possible choices lead to the same robust notion.
+In other words, all "reasonable" notions of a finitary procedure should be equivalent to one another. The list of equivalent notions is long and includes: decidable by a Turing machine, decidable by a python program, definable by recursion, and $\Delta_1$-definability. Since all these choices lead to the same concept, the notion of decidable must be very important!
 
 For this class we make the thesis into our formal definition:
 
@@ -1197,7 +1201,7 @@ Intuitively, we can think of $U$ as a $2$-dimensional set where the $\Sigma_1$-d
 
 To prove the theorem, we once again return to the diagonalization idea of Cantor and Russell.
 
-*Proof of Theorem*. Let $U$ be the universal $\Sigma_1$ set constructed in the Lemma. Let $D=\set{a\in HF\mid (a,a)\notin U}$. Then the definition of $D$ is clearly $\Pi_1-definable, due to the negation and the $U$. On the other hand, due to its definition, $D$ cannot not appear as a column of $U$. Since all the $\Sigma_1$-definable sets appear as columns of $U$, we must conclude that $D$ is not $\Sigma_1$-definable.
+*Proof of Theorem*. Let $U$ be the universal $\Sigma_1$ set constructed in the Lemma. Let $D=\set{a\in HF\mid (a,a)\notin U}$. Then the definition of $D$ is clearly $\Pi_1$-definable, due to the negation and the $U$. On the other hand, due to its definition, $D$ cannot not appear as a column of $U$. Since all the $\Sigma_1$-definable sets appear as columns of $U$, we must conclude that $D$ is not $\Sigma_1$-definable.
 
 Letting $A=HF\setminus D$, we have that $A$ is $\Sigma_1$-definable and not $\Pi_1$-definable. In particular, $A$ is $\Sigma_1$-definable but not $\Delta_1$-definable, as desired. $\blacksquare$
 
