@@ -1177,7 +1177,7 @@ In order to define $+$ and $\times$, one would actually need an analogous result
 
 There is also a version of the recursion theorem along $\in$, which allows one to construct functions on HF by defining $F(x)$ in terms of $F(y)$ for all $y\in x$. Thus for example the *rank function* on HF is defined using the recursion $\mathrm{rk}(x)=\max_{y\in x}\mathrm{rk}(y)+1$.
 
-Lastly, it is also a version of the recursion theorem along well-formed formulas. Here we regard well-formed formulas as elements of HF. To do this we can fix numerical codes for every logical symbol and for any finite signature $\mathcal L$. We code an expression by an ordered tuple of codes for symbols.
+Lastly, there is also a version of the recursion theorem along well-formed formulas. Here we regard well-formed formulas as elements of HF. To do this we can fix numerical codes for every logical symbol and for any finite signature $\mathcal L$. We code an expression by an ordered tuple of codes for symbols.
 
 Let $W\subset HF$ consisting of just the codes for the well-formed formulas. Then $W$ is decidable using a version of the recursion theorem.
 
@@ -1195,7 +1195,7 @@ This of course justifies giving different names to $\Delta_1$ and $\Sigma_1$ in 
 
 *Proof of Lemma*: Let $V$ be the set of all triples $(p,a,b)$ such that $p$ is a code for a $\Delta_0$-formula $\phi$ and $HF\models\phi[x\mapsto a,y\mapsto b]$. Then we have argued using recursion that $V$ is $\Delta_1$-definable. Next let $U$ be the set of all pairs $(p,a)$ such that $(\exists b)(p,a,b)\in V$. Then $U$ is clearly $\Sigma_1$-definable.
 
-Now if $A$ is any $\Sigma_1$ set, then $A$ is definable by some formula $\exists y\phi$ where $\phi$ is a $\Delta_0$-formula. Letting $p$ be a code for $\phi$, we have that $A$ is precisely equal to $\set{a:(p,a)\in U}$, as desired. $\blacksquare$
+Now if $A$ is any $\Sigma_1$-definable set, then $A$ is definable by some formula $\exists y\phi$ where $\phi$ is a $\Delta_0$-formula. Letting $p$ be a code for $\phi$, we have that $A$ is precisely equal to $\set{a:(p,a)\in U}$, as desired. $\blacksquare$
 
 Intuitively, we can think of $U$ as a $2$-dimensional set where the $\Sigma_1$-definable sets make up the columns of $U$.
 
@@ -1205,15 +1205,15 @@ To prove the theorem, we once again return to the diagonalization idea of Cantor
 
 Letting $A=HF\setminus D$, we have that $A$ is $\Sigma_1$-definable and not $\Pi_1$-definable. In particular, $A$ is $\Sigma_1$-definable but not $\Delta_1$-definable, as desired. $\blacksquare$
 
-While a universal set is usually the first place one would look for an example of an undecidable set, it is not very natural in the sense that it would not arise in practice. We next conclude this sections with one of the most famous and naturally occuring examples of an undecidable set.
+While a universal set is usually the first place one would look for an example of an undecidable set, it is not very natural in the sense that it would not arise in practice. We next conclude this section with one of the most famous and naturally occuring examples of an undecidable set.
 
 In the following result, fix any model of computation you prefer, and fix some way of coding procedures in that model as elements of HF. For example if you like python programs, you can code the python commands and symbols as natural numbers, and code a python program as a tuple of natural numbers. For this discussion assume the input is not used (or is the empty set). Then some python programs halt, and others run on forever. We let $H\subset HF$ consist of the set of codes for python programs that halt.
 
 **Theorem** The set $H$ of codes for halting programs is undecidable.
 
-*Proof*: Let $A$ be a $\Sigma_1$ set which is not $\Delta_1$. Let $\phi$ be a $\Delta_0$-formula such that $x\in A$ if and only if $\exists y\phi(x,y)$. For each $x$ let $h_x$ be a code for the program which searches through all possible $y\in HF$ until it finds one such that $\phi(x,y)$. Then $x\in A$ if and only if $h_x\in H$. Thus if $H$ were $\Delta_1$ then so would $A$ be $\Delta_1$, a contradicton. $\blacksquare$
+*Proof*: Let $A$ be a $\Sigma_1$ set which is not $\Delta_1$. Let $\phi$ be a $\Delta_0$-formula such that $a\in A$ iff $\exists y\phi(x,y)[x\mapsto a,y\mapsto b]$. For each $a$ let $h_a$ be a code for the program which searches through all possible $b\in HF$ until it finds one such that $HF\models\phi(a,b)$. Then the function $a\mapsto h_a$ is computable, since we can write general such program $h_x$, and given any $a$, subsitute $a$ for $x$ in the program code. Now we have $a\in A$ iff $h_a\in H$. Thus if $H$ were $\Delta_1$ then so would $A$ be $\Delta_1$, a contradicton. $\blacksquare$
 
-In this proof we defined a function $r\colon HF\to HF$ with the property that $x\in A\iff r(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$, and it implies that the complexity of $H$ is no simpler than that of $A$. If one wishes to prove that a given set is undecidable, the most common proof technique is to find a reduction from some known undecidable set to the given set.
+In this proof we defined a function $r\colon HF\to HF$ with the property that $a\in A\iff a(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$, and it implies that the complexity of $H$ is no simpler than that of $A$. In general, if one wishes to prove that a given set $B$ is undecidable, the most common technique is to find a computable reduction function from some known undecidable set $A$ to $B$.
 
 ### 10. Decidability in logic and incompleteness
 
