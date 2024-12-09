@@ -552,7 +552,7 @@ In lectures, we will give examples of the scope of several symbols in an express
 
 #### First order syntax
 
-We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,\forall,\exists,=}\cup\set{x_n\mid n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and all the rest have arity $2$.
+We now apply our knowledge of syntax to first order logic. The *basic lexicon* of first order logic consists of the alphabet $A=\set{\neg,\wedge,\vee,\rightarrow,\leftrightarrow,\forall,\exists,=}\cup\set{x_n:n\in\omega}$. The arity of the symbols are defined by $a(x_i)=0$, $a(\neg)=1$, and all the rest have arity $2$.
 
 In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. The most important examples include $+,\cdot,<,\in$ and so forth.
 
@@ -1201,7 +1201,7 @@ Intuitively, we can think of $U$ as a $2$-dimensional set where the $\Sigma_1$-d
 
 To prove the theorem, we once again return to the diagonalization idea of Cantor and Russell.
 
-*Proof of Theorem*. Let $U$ be the universal $\Sigma_1$ set constructed in the Lemma. Let $D=\set{a\in HF\mid (a,a)\notin U}$. Then the definition of $D$ is clearly $\Pi_1$-definable, due to the negation and the $U$. On the other hand, due to its definition, $D$ cannot not appear as a column of $U$. Since all the $\Sigma_1$-definable sets appear as columns of $U$, we must conclude that $D$ is not $\Sigma_1$-definable.
+*Proof of Theorem*. Let $U$ be the universal $\Sigma_1$ set constructed in the Lemma. Let $D=\set{a\in HF:(a,a)\notin U}$. Then the definition of $D$ is clearly $\Pi_1$-definable, due to the negation and the $U$. On the other hand, due to its definition, $D$ cannot not appear as a column of $U$. Since all the $\Sigma_1$-definable sets appear as columns of $U$, we must conclude that $D$ is not $\Sigma_1$-definable.
 
 Letting $A=HF\setminus D$, we have that $A$ is $\Sigma_1$-definable and not $\Pi_1$-definable. In particular, $A$ is $\Sigma_1$-definable but not $\Delta_1$-definable, as desired. $\blacksquare$
 
@@ -1221,7 +1221,7 @@ In this section we apply our understanding of diagonalization and undecidability
 
 We have said that if $\phi$ is a well-formed formula we can view it as an element of HF using any standard coding method. Thus if $T$ is a theory, we can view it as a subset of HF, and ask whether $T$ is decidable or not. Most of the theories that we have discussed in this course are decidable theories, because we listed the axioms clearly. The main exceptions are when we use the $\mathrm{Th}(\mathcal A)$ construction, or when we perform an arbitrary completion $\bar T$ of some theory $T$.
 
-**Definition** For any theory $T$ we let $T^\vdash=\set{\sigma\mid T\vdash\sigma}$. We say $T^\vdash$ is the *deductive closure* of $T$.
+**Definition** For any theory $T$ we let $T^\vdash=\set{\sigma:T\vdash\sigma}$. We say $T^\vdash$ is the *deductive closure* of $T$.
 
 If $T$ is decidable, we can still consider the question of whether $T^\vdash$ is decidable or not. We will always have that $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a proof from $T$ of $\sigma$. We invite the reader to carry out the details of this statement.
 
@@ -1229,11 +1229,11 @@ For example, ZFC is a decidable theory. Most of the axioms of ZFC are specific w
 
 But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search for a deduction. We will see that $\mathrm{ZFC}^\vdash$ turns out to be *undecidable*. Whether that's surprising or not depends on your point of view. ZFC is powerful enough to settle many if not most open problems in mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, then modern and future humans and automated theorem provers should be able to settle most open problems in mathematics.
 
-Studying ZFC only is a little bit specific, and also impractical due to its strength. In the rest of the section it will be sufficient to work with the following much simpler theory.
+Of course you may feel that studying ZFC is rather specific, since we could always add or subtract some of the axioms. In the rest of the section, it will be sufficient to work with the following much simpler theory.
 
 **Definition** The theory CST, or *core set theory*, consists of the Extensionality, Pairing, Union, Separation, and Foundation.
 
-This theory is weak compared to ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$, includingt induction on natural numbers.
+This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$, includingt induction on natural numbers.
 
 **Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
 
@@ -1241,7 +1241,7 @@ In our proof of the first incompleteness theorem, we will use a diagonalization 
 
 We begin by showing we can "represent" subsets of HF inside the theory $CST$ itself.
 
-**Proposition** Every element $a\in HF$ is $\Delta_0$-definable. That is, there is a $\Delta_0$-formula $\delta_a(x)$ such that $x=a$ iff $HF\models\delta_a(x)$.
+**Proposition** Every element of HF is $\Delta_0$-definable. That is, for all $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(x)[x\mapsto b]$.
 
 The propostion says that in logical formulas, we can reference every single element of HF without needing to expand the signature or theory CST with new constant symbols. It's similar to the situation in arithmetic where we can refer to $n\in\mathrm N$ as the $n$-th least element. We invite the reader to carry out the proof of the result.
 
@@ -1263,13 +1263,13 @@ Note that we cannot directly use either of the two formulas $\alpha,\beta$ to re
 
 Instead we let $\psi(x)$ be the formula:
 
-$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right]$.
+$$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right].$$
 
 We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_0$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
 
 Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is:
 
-$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right]$.
+$$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right].$$
 
 Indeed first find $z$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle z\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
@@ -1277,9 +1277,9 @@ We are now ready to prove the final step of the first incompleteness theorem.
 
 **Theorem** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
 
-*Proof*: Let $U=\set{(\phi,a)\mid T\vdash\phi(\langle a\rangle)}$. Then since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set  appears as a cross-section of $U$, namely $\set{a\mid (\phi,a)\in U}$. We say that $U$ is universal for $\Delta_1$ sets.
+*Proof*: Let $U=\set{(\phi,a):T\vdash\phi(\langle a\rangle)}$. Then since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set  appears as a cross-section of $U$, namely $\set{a:(\phi,a)\in U}$. We say that $U$ is universal for $\Delta_1$ sets.
 
-Now if $\bar T$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{x\mid (x,x)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a cross-section of $U$. $\blacksquare$
+Now if $\bar T$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{x:(x,x)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a cross-section of $U$. $\blacksquare$
 
 The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
 
@@ -1291,9 +1291,15 @@ The corollary is rather stunning, since it implies mathematicians and humanity w
 
 The corollary provides conditions under which there exists a sentence that is neither provable nor disprovable from $T$. However it does not provide an example of such a sentence $\sigma$. The second incompleteness theorem gives an explicit and relevant example of such a sentence $\sigma$.
 
+In order to state the theorem, we first remark that given a theory $T$ which is coded as a decidable subset of HF, it is possible to construct a sentence $\sigma$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$. The sentence $\sigma$ thus says that $T$ is consistent.
+
 **Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\sigma$ is the sentence which asserts that $T$ is consistent, then $T\not\vdash\sigma$.
 
-*Proof idea*: It is possible to formalize consistency and provability in CST. It is further possible to construct a diagonal sentence $\tau$ which asserts in the formalization that "$T\not\vdash\tau$", that is, there is no proof from $T$ of $\tau$ itself. We omit the details—it is like the liar paradox statement "this sentence is false", but with truth replaced by provability. Then $T\vdash\tau$ implies $T\not\vdash\tau$ and vice versa. This is a contradiction! $\blacksquare$
+*Proof idea*: It is possible to construct a diagonal sentence $\tau$ which asserts that "there does not exist a deduction from $T$ of $\langle\tau\rangle$". That is, $\tau$ is self-referential in saying "this sentence is not provable". We omit the details of the diagonal construction—it is like the so-called liar paradox "this sentence is false", but with truth replaced by provability.
+
+We claim $T$ is consistent iff $T\not\vdash\tau$. Clearly if $T\not\vdash$ something, then $T$ is consistent. Conversely if $T\vdash\tau$, then since $T\supset CST$, $T$ proves "there exists a deduction from $T$ of $\langle\tau\rangle$". We can conclude from this that $T\vdash\neg\tau$, so $T$ is inconsistent.
+
+The proof of the claim itself can be formalised as a deduction, which means $T\vdash\sigma\leftrightarrow\tau$. Now if we assume $T\vdash\sigma$, then $T\vdash\tau$, and the claim implies $T$ is inconsistent, contradicting our hypothesis. Thus $T\not\vdash\sigma$, as desired. $\blacksquare$
 
 <script>
   MathJax = {
