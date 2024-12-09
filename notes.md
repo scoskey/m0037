@@ -1213,27 +1213,37 @@ In the following result, fix any model of computation you prefer, and fix some w
 
 *Proof*: Let $A$ be a $\Sigma_1$ set which is not $\Delta_1$. Let $\phi$ be a $\Delta_0$-formula such that $a\in A$ iff $\exists y\phi(x,y)[x\mapsto a,y\mapsto b]$. For each $a$ let $h_a$ be a code for the program which searches through all possible $b\in HF$ until it finds one such that $HF\models\phi(a,b)$. Then the function $a\mapsto h_a$ is computable, since we can write general such program $h_x$, and given any $a$, subsitute $a$ for $x$ in the program code. Now we have $a\in A$ iff $h_a\in H$. Thus if $H$ were $\Delta_1$ then so would $A$ be $\Delta_1$, a contradicton. $\blacksquare$
 
-In this proof we defined a function $r\colon HF\to HF$ with the property that $a\in A\iff a(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$, and it implies that the complexity of $H$ is no simpler than that of $A$. In general, if one wishes to prove that a given set $B$ is undecidable, the most common technique is to find a computable reduction function from some known undecidable set $A$ to $B$.
+In this proof, we defined a function $r\colon HF\to HF$ with the property that $a\in A\iff a(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$. When there exists a computable reduction from $A$ to $B$ we sometimes write $A\leq B$ because it says in some sense that the complexity of $B$ is no simpler than that of $A$. In general, if one wishes to prove that a given set $B$ is undecidable, the most common technique is to find a computable reduction function from some known undecidable set $A$ to $B$.
 
 ### 10. Decidability in logic and incompleteness
 
-In this section we apply our understanding of diagonalization and undecidability in the setting of logical proof. The result will be Godel's incompleteness theorems.
+In this section we apply our understanding of diagonalization and undecidability in the setting of theories and deductions. The result will be Godel's incompleteness theorems.
 
-Recall that if $T$ is a theory then its deductive closure is the set $T^\vdash=\set{\sigma\mid T\vdash\sigma}$. Most of the theories that we have discussed in this course are decidable theories, because we listed the axioms (exceptions include some arbitrary completions $\bar T$). But the deductive closure of these theories may or may not be decidable.
+We have said that if $\phi$ is a well-formed formula we can view it as an element of HF using any standard coding method. Thus if $T$ is a theory, we can view it as a subset of HF, and ask whether $T$ is decidable or not. Most of the theories that we have discussed in this course are decidable theories, because we listed the axioms clearly. The main exceptions are when we use the $\mathrm{Th}(\mathcal A)$ construction, or when we perform an arbitrary completion $\bar T$ of some theory $T$.
 
-For example it is not difficult to decide whether or not a given sentence $\sigma$ is in ZFC, simply by checking whether $\sigma$ matches one of the axioms or axiom templates. But it is much more difficult to decide whether $\sigma$ is a theorem of ZFC, because on its face this involves searching for a deduction (searching for $\exists x$). This may not be too surprising, since ZFC is powerful enough to express most open problems in mathematics. But we can also study the same questions about deductive closure in the context of much simpler theories.
+**Definition** For any theory $T$ we let $T^\vdash=\set{\sigma\mid T\vdash\sigma}$. We say $T^\vdash$ is the *deductive closure* of $T$.
 
-**Definition** Core set theory, or CST, is the theory consisting of the Extensionality, Pairing, Union, Separation, and Foundation.
+If $T$ is decidable, we can still consider the question of whether $T^\vdash$ is decidable or not. We will always have that $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a proof from $T$ of $\sigma$. We invite the reader to carry out the details of this statement.
 
-This theory may seem weak compared to ZFC, but it is strong enough to do finite set theory plus induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$ including the induction scheme.
+For example, ZFC is a decidable theory. Most of the axioms of ZFC are specific well-formed sentences. The Separation and Replacement axioms are actually axiom schemes, which say for any formula $\phi$ a certain sentence involving $\phi$ is true. Nevertheless these templates are easy to recognise, so give a sentence $\sigma$ we can imagine testing whether it matches an instance of the Separation or Replacement axiom, or not.
+
+But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search for a deduction. We will see that $\mathrm{ZFC}^\vdash$ turns out to be *undecidable*. Whether that's surprising or not depends on your point of view. ZFC is powerful enough to settle many if not most open problems in mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, then modern and future humans and automated theorem provers should be able to settle most open problems in mathematics.
+
+Studying ZFC only is a little bit specific, and also impractical due to its strength. In the rest of the section it will be sufficient to work with the following much simpler theory.
+
+**Definition** The theory CST, or *core set theory*, consists of the Extensionality, Pairing, Union, Separation, and Foundation.
+
+This theory is weak compared to ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$, includingt induction on natural numbers.
 
 **Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
 
-In our proof of the first incompleteness theorem, we will use a diagonalization argument similar to that used in Russell's paradox or Cantor's uncountability theorem. Frist we will need to show we can "represent" subsets of HF inside the theory $T$ itself.
+In our proof of the first incompleteness theorem, we will use a diagonalization argument similar to that used in Russell's paradox, Cantor's uncountability theorem, and the undecidability of the halting problem.
 
-**Proposition** Every element $a\in HF$ is $\Delta_0$-definable. That is, there is a $\Delta_0$-formula $\delta_a(x)$ such that $x=a\iff\delta_a(x)$.
+We begin by showing we can "represent" subsets of HF inside the theory $CST$ itself.
 
-The propostion says that we can reference each and every point of HF without expanding the language with constant symbols. This means we can further reference properties of elements of HF.
+**Proposition** Every element $a\in HF$ is $\Delta_0$-definable. That is, there is a $\Delta_0$-formula $\delta_a(x)$ such that $x=a$ iff $HF\models\delta_a(x)$.
+
+The propostion says that in logical formulas, we can reference every single element of HF without needing to expand the signature or theory CST with new constant symbols. It's similar to the situation in arithmetic where we can refer to $n\in\mathrm N$ as the $n$-th least element. We invite the reader to carry out the proof of the result.
 
 **Definition** Let $\mathcal L=\{\in\}$ and $T$ be an $\mathcal L$-theory. Given a formula $\phi(x)$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
 
@@ -1243,23 +1253,23 @@ The propostion says that we can reference each and every point of HF without exp
 
 *Proof*: We will prove that for any $\Delta_0$-formula $\phi(x)$, we have $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi[x\mapsto a]$. For atomic and negated atomic formulas $x\in y$, $x\notin y$, $x=y$, and $x\neq y$ are proved by induction on the rank of the elements $a,b$ that are plugged in for $x,y$. For general $\Delta_0$-formulas $\phi$ we use induction on the complexity of $\phi$. The boundedness of quantifiers is key because they reduce to conjuctions or disjunctions of atomics. $\blacksquare$
 
-Note that statement that $CST\vdash\phi$ if and only if $HF\models\phi$ fails for arbitrary formulas since for instance the negation of the Axiom of Infinity is true in HF but not provable from CST.
+Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST.
 
 **Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_1$-definable set is representable in $T$.
 
 *Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha[x\mapsto a]$, and $a\in A$ iff $HF\models\forall z\beta[x\mapsto a]$.
 
-Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.)
+Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.)
 
 Instead we let $\psi(x)$ be the formula:
 
-$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right]$
+$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right]$.
 
-We claim that $a\in A\iff T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_0$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
+We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_0$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
 
-Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is,
+Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is:
 
-$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right]$
+$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right]$.
 
 Indeed first find $z$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle z\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
@@ -1271,7 +1281,7 @@ We are now ready to prove the final step of the first incompleteness theorem.
 
 Now if $\bar T$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{x\mid (x,x)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a cross-section of $U$. $\blacksquare$
 
-This completes the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
+The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
 
 **Corollary** If $T$ is any consistent, decidable extension of CST then $T$ is incomplete.
 
