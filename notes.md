@@ -1291,15 +1291,35 @@ The corollary is rather stunning, since it implies mathematicians and humanity w
 
 The corollary provides conditions under which there exists a sentence that is neither provable nor disprovable from $T$. However it does not provide an example of such a sentence $\sigma$. The second incompleteness theorem gives an explicit and relevant example of such a sentence $\sigma$.
 
-In order to state the theorem, we first remark that given a theory $T$ which is coded as a decidable subset of HF, it is possible to construct a sentence $\sigma$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$. The sentence $\sigma$ thus says that $T$ is consistent.
+In order to state the theorem, we first remark that given a theory $T$ which is coded as a decidable subset of HF, it is possible to construct a sentence $\mathrm{con}_T$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$, that is, $\mathrm{con}_T$ says that $T$ is consistent.
 
-**Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\sigma$ is the sentence which asserts that $T$ is consistent, then $T\not\vdash\sigma$.
+**Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\mathrm{con}_T$ is the sentence which asserts that $T$ is consistent, then $T\mathbin{\not\vdash}\mathrm{con}_T$.
 
-*Proof idea*: It is possible to construct a diagonal sentence $\tau$ which asserts that "there does not exist a deduction from $T$ of $\langle\tau\rangle$". That is, $\tau$ is self-referential in saying "this sentence is not provable". We omit the details of the diagonal construction—it is like the so-called liar paradox "this sentence is false", but with truth replaced by provability.
+The key to the proof is the following diagonalisation lemma.
 
-We claim $T$ is consistent iff $T\not\vdash\tau$. Clearly if $T\not\vdash$ something, then $T$ is consistent. Conversely if $T\vdash\tau$, then since $T\supset CST$, $T$ proves "there exists a deduction from $T$ of $\langle\tau\rangle$". We can conclude from this that $T\vdash\neg\tau$, so $T$ is inconsistent.
+**Lemma** There exists a "diagonal" sentence $\gamma$ which asserts that "there does not exist a deduction from $T$ of $\gamma$".
 
-The proof of the claim itself can be formalised as a deduction, which means $T\vdash\sigma\leftrightarrow\tau$. Now if we assume $T\vdash\sigma$, then $T\vdash\tau$, and the claim implies $T$ is inconsistent, contradicting our hypothesis. Thus $T\not\vdash\sigma$, as desired. $\blacksquare$
+That is, $\gamma$ says in a self-referential way, "this sentence is not provable". It is similar the so-called liar paradox sentence, "this sentence is false", but with truth replaced by provability. Truth is usually not definable, but provability is definable using deductions.
+
+*Proof sketch of lemma*: We will be a little bit informal here, but give the general idea. Let $\sigma(p,x)$ be a formula which says "$p$ is a code for a formula $\phi$, and there exists a deduction from $T$ of $\phi(x)$".
+
+Let $\psi(x)$ be the formula $\neg\sigma(x,x)$, so like in the diagonal arguments, $\psi$ does not appear as a "column" of $\sigma$. Then we have:
+
+$$\begin{aligned}
+  \psi(\langle\psi\rangle)
+  &\iff\neg\sigma(\langle\psi\rangle,\langle\psi\rangle)\\
+  &\iff\text{there does not exist a deduction from $T$ of $\psi(\langle\psi\rangle)$}.
+\end{aligned}$$
+
+Letting $\gamma$ be $\psi(\langle\psi\rangle)$, we have $\gamma$ is as desired. $\blacksquare$
+
+Due to its contradictory nature, it should not be hard to believe that $\gamma$ is correct about itself. That is, so long as $T$ is consistent, we have $T\not\vdash\gamma$. To see this, if $T\vdash\gamma$ then there exists a deduction from $T$ of $\gamma$. Formalising the deduction in CST, we would have "$T\vdash$ there exists a deduction from $T$ of $\gamma$", and hence $T\vdash\neg\gamma$. (This isn't quite a contradiction, it just means $T$ has to be inconsistent in this case.)
+
+*Proof of Theorem*: Assume towards a contradiction that $T\vdash\mathrm{con}_T$. Let $\gamma$ be the diagonal sentence from the lemma.
+
+We have seen that if $T$ is consistent, then $T\not\vdash\gamma$. Formalising this conditional in CST, we have that $T\vdash\mathrm{con}_T\rightarrow$ "there does not exist a deduction from $T$ of $\gamma$". But this says precisely that $T\vdash\mathrm{con}_T\rightarrow\gamma$.
+
+Since we are assuming $T\vdash\mathrm{con}_T$, we can conclude $T\vdash\gamma$. We have seen this implies $T$ is inconsistent, which contradicts our hypothesis, and completes the proof. $\blacksquare$
 
 <script>
   MathJax = {
