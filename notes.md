@@ -942,13 +942,13 @@ The von Neumann natural numbers have the property that each $n$ is not in biject
 
 We say that an ordinal $\kappa$ is a *cardinal number* if $\kappa$ is not in bijection with any ordinal $\alpha<\kappa$. The cardinal numbers are thus very special ordinals that occur unboundedly but in some sense rarely.
 
-It is not difficult to prove using AC that for any set $A$, there exists an ordinal $\alpha$ such that $\alpha$ is in bijection with $A$. The *cardinality* of $A$ is the least ordinal $\kappa$ that is in bijection with $A$. We sometimes write $|A|=\kappa$. Thus if $A$ is infinite and countable we have $|A|=\omega$. But if $A$ is uncountable then there will be some larger cardinal $\kappa$ such that $|A|=\kappa$.
+It is not difficult to prove using AC that for any set $A$, there exists an ordinal $\alpha$ such that $\alpha$ is in bijection with $A$. The *cardinality* of $A$ is the least ordinal $\kappa$ that is in bijection with $A$. We sometimes write $\vert A\vert=\kappa$. Thus if $A$ is infinite and countable we have $\vert A\vert=\omega$. But if $A$ is uncountable then there will be some larger cardinal $\kappa$ such that $\vert A\vert=\kappa$.
 
 When talking about $\omega$ in the context of cardinality, we give it the special name $\aleph_0$, because it is the first in the sequence of infinite cardinals. We let $\aleph_1$ denote the second infinite cardinal, $\aleph_2$ the third, and so on.
 
 We say that a set $A$ is *countable* if its cardinality is $\leq\aleph_0$, and *uncountable* if its cardinality is $\geq\aleph_1$. (Sometimes people use the term countable to mean *countably infinite*, or cardinality exactly $\aleph_0$.)
 
-Cardinal numbers may be added using disjoint unions, and multiplied using cartesian products. For instance, if $\kappa$ and $\lambda$ are cardinals, then $\kappa\cdot\lambda$ is defined as the cardinality of the cartesian product $|\kappa\times\lambda|$. One should check that for finite cardinals (natural numbers), this gives the expected results. But if one of the two cardinals is infinite, $\kappa\cdot\lambda$ will always be $\max(\kappa,\lambda)$.
+Cardinal numbers may be added using disjoint unions, and multiplied using cartesian products. For instance, if $\kappa$ and $\lambda$ are cardinals, then $\kappa\cdot\lambda$ is defined as the cardinality of the cartesian product $\vert\kappa\times\lambda\vert$. One should check that for finite cardinals (natural numbers), this gives the expected results. But if one of the two cardinals is infinite, $\kappa\cdot\lambda$ will always be $\max(\kappa,\lambda)$.
 
 Returning to theories in logic, we have shown above that theories with arbitrarily large finite models have infinite models. Now it is natural to ask what cardinalities will occur. The next result addresses this question with the most expansive answer possible.
 
@@ -1313,7 +1313,7 @@ $$\begin{aligned}
 
 Letting $\gamma$ be $\psi(\langle\psi\rangle)$, we have $\gamma$ is as desired. $\blacksquare$
 
-Due to its contradictory nature, it should not be hard to believe that $\gamma$ is correct about itself. That is, so long as $T$ is consistent, we have $T\not\vdash\gamma$. To see this, if $T\vdash\gamma$ then there exists a deduction from $T$ of $\gamma$. Formalising the deduction in CST, we would have "$T\vdash$ there exists a deduction from $T$ of $\gamma$", and hence $T\vdash\neg\gamma$. (This isn't quite a contradiction, it just means $T$ has to be inconsistent in this case.)
+Due to its contrary nature, it should not be hard to believe that $\gamma$ is correct about itself. That is, so long as $T$ is consistent, we have $T\not\vdash\gamma$. To see this, if $T\vdash\gamma$ then there exists a deduction from $T$ of $\gamma$. Formalising the deduction in CST, we would have "$T\vdash$ there exists a deduction from $T$ of $\gamma$", and hence $T\vdash\neg\gamma$. (This isn't quite a contradiction, it just means $T$ has to be inconsistent in this case.)
 
 *Proof of Theorem*: Assume towards a contradiction that $T\vdash\mathrm{con}_T$. Let $\gamma$ be the diagonal sentence from the lemma.
 
