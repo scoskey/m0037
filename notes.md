@@ -1263,23 +1263,23 @@ Note that we cannot directly use either of the two formulas $\alpha,\beta$ to re
 
 Instead we let $\psi(x)$ be the formula:
 
-$$\exists y\left[\alpha(x,y)\wedge\forall z \mathrm{rk}(z)<\mathrm{rk}(y)\rightarrow\beta(x,z)\right].$$
+$$\exists y\left[\alpha(x,y)\wedge\forall z((\mathrm{rk}(z)<\mathrm{rk}(y))\rightarrow\beta(x,z))\right].$$
 
-We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_0$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
+We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_1$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
 
 Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is:
 
-$$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z \mathrm{rk}(z)<\mathrm{rk}(y)\wedge\neg\beta(\langle a\rangle,z)\right].$$
+$$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z((\mathrm{rk}(z)<\mathrm{rk}(y))\wedge\neg\beta(\langle a\rangle,z))\right].$$
 
-Indeed first find $z$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle z\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
+Indeed first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
 We are now ready to prove the final step of the first incompleteness theorem.
 
 **Theorem** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
 
-*Proof*: Let $U=\set{(\phi,a):T\vdash\phi(\langle a\rangle)}$. Then since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set  appears as a cross-section of $U$, namely $\set{a:(\phi,a)\in U}$. We say that $U$ is universal for $\Delta_1$ sets.
+*Proof*: Let $U=\set{(p,a):p\text{ is a code for a formula }\phi\text{ and }T\vdash\phi(\langle a\rangle)}$. Then since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set appears as a column of $U$, namely $\set{a:(\phi,a)\in U}$. We say that $U$ is universal for $\Delta_1$ sets.
 
-Now if $\bar T$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{x:(x,x)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a cross-section of $U$. $\blacksquare$
+Now if $T^\vdash$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{p:(p,p)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a column of $U$. $\blacksquare$
 
 The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
 
@@ -1289,13 +1289,19 @@ To see that this result follows from the first incompleteness theorem, note that
 
 The corollary is rather stunning, since it implies mathematicians and humanity will never know all the theorems about sets, about arithmetic or about mathematics generally. We can't simply add axioms to ZFC (such as CH etc) to obtain a decidable theory which is strong enough to prove or disprove any statement.
 
-The corollary provides conditions under which there exists a sentence that is neither provable nor disprovable from $T$. However it does not provide an example of such a sentence $\sigma$. The second incompleteness theorem gives an explicit and relevant example of such a sentence $\sigma$.
+#### The second incompleteness theorem
 
-In order to state the theorem, we first remark that given a theory $T$ which is coded as a decidable subset of HF, it is possible to construct a sentence $\mathrm{con}_T$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$, that is, $\mathrm{con}_T$ says that $T$ is consistent.
+The corollary to the first incompleteness theorem provides conditions under which there exists a sentence that is neither provable nor disprovable from $T$. However it does not provide an example of such a sentence $\sigma$. The second incompleteness theorem helps give an explicit and relevant example of such a sentence $\sigma$ which concerns the consistency of the theory $T$ itself.
+
+Note that we haven't yet said whether ZFC is consistent or not. We said it is an excellent foundation of mathematics, and we said it has the necessary limitation that *if* it is consistent, then the set of ZFC-theorems is undecidable. But is it consistent?
+
+Maybe we can prove that ZFC is consistent. In fact for any theory $T$ which is decidable, $T$ is coded as a $\Delta_1$-definable subset of HF, and it is possible to construct a sentence $\mathrm{con}_T$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$. Then $\mathrm{con}_T$ asserts that $T$ is consistent.
 
 **Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\mathrm{con}_T$ is the sentence which asserts that $T$ is consistent, then $T\mathbin{\not\vdash}\mathrm{con}_T$.
 
-The key to the proof is the following diagonalisation lemma.
+The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$. We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
+
+The key to the proof of the second incompleteness theorem is once again a diagonalisation lemma.
 
 **Lemma** There exists a "diagonal" sentence $\gamma$ which asserts that "there does not exist a deduction from $T$ of $\gamma$".
 
