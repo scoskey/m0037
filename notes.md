@@ -1259,35 +1259,39 @@ Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is 
 
 *Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha[x\mapsto a]$, and $a\in A$ iff $HF\models\forall z\beta[x\mapsto a]$.
 
-Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.)
-
-Instead we let $\psi(x)$ be the formula:
+Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula:
 
 $$\exists y\left[\alpha(x,y)\wedge\forall z((\mathrm{rk}(z)<\mathrm{rk}(y))\rightarrow\beta(x,z))\right].$$
 
-We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $y\in HF$ with the desired property. Since the inner portion of the sentence is $\Delta_1$, the previous proposition implies $T$ proves $\psi(\langle a\rangle)$.
+We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $b\in HF$ such that $HF\models\alpha(x,y)[x\mapsto a,y\mapsto b]$, and for all $c\in HF$ we have $HF\models\beta(x,z)[x\mapsto a,z\mapsto c]$. Since $\alpha,\beta$ are $\Delta_0$, the previous proposition implies $CST\vdash\alpha(\langle a\rangle,\langle b\rangle)$ and $CST\vdash\beta(\langle a\rangle,\langle c\rangle)$. The requirement that $\mathrm{rk}(z)<\mathrm{rk}(y)$ amounts to a finite disjunction over all $c$ of rank less than that of $b$. Thus $CST\vdash\psi(\langle a\rangle)$, and so $T\vdash\psi(\langle a\rangle)$.
 
 Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is:
 
 $$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z((\mathrm{rk}(z)<\mathrm{rk}(y))\wedge\neg\beta(\langle a\rangle,z))\right].$$
 
-Indeed first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next given any $y$, if $y\in HF$ then the first clause holds, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
+For this, first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next for any $y$, if $y=b\in HF$ then the first clause holds for $y$, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
 We are now ready to prove the final step of the first incompleteness theorem.
 
 **Theorem** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
 
-*Proof*: Let $U=\set{(p,a):p\text{ is a code for a formula }\phi\text{ and }T\vdash\phi(\langle a\rangle)}$. Then since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set appears as a column of $U$, namely $\set{a:(\phi,a)\in U}$. We say that $U$ is universal for $\Delta_1$ sets.
+*Proof*: Assume $T^\vdash$ is decidable and consider the set:
 
-Now if $T^\vdash$ were decidable then $U$ would be decidable and hence $\Delta_1$-definable. Thus the diagonal set $D=\set{p:(p,p)\notin U}$ would be $\Delta_1$-definable. This is a contradiction because $D$ does not appear as a column of $U$. $\blacksquare$
+$$U=\set{(p,a):p\text{ is a code for a formula }\phi\text{ and }T\vdash\phi(\langle a\rangle)}.$$
+
+Then $U$ is decidable, and since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set appears as a column of $U$. We say that $U$ is universal for $\Delta_1$-definable sets. Let $D$ be the diagonal set:
+
+$$D=\set{p:(p,p)\notin U}$$
+
+Then due to its definition, $D$ cannot appear as a column of $U$. But  $D$ is also decidable, i.e., $D$ is $\Delta_1$-definable, and so it must appear as a column of $U$. This is a contradiction! $\blacksquare$
 
 The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
 
-**Corollary** If $T$ is any consistent, decidable extension of CST then $T$ is incomplete.
+**Corollary** If $T$ is any consistent, decidable extension of CST then $T^\vdash$ is incomplete.
 
-To see that this result follows from the first incompleteness theorem, note that if $T$ were complete then we would have $T^\vdash=T$.
+*Proof*: Since $T$ is decidable, $T^\vdash$ is $\Sigma_1$-definable, because $\sigma\in T^\vdash$ iff there exists a deduction etc. If $T^\vdash$ is complete, we have $T\vdash\sigma$ iff $T\not\vdash\neg\sigma$, which shows $T^\vdash$ is $\Pi_1$-definable as well. It follows that $T^\vdash$ is decidable, but this contradicts the first incompleteness theorem. $\blacksquare$
 
-The corollary is rather stunning, since it implies mathematicians and humanity will never know all the theorems about sets, about arithmetic or about mathematics generally. We can't simply add axioms to ZFC (such as CH etc) to obtain a decidable theory which is strong enough to prove or disprove any statement.
+The corollary is rather stunning, since it implies mathematicians and humanity will never know all the theorems about sets, about arithmetic or about mathematics generally. We can't simply add axioms to ZFC (such as CH etc) to obtain a decidable collection of axioms that is strong enough to prove or disprove everything.
 
 #### The second incompleteness theorem
 
