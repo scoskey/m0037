@@ -1,13 +1,9 @@
 \usepackage[fontsize=11pt]{scrextend}
 \usepackage{mathpazo}
-\usepackage{setspace}\onehalfspacing
-\raggedbottom
-\usepackage[paper=a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}\onehalfspacing\raggedbottom
+\usepackage[paper=a4paper,vscale=.8,vmarginratio=4:3]{geometry}
 \usepackage{hyperref}
 \newcommand{\set}[1]{\left\{\,#1\,\right\}}
-\newcommand{\abs}[1]{\left|\,#1\,\right|}
-\newcommand{\lt}{<}
-
 
 \usepackage{etoolbox}
 \newtoggle{afterpart}
@@ -21,3 +17,14 @@
    \global\toggletrue{afterpart}% tell \section we're just after a part
   }
   {}{}
+
+\makeatletter
+\pretocmd{\@seccntformat}{\S}{}{}
+\patchcmd{\tocsection}{#2.}{\S#2.}{}{}
+\apptocmd{\tocsection}{\dotfill}{}{}
+\patchcmd{\@maketitle}{\newpage}{}{}{}
+\makeatother
+
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+

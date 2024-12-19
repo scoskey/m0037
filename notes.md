@@ -103,6 +103,7 @@ While these truth tables are certainly familiar, we still need to describe how t
 In other words, a truth assignment $v$ says whether each propositional symbol is true or false. Since the propositional symbols are the simplest well-formed formulas, intuitively we should be able to use $v$ together with the truth tables for the boolean connectives to determine whether $v$ says any well-formed formula $\alpha$ is true or false. The following definition makes this idea formal.
 
 **Definition** Let $v$ be a truth assignment and $\alpha$ be a well-formed formula. We define $v\models\alpha$, read aloud "$v$ satisfies $\alpha$", using the following base case and recursive rules:
+
 * If $\alpha=P$ and $v(P)=T$, let $v\models\alpha$. If $v(P)=F$ let $v\not\models\alpha$.
 * If $\alpha=\neg\beta$ and $v\models\beta$ then let $v\not\models\alpha$. If $v\not\models\beta$ then let $v\models\alpha$.
 * If $\alpha=\beta\wedge\gamma$ and $v\models\beta$ and $v\models\gamma$ then let $v\models\alpha$; otherwise let $v\not\models\alpha$.
@@ -237,6 +238,7 @@ We invite the reader to check that this construction "works" in the sense that t
 For instance, $\mathbb R\times\mathbb R$ is the Cartesian plane, and $\mathbb Z\times\mathbb Z$ is the grid points of the Cartesian plane.
 
 **Definition** Let $A,B$ be sets.
+
 * A *binary relation* between $A$ and $B$ is any subset $R\subset A\times B$. We sometimes write $aRb$ to mean that $(a,b)\in R$.
 * The *domain* of $R$ is $\set{a\in A:(\exists b)(a,b)\in R}$
 * The *range* of $R$ is $\set{b\in B:(\exists a)(a,b)\in R}$
@@ -248,6 +250,7 @@ Many important types of mathematical objects are binary relations. All of the fo
 Another special example of a binary relation is a functions. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
 
 **Definition** Let $A$ and $B$ be sets.
+
 * A *function* from $A$ to $B$ is a binary relation $f\subset A\times B$ with the property: for all $a\in A$ there exists a unique $b\in B$ such that $(a,b)\in f$.
 * $f$ is *injective* or *one-to-one* if $(a,b),(a',b)\in f$ implies $a=a'$
 * $f$ is *surjective onto* $B$ (or simply *surjective* when $B$ is clear from context) if the range of $f$ is equal to $B$.
@@ -272,6 +275,7 @@ For example, if $G$ is a group then it possesses a multiplication operation $g\c
 In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
 
 **Defintion**. Let $X$ be any set.
+
 * The *full tree* on $X$, denoted $X^{<\mathbb N}$, is defined as $\bigcup_{n\in\mathbb N}X^n$.
 * The $n$-th *level* of $X^{<\mathbb N}$ is $X^n$; we say elements on this level have *length* $n$.
 * If $s,t\in X^{<\mathbb N}$, we say $s$ is a *predecessor* of $t$, or $t$ is a *successor* of $s$, if $s\subset t$.
@@ -460,7 +464,8 @@ Once again $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bi
 
 Having defined the real numbers, we can now continue to define nearly all familiar objects in mathematics.
 
-**Definition** 
+**Definition**
+
 * $\mathbb C$ is the set $\mathbb R\times\mathbb R$. Each ordered pair $(x,y)$ is interpreted as the complex number $x+iy$.
 * $\mathbb R[x]$ is the set $\mathbb R^{<\mathbb N}$. Each sequence $a_0,\ldots,a_n$ is interpreted as the polynomial $a_0+a_1x+\cdots+a_nx^n$.
 * $\mathbb R[[x]]$ is the set $\mathbb R^{\mathbb N}$. Each sequence $a_0,a_1,\ldots$ is interpreted as the formal power series $\sum a_nx^n$.
@@ -595,11 +600,12 @@ The sentences are the well-formed formulas for which we can conceivably assign a
 In order to decide the truth value of a sentence, we still need to know the context of the variables and the behavior of the function and relation symbols in the signature. This package of information is called a *structure* or *model*. A structure is a special type of set which forms one possible universe for sentences in a given signature.
 
 **Definition** Let $\mathcal L$ be a signature of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
-  * A set $A$, the universe of the structure
-  * For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
-  * For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
-  * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
-  * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
+
+* A set $A$, the universe of the structure
+* For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
+* For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
+* For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
+* For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
 
 **Example** Let $\mathcal L=\{<\}$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
@@ -664,12 +670,14 @@ We often apply the satisfaction relation to a set of sentences.
 **Definition** If $\mathcal L$ is a signature of first order logic, then an *$\mathcal L$-theory* is any set of $\mathcal L$-sentences.
 
 **Example** Let $\mathcal L$ consist of one binary function symbol $\cdot$, and let $T$ consist of the following two sentences:
+
 > * $(\forall x)(\forall y)(\forall z)(x\cdot y)\cdot z=x\cdot(y\cdot z)$
 > * $(\exists u)(\forall x)x\cdot u=x\wedge u\cdot x=x\wedge(\exists y)x\cdot y=u$
 
 Then $T$ is the *theory of groups* (or group theory for short).
 
 **Example** Let $\mathcal L$ consist of one binary relation symbol $<$, and let $T$ consist of the following sentences:
+
 > * $(\forall x)x\not<x$
 > * $(\forall x)(\forall y)x<y\rightarrow y\not<x$
 > * $(\forall x)(\forall y)x=y\vee x<y\vee y<x$
@@ -686,6 +694,7 @@ For example if $T$ is the theory of groups, the models of $T$ are the groups. If
 With the concept of first order satisfaction in hand, we can now define several key semantic notions:
 
 **Definition**
+
 * A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
 * A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
@@ -729,6 +738,7 @@ It is easy to see that each of these logical axioms is a valid sentence. While t
 Recall we defined the trio of semantic validity, semantic implication, and semantic consistency using the concept of satisfaction. We have just defined syntactic implication using deductions, and the following completes the syntactic trio of concepts.
 
 **Definition**
+
 * A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$
 * A theory $T$ is *syntactically consistent* if $T\not\vdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
 
@@ -753,6 +763,7 @@ As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all 
 *Proof*: If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then using propositional tautologies we have $T\cup\{\neg\alpha\}\vdash\alpha$. By the deduction theorem, $T\vdash\neg\alpha\rightarrow\alpha$. By a tautology, $T\vdash\alpha\vee\alpha$ and therefore $T\vdash\alpha$. $\blacksquare$
 
 **Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$.
+
 * (UG) If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$.
 * (EI) If $T\cup\set{\phi(c)}\vdash\alpha$, then $T\cup\set{\exists x\phi(x)}\vdash\alpha$.
 
