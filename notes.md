@@ -4,6 +4,19 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
+<!--
+Compile command
+> pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
+
+Some issues to fix
+* Introduce prefix syntax even for propositional logic
+* For unique readability prove informally with a tree only
+* Prove propositional compactness directly
+* Add in results about equivalents of compactness after, leaving some as exercises
+* In set theory we need cardinality included
+* In computability you can prove both of godel's theorems with the diagonal sentence
+-->
+
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
@@ -40,7 +53,7 @@ In this module we will focus primarily on first order logic. However we will beg
 
 We begin our study of mathematical logic with the relatively simple theory of *propositional logic*. This theory deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists).
 
-In the next part we will study first order logic, which adds the quantifiers back in. While that means the material of this section will soon be eclipsed, we include it to help us transition from commonly used logic to true mathematical logic.
+In the next part we will study first order logic, which adds the quantifiers back in. While that means the progress we make in this section will later be replaced, we include it to help us transition from basic logic to genuine mathematical logic.
 
 We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols we may write. The alphabet of propositional logic includes:
 
@@ -1028,6 +1041,8 @@ The following result shows the connection between categorical and complete theor
 A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for some $\kappa\geq\aleph_1$ if and only if $T$ is $\aleph_1$-categorical. This means that there are just two types of categoricity, countable and uncountable.
 
 ## Part III: Computability theory and incompleteness
+
+#### Introduction
 
 In Part II we said that most theories $T$ are incomplete, like the theory of linear orders and the theory of groups. In these examples the incompletness is a feature and not a bug, because in these examples we wish to study the diversity of models.
 
