@@ -767,9 +767,9 @@ The definition of deduction that we have given is of theoretical value, but not 
 
 **Theorem** (Deduction theorem) $T\vdash\alpha\to\beta$ if and only if $T\cup\set{\alpha}\vdash\beta$.
 
-*Proof*: The forward implication is just modus ponens. For the reverse implication, assume that $T\cup\set{\alpha}\vdash\beta$ and let $\sigma_1,\ldots\sigma_n$ be a proof. We will show by induction that for all $i$ we have $T\vdash\alpha\to\sigma_i$.
+*Proof*: The forward implication is just modus ponens. For the reverse implication, assume that $T\cup\set{\alpha}\vdash\beta$ and let $\sigma_1,\ldots\sigma_n$ be a deduction. We will show by induction that for all $i$ we have $T\vdash\alpha\to\sigma_i$.
 
-As before, the base case is trivial. Next assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\phi\to\sigma_i$. Otherwise $\sigma_i$ followed by modus ponens. By inductive hypothesis, we then have $T\vdash\sigma\to\sigma_j$ and $T\vdash\sigma\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\sigma\to\sigma_i$. This completes the induction. $\blacksquare$
+Assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi$, or is a logical axiom, then it is clear that $T\vdash\alpha\to\sigma_i$. Otherwise $\sigma_i$ followed from earlier items by modus ponens. By inductive hypothesis, we then have $T\vdash\alpha\to\sigma_j$ and $T\vdash\alpha\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\alpha\to\sigma_i$. This completes the induction. $\blacksquare$
 
 **Theorem** (Proofs by contradiction) If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then $T\vdash\alpha$.
 
