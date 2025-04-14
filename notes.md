@@ -7,14 +7,6 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 <!--
 Compile command
 > pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
-
-Some issues to fix
-* Introduce prefix syntax even for propositional logic
-* For unique readability prove informally with a tree only
-* Prove propositional compactness directly
-* Add in results about equivalents of compactness after, leaving some as exercises
-* In set theory we need cardinality included
-* In computability you can prove both of godel's theorems with the diagonal sentence
 -->
 
 #### Table of contents
