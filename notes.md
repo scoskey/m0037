@@ -790,7 +790,7 @@ Recall from propositional logic the soundness and completeness theorems, which l
 
 **Theorem** (Soundness and completeness theorems, version I) Let $T$ be a theory and let $\sigma$ be a sentence. Then $T\models\sigma$ if and only if $T\vdash\sigma$.
 
-The right-to-left implication is the soundness theorem and says anything we can deduce is true, or that deductions are *sound*. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The right-to-left implication is the completeness theorem.
+The right-to-left implication is the soundness theorem and says anything we can deduce is true, or that deductions are *sound*. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The left-to-right implication is the completeness theorem.
 
 We will actually study the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
 
