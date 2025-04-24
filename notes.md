@@ -5,8 +5,9 @@ By Samuel Coskey
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
 <!--
-Compile command
-> pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
+Compiling
+Comment out the toc
+pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
 -->
 
 #### Table of contents
@@ -97,7 +98,7 @@ The boolean connective $\rightarrow$ always sparks a little bit of discussion.
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$$
 
-Sometimes called *material conditional*, the truth table is meant to capture the idea of "P implies Q", but without any of the causation one would normally understand from natural language. Instead the formula $\alpha\rightarrow\beta$ may be thought of as a kind of promise, that if $\alpha$ is true then $\beta$ will be true also. If $\alpha$ is not true, then the promise will not be broken, so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
+This truth table attempts to capture the logic of "P implies Q", but it doesn't capture the causation we normally understand from natural language. It is sometimes called the *material conditional*. We can describe $\alpha\rightarrow\beta$ as a promise: if you know $\alpha$ is true then it promises $\beta$ is also true. Thus if $\alpha$ is not true, then no promise is made, and so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
 
 We invite the reader to fill in truth tables for the rest of the boolean connectives.
 
@@ -202,9 +203,9 @@ Since studying propositional logic is not our primary goal, we will stick with t
 > 2. $((\neg S)\vee R)\rightarrow (S\rightarrow R)$ — (tautology)
 > 3. $S\to R$ — (modus ponens)
 > 4. $S$ — (hypothesis)
-> 5. $R$ (modus ponens)
-> 6. $R\rightarrow P$ (hypothesis)
-> 7. $P$ (modus ponens)
+> 5. $R$ — (modus ponens)
+> 6. $R\rightarrow P$ — (hypothesis)
+> 7. $P$ — (modus ponens)
 
 We have now introduced two distinct ways of understanding logical consequence, semantic implication $\Sigma\models\alpha$ and syntactic implication $\Sigma\vdash\alpha$. We should naturally try to understand how the two are connected, and in fact we will see that the two are equivalent. What's provable is true, and what's true is provable.
 
@@ -606,7 +607,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 **Definition** Let $\mathcal L$ be a signature of first order logic. An *$\mathcal L$-structure* $\mathcal A$ consists of:
 
-* A set $A$, the universe of the structure
+* A nonempty set $A$, the *domain* or *universe* of the structure
 * For each $n$-ary function symbol $f$ a function $f^{\mathcal A}\colon A^n\to A$
 * For each $n$-ary relation symbol $R$ a relation $R^{\mathcal A}\subset A^n$
 * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
@@ -777,12 +778,12 @@ The UG rule is for proofs that end "... since $c$ was arbitrary, the result hold
 **Example** Let $\sigma$ be the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. However rather than providing an explicit deduction, we will mix deduction steps with the results above to show that a deduction exists.
 
 1. We first prove that $\forall x P(x)\wedge Q(x)\vdash\forall y P(y)$.  
-    a. $\forall x P(x)\wedge Q(x)$ (Given)  
-    c. $P(c)\wedge Q(c)$ (UI)  
-    d. $P(c)\wedge Q(c)\to P(c)$ (Tautology)  
-    e. $P(c)$ (MP c,d)  
-    g. $\forall y P(y)$ (UG)  
-2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ (Deduction, 1)
+    a. $\forall x P(x)\wedge Q(x)$ — (Given)  
+    c. $P(c)\wedge Q(c)$ — (UI)  
+    d. $P(c)\wedge Q(c)\to P(c)$ — (Tautology)  
+    e. $P(c)$ — (MP c,d)  
+    g. $\forall y P(y)$ — (UG)  
+2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ — (Deduction, 1)
 
 ### 6. Completeness and compactness
 
@@ -790,7 +791,7 @@ Recall from propositional logic the soundness and completeness theorems, which l
 
 **Theorem** (Soundness and completeness theorems, version I) Let $T$ be a theory and let $\sigma$ be a sentence. Then $T\models\sigma$ if and only if $T\vdash\sigma$.
 
-The right-to-left implication is the soundness theorem and says anything we can deduce is true, or that deductions are *sound*. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The left-to-right implication is the completeness theorem.
+The right-to-left implication is the soundness theorem and says anything we can deduce is true, meaning deductions are *sound* reasoning. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The left-to-right implication is the completeness theorem.
 
 We will actually study the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
 
@@ -798,59 +799,35 @@ We will actually study the completeness theorem in another form. Recall that a t
 
 To see version II implies version I, assume version II is true. Then $T\models\sigma$ if and only if there does not exist a model of $T\cup\{\neg\sigma\}$, which means $T\cup\{\neg\sigma\}$ is semantically inconsistent, which is true if and only if $T\cup\{\neg\sigma\}$ is syntactically inconsistent, which is equivalent to $T\vdash\sigma$ (see the proposition on proofs by contradiction). Thus version I is true. We invite the reader to prove that version I implies version II in a similar fashion.
 
-Thus, proving the completeness theorem is really about building a model. If $T$ is reasonable in the sense that we can't use the sentences of $T$ to deduce a contradiction, then it should be possible to *construct* a model of $T$, that is, a universe in which the sentences of $T$ are true.
+Thus, proving the completeness theorem is really about building a model. If $T$ is reasonable in the sense that we can't use the sentences of $T$ to deduce a contradiction, then it should be possible to *construct* a model of $T$, that is, a universe in which the sentences of $T$ hold true.
 
-Maybe this makes some intuitive sense to you, but it should also sound like a difficult request. How will we begin to build the model of $T$? The BIG IDEA is to build the model using the terms of the language. In order to illustrate:
+Maybe this makes some intuitive sense to you, but at the same time it should seem like a challenging request. How will we begin to build the model of $T$? The BIG IDEA is to build the model using the terms of the language. In order to illustrate this consider the following.
 
-**Example** Let $\mathcal L=\set{+,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, identity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, etc. These are pretty good substitutes for the true natural numbers! Of course there are many other terms such as $1+0+0+1$, but our theory knows that this one is really equivalent to $1+1$. In other words, there is an equivalence relation on terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
+**Example** Let $\mathcal L=\set{+,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, identity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, etc. These terms are pretty good substitutes for the genuine natural numbers $0$, $1$, $2$, $3$, etc!
 
-This example worked smoothly, but we should wonder what we would do if the constant symbol $1$ was not present in the language. We can make a theory in this language that is equivalent to $T$ by defining $1$ as the least natural number greater than $0$. But this language doesn't have any interesting terms. In general when building a model of $T$ we will use the terms of an expanded language where constant symbols have been added for each possible definition.
+Of course there are many other terms such as $1+0+0+1$, should our model include these also? Yes and no. Our theory knows that $1+0+0+1$ is really equivalent to $1+1$. In other words, there is an equivalence relation on the terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$. We will need to work with *equivalence classes* of the terms.
 
 This idea is called a *Henkin construction* or the *Herbrand construction*, named for two mathematicians who contributed to this strategy. In order to begin, we first make a structure from terms.
 
-**Definition** Let $T$ be a theory. The structure $\mathcal H_0=\mathcal H_0(T)$ is defined as follows.
-
-* The universe of $\mathcal H_0$ consists of the terms of $\mathcal L$ with no  variables.
-* If $f$ is a function symbol, then define $f^{\mathcal H_0}(\tau_1,\ldots,\tau_n)$ to equal the term $f\tau_1\cdots\tau_n$.
-* If $R$ is a relation symbol, then define $(\tau_1\ldots,\tau_n)\in R^{\mathcal H_0}$ if and only if $T\vdash R\tau_1\cdots\tau_n$.
-
-This is a good start, but we have seen this model may have several problems. First, it doesn't identify terms that the theory knows are equivalent. Second, if there aren't any constant symbols in the language, this model will be empty. And third, it still might not be a model of $T$.
-
 **Definition** Let $T$ be a theory. The *Henkin structure* $\mathcal H=\mathcal H(T)$ is defined as follows.
 
-* The domain of $\mathcal H$ consists of the equivalence classes $[\tau]$ of elements of $\mathcal H_0$ with respect to the equivalence relation defined by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
+* The domain of $\mathcal H$ consists of the equivalence classes $[\tau]$ of $L$-terms $\tau$, with respect to the equivalence relation defined by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$.
 * If $f$ is a function symbol, then define $f^{\mathcal H}([\tau_1],\ldots,[\tau_n])$ to be the equivalence class $[f\tau_1\cdots\tau_n]$.
 * If $R$ is a relation symbol, then define $([\tau_1],\ldots,[\tau_n])\in R^{\mathcal H}$ if and only if $T\vdash R\tau_1\cdots\tau_n$.
 
-We invite the reader to check that this definition is well-defined, that is, the function values and relation tuples are independent of the equivalence class representatives. This will use the logical proof axioms about equality. We could equally call $\mathcal H$ the Herbrand structure.
+We invite the reader to check that this definition is well-defined, that is, the function values and relation tuples are independent of the equivalence class representatives. This will use the logical proof axioms about equality. We remark that the Henkin structure could equally have been called the Herbrand structure.
 
-**Lemma** If $\sigma$ is an atomic sentence, then $\mathcal H\models\sigma$ if and only if $T\vdash\sigma$.
+The Henkin structure works smoothly for the previous example. The universe will consist of $[0]$, $[1]$, $[1+1]$, etc. Each of these equivalence classes includes infinitely many terms that the theory knows are equal, for instance, $[1]$ includes $1$, $1+0$, $0+(1+0)$, etc. In the structure, $+$ and $\times$ behave as one would expect. So for instance $[1]+[1]=[1+1]$, and more generally all the axioms of $T$ will be true.
 
-*Proof sketch*: The key is to show by induction that $\mathrm{val}_{\mathcal H}(\tau)=[\tau]$ for all terms $\tau$. Then If $\sigma$ is the sentence $R\tau_1\cdots\tau_n$, our definition of $R^{\mathcal H}$ guarantees the desired result. $\blacksquare$
+But the next example shows that things aren't always this successful.
 
-We are clearly on our way to obtaining a model of $T$. But quantifiers are still a big problem.
+**Example** Let $\mathcal L_2=\set{+,0,<}$ and let $T_2$ be the standard axioms of arithmetic of the natural numbers. (Whenever an axiom of $T$ says something about the constant $1$, we can write an equivalent axiom of $T_2$ that says it about "the least natural number greater than $0$".) In this language the only terms are $0$, $0+0$, etc, so $\mathcal H$ consists of just one point $[0]$. Thus $\mathcal H(T_2)$ isn't a model of $T_2$.
 
-**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders with no maximum, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $<^{\mathcal H}$ is empty. Thus $\mathcal H$ is not a model of $T$, because $T$ includes the trichotomy axiom, and $\mathcal H$ does not satisfy trichtomoy.
-
-To fix this problem, we will work only with complete theories $T$.
-
-**Definition** A theory $T$ is *complete* if for every sentence $\sigma$ we have either $\sigma\in T$ or $\neg\sigma\in T$.
-
-**Lemma** If $T$ is a syntactically consistent theory, there exists a complete syntactically consistent theory $\bar T$ such that $T\subset\bar T$.
-
-*Proof*: Let $P$ be the partial order consisting of all syntactically consistent theories $U$ extending $T$. Then $P$ is partially ordered by set inclusion. Then chains of $P$ are bounded because the union of a chain of syntactically consistent theories is still syntactically consistent.
-
-By Zorn's lemma, there exists a maximal consistent theory $\bar T$. such that $T\subset\bar T$. We claim that $\bar T$ is complete. Indeed, if $\sigma\notin\bar T$, then $\bar T\cup\set{\sigma}$ is inconsistent, so by our theorem about proofs by contradiction, $\bar T\vdash\neg\sigma$. Since $\bar T$ is maximal, it follows that $\neg\sigma\in T$. $\blacksquare$
-
-We remark that if $T$ is a complete theory and $\alpha\vee\beta\in T$, then we must have either $\alpha\in T$ or $\beta\in T$ (check this!). Continuing the above example, if we complete $T$, then since $a<b\vee b<a$ is true, we will have either $a<b$ or $b<a$ in $\bar{T}$, whichever one Zorn's lemma picks for us. Thus the model $\mathcal H$ will be a two-element linear order.
-
-Does this mean the structure $\mathcal H$ is a model of $T$? The answer is still "no", because the original $T$ included the sentence $(\exists x) a<x\wedge b<x$, and $\mathcal H$ does not satisfy this sentence. This example has some terms, but still too few terms to force $\mathcal H$ to be a model of $T$.
-
-In order to fix this, we add new terms to the language that witness existential formulas.
+In order to make examples like this one work, we will have to use terms of an *expanded* language, where constant symbols have been added for every conceivable definition.
 
 **Definition** A theory $T$ is said to have *witnessing terms* if whenever $\phi(x)$ is a formula with one free variable $x$ there exists a term $\tau$ such that $T\vdash\exists x\phi(x)\to\phi(\tau)$.
 
-For example consider $\mathbb R$ as a field. If $\phi(x)$ is $\forall y xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the crux of the Henkin construction.
+For example consider the field of real numbers $\mathbb R$. If $\phi(x)$ is $\forall y xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the next key to Henkin/Herbrand construction.
 
 **Lemma** If $T$ is a syntactically consistent theory, then there exists a syntactially consistent theory $T'$ in an expanded language such that $T\subset T'$ and $T'$ has witnessing terms.
 
@@ -860,15 +837,37 @@ We claim that $T'$ is syntactically consitent. If it isn't, then there is a proo
 
 Now to add witnessing terms for all formulas, we inductively define $\mathcal L^{(n)},T^{(n)}$ as follows. First let $\mathcal L^{(0)}=\mathcal L$ and $T^{(0)}=T$. If $\mathcal L^{(n)},T^{(n)}$ have been defined, we let $\mathcal L^{(n+1)}$ include new constant symbols for each existential formula of $\mathcal L^{(n)}$, and let $T^{(n+1)}$ include corresponding sentences for each. Then by an argument similar to the above, each $T^{(n)}$ is syntactically consistent, and it follows that $T'=\bigcup T^{(n)}$ is syntactically consistent. Moreover with $T'$ we have "caught our tail" meaning that $T'$ has witnessing terms. $\blacksquare$
 
+In the last example with $0$ in the language but not $1$, the theory $T_2$ proves that there exists a least element greater than $0$, so when we go to $T_2'$ we will get a new constant symbol for $1$. For that matter we will get constant symbols for $2$, $3$, etc. When we construct $\mathcal H(T_2')$ we will indeed get a model of $T_2$.
+
+But the next and final example shows there is one more issue to consider.
+
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the trichotomy axiom.
+
+The problem in this example is that the theory $T$ doesn't say much about its terms. To fix this last issue, we will work with theories that say as much as they can.
+
+**Definition** A theory $T$ is *complete* if for every sentence $\sigma$ we have either $\sigma\in T$ or $\neg\sigma\in T$.
+
+The next result says that an incomplete theory can always be *extended* to a complete theory. This is done by making a bunch of arbitrary decisions about what sentences to add, in a process similar to the proof of the propositional compactness theorem.
+
+**Lemma** If $T$ is a syntactically consistent theory, there exists a complete syntactically consistent theory $\bar T$ such that $T\subset\bar T$.
+
+*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\{\sigma\}$ is clearly consistent. If $T\not\vdash\sigma$, then $T\cup\{\neg\sigma\}$ will be consistent (check this!).
+
+Now iterate the procedure until there are no more sentences $\sigma$ such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. The resulting theory $\bar T$ will be consistent and complete. $\blacksquare$
+
+Referring back to the last example, if we extend $T$ to $\bar T$ then we must add one of the sentences $a<b$ or $b<a$ to $\bar T$. Thus the resulting Henkin structure of $\bar T$ will be a linear order and in particular a model of $T$.
+
+We are finally ready to use the Henkin construction to prove the completeness theorem.
+
 **Theorem** (Completeness Theorem, version II) If $T$ is syntactically consistent, then $T$ has a model.
 
-*Proof*: We apply the lemmas we have proved in sequence. Given $T$, we first extend it to a theory with witnessing terms and then further extend it to a complete theory $T^\ast$ in the expanded language. We then let $\mathcal H$ be the Henkin structure of $T^\ast$. 
+*Proof*: We apply the lemmas we have proved in sequence. Given $T$, we first extend it to a theory with witnessing terms in an expanded language, and then further extend it to a complete theory $T^\ast$ in the expanded language. We then let $\mathcal H$ be the Henkin structure of $T^\ast$. 
 
-We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only if $\mathcal H\models\sigma$, so that $\mathcal H$ really is a model of $T^\ast$. For this we proceed by induction on the *complexity* of $\sigma$. For this we can assume that the only connectives in $\sigma$ are $\wedge,\neg,\exists$ and proceed by induction on the number of occurrences of these symbols.
+We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only if $\mathcal H\models\sigma$, so that $\mathcal H$ really is a model of $T^\ast$ and therefore of $T$. We will proceed by induction on the *complexity* of $\sigma$. For this we can assume that the only connectives in $\sigma$ are $\wedge,\neg,\exists$, and proceed by induction on the number of occurrences of these symbols.
 
-We have already proved the result for atomic sentences $\sigma$ directly from the definition of $\mathcal H$.
+First assume $\sigma$ is an atomic sentence $R\tau_1\cdots\tau_n$. Then the desired result follows from the definition of the relations of $\mathcal H$. (There is actually a subtle point that we must check $\mathrm{val}^{\mathcal H}(\tau)=[\tau]$ for all terms $\tau$. This is an induction on the construction of $\tau$ using the definition of $\mathcal H$ for the base case.)
 
-If $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\sigma\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\sigma$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$.
+Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\sigma\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\sigma$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$.
 
 Finally if $\sigma$ is of the form $\exists x\phi(x)$ then since $T^\ast$ has witnessing terms there is a term $\tau$ in the expanded language such that the sentence $\exists x\phi(x)\to\phi(\tau)$ is in $T^\ast$. Now:
 
