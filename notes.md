@@ -768,6 +768,8 @@ Assume that $T\vdash\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T$, is $\phi
 
 *Proof*: If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then using propositional tautologies we have $T\cup\{\neg\alpha\}\vdash\alpha$. By the deduction theorem, $T\vdash\neg\alpha\rightarrow\alpha$. By a tautology, $T\vdash\alpha\vee\alpha$ and therefore $T\vdash\alpha$. $\blacksquare$
 
+We invite the reader to verify that the converse of the Proofs by contradiction theorem is also true.
+
 **Theorem** (Universal generalization and existential instantiation) Let $\mathcal L$ be a given signature, and let $c$ be a constant symbol such that $c\notin\mathcal L$.
 
 * (UG) If $T\vdash\phi(c)$, then $T\vdash\forall x\phi(x)$.
@@ -1236,21 +1238,21 @@ In this proof, we defined a function $r\colon HF\to HF$ with the property that $
 
 In this section we apply our understanding of diagonalization and undecidability in the setting of theories and deductions. The result will be Godel's incompleteness theorems.
 
-We have said that if $\phi$ is a well-formed formula we can view it as an element of HF using any standard coding method. Thus if $T$ is a theory, we can view it as a subset of HF, and ask whether $T$ is decidable or not. Most of the theories that we have discussed in this course are decidable theories, because we listed the axioms clearly. The main exceptions are when we use the $\mathrm{Th}(\mathcal A)$ construction, or when we perform an arbitrary completion $\bar T$ of some theory $T$.
+We have said that if $\phi$ is a well-formed formula we can view it as an element of HF using any standard coding method. Thus if $T$ is a theory, we can view it as a subset of HF, and ask whether $T$ is decidable or not. Most of the theories that we have discussed in this course are decidable theories, because we listed the axioms in a straightforward way. But exceptions may occur when we use indirect constructions to define $T$, such as $T=\mathrm{Th}(\mathcal A)$ or $T=\bar {T_0}$. Another indirect construction is the following:
 
 **Definition** For any theory $T$ we let $T^\vdash=\set{\sigma:T\vdash\sigma}$. We say $T^\vdash$ is the *deductive closure* of $T$.
 
-If $T$ is decidable, we can still consider the question of whether $T^\vdash$ is decidable or not. We will always have that $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a proof from $T$ of $\sigma$. We invite the reader to carry out the details of this statement.
+If $T$ is decidable, we can still consider the question of whether $T^\vdash$ is decidable or not. We will always have that $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a deduction from $T$ of $\sigma$. We invite the reader to carry out the details of this justification.
 
-For example, ZFC is a decidable theory. Most of the axioms of ZFC are specific well-formed sentences. The Separation and Replacement axioms are actually axiom schemes, which say for any formula $\phi$ a certain sentence involving $\phi$ is true. Nevertheless these templates are easy to recognise, so give a sentence $\sigma$ we can imagine testing whether it matches an instance of the Separation or Replacement axiom, or not.
+For example, ZFC is a decidable theory. Most of the axioms of ZFC are specific well-formed sentences. The Separation and Replacement axioms are actually axiom schemes, which say that for any formula $\phi$ a certain sentence involving $\phi$ is true. Nevertheless these axiom schemes are templates that are easy to recognise. That is, given a sentence $\sigma$, we can imagine a simple condition or procedure to decide whether $\sigma$ is an instance of the Separation or Replacement axiom or not.
 
-But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search for a deduction. We will see that $\mathrm{ZFC}^\vdash$ turns out to be *undecidable*. Whether that's surprising or not depends on your point of view. ZFC is powerful enough to settle many if not most open problems in mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, then modern and future humans and automated theorem provers should be able to settle most open problems in mathematics.
+But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search over all possible deductions. We will see that $\mathrm{ZFC}^\vdash$ turns out to be *undecidable*. Whether that's surprising or not depends on your point of view. ZFC is powerful enough to settle many if not most open problems in mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, then contemporary and future humans and automated theorem provers should be able to settle most open problems in mathematics.
 
-Of course you may feel that studying ZFC is rather specific, since we could always add or subtract some of the axioms. In the rest of the section, it will be sufficient to work with the following much simpler theory.
+Of course you may feel that studying ZFC is rather specific, since we could always debate, add, and subtract some of the axioms. In the rest of the section, it will be sufficient to work with the following theory which is much more basic.
 
-**Definition** The theory CST, or *core set theory*, consists of the Extensionality, Pairing, Union, Separation, and Foundation.
+**Definition** The theory CST, or *core set theory*, consists of Extensionality, Pairing, Union, Separation, and Foundation.
 
-This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$, includingt induction on natural numbers.
+This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including many properties of HF and natural numbers, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$.
 
 **Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
 
