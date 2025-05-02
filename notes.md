@@ -63,7 +63,7 @@ Next, a language should tell us how to put symbols from the alphabet together.
 For example, both of the following are expressions:
 
 * $(P\wedge Q)\vee R$
-* $((P\rightarrow)$
+* $((P\rightarrow($
 
 Clearly some expressions are more useful than others! The following definition helps us pick out the expressions which are more likely to have a useful meaning.
 
@@ -143,7 +143,7 @@ We next generalise the $\models$ notation once more to allow sets of formulas to
 
 The semantic implication $\Sigma\models\alpha$ is more interesting when $\Sigma$ is infinite (why is this?). The next result states that even when $\Sigma$ is infinite, just a finite subset of $\Sigma$ is needed.
 
-**Theorem** (The compactness theorem). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma\models\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\models\alpha$.
+**Theorem** (Compactness theorem, version I). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma\models\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\models\alpha$.
 
 The compactness theorem for propositional logic is one of the cornerstones of the theory, as will be the more general compactness theorem for first order logic. The name of the compactness theorem is due to its relationship to the idea of compactness in analysis, something which will become a little clearer later on.
 
@@ -153,9 +153,9 @@ The compactness theorem can be restated as a statement about consistency.
 
 We invite the reader to verify that $\Sigma$ is consistent if and only if $\Sigma\not\models (P\wedge(\neg P))$. Sometimes the symbol $\bot$ is used for a tautologically false formula such as $(P\wedge(\neg P))$. Thus we may say $\Sigma$ is consistent if and only if $\Sigma\not\models\bot$.
 
-**Theorem** (The compactness theorem again). Let $\Sigma$ be a set of well-formed formulas. If every finite subset of $\Sigma$ is consistent, then $\Sigma$ is consistent.
+**Theorem** (Compactness theorem, version II). Let $\Sigma$ be a set of well-formed formulas. If every finite subset of $\Sigma$ is consistent, then $\Sigma$ is consistent.
 
-We leave it to the reader to establish an equivalence between the two statements of the compactness theorem.
+We invite the reader to establish an equivalence between the two versions of the compactness theorem.
 
 The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to\set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
 
