@@ -237,7 +237,7 @@ Here we introduce some foundational notation and constructs using sets. We assum
 
 **Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
 
-We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\{a\},\{b\}}$ or $\set{a,\set{a,b}}$.
+We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\lbrace a\rbrace,\lbrace b\rbrace}$ or $\set{a,\set{a,b}}$.
 
 **Definition** Let $A,B$ be sets. The *cartesian product* of $A$ and $B$ is defined as $A\times B=\set{(a,b):a\in A,\ b\in B}$.
 
@@ -373,7 +373,7 @@ The next several axioms of set theory are construction axioms, that is, axioms t
 
 **Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\set{a_1,\ldots,a_n}$ is a set.
 
-For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\{\}$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
+For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\lbrace\rbrace$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
 
 We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the Strong Pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as they are related by the $\in$ relation. (That is, when $x\in y$ draw an upwards arrow from $x$ to $y$.)
 
@@ -381,7 +381,7 @@ Without any other axioms, the Strong Pairing axiom can *only* help us construct 
 
 **Axiom** (Infinity) There exists a set HF such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the Strong Pairing axiom).
 
-Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\{HF\}$. However, the axioms so far do not help us construct an infinite set besides HF.
+Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\lbrace HF\rbrace$. However, the axioms so far do not help us construct an infinite set besides HF.
 
 In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal!
 
@@ -429,15 +429,15 @@ The second answer is that we will also construct the natural numbers using set t
 
 The *von Neumann* natural numbers are constructed as follows:
 
-* $0=\emptyset=\{\}$
-* $1=\{0\}=\{\{\}\}$
-* $2=\{0,1\}=\{\{\},\{\{\}\}\}$
-* $3=\{0,1,2\}=\{\{\},\{\{\}\},\{\{\},\{\{\}\}\}\}$
+* $0=\emptyset=\lbrace\rbrace$
+* $1=\lbrace0\rbrace=\lbrace\lbrace\rbrace\rbrace$
+* $2=\lbrace0,1\rbrace=\lbrace\lbrace\rbrace,\lbrace\lbrace\rbrace\rbrace\rbrace$
+* $3=\lbrace0,1,2\rbrace=\lbrace\lbrace\rbrace,\lbrace\lbrace\rbrace\rbrace,\lbrace\lbrace\rbrace,\lbrace\lbrace\rbrace\rbrace\rbrace\rbrace$
 * $\vdots$
 
 In general, we recursively define:
 
-* $n+1=n\cup\{n\}$
+* $n+1=n\cup\lbrace n\rbrace$
 
 We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\set{0,\ldots,n-1}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
 
@@ -495,14 +495,14 @@ The starting observation is that we can extend the von Neumann natural numbers i
 * $\vdots$
 * $n$
 * $\omega=\bigcup_{n\in\mathbb N}n$
-* $\omega+1=\omega\bigcup\{\omega\}$
-* $\omega+2=(\omega+1)\cup\{\omega+1\}$
+* $\omega+1=\omega\bigcup\lbrace\omega\rbrace$
+* $\omega+2=(\omega+1)\cup\lbrace\omega+1\rbrace$
 * $\vdots$
 * $\omega+\omega=\bigcup_{n\in\mathbb N}(\omega+n)$
-* $\omega+\omega+1=(\omega+\omega)\cup\{\omega+\omega\}$
+* $\omega+\omega+1=(\omega+\omega)\cup\lbrace\omega+\omega\rbrace$
 * $\vdots$
 
-Each ordinal in the sequence falls into one of two types. The *successor* ordinals are those $\alpha$ of the form $\beta\cup\{\beta\}$ for some ordinal $\beta$. We sometimes use the notation $S(\beta)$ or $\beta+1$ for the set $\beta\cup\{\beta\}$ because it is the successor of $\beta$. The *limit* ordinals are those $\lambda$ which are not the successor of any ordinal, such as $\omega$ and $\omega+\omega$. Instead a limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup\set{\beta:\beta<\lambda}$.
+Each ordinal in the sequence falls into one of two types. The *successor* ordinals are those $\alpha$ of the form $\beta\cup\lbrace\beta\rbrace$ for some ordinal $\beta$. We sometimes use the notation $S(\beta)$ or $\beta+1$ for the set $\beta\cup\lbrace\beta\rbrace$ because it is the successor of $\beta$. The *limit* ordinals are those $\lambda$ which are not the successor of any ordinal, such as $\omega$ and $\omega+\omega$. Instead a limit ordinal $\lambda$ is the union of all ordinals that came before, that is, $\lambda=\bigcup\set{\beta:\beta<\lambda}$.
 
 (This last equation is a fact and not a definition or construction. It isn't suitable as a definition because it is circular with $\lambda$ on both sides. To construct ordinals properly, somewhat more work is needed: an ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
 
@@ -567,7 +567,7 @@ We now apply our knowledge of syntax to first order logic. The *basic lexicon* o
 
 In a given context, we will extend the lexicon to include additional function and relation symbols with given arity. The most important examples include $+,\cdot,<,\in$ and so forth.
 
-**Definition** A *signature* $\mathcal L$ of first order logic consists of a set of function symbols $\{f_i\}$, a set of relation symbols $\set{R_j}$, and the arities $a(f_i)$ and $a(R_j)$ for all $i,j$.
+**Definition** A *signature* $\mathcal L$ of first order logic consists of a set of function symbols $\lbrace f_i\rbrace$, a set of relation symbols $\set{R_j}$, and the arities $a(f_i)$ and $a(R_j)$ for all $i,j$.
 
 Given a signature $\mathcal L$, the corresponding *first order lexicon* consists of $\mathcal L$ together with the basic lexicon described above. A first order lexicon is sometimes also called a *language*.
 
@@ -575,7 +575,7 @@ For example, if we are studying group theory then our signature should include a
 
 With the lexicon established, we naturally wish to focus on just the well-formed expressions in that lexicon, and assign meaning to these well-formed expressions. Unfortunately this is still not always possible. To see this, consider the well-formed expression $+x\forall yz$, which in infix notation translates to $x+(\forall yz)$. Although this is meaningless, you may check that it uses each symbol's arity correctly. (Contrast this with the simpler situation in propositional logic.)
 
-**Definition** Let $\mathcal L=(\{f_i\},\{R_j\})$ be a signature of first order logic.
+**Definition** Let $\mathcal L=(\lbrace f_i\rbrace,\lbrace R_j\rbrace)$ be a signature of first order logic.
 
 * The *terms* of $\mathcal L$ are the well-formed expressions in the lexicon consisting of just the symbols $f_i$ and $x_n$.
 * The *atomic formulas* of $\mathcal L$ are the expressions of the form:  
@@ -613,9 +613,9 @@ In order to decide the truth value of a sentence, we still need to know the cont
 * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
 * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
 
-**Example** Let $\mathcal L=\{<\}$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\lbrace<\rbrace$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\{\cdot\}$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\lbrace\cdot\rbrace$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
 
 **Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the signature with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
 
@@ -705,7 +705,7 @@ With the concept of first order satisfaction in hand, we can now define several 
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
 * A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
-In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a signature $\mathcal L=\{P_1,\ldots,P_n\}$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
+In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a signature $\mathcal L=\lbrace P_1,\ldots,P_n\rbrace$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
 
 More generally, we can start with a propositional tautology $\alpha$, and replace each propositional variable symbol with any first order sentence, and the result will be a semantically valid sentence. For example $((\forall x)(\forall y)x^2<y)\vee\neg((\forall x)(\forall y)x^2<y)$ is a valid sentence because it is of the *form* $P\vee\neg P$.
 
@@ -762,11 +762,11 @@ The definition of deduction that we have given is of theoretical value, but not 
 
 *Proof*: The forward implication is just modus ponens. For the reverse implication, assume that $T\cup\set{\alpha}\vdash\beta$ and let $\sigma_1,\ldots\sigma_n$ be a deduction. We will show by induction that for all $i$ we have $T\vdash\alpha\to\sigma_i$.
 
-Assume that $T\vdash\alpha\to\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T\cup\{\alpha\}$, or is a logical axiom, then it is clear that $T\vdash\alpha\to\sigma_i$. Otherwise $\sigma_i$ followed from earlier items by modus ponens. By inductive hypothesis, we then have $T\vdash\alpha\to\sigma_j$ and $T\vdash\alpha\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\alpha\to\sigma_i$. This completes the induction. $\blacksquare$
+Assume that $T\vdash\alpha\to\sigma_j$ for all $j<i$. If $\sigma_i$ lies in $T\cup\lbrace\alpha\rbrace$, or is a logical axiom, then it is clear that $T\vdash\alpha\to\sigma_i$. Otherwise $\sigma_i$ followed from earlier items by modus ponens. By inductive hypothesis, we then have $T\vdash\alpha\to\sigma_j$ and $T\vdash\alpha\to(\sigma_j\to\sigma_i)$. It follows using easy tautologies and modus ponens that $T\vdash\alpha\to\sigma_i$. This completes the induction. $\blacksquare$
 
-**Theorem** (Proofs by contradiction) If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then $T\vdash\alpha$.
+**Theorem** (Proofs by contradiction) If $T\cup\lbrace\neg\alpha\rbrace\vdash\sigma\wedge\neg\sigma$, then $T\vdash\alpha$.
 
-*Proof*: If $T\cup\{\neg\alpha\}\vdash\sigma\wedge\neg\sigma$, then using propositional tautologies we have $T\cup\{\neg\alpha\}\vdash\alpha$. By the deduction theorem, $T\vdash\neg\alpha\rightarrow\alpha$. By a tautology, $T\vdash\alpha\vee\alpha$ and therefore $T\vdash\alpha$. $\blacksquare$
+*Proof*: If $T\cup\lbrace\neg\alpha\rbrace\vdash\sigma\wedge\neg\sigma$, then using propositional tautologies we have $T\cup\lbrace\neg\alpha\rbrace\vdash\alpha$. By the deduction theorem, $T\vdash\neg\alpha\rightarrow\alpha$. By a tautology, $T\vdash\alpha\vee\alpha$ and therefore $T\vdash\alpha$. $\blacksquare$
 
 We invite the reader to verify that the converse of the Proofs by contradiction theorem is also true.
 
@@ -799,7 +799,7 @@ We will actually study the completeness theorem in another form. Recall that a t
 
 **Theorem** (Soundness and completeness theorems, version II) $T$ is syntactically consistent if and only if $T$ is semantically consistent.
 
-To see version II implies version I, assume version II is true. Then $T\models\sigma$ if and only if there does not exist a model of $T\cup\{\neg\sigma\}$, which means $T\cup\{\neg\sigma\}$ is semantically inconsistent, which is true if and only if $T\cup\{\neg\sigma\}$ is syntactically inconsistent, which is equivalent to $T\vdash\sigma$ (see the proposition on proofs by contradiction). Thus version I is true. We invite the reader to prove that version I implies version II in a similar fashion.
+To see version II implies version I, assume version II is true. Then $T\models\sigma$ if and only if there does not exist a model of $T\cup\lbrace\neg\sigma\rbrace$, which means $T\cup\lbrace\neg\sigma\rbrace$ is semantically inconsistent, which is true if and only if $T\cup\lbrace\neg\sigma\rbrace$ is syntactically inconsistent, which is equivalent to $T\vdash\sigma$ (see the proposition on proofs by contradiction). Thus version I is true. We invite the reader to prove that version I implies version II in a similar fashion.
 
 Thus, proving the completeness theorem is really about building a model. If $T$ is reasonable in the sense that we can't use the sentences of $T$ to deduce a contradiction, then it should be possible to *construct* a model of $T$, that is, a universe in which the sentences of $T$ hold true.
 
@@ -853,7 +853,7 @@ The next result says that an incomplete theory can always be *extended* to a com
 
 **Lemma** If $T$ is a syntactically consistent theory, there exists a complete syntactically consistent theory $\bar T$ such that $T\subset\bar T$.
 
-*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\{\sigma\}$ is clearly consistent. If $T\not\vdash\sigma$, then $T\cup\{\neg\sigma\}$ will be consistent (check this!).
+*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\lbrace\sigma\rbrace$ is clearly consistent. If $T\not\vdash\sigma$, then $T\cup\lbrace\neg\sigma\rbrace$ will be consistent (check this!).
 
 Now iterate the procedure until there are no more sentences $\sigma$ such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. The resulting theory $\bar T$ will be consistent and complete. $\blacksquare$
 
@@ -1025,7 +1025,7 @@ The following result shows the connection between categorical and complete theor
 
 **Thoerem** (Vaught test) Let $T$ be a consistent theory in a finite language with no finite models. If $T$ is $\kappa$-categorical for some $\kappa$, then $T$ is complete.
 
-*Proof*: Suppose that $T$ is $\kappa$-categorical but not complete. Then there is a sentence $\sigma$ such that both $T\cup\{\sigma\}$ and $T\cup\{\neg\sigma\}$ are consistent. By the Lowenheim–Skolem theorem, there are models $\mathcal A,\mathcal B$ of $T\cup\{\sigma\},T\cup\{\neg\sigma\}$ respectively, of cardinality $\kappa$. This contradicts that $T$ is $\kappa$-categorical. $\blacksquare$
+*Proof*: Suppose that $T$ is $\kappa$-categorical but not complete. Then there is a sentence $\sigma$ such that both $T\cup\lbrace\sigma\rbrace$ and $T\cup\lbrace\neg\sigma\rbrace$ are consistent. By the Lowenheim–Skolem theorem, there are models $\mathcal A,\mathcal B$ of $T\cup\lbrace\sigma\rbrace,T\cup\lbrace\neg\sigma\rbrace$ respectively, of cardinality $\kappa$. This contradicts that $T$ is $\kappa$-categorical. $\blacksquare$
 
 **Corollary** The theory of dense linear orders without endpoints is complete. In particular, $(\mathbb Q,<)$ and $(\mathbb R,<)$ are elementarily equivalent.
 
@@ -1057,7 +1057,7 @@ Beginning with definability, we first recall the following definition.
 
 **Example** Let $\mathcal A=(\mathbb N;+)$. Then $0$ is definable using the formula $x+x=x$, and $<$ is definable using the formula $(\exists z)x+z=y$. We invite the reader to show that $1$ is definable and in fact every element of $\mathbb N$ is definable. (It's also worth thinking about the harder question: is $\times$ definable?)
 
-**Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula with free variables $x_1,\ldots,x_n$. Let $\mathcal L'=\mathcal L\cup\{R\}$, where $R$ is a new relation symbol. The *expansion by definitions* of $T$ with $\phi$ is the $\mathcal L'$-theory $T'=T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n)}$.
+**Definition** Let $T$ be an $\mathcal L$-theory, and $\phi$ a formula with free variables $x_1,\ldots,x_n$. Let $\mathcal L'=\mathcal L\cup\lbrace R\rbrace$, where $R$ is a new relation symbol. The *expansion by definitions* of $T$ with $\phi$ is the $\mathcal L'$-theory $T'=T\cup\set{\phi(x_1,\ldots,x_n)\iff R(x_1,\ldots,x_n)}$.
 
 It is not difficult to show using surgery on deductions that if $T'$ is an expansion by definitions of $T$, then $T,T'$ prove exactly the same $\mathcal L$-sentences. Moreover if $\phi'$ is any $\mathcal L'$-formula then $T'$ proves that $\phi'$ equivalent to an $\mathcal L$-formula $\phi$. Finally, if $\mathcal A$ is any model of $T$ then $\mathcal A$ can be made into a model of $T'$ by interpreting the symbols of $\mathcal L'$ according to their definitions.
 
@@ -1067,13 +1067,13 @@ In the rest of this section we study definability in models of set theory. That 
 
 **Definition** Let $A$ be any set. Then $A$ gives rise to a *set model* $(A;\epsilon)$ with domain $A$ and binary relation $\epsilon$.
 
-When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all of ZFC, but some sub-theory of ZFC. For instance, every set model satisfies Extensionality. The set $\mathbb N$ doesn't satisfy pairing because for instance $(0,1)=\{1,2\}$ isn't a natural number.
+When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all of ZFC, but some sub-theory of ZFC. For instance, every set model satisfies Extensionality. The set $\mathbb N$ doesn't satisfy pairing because for instance $(0,1)=\lbrace1,2\rbrace$ isn't a natural number.
 
 One of the most useful set models is HF, the set of hereditarily finite sets. (In references, this may also be denoted as $V_\omega$ or $\mathcal R_\omega$.) It is an exercise to check that HF satisfies all of ZFC except Infinity. Similarly the set model HC consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
 
 When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example consider $\mathbb N$ and HF. We have $\mathbb N\subset HF$. Both these set models agree on which object is the empty set, but they disagree on whether $\epsilon$ is a linear order or not. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with $\mathbb N$ and HF about which object is the empty set!
 
-**Definition** Let $A,B$ be sets such that $A\subset B$. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\{x_1,x_2,\ldots\}\to A$ we have $A\models\phi[s]\iff B\models\phi[s]$.
+**Definition** Let $A,B$ be sets such that $A\subset B$. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\lbrace x_1,x_2,\ldots\rbrace\to A$ we have $A\models\phi[s]\iff B\models\phi[s]$.
 
 Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive. Recall that a set $A$ is *transitive* if $b\in a\in A$ implies $b\in A$.
 
@@ -1081,7 +1081,7 @@ Which formulas are absolute between which set models? This is a complicated ques
 
 The notation $\exists y\in z$ and $\forall y\in z$ aren't technically part of our first order logic. Instead these are abbreviations: $(\exists y\in z)\cdots$ is short for $(\exists y)y\in z\wedge\cdots$, and $(\forall y\in z)\cdots$ is short for $(\forall y)y\in z\rightarrow\cdots$.
 
-**Example** The statement that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say something like $(\exists a)(\exists b) x=(a,b)$, but these quantifiers are not bounded. In fact $a,b$ are found somewhere inside the structure of $x$: $(\exists y\in x)(\exists z\in x)(\exists a\in z)(\exists b\in z)x=\{y,z\}\wedge y=\{a\}\wedge z=\{a,b\}$.
+**Example** The statement that $x$ is an ordered pair may be expressed as a $\Delta_0$-formula. One needs to say something like $(\exists a)(\exists b) x=(a,b)$, but these quantifiers are not bounded. In fact $a,b$ are found somewhere inside the structure of $x$: $(\exists y\in x)(\exists z\in x)(\exists a\in z)(\exists b\in z)x=\lbrace y,z\rbrace\wedge y=\lbrace a\rbrace\wedge z=\lbrace a,b\rbrace$.
 
 On the other hand, the proposition that $x$ is a power set of another set cannot (apparently) be expressed as a $\Delta_0$-formula. Here one wishes to let $\phi(x)$ say $(\exists y)(\forall z)(z\in y\leftrightarrow z\subset x)$ but these quantifiers are unbounded and in fact cannot be completely eliminated.
 
@@ -1200,7 +1200,7 @@ Lastly, there is also a version of the recursion theorem along well-formed formu
 
 Let $W\subset HF$ consisting of just the codes for the well-formed formulas. Then $W$ is decidable using a version of the recursion theorem.
 
-Next let $S$ (for "satisfaction") consist al all ordered pairs $(p,s)$ where $p$ is a code for a $\Delta_0$-formula $\phi$, $s$ is a substitution of the free variables of $\phi$, and $HF\models\phi[s]$. Then $S$ is once again decidable using a version of the recursion theorem. Here we are constructing a function $F$ from such pairs $(p,s)$ to $\{T,F\}$ (coded as $\{1,0\}$) in terms of the sub-formulas of $p$ by formalising the definition of $\models$.
+Next let $S$ (for "satisfaction") consist al all ordered pairs $(p,s)$ where $p$ is a code for a $\Delta_0$-formula $\phi$, $s$ is a substitution of the free variables of $\phi$, and $HF\models\phi[s]$. Then $S$ is once again decidable using a version of the recursion theorem. Here we are constructing a function $F$ from such pairs $(p,s)$ to $\lbrace T,F\rbrace$ (coded as $\lbrace1,0\rbrace$) in terms of the sub-formulas of $p$ by formalising the definition of $\models$.
 
 #### Undecidable sets
 
@@ -1264,7 +1264,7 @@ We begin by showing we can "represent" subsets of HF inside the theory $CST$ its
 
 The propostion says that in logical formulas, we can reference every single element of HF without needing to expand the signature or theory CST with new constant symbols. It's similar to the situation in arithmetic where we can refer to $n\in\mathrm N$ as the $n$-th least element. We invite the reader to carry out the proof of the result.
 
-**Definition** Let $\mathcal L=\{\in\}$ and $T$ be an $\mathcal L$-theory. Given a formula $\phi(x)$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
+**Definition** Let $\mathcal L=\lbrace\in\rbrace$ and $T$ be an $\mathcal L$-theory. Given a formula $\phi(x)$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
 
 **Definition** With $T$ as above, a subset $A\subset HF$ is *representable* in $T$ if there is a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(\langle a\rangle)$.
 
