@@ -1,25 +1,26 @@
 % Compile command:
-% pandoc -H header.tex --shift-heading-level-by=-1 --toc notes.md -o notes.pdf
+% pandoc --from=markdown-markdown_in_html_blocks-native_divs -H header.tex -V documentclass=amsbook -V fontsize=11pt --top-level-division=chapter --shift-heading-level-by=-1 --toc --toc-depth=2 notes.md -o notes.pdf
 
-\usepackage[fontsize=11pt]{scrextend}
-\usepackage{mathpazo}
+% \usepackage[fontsize=11pt]{scrextend}
+\usepackage{lmodern}
+\usepackage{newpxtext,newpxmath}
 \usepackage{setspace}\onehalfspacing\raggedbottom
-\usepackage[paper=a4paper,vscale=.8,vmarginratio=4:3]{geometry}
+\usepackage[paper=a4paper,vscale=.8,hmarginratio=1:1,vmarginratio=4:3]{geometry}
 \usepackage{hyperref}
 \newcommand{\set}[1]{\left\{\,#1\,\right\}}
 
 \usepackage{etoolbox}
-\newtoggle{afterpart}
-\pretocmd{\subsection}
-  {\iftoggle{afterpart}
-    {\global\togglefalse{afterpart}}% we're after a part
-    {\clearpage}% we're not immediately after a part
-  }{}{}
-\pretocmd{\section}
-  {\clearpage % do a page break
-   \global\toggletrue{afterpart}% tell \section we're just after a part
+\newtoggle{afterchapter}
+\pretocmd{\section}{
+  \iftoggle{afterchapter}{
+    \global\togglefalse{afterchapter}
+  }{
+    \clearpage
   }
-  {}{}
+}{}{}
+\pretocmd{\chapter}{
+  \global\toggletrue{afterchapter}
+}{}{}
 
 \makeatletter
 \pretocmd{\@seccntformat}{\S}{}{}

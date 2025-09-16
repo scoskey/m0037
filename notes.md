@@ -4,12 +4,7 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
-<!--
-Compiling
-Comment out the toc
-pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
--->
-
+<div>
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
@@ -27,6 +22,7 @@ pandoc -H header.tex --shift-heading-level-by=-1 notes.md -o notes.pdf
 - [8. Definability, absoluteness, and decidability](#8-definability-absoluteness-and-decidability)
 - [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
 - [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
+</div>
 
 ## Part I: Introduction to logic and set theory
 
