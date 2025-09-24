@@ -4,7 +4,6 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
-<div>
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
@@ -22,7 +21,6 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 - [8. Definability, absoluteness, and decidability](#8-definability-absoluteness-and-decidability)
 - [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
 - [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
-</div>
 
 ## Part I: Introduction to logic and set theory
 
@@ -40,9 +38,7 @@ In this module we will focus primarily on first order logic. However we will beg
 
 ### 1. Propositional logic
 
-We begin our study of mathematical logic with the relatively simple theory of *propositional logic*. This theory deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists).
-
-In the next part we will study first order logic, which adds the quantifiers back in. While that means the progress we make in this section will later be replaced, we include it to help us transition from basic logic to genuine mathematical logic.
+We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists). In the next part we will study first order logic, which adds the quantifiers back in. While propositional logic is thus much simpler than first order logic, learning it is not a waste of time for two reasons: (1) propisitional logic has many uses and applications by itself, and (2) our understanding of propositional logic will help us to understand first order logic.
 
 We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols we may write. The alphabet of propositional logic includes:
 
