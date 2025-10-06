@@ -8,7 +8,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
 - [1. Propositional logic](#1-propositional-logic)
-- [2. Naive set theory and the proof of compactness](#2-naive-set-theory-and-the-proof-of-compactness)
+- [2. More about compactness, introductory set theory](#2-more-about-compactness-introductory-set-theory)
 - [3. Axiomatic set theory and foundations](#3-axiomatic-set-theory-and-foundations)
 
 [Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
@@ -300,7 +300,7 @@ Informally, cardinality means the size of a set. If $A$ is finite, then there ex
 
 * We say $\vert A\vert\leq\vert B\vert$ if there exists an injective function from $A$ to $B$.
 * We say $\vert A\vert=\vert B\vert$ if there exists a bijective function from $A$ to $B$.
-* We say $\vert A\vert\lt\vert B\vert$ if $\vert A\vert\leq\vert B\vert$ and $\vert A\vert\neq\vert B\vert$.
+* We say $\vert A\vert<\vert B\vert$ if $\vert A\vert\leq\vert B\vert$ and $\vert A\vert\neq\vert B\vert$.
 
 The simple notion of bijective cardinality allows us to define countable and uncountable sets, something frequently used throughout mathematics.
 
