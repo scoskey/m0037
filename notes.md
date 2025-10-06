@@ -28,17 +28,19 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 
 *Logic* is the area of study that concerns reasoning. It has of course been studied by both philosophers and mathematicians for several millennia.
 
-In this module we will study *mathematical logic*, which has been studied since late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
+In this module we will study *mathematical logic*, which has been studied since the late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
 
-Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like groups, rings, graphs, and so on.
+Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like number systems, functions, graphs, groups, rings, topological spaces, and so on.
 
-The modern field of mathematical logic now consists of three interconnected subfields: first order logic, set theory, and computability theory.
+The modern field of mathematical logic now consists of three interconnected subfields: first order logic and model theory, set theory, and computability theory.
 
 In this module we will focus primarily on first order logic. However we will begin our study with the much simpler propositional logic, along with some elementary set theory to support our studies. We will conclude with an introduction to computability theory and the incompleteness phenomenon.
 
 ### 1. Propositional logic
 
-We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists). In the next part we will study first order logic, which adds the quantifiers back in. While propositional logic is thus much simpler than first order logic, learning it is not a waste of time for two reasons: (1) propisitional logic has many uses and applications by itself, and (2) our understanding of propositional logic will help us to understand first order logic.
+We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists).
+
+In the next part we will study first order logic, which adds in the quantifiers. While propositional logic is thus much simpler than first order logic, it nonetheless has many uses and applications. Moreover, familiarity with propositional logic will help us when we approach first order logic.
 
 We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols we may write. The alphabet of propositional logic includes:
 
@@ -57,7 +59,7 @@ For example, both of the following are expressions:
 * $(P\wedge Q)\vee R$
 * $((P\rightarrow($
 
-Clearly some expressions are more useful than others! The following definition helps us pick out the expressions which are more likely to have a useful meaning.
+Clearly some expressions are more useful than others! The following definition helps us pick out the expressions that are more likely to have a useful meaning.
 
 **Definition** An expression is called a *well-formed formula* (or *wff*, or simply *formula*) if it can be constructed using the following base case and recursive rule:
 
@@ -76,9 +78,9 @@ The following are not well-formed formulas:
 
 The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well-formed formula because it has too few brackets. As humans we can infer it intends to mean the same as $((P\wedge Q)\vee R)$. When there is no cause for confusion we will sometimes write such incorrect expressions, and ask the reader to mentally insert the needed brackets.
 
-Many authors introduce an order of operations. For example if we state that $\wedge$ takes precedence over $\vee$ (which is standard for many authors), then $P\wedge Q\vee R$ may again be interpreted as $((P\wedge Q)\vee R)$. We will try to avoid this and include enough brackets to make it clear .
+Many authors introduce an order of operations. For example if we state that $\wedge$ takes precedence over $\vee$ (which is standard for many authors), then $P\wedge Q\vee R$ may again be interpreted as $((P\wedge Q)\vee R)$. We will try to avoid this by including enough brackets to make it clear .
 
-In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is all about rules, you can think of it as analogous to grammar for languages. for example, what is and isn't considered a well-formed formula, much like grammar. On the other hand, semantics is all about meaning, for example, which formulas might be considered true or false.
+In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is much like grammar rules, for example, deciding which expressions are well-formed and which are not. Semantics is like meaning, for example, deciding which formulas are true and which are not.
 
 The semantics of propositional logic is governed by truth tables. In the following, let $\alpha$ and $\beta$ be well-formed formulas.
 
@@ -86,26 +88,26 @@ $$\begin{array}{cc}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$$
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$$
 
-The boolean connective $\rightarrow$ always sparks a little bit of discussion.
+The boolean conditional connective $\rightarrow$ always sparks a little bit of discussion.
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$$
 
-This truth table attempts to capture the logic of "P implies Q", but it doesn't capture the causation we normally understand from natural language. It is sometimes called the *material conditional*. We can describe $\alpha\rightarrow\beta$ as a promise: if you know $\alpha$ is true then it promises $\beta$ is also true. Thus if $\alpha$ is not true, then no promise is made, and so the conditional is "vacuously true". We will see later that this definition is the most useful way to study deductions in mathematics.
+This truth table attempts to capture the logic of "P implies Q", but it doesn't capture the causation we normally understand from natural language. It is sometimes called the *material conditional*. We can think of $\alpha\rightarrow\beta$ as a promise: if you know $\alpha$ is true then it promises $\beta$ is also true. Thus if $\alpha$ is not true, then no promise is made, and so the conditional is "vacuously true". We will see soon that this definition is the most useful way to study deductions in mathematics.
 
 We invite the reader to fill in truth tables for the rest of the boolean connectives.
 
 While these truth tables are certainly familiar, we still need to describe how they are used. We will say the set of *truth values* is $\set{T,F}$.
 
-**Definition** A *truth assignment* is a function $v$ from the set of propositional symbols to the set of truth values. That is, $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$.
+**Definition** A *truth assignment* or *valuation* is a function $v$ from the set of propositional symbols to the set of truth values. That is, $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$.
 
-In other words, a truth assignment $v$ says whether each propositional symbol is true or false. Since the propositional symbols are the simplest well-formed formulas, intuitively we should be able to use $v$ together with the truth tables for the boolean connectives to determine whether $v$ says any well-formed formula $\alpha$ is true or false. The following definition makes this idea formal.
+In other words, a truth assignment $v$ says whether each propositional symbol is true or false. Since the propositional symbols are the simplest well-formed formulas, intuitively we should be able to use $v$ together with the truth tables of the boolean connectives to determine whether $v$ says any well-formed formula $\alpha$ is true or false. The following definition makes this idea formal.
 
-**Definition** Let $v$ be a truth assignment and $\alpha$ be a well-formed formula. We define $v\models\alpha$, read aloud "$v$ satisfies $\alpha$", using the following base case and recursive rules:
+**Definition** Let $v$ be a truth assignment and $\alpha$ be a well-formed formula. We define $v\models\alpha$, said aloud "$v$ satisfies $\alpha$", using the following base case and recursive rules:
 
 * If $\alpha=P$ and $v(P)=T$, let $v\models\alpha$. If $v(P)=F$ let $v\not\models\alpha$.
 * If $\alpha=\neg\beta$ and $v\models\beta$ then let $v\not\models\alpha$. If $v\not\models\beta$ then let $v\models\alpha$.
 * If $\alpha=\beta\wedge\gamma$ and $v\models\beta$ and $v\models\gamma$ then let $v\models\alpha$; otherwise let $v\not\models\alpha$.
-* We invite the reader to add an additional recursive rule for each boolean connective using truth tables described above.
+* We invite the reader to add an additional recursive rule for each boolean connective using your truth tables as guides.
 
 For the record, we state that the above definition is *well-defined*, meaning that for any $v$ and $\alpha$ it follows from these rules that either $v\models\alpha$ or $v\not\models\alpha$, and not both. While this assertion may seem intuitively true or unnecessary, it should be proved, and we will postpone the proof until the next part.
 
@@ -119,7 +121,7 @@ Typically, different truth assignments will give rise to different truth values 
 
 The tautologies are thus little bits of reasoning that are always true, regardless of the truth values of the propositional variables. Another example of a tautology is $(P\wedge Q)\rightarrow P$. This is because any truth assignment that makes $P\wedge Q$ true must also make $P$ true.
 
-**Definition** We say that $\alpha\models\beta$, read aloud "$\alpha$ semantically implies $\beta$", if for every truth assignment $v$, if $v\models\alpha$ then $v\models\beta$.
+**Definition** We say that $\alpha\models\beta$, said aloud "$\alpha$ semantically implies $\beta$", if for every truth assignment $v$, if $v\models\alpha$ then $v\models\beta$.
 
 Semantic implication in propositional logic is sometimes also called "tautological implication". We invite the reader to verify that $\alpha\models\beta$ if and only if $\alpha\to\beta$ is a tautology.
 
@@ -137,7 +139,7 @@ The semantic implication $\Sigma\models\alpha$ is more interesting when $\Sigma$
 
 **Theorem** (Compactness theorem, version I). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma\models\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\models\alpha$.
 
-The compactness theorem for propositional logic is one of the cornerstones of the theory, as will be the more general compactness theorem for first order logic. The name of the compactness theorem is due to its relationship to the idea of compactness in analysis, something which will become a little clearer later on.
+The compactness theorem for propositional logic is one of the cornerstones of the theory, as will be the more general compactness theorem for first order logic. The name of the compactness theorem is due to its relationship to the idea of compactness in analysis, something which we will explain later on.
 
 The compactness theorem can be restated as a statement about consistency.
 
@@ -211,9 +213,33 @@ Since $\Sigma_0$ is finite, we may enumerate now the well-formed formulas in $\S
 
 We see from the proof above that the compactness theorem implies the completeness theorem. We invite the reader to prove that the reverse is also true. The key is that $\vdash$ automatically satisfies the compactness-like property: if $\Sigma\vdash\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\vdash\alpha$. This is true because any deduction of $\alpha$ from $\Sigma$ has finitely many steps, and therefore may only use finitely many of the well-formed formulas in $\Sigma$.
 
-### 2. Naive set theory and the proof of compactness
+### 2. More about compactness, introductory set theory
 
-In this section we take a short detour through set theory before returning to propositional logic and the compactness theorem. The primary reason is that some elementary set theory will be used in our further studies of logic. Moreover, set theory is very beautiful in its own right, and relevant to many areas of mathematics including analysis and algebra.
+In the previous section we introduced the propositional compactness theorem, and we saw its power with some key applications. We are now ready to prove it.
+
+For convenience, let's say that a set $\Sigma$ of well-formed formulas is *finitely consistent* if every finite subset of $\Sigma$ is consistent. Then the compactness theorem says:
+
+**Theorem** (Compactness theorem, version II). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma$ is finitely consistent, then $\Sigma$ is consistent.
+
+*Proof*: Let $\alpha_1$ be any well-formed formula. Then at least one of $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$ is finitely consistent. We invite the reader to verify this claim.
+
+We may let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$, whichever is finitely consistent. If both are finitely consistent, then we may choose either one; for definiteness we pick the first by default.
+
+Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we may let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
+
+Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_infty$, and not both.
+
+We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
+
+To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is already completed. If $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$
+
+We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma$ and so $\Sigma$ is consistent. $\blacksquare$
+
+We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
+
+#### Introductory set theory
+
+In this subsection we take a short detour through set theory before returning to logic. The primary reason is that some elementary set theory will be used in our further studies of logic. Moreover, set theory is very beautiful in its own right, and relevant to many areas of mathematics including analysis and algebra.
 
 Beginning informally, a *set* is a collection of mathematical objects which we call *elements*. When $x$ is an element of the set $A$, we write $x\in A$. For instance $\mathbb Q$ is a set whose elements are the rational numbers, so for instance $\frac35\in\mathbb Q$ and $\sqrt2\notin\mathbb Q$.
 
@@ -223,9 +249,7 @@ The foundation of set theory is the *extensionality axiom*, which states that tw
 
 You may be aware that this informal or "naive" approach is not entirely sound, as it can lead to falsehoods such as Russell's paradox. In this section no such paradoxes will arise, so we can proceed for now without worrying. In the next section, we will be more careful.
 
-#### Pairs, relations, and functions
-
-Here we introduce some foundational notation and constructs using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, and $\triangle$. We note that "complement" $\bar{A}$ is not an operation because we are not working with a universal set in which to take the complement. We may however use the set difference $B\smallsetminus A$, which means all elements of $B$ which are not in $A$.
+We now introduce some fundamental notation and key constructions using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, and $\triangle$. We note that "complement" $\bar{A}$ is not an operation because we are not working with a universal set in which to take the complement. We may however use the set difference $B\smallsetminus A$, which means all elements of $B$ which are not in $A$.
 
 **Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
 
@@ -268,7 +292,23 @@ When the exponent set is finite, we can think of $B^A$ as tuples of elements of 
 
 For example, if $G$ is a group then it possesses a multiplication operation $g\cdot h$. We can think of $\cdot$ as a function $G\times G\to G$. We can also think of $\cdot$ as the ternary relation $R\subset G^3$ consisting of all triples $(g,h,j)\in R$ such that $g\cdot h=j$.
 
-#### Rooted trees, Konig's lemma, and compactness
+#### Cardinality
+
+Informally, cardinality means the size of a set. If $A$ is finite, then there exists a unique natural number $n$ such that $A$ has exactly $n$ elements, and we usually write $\vert A\vert=n$. But if $A$ is infinite, how should $\vert A\vert$ be defined? In naive set theory, we do not define $\vert A\vert$ itself, but instead we define how it works.
+
+**Definition** Let $A,B$ be sets.
+
+* We say $\vert A\vert\leq\vert B\vert$ if there exists an injective function from $A$ to $B$.
+* We say $\vert A\vert=\vert B\vert$ if there exists a bijective function from $A$ to $B$.
+* We say $\vert A\vert\lt\vert B\vert$ if $\vert A\vert\leq\vert B\vert$ and $\vert A\vert\neq\vert B\vert$.
+
+The simple notion of bijective cardinality allows us to define countable and uncountable sets, something frequently used throughout mathematics.
+
+**Definition** Let $A$ be an infinite set. We say $A$ is *countable* if $\vert A\vert=\vert\mathbb N\vert$. Otherwise we say $A$ is *uncountable*.
+
+Sometimes, we accept finite sets as countable, but a better term to include both the finite sets and countable infinite sets would be "at most countable".
+
+#### Trees and an application of compactness
 
 In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
 
@@ -289,13 +329,11 @@ In lectures we will give several examples of set-theoretic trees.
 * For any sequence $f\in X^{\mathbb N}$ and any $n\in\mathbb N$ the *restriction* of $f$ to $n$, denoted $f\restriction n$, is the initial segment of $f$ with domain $\set{0,\ldots,n-1}$.
 * Let $T$ be a tree on $X$. A sequence $f\in X^{\mathbb N}$ is a *branch* through $T$ if for all $n\in\mathbb N$ we have $f\restriction n\in T$.
 
-In lectures we will give several examples of branches through set-theoretic trees.
-
-We now give a fundamental application of the propositional compactness theorem to the study of trees and branches.
-
 **Theorem** (Konig's lemma) Let $T$ be a tree on $X$ such that every level of $T$ is nonempty and finite. Then there exists a branch through $T$.
 
 We invite the reader to give an example of a tree $T$ such that every level of $T$ is nonempty but there are no branches through $T$.
+
+Konig's lemma makes a good example of an application of the compactness theorem, so we provide such a proof here. On the other hand, it's not hard to give a direct proof, and we invite the reader to do so.
 
 *Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
 
@@ -309,39 +347,51 @@ We claim $\Sigma$ is finitely satisfiable. Let $\Sigma_0\subset\Sigma$ be a fini
 
 Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there exists a branch through $T$. $\blacksquare$
 
-Konig's lemma has many important applications, we present just one. We first recall that the set $X^{\mathbb N}$ is a metric space, where two sequences are close together if they agree on a long partial sequence. Formally we let $d(f,g)=1/N$, where $N$ is the maximum number such that $f\restriction N=g\restriction N$. Thus a sequence of elements $f_n\in X^{\mathbb N}$ converges to $f\in X^{\mathbb N}$ if the length of agreement between $f_n$ and $f$ goes to infinity.
+#### Why it's called compactness
+
+It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection. The analysis portions of this section will not be assessed.
+
+First, recall that the set $X^{\mathbb N}$ is a metric space, where two sequences are close together if they agree on a long partial sequence. Formally we let $d(f,g)=1/N$, where $N$ is the maximum number such that $f\restriction N=g\restriction N$. Thus a sequence of elements $f_n\in X^{\mathbb N}$ converges to $f\in X^{\mathbb N}$ if the length of agreement between $f_n$ and $f$ goes to infinity.
 
 **Theorem** Let $2=\set{0,1}$. The metric space $2^{\mathbb N}$ is compact.
 
+*Proof*: The metric space $2=\set{0,1}$, equipped with the discrete metric, is compact. Tychonoff's theorem from topology states that any product of compact topological spaces is compact. $\blacksquare$
+
+We claim that the following three statements are all equivalent to one another:
+
+> * The compactness theorem version II;
+> * Konig's lemma;
+> * The space $2^{\mathbb N}$ is compact.
+
+We have already shown that the compactness theorem implies Konig's lemma. We claim it is possible to find two new proofs: A proof that uses Konig's lemma to show $2^{\mathbb N}$ is compact, and; A proof that uses $2^{\mathbb N}$ is compact to show the compactness theorem.
+
+For Konig implies $2^{\mathbb N}$ is compact, one may use the sequential definition of compactness. We leave this as an exercise only for the reader inclined towards analysis proofs.
+
+<!--
 *Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence of $f_n$ which converges to some limit $f\in 2^{\mathbb N}$ in the sense of the metric described above.
 
 Let $T$ be the set of all $s\in 2^{<\mathbb N}$ such that $s\subset f_n$ for infinitely many $n\in\mathbb N$. Then it is easy to verify that $T$ is a tree. Moreover, the pigeonhole principle implies that the levels of $T$ are nonempty. Thirdly, since $T\subset 2^{<\mathbb N}$, the levels of $T$ are obviously finite. Therefore by Konig's lemma there exists a branch $f$ through $T$.
 
 We now construct a subsequence of $f_n$ which converges to $f$. To do so, first observe that for every $k$ there are infinitely many $n\in\mathbb N$ such that $d(f,f_n)\leq1/k$. We can therefore inductively choose indices $n_k$ such that: (1) $d(f,f_{n_k})\leq1/k$, and (2) $n_k>n_{k-1}$. We have therefore found a subsequence $f_{n_k}$ of $f_n$ which converges to $f$. $\blacksquare$
+-->
 
-We are now ready to return from our detour into set theory (and some light analysis) to the propositional compactness theorem. 
+For $2^{\mathbb N}$ compact implies compactness, one needs the observation that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\set{T,F}$ with $\set{0,1}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. Therefore the set of truth assignments admits the metric of agreement discussed earlier.
 
-Recall that a truth assignment is a function $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$. We observe that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\set{T,F}$ with $\set{0,1}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. In what follows we will use this equivalence freely, and in particular we will use the same metric of agreement that we used in the previous result.
+One should next observe that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such that $v\models A$ is a closed subset of $2^{\mathbb N}$ also.
 
-We invite the reader to verify that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such that $v\models A$ is a closed subset of $2^{\mathbb N}$ also.
+The final ingredient is the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (In fact this may be taken as the definition of a compact metric space.)
 
-**Theorem** (Compactness theorem) Let $\Sigma$ be a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent. Then $\Sigma$ is consistent.
+Now the outline of the proof is this: if $\Sigma$ is a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent, consider the family of all $V_A$ where $A$ is a finite subset of $\Sigma$. The compactness result of the previous paragraph implies there exists a truth assignment $v$ in the intersection of all such $V_A$. Then $v\models\Sigma$, so $\Sigma$ is consistent.
 
-*Proof*: We recall the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (In fact this may be taken as the definition of a compact metric space.)
+Once again, we leave it to the analytically inclined reader to fill in the missing details.
 
+<!--
 Working in the space $2^{\mathbb N}$, we let $\mathcal F$ be the family of all $V_A$ where $A$ is a finite subset of $\Sigma$. Observe that if $V_{A_1},\ldots, V_{A_n}\in\mathcal F$ then $V_{A_1}\cap\cdots\cap V_{A_n}=V_{A_1\cup\cdots\cup A_n}$. Since $A_1\cup\cdots\cup A_n$ is a finite subset of $\Sigma$, it is consistent, and therefore there exists $v$ such that $v\models A_1\cup\cdots\cup A_n$. By definition this implies $v\in V_{A_1}\cap\cdots\cap V_{A_n}$, so $V_{A_1}\cap\cdots\cap V_{A_n}\neq\emptyset$.
 
 It follows from the fact from analysis that there exists $v\in\bigcap_{V_A\in\mathcal F}V_A$. Again by definition this means that $v\models\Sigma$. Thus, $\Sigma$ is consistent. $\blacksquare$
+-->
 
-We remark that the results of this section show that the following three statements are all equivalent:
-
-> * The compactness theorem
-> * Konig's lemma
-> * The space $2^{\mathbb N}$ is compact
-
-This gives some some explanation of the reason for the name of the compactness theorem. Of course, it is also possible to prove each of the three of these results directly. We invite the reader to find such proofs in our references or else look for them yourself.
-
-We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
+In any case, we hope this gives some some explanation of the reason for the name of the compactness theorem.
 
 ### 3. Axiomatic set theory and foundations
 
@@ -353,11 +403,11 @@ Lastly set theory is the key to studying the infinite. We will conclude the sect
 
 #### Axiomatic set theory
 
-The starting point for axiomatic set theory is the following big idea: **everything** is a set! We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, are there any objects that aren't themselves sets? To a pure set theorist, everything is a set.
+The starting point for axiomatic set theory is the following big idea: *everything is a set*. We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, are there any objects that aren't themselves sets? To a modern set theorist, Everything. Is. A. Set.
 
-What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* of sets, which govern how sets behave and how we can construct them. Historically it took some time and debate for mathematicians to agree on axioms. Here we elaborate the axioms of *Zermelo–Fraenkel–Choice* set theory or ZFC, which is the officially accepted list.
+What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* about sets, which govern what sets may be constructed and how they behave. Historically it took some time and debate for mathematicians to agree on the list of axioms. Here we elaborate the axioms of *Zermelo Fraenkel Choice* set theory, or ZFC, which is now the officially accepted list.
 
-We have already introduced the key axiom of ZFC, which explains the relationship between $\in$ and $=$.
+We have already introduced the most basic axiom of ZFC, which explains the relationship between $\in$ and $=$.
 
 **Axiom** (Extensionality) $x=y$ iff for all $z$, $z\in x\iff z\in y$.
 
@@ -365,15 +415,15 @@ The next several axioms of set theory are construction axioms, that is, axioms t
 
 **Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\set{a_1,\ldots,a_n}$ is a set.
 
-For one thing, the Strong Pairing axiom implies that there exists a set. Namely, if we apply it in the case when $n=0$ then the result is $\lbrace\rbrace$, which we also call the empty set $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
+For one thing, the Strong Pairing axiom implies that there exists a set. This is because we can apply it in the case when $n=0$ to obtain the set $\lbrace\rbrace$. This is called the *empty set* and given the special symbol $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
 
-We say that a set is *hereditarily finite* if it may be constructed using only repeated applications of the Strong Pairing axiom. We invite the reader to write out several dozen hereditarily finite sets, and to make a diagram of these sets as they are related by the $\in$ relation. (That is, when $x\in y$ draw an upwards arrow from $x$ to $y$.)
+We say that a set is *hereditarily finite* if it may be constructed using repeated applications of the Strong Pairing axiom and nothing else. We invite the reader to write out several dozen different hereditarily finite sets, and to make a diagram of how they are related to one another by the $\in$ relation. (For example, draw an upwards arrow from $x$ to $y$ whenever $x\in y$.)
 
-Without any other axioms, the Strong Pairing axiom can *only* help us construct hereditarily finite sets. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
+Without any other axioms, the Strong Pairing axiom can't be used to construct an infinite set. In addition to being the theory of everything, set theory is meant to be the theory of infinity! Therefore we need the following axiom, which lets us construct our first example of an infinite set.
 
-**Axiom** (Infinity) There exists a set HF such that $x\in HF$ if and only if $x$ is hereditarily finite ($x$ can be constructed using only the Strong Pairing axiom).
+**Axiom** (Infinity) There exists a set HF consisting of all hereditarily finite sets.
 
-Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\lbrace HF\rbrace$. However, the axioms so far do not help us construct an infinite set besides HF.
+Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\lbrace HF\rbrace$. However, the axioms so far do not help us construct any infinite sets other than HF.
 
 In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal!
 
