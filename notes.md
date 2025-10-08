@@ -231,9 +231,19 @@ Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm t
 
 We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
 
-To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is already completed. If $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$
+To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is already completed. Next if $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$, we have:
 
-We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma$ and so $\Sigma$ is consistent. $\blacksquare$
+$$\begin{aligned}
+  v\models\alpha
+  \iff&v\models\beta\text{ and }v\models\gamma\\
+  \iff&\beta\in\Sigma_\infty\text{ and }\gamma\in\Sigma_\infty\\
+  \iff&\beta\wedge\gamma\in\Sigma_\infty\\
+  \iff&\alpha\in\Sigma_\infty
+\end{aligned}$$
+
+The third equivalence is a little bit subtle. If $\beta\in\Sigma_\infty$ and $\gamma\in\Sigma_\infty$ then we couldn't have $\neg(\beta\wedge\gamma)\in\Sigma_\infty$ because that wouldn't be finitely consistent. Since $\Sigma_\infty$ contains every formula or its neagation, we must have $\beta\wedge\gamma\in\Sigma_\infty$. Conversely if $\beta\wedge\gamma\in\Sigma_\infty$, then we couldn't have $\neg\beta\in\Sigma_\infty$, so we must have $\beta\in\Sigma_\infty$, and similarly for $\gamma$.
+
+We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma_\infty$ and so $\Sigma_\infty$ is consistent, and so $\Sigma$ is consistent. $\blacksquare$
 
 We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
 
