@@ -187,11 +187,11 @@ We leave it to the reader to verify that the modus ponens rule is true semantica
 
 In other words, a deduction is a very simple kind of proof that the hypotheses $\Sigma$ imply the conclusion $\alpha$. While $\Sigma\models\alpha$ must be verified abstractly using truth tables, $\Sigma\vdash\alpha$ may be verified by checking the steps. The deduction includes its own reasoning.
 
-We remark that it is overkill to allow *all* tautologies to be included in part (b) of the definition. Those who study deductions typically include only tautologies from a selected list of approved templates. For example, you can imagine including $\neg(\neg\alpha)\leftrightarrow\alpha$, $(\alpha\wedge\beta)\rightarrow\alpha$, and so on. By the same token, some authors use a minimal set of tautologies in (b) but expand the deductive rules allowed in (c). 
+We remark that it is excessive to allow *all* tautologies to be included in part (b) of the definition. Those who study deductions typically include only tautologies from a selected list of approved templates. For example, you can imagine including $\neg(\neg\alpha)\leftrightarrow\alpha$, $(\alpha\wedge\beta)\rightarrow\alpha$, and so on. It is also possible to allow only a few tautologies in (b), and instead allow a wider variety of deductive rules in (c).
 
-Since studying propositional logic is not our primary goal, we will stick with the simple definition (a)–(c) above in order to exposit a few key results. We invite the interested reader to to look up other standard deductive systems.
+Since studying propositional logic is not our primary goal, we will stick with the simple definition (a)–(c) above in order to showcase a few key results. We invite the interested reader to to look up other deductive systems such as natural deduction.
 
-**Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$ and let $\alpha=P$. We show that $\Sigma\vdash\alpha$ using the following deduction.
+**Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$ and let $\alpha=P$. We show that $\Sigma\vdash\alpha$ using the following deduction:
 
 > 1. $(\neg S)\vee R$ — (hypothesis)
 > 2. $((\neg S)\vee R)\rightarrow (S\rightarrow R)$ — (tautology)
@@ -227,7 +227,7 @@ We may let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cu
 
 Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we may let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
 
-Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_infty$, and not both.
+Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_\infty$, and not both.
 
 We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
 
@@ -253,7 +253,7 @@ We now introduce some fundamental notation and key constructions using sets. We 
 
 **Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
 
-We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. One should observe that many simpler attempts don't work, such as $\set{\lbrace a\rbrace,\lbrace b\rbrace}$ or $\set{a,\set{a,b}}$.
+We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal.
 
 **Definition** Let $A,B$ be sets. The *cartesian product* of $A$ and $B$ is defined as $A\times B=\set{(a,b):a\in A,\ b\in B}$.
 
