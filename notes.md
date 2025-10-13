@@ -318,28 +318,15 @@ The simple notion of bijective cardinality allows us to define countable and unc
 
 Sometimes, we accept finite sets as countable, but a better term to include both the finite sets and countable infinite sets would be "at most countable".
 
-#### Trees and an application of compactness
+#### Another application of compactness
 
-In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a root vertex and other vertices labeled by elements of a set $X$. Here we introduce the set-theoretic terminology and notation surrounding trees.
+In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a distinguished root vertex on level $0$, labeled children on level $1$, and so on.
 
-**Defintion**. Let $X$ be any set.
+More formally, a tree $T$ is a set with a distinguished root vertex $r$ and a predecessor relation $\prec$ satisfying the properties: for all $t\neq r$ we have $r\prec t$, for all $t$ the set $\lbrace s\in T:s\prec t\rbrace$ is finite, and $\prec$ does not have any cycles. For any $t$, the *level* of $t$ is the number of elements of $\lbrace s\in T:s\prec t\rbrace$.
 
-* The *full tree* on $X$, denoted $X^{<\mathbb N}$, is defined as $\bigcup_{n\in\mathbb N}X^n$.
-* The $n$-th *level* of $X^{<\mathbb N}$ is $X^n$; we say elements on this level have *length* $n$.
-* If $s,t\in X^{<\mathbb N}$, we say $s$ is a *predecessor* of $t$, or $t$ is a *successor* of $s$, if $s\subset t$.
-* $t$ is an *immediate successor* of $s$ if $t$ is a successor of $s$ and $\vert t\vert=\vert s\vert+1$.
+A *branch* through $T$ is a sequence of elements $t_n\in T$ such that $t_n$ is on level $n$, and for all $m<n$ we have $t_m\prec t_n$.
 
-**Definition** Let $X$ be any set. A *tree* on $X$ is a subset $T\subset X^{<\mathbb N}$ of the full tree on $X$ which is closed under predecessors, that is, for all $s,t\in X^{<\mathbb N}$, if $s\subset t\in T$ then $s\in T$.
-
-In lectures we will give several examples of set-theoretic trees.
-
-**Definition** Let $X$ be any set.
-
-* The set of sequences on $X$, denoted $X^{\mathbb N}$ is the set of all functions $f\colon\mathbb N\to X$.
-* For any sequence $f\in X^{\mathbb N}$ and any $n\in\mathbb N$ the *restriction* of $f$ to $n$, denoted $f\restriction n$, is the initial segment of $f$ with domain $\set{0,\ldots,n-1}$.
-* Let $T$ be a tree on $X$. A sequence $f\in X^{\mathbb N}$ is a *branch* through $T$ if for all $n\in\mathbb N$ we have $f\restriction n\in T$.
-
-**Theorem** (Konig's lemma) Let $T$ be a tree on $X$ such that every level of $T$ is nonempty and finite. Then there exists a branch through $T$.
+**Theorem** (Konig's lemma) Let $T$ be a tree such that every level of $T$ is nonempty and finite. Then there exists a branch through $T$.
 
 We invite the reader to give an example of a tree $T$ such that every level of $T$ is nonempty but there are no branches through $T$.
 
@@ -347,9 +334,9 @@ Konig's lemma makes a good example of an application of the compactness theorem,
 
 *Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
 
-> * $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$
-> * $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of length $n$, for each $n$ and each $i\neq j$
-> * $P_t\rightarrow P_s$ where $s,t\in T$ and $s\subset t$
+> * $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of level $n$, for each $n$;
+> * $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of level $n$, for each $n$ and each $i\neq j$;
+> * $P_t\rightarrow P_s$ where $s,t\in T$ and $s\prec t$.
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a branch through $T$.
 
@@ -357,51 +344,27 @@ We claim $\Sigma$ is finitely satisfiable. Let $\Sigma_0\subset\Sigma$ be a fini
 
 Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there exists a branch through $T$. $\blacksquare$
 
+We remark that it is also the case that Konig's lemma may be used to show that the compactness theorem is true. Thus there is a sense in which the (countable) propositional compactness theorem is *equivalent* to Konig's lemma.
+
 #### Why it's called compactness
 
-It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection. The analysis portions of this section will not be assessed.
+It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection.
 
-First, recall that the set $X^{\mathbb N}$ is a metric space, where two sequences are close together if they agree on a long partial sequence. Formally we let $d(f,g)=1/N$, where $N$ is the maximum number such that $f\restriction N=g\restriction N$. Thus a sequence of elements $f_n\in X^{\mathbb N}$ converges to $f\in X^{\mathbb N}$ if the length of agreement between $f_n$ and $f$ goes to infinity.
+To begin, let $V$ be the set of all truth assignments $v$. If $\alpha$ is a well-formed formula, we let $V_\alpha=\set{v\in V\mid v\models\alpha}$. We can define a topology on $V$ by declaring that $V_\alpha$ is *closed* for all $\alpha$. Thus a general closed subset of $V$ is defined to be an intersection of any number of sets of the form $V_\alpha$.
 
-**Theorem** Let $2=\set{0,1}$. The metric space $2^{\mathbb N}$ is compact.
+Recall that a topological space is **compact** if the following holds: if $\mathcal F$ is a family of closed sets such that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then we have $\bigcap\mathcal F\neq\emptyset$. This definition is equivalent to the more commonly stated open subcover property, and for metric spaces it's equivalent to the convergent subsequences property.
 
-*Proof*: The metric space $2=\set{0,1}$, equipped with the discrete metric, is compact. Tychonoff's theorem from topology states that any product of compact topological spaces is compact. $\blacksquare$
+**Theorem** $V$ is a compact topological space.
 
-We claim that the following three statements are all equivalent to one another:
+*Proof*: Let $\mathcal F$ be a family of closed subsets of $V$ with the property that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$.
 
-> * The compactness theorem version II;
-> * Konig's lemma;
-> * The space $2^{\mathbb N}$ is compact.
+For each $A\in\mathcal F$, let $\Sigma_A=\set{\alpha\mid(\forall v\in A)v\models\alpha}$. We invite the reader to check that $v\in A$ if and only if $v\models\Sigma_A$.
 
-We have already shown that the compactness theorem implies Konig's lemma. We claim it is possible to find two new proofs: A proof that uses Konig's lemma to show $2^{\mathbb N}$ is compact, and; A proof that uses $2^{\mathbb N}$ is compact to show the compactness theorem.
+Let $\Sigma=\bigcup_{A\in\mathcal F}\Sigma_A$. We claim that $\Sigma$ is finitely consistent. Indeed if $\Sigma_0\subset\Sigma$ is finite, then there exist $A_1,\ldots,A_n\in\mathcal F$ such that $\Sigma_0\subset\Sigma_{A_1}\cup\cdots\cup\Sigma_{A_n}$. By our assumption about $\mathcal F$, there exists $v\in A_1\cap\cdots\cap A_n$. We then have $v\models\Sigma_{A_1}\cup\cdots\cup\Sigma_{A_n}$ and thus $v\models\Sigma_0$.
 
-For Konig implies $2^{\mathbb N}$ is compact, one may use the sequential definition of compactness. We leave this as an exercise only for the reader inclined towards analysis proofs.
+By the compactness theorem, $\Sigma$ is consistent, that is, there exists $v\in V$ such that $v\models\Sigma$. Then for all $A\in\mathcal F$ we have $v\models\Sigma_A$. It follows that $v\in\bigcap_{A\in\mathcal F}A$, completing the proof. $\blacksquare$
 
-<!--
-*Proof*: Let $f_n\in 2^{\mathbb N}$. We wish to show that there exists a subsequence of $f_n$ which converges to some limit $f\in 2^{\mathbb N}$ in the sense of the metric described above.
-
-Let $T$ be the set of all $s\in 2^{<\mathbb N}$ such that $s\subset f_n$ for infinitely many $n\in\mathbb N$. Then it is easy to verify that $T$ is a tree. Moreover, the pigeonhole principle implies that the levels of $T$ are nonempty. Thirdly, since $T\subset 2^{<\mathbb N}$, the levels of $T$ are obviously finite. Therefore by Konig's lemma there exists a branch $f$ through $T$.
-
-We now construct a subsequence of $f_n$ which converges to $f$. To do so, first observe that for every $k$ there are infinitely many $n\in\mathbb N$ such that $d(f,f_n)\leq1/k$. We can therefore inductively choose indices $n_k$ such that: (1) $d(f,f_{n_k})\leq1/k$, and (2) $n_k>n_{k-1}$. We have therefore found a subsequence $f_{n_k}$ of $f_n$ which converges to $f$. $\blacksquare$
--->
-
-For $2^{\mathbb N}$ compact implies compactness, one needs the observation that if we identify $P_1,P_2,\ldots$ with natural numbers $1,2,\ldots$, and identify $\set{T,F}$ with $\set{0,1}$, then the set of truth assignments $v$ is equivalent to the set $2^{\mathbb N}$. Therefore the set of truth assignments admits the metric of agreement discussed earlier.
-
-One should next observe that if $\alpha$ is any well-formed formula, then the set $V_\alpha$ of all truth assignments $v$ such that $v\models\alpha$ is a closed subset of $2^{\mathbb N}$. By the same argument, if $A$ is any finite set of well-formed formulas, then the set $V_A$ of all truth assignments $v$ such that $v\models A$ is a closed subset of $2^{\mathbb N}$ also.
-
-The final ingredient is the following fact from analysis. Let $X$ be a compact metric space, and let $\mathcal F$ be a family of closed subsets of $X$. If for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then $\bigcap\mathcal F\neq\emptyset$. (In fact this may be taken as the definition of a compact metric space.)
-
-Now the outline of the proof is this: if $\Sigma$ is a set of well-formed formulas such that every finite subset of $\Sigma$ is consistent, consider the family of all $V_A$ where $A$ is a finite subset of $\Sigma$. The compactness result of the previous paragraph implies there exists a truth assignment $v$ in the intersection of all such $V_A$. Then $v\models\Sigma$, so $\Sigma$ is consistent.
-
-Once again, we leave it to the analytically inclined reader to fill in the missing details.
-
-<!--
-Working in the space $2^{\mathbb N}$, we let $\mathcal F$ be the family of all $V_A$ where $A$ is a finite subset of $\Sigma$. Observe that if $V_{A_1},\ldots, V_{A_n}\in\mathcal F$ then $V_{A_1}\cap\cdots\cap V_{A_n}=V_{A_1\cup\cdots\cup A_n}$. Since $A_1\cup\cdots\cup A_n$ is a finite subset of $\Sigma$, it is consistent, and therefore there exists $v$ such that $v\models A_1\cup\cdots\cup A_n$. By definition this implies $v\in V_{A_1}\cap\cdots\cap V_{A_n}$, so $V_{A_1}\cap\cdots\cap V_{A_n}\neq\emptyset$.
-
-It follows from the fact from analysis that there exists $v\in\bigcap_{V_A\in\mathcal F}V_A$. Again by definition this means that $v\models\Sigma$. Thus, $\Sigma$ is consistent. $\blacksquare$
--->
-
-In any case, we hope this gives some some explanation of the reason for the name of the compactness theorem.
+We remark that it is also true that the compactness of the topological space $V$ may be used to show that the compactness theorem is true. Thus there is a sense in which the propositional compactness theorem is *equivalent* to the compactness of $V$. We hope this helps shed some light on the reason the compactness theorem is so named.
 
 ### 3. Axiomatic set theory and foundations
 
