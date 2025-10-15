@@ -396,11 +396,11 @@ Without any other axioms, the Strong Pairing axiom can't be used to construct an
 
 **Axiom** (Infinity) There exists a set HF consisting of all hereditarily finite sets.
 
-Putting the last two axioms together, we may also construct an first example of a finite but not hereditarily finite set, namely, $\lbrace HF\rbrace$. However, the axioms so far do not help us construct any infinite sets other than HF.
+Putting the last two axioms together, we may also construct our first example of a finite but not hereditarily finite set, namely, $\lbrace HF\rbrace$. However, the axioms so far do not help us construct any infinite sets other than HF.
 
 In order to construct new sets, we would like an axiom which allows us to define sets using properties. In the previous section we introduced the informal set-builder notation $\set{x:\text{some property of }x}$. However it turns out this is *too* informal!
 
-Indeed we cannot construct a set of the form $A=\set{x:x\notin x}$. If you haven't done it before, we invite you to check that the definition of $A$ implies both $A\in A$ and $A\notin A$ are false, which is a contradiction. This is known as *Russell's paradox*, and as we define our axioms we must navigate around this issue.
+Indeed we cannot construct a set of the form $A=\set{x:x\notin x}$. If you haven't done it before, we invite you to check that the definition of $A$ implies both $A\in A$ and $A\notin A$ are false, which is a contradiction. This is known as *Russell's paradox*, and as we choose our axioms we must navigate around this issue.
 
 While we can't expect to use general set-builder constructions, the following axiom states we can use *bounded* set-builder constructions, meaning set-builder constructions taking place inside a given set.
 
@@ -410,7 +410,7 @@ The axiom is also sometimes called Specification or (restricted) Comprehension. 
 
 For instance we could let $E=\set{x\in HF:x\text{ has an even number of elements}}$. Then $E$ is a new infinite set which is a subset of HF.
 
-The Separation axiom allows us to construct sets which are contained in a set we have already. What about constructing sets which are larger? One way to do this is the following.
+The Separation axiom allows us to construct sets which are contained in a set we already have. What about constructing sets which are larger? One way to do this is the following.
 
 **Axiom** (Power Set) If $A$ is a set then there exists a set $\mathcal P(A)$ called the *power set* of $x$ which consists of all subsets of $A$.
 
@@ -477,11 +477,12 @@ With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unf
 So far, all the numbers we have constructed are elements of HF and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of HF, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
 
 **Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
+
 > * $C\neq\emptyset$, $\mathbb Q$
 > * $C$ is closed downwards
 > * $C$ has no last element
 
-Once again $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
+Once again, with these definitions $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
 
 Having defined the real numbers, we can now continue to define nearly all familiar objects in mathematics.
 
