@@ -631,7 +631,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 
 **Example** Let $\mathcal L=\lbrace<\rbrace$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
-**Example** Let $\mathcal L=\lbrace\cdot\rbrace$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the gropu operation, is an $\mathcal L$-structure.
+**Example** Let $\mathcal L=\lbrace\cdot\rbrace$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the group operation, is an $\mathcal L$-structure.
 
 **Example** Let $\mathcal L=\set{0,1,+,\cdot,<}$ be the signature with two constant symbols, two binary function symbols, and one binary relation symbol. Then the real ordered field $(\mathbb R;0,1,+,\cdot,<)$ is an $\mathcal L$-structure.
 
@@ -691,23 +691,25 @@ We often apply the satisfaction relation to a set of sentences.
 
 **Definition** If $\mathcal L$ is a signature of first order logic, then an *$\mathcal L$-theory* is any set of $\mathcal L$-sentences.
 
-**Example** Let $\mathcal L$ consist of one binary function symbol $\cdot$, and let $T$ consist of the following two sentences:
+**Example** (Group theory) Let $\mathcal L$ consist of one binary function symbol $\cdot$, and let $T$ consist of the following two sentences:
 
 > * $(\forall x)(\forall y)(\forall z)(x\cdot y)\cdot z=x\cdot(y\cdot z)$
 > * $(\exists u)(\forall x)x\cdot u=x\wedge u\cdot x=x\wedge(\exists y)x\cdot y=u$
 
-Then $T$ is the *theory of groups* (or group theory for short).
-
-**Example** Let $\mathcal L$ consist of one binary relation symbol $<$, and let $T$ consist of the following sentences:
+**Example** (The theory of linear orders) Let $\mathcal L$ consist of one binary relation symbol $<$, and let $T$ consist of the following sentences:
 
 > * $(\forall x)x\not<x$
 > * $(\forall x)(\forall y)x<y\rightarrow y\not<x$
 > * $(\forall x)(\forall y)x=y\vee x<y\vee y<x$
 > * $(\forall x)(\forall y)(\forall z)x<y\wedge y<z\rightarrow x<z$
 
-Then $T$ is the *theory of linear orders*.
+**Example** (Peano arithmetic) Let $\mathcal L$ consist of binary function symbols $+,\cdot$, binary relation symbol $<$, and constant symbols $0,1$. Let $T$ consist of the usual arithmetic axioms such as commutativity, associativity, distributivity, identity, and so on, together with the *induction scheme*:
 
-**Example** Let $\mathcal L$ consist of one binary relation symbol $\in$. Let $T$ consist of the axioms of set theory described in section 3. Then $T$ is what we mean when we talk about ZFC.
+* For any well-formed formula $\phi(x)$ with free variable $x$, the following is an axiom: $(\phi(0)\wedge((\forall n)\phi(n)\to\phi(n+1)))\to(\forall x)\phi(x)$.
+
+Note that Peano arithmetic is an infinite theory, because the induction scheme includes a separate axiom for every well-formed formula $\phi(x)$.
+
+**Example** (Set theory) Let $\mathcal L$ consist of one binary relation symbol $\in$. Let $T$ consist of the axioms of set theory described in Section 3. Then $T$ is what we mean when we talk about ZFC.
 
 **Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A\models T$ if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. In this case we also say that $\mathcal A$ is a *model* of $T$.
 
