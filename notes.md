@@ -12,8 +12,8 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 - [3. Axiomatic set theory and foundations](#3-axiomatic-set-theory-and-foundations)
 
 [Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
-- [4. Syntax and theories](#4-syntax-and-theories)
-- [5. Semantics, structures, and satisfaction](#5-semantics-structures-and-satisfaction)
+- [4. First order syntax, models](#4-first-order-syntax-models)
+- [5. First order semantics, deductions](#5-first-order-semantics-deductions)
 - [6. Compactness and completeness](#6-completeness-and-compactness)
 - [7. Applications of compactness, more about theories](#7-applications-of-compactness-more-about-theories)
 
@@ -536,7 +536,7 @@ In this part we introduce and elaborate on first order logic, which is logic wit
 
 We will see that first order logic is powerful enough to express nearly all mathematical concepts. But it strikes a balance, because it is also simple enough that we can reason and prove thoerems about it.
 
-### 4. Syntax and theories
+### 4. First order syntax, models
 
 In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
 
@@ -629,6 +629,8 @@ In order to decide the truth value of a sentence, we still need to know the cont
 * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
 * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
 
+Note that the $0$-ary function symbols are called *constants*, and the $0$-ary relation symbols are called *propositions*.
+
 **Example** Let $\mathcal L=\lbrace<\rbrace$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
 **Example** Let $\mathcal L=\lbrace\cdot\rbrace$ be the signature with one binary function symbol. Then any group $(G;\cdot^G)$, where $G$ is a set and $\cdot^G$ is the group operation, is an $\mathcal L$-structure.
@@ -639,7 +641,7 @@ If $\mathcal L$ is a signature, $\alpha$ is an $\mathcal L$-sentence, and $\math
 
 The formal definiton of $\models$ is somewhat involved, but it will work the way you might expect. For example, returning to the example sentence $\alpha$ defined by $(\forall x)x\geq0\rightarrow(\exists y)y\cdot y=x$, we will have that $(\mathbb R;+,\cdot,0,1)\models\alpha$ and $(\mathbb Q;+,\cdot,0,1)\not\models\alpha$.
 
-### 5. Semantics, structures, and satisfaction
+### 5. First order semantics, deductions
 
 In this section will formally define of the satisfaction relation $\mathcal A\models\sigma$ for a $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
 
@@ -647,18 +649,18 @@ To get an idea of how this should work, let $\mathcal A$ be the structure $(\mat
 
 The first step in this process should be to deal with the term $x^2$. The definition should understand that $x^2$ evaluates to $9$ when $x\mapsto 3$, and $x^2$ evaluates to $16$ when $x\mapsto 4$. We now introduce notation for evaluating the terms and define how it works in general.
 
-**Definition** Let $\mathcal L$ be a signature of first order logic, and let $\tau$ be a term. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function whose domain includes the variables of $\tau$ and whose codomain is $A$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function from the variables to $A$. Then:
 
-* If $x$ is a variable of $\tau$, define $\mathrm{val}^{\mathcal A}(x)[s]$ to be $s(x)$
-* If $c$ is a constant symbol of $\tau$, define $\mathrm{val}^{\mathcal A}(c)[s]$ to be $c^{\mathcal A}$
-* If $\tau=f\tau_1,\ldots,\tau_n$ where $\tau_i$ are terms, define $\mathrm{val}^{\mathcal A}(\tau)[s]=f^{\mathcal A}(\mathrm{val}^{\mathcal A}(\tau_1)[s],\ldots,\mathrm{val}^{\mathcal A}(\tau_n)[s])$.
+* If $x$ is a variable, define $x^{\mathcal A}[s]=s(x)$
+* If $c$ is a constant symbol, define $c^{\mathcal A}[s]=c^{\mathcal A}$
+* If $\tau=f\tau_1,\ldots,\tau_n$ where $\tau_i$ are terms, define $\tau^{\mathcal A}[s]=f^{\mathcal A}(\tau_1^{\mathcal A}[s],\ldots,\tau_n^{\mathcal A}[s])$.
 
 **Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution function $x\mapsto 3,y\mapsto 4$. Then:
 
 $$\begin{aligned}
-  \mathrm{val}^{\mathcal A}(\tau)[s]
-  &=\mathrm{val}^{\mathcal A}(x\cdot y)[s]\\
-  &=\mathrm{val}^{\mathcal A}(x)[s]\cdot\mathrm{val}^{\mathcal A}(y)[s]\\
+  \tau^{\mathcal A}[s]
+  &=(x\cdot y)^{\mathcal A}[s]\\
+  &=x^{\mathcal A}[s]\cdot y^{\mathcal A}[s]\\
   &=3\cdot 4\\
   &=12
 \end{aligned}$$
@@ -667,9 +669,9 @@ We next define satisfaction for atomic formulas.
 
 **Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be an atomic formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
-* If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi[s]$ if and only if $\mathrm{val}^{\mathcal A}(\tau_1)[s]=\mathrm{val}^{\mathcal A}(\tau_2)[s]$.
-* If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi$ if and only if $P^{\mathcal A}=T$.
-* If $\phi$ is $R\tau_1\cdots\tau_n$, then $\mathcal A\models\phi[s]$ if and only if $(\mathrm{val}^{\mathcal A}(\tau_1)[s],\ldots,\mathrm{val}^{\mathcal A}(\tau_n)[s])\in R^{\mathcal A}$.
+* If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi[s]$ if and only if $\tau_1^{\mathcal A}[s]=\tau_2^{\mathcal A}[s]$.
+* If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi[s]$ if and only if $P^{\mathcal A}=T$.
+* If $\phi$ is $R\tau_1\cdots\tau_n$, then $\mathcal A\models\phi[s]$ if and only if $(\tau_1^{\mathcal A}[s],\ldots,\tau_n^{\mathcal A}[s])\in R^{\mathcal A}$.
 
 Note that in this definition the equality relation is treated specially. This guarantees that the equality relation always represents true equality, and not some alternative model-defined notion of equality.
 
@@ -705,13 +707,13 @@ We often apply the satisfaction relation to a set of sentences.
 
 **Example** (Peano arithmetic) Let $\mathcal L$ consist of binary function symbols $+,\cdot$, binary relation symbol $<$, and constant symbols $0,1$. Let $T$ consist of the usual arithmetic axioms such as commutativity, associativity, distributivity, identity, and so on, together with the *induction scheme*:
 
-* For any well-formed formula $\phi(x)$ with free variable $x$, the following is an axiom: $(\phi(0)\wedge((\forall n)\phi(n)\to\phi(n+1)))\to(\forall x)\phi(x)$.
+* For any well-formed formula $\phi(x)$ with free variable $x$, the following is an axiom: $(\phi(0)\wedge((\forall x)\phi(x)\to\phi(x+1)))\to(\forall x)\phi(x)$.
 
 Note that Peano arithmetic is an infinite theory, because the induction scheme includes a separate axiom for every well-formed formula $\phi(x)$.
 
-**Example** (Set theory) Let $\mathcal L$ consist of one binary relation symbol $\in$. Let $T$ consist of the axioms of set theory described in Section 3. Then $T$ is what we mean when we talk about ZFC.
+**Example** (Set theory) Let $\mathcal L$ consist of one binary relation symbol $\in$. Let $T$ consist of the axioms of set theory described in Section 3. Then $T$ is what we mean when we talk about ZFC. Note that the Separation axiom is a scheme, just like the induction axiom in Peano arithmetic.
 
-**Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A\models T$ if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. In this case we also say that $\mathcal A$ is a *model* of $T$.
+**Definition** Let $T$ be an $\mathcal L$-theory and let $\mathcal A$ be an $\mathcal L$-structure. We say $\mathcal A$ *satisfies* $T$, written $\mathcal A\models T$, if for every $\sigma\in T$ we have $\mathcal A\models\sigma$. (We also say that $\mathcal A$ *models* $T$ or $\mathcal A$ is a model of $T$.)
 
 For example if $T$ is the theory of groups, the models of $T$ are the groups. If $T$ is the theory of linear orders, the models of $T$ are the linear orders. If $T$ is ZFC, the models of $T$ are the possible universes of set theory. This fulfills the notion that model theory provides the universes where a given collection of axioms is true. 
 
@@ -723,15 +725,15 @@ With the concept of first order satisfaction in hand, we can now define several 
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
 * A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
-In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositoinal variables, then we can make a signature $\mathcal L=\lbrace P_1,\ldots,P_n\rbrace$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
+In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositional variables, then we can make a signature $\mathcal L=\lbrace P_1,\ldots,P_n\rbrace$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
 
 More generally, we can start with a propositional tautology $\alpha$, and replace each propositional variable symbol with any first order sentence, and the result will be a semantically valid sentence. For example $((\forall x)(\forall y)x^2<y)\vee\neg((\forall x)(\forall y)x^2<y)$ is a valid sentence because it is of the *form* $P\vee\neg P$.
 
-There are also sentences which are semantically valid in a genuinely first order way, that is, they do not just come from propositional tautologies. For example, all of the following are semantically valid: $(\forall x)x=x$; $((\forall x)R(x))\to\neg(\exists x)\neg R(x)$; $((\forall x)\phi(x))\to\phi(\tau)$.
+There are also sentences which are semantically valid in a genuinely first order way, that is, they do not arise from propositional tautologies with sentences plugged in. For example, all of the following are semantically valid: $(\forall x)x=x$; $((\forall x)R(x))\to\neg(\exists x)\neg R(x)$; $((\forall x)\phi(x))\to\phi(\tau)$.
 
 We next give an example of semantic implication. Let $T$ be the theory of groups, and let $\sigma$ be the sentence $(\forall x)(\forall y)(\forall z)xy=xz\rightarrow y=z$. We can recognise $\sigma$ as something that is true in every group. Therefore $T\models\sigma$.
 
-Finally we give examples of consistent and inconsistent theories. The theory of groups is consistent, because we can construct a group and prove that it satisfies the sentences in the theory. Similarly the theory of linear orders is consistent. On the other hand, the theory of non-abelian groups with 5 elements (write this down) is inconsistent, because no such group exists! 
+Finally we give examples of consistent and inconsistent theories. The theory of groups is consistent, because we can construct a group and prove that it satisfies the sentences in the theory. Similarly the theory of linear orders is consistent. On the other hand, the theory of non-abelian groups with 5 elements (can you write out this theory formally?) is inconsistent, because no such group exists! 
 
 #### First order deductions
 
@@ -774,7 +776,7 @@ Recall we defined the trio of semantic validity, semantic implication, and seman
 4. $((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)$ (Modus ponens 2,3)
 5. $(\forall x)(\exists y)x=y$ (Modus ponens 1,4)
 
-The definition of deduction that we have given is of theoretical value, but not of great practical value. It can be very difficult to take substantial mathematical results and formalize them in this system. In the rest of the section we mention a few tactics for making the work of finding proofs at least somewhat more accessible.
+The definition of deduction that we have given is of theoretical value, but not of great practical value. It can be very difficult to take substantial mathematical results and formalize them in this system. In the rest of the section we mention a few tactics for making the work of finding deductions at least somewhat more accessible.
 
 **Theorem** (Deduction theorem) $T\vdash\alpha\to\beta$ if and only if $T\cup\set{\alpha}\vdash\beta$.
 
@@ -885,7 +887,7 @@ We are finally ready to use the Henkin construction to prove the completeness th
 
 We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only if $\mathcal H\models\sigma$, so that $\mathcal H$ really is a model of $T^\ast$ and therefore of $T$. We will proceed by induction on the *complexity* of $\sigma$. For this we can assume that the only connectives in $\sigma$ are $\wedge,\neg,\exists$, and proceed by induction on the number of occurrences of these symbols.
 
-First assume $\sigma$ is an atomic sentence $R\tau_1\cdots\tau_n$. Then the desired result follows from the definition of the relations of $\mathcal H$. (There is actually a subtle point that we must check $\mathrm{val}^{\mathcal H}(\tau)=[\tau]$ for all terms $\tau$. This is an induction on the construction of $\tau$ using the definition of $\mathcal H$ for the base case.)
+First assume $\sigma$ is an atomic sentence $R\tau_1\cdots\tau_n$. Then the desired result follows from the definition of the relations of $\mathcal H$. (There is actually a subtle point that we must check $\tau^{\mathcal H}=[\tau]$ for all terms $\tau$. This is an induction on the construction of $\tau$ using the definition of $\mathcal H$ for the base case.)
 
 Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\sigma\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\sigma$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$.
 
