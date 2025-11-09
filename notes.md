@@ -723,7 +723,7 @@ With the concept of first order satisfaction in hand, we can now define several 
 
 * A sentence $\sigma$ is *semantically valid* if for every structure $\mathcal A$ we have $\mathcal A\models\sigma$.
 * A theory $T$ *semantically implies* a sentence $\sigma$ if for every structure $\mathcal A$ we have $\mathcal A\models T$ implies $\mathcal A\models\sigma$.
-* A theory $T$ is *semantically consistent* there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
+* A theory $T$ is *semantically consistent* if there exists a structure $\mathcal A$ such that $\mathcal A\models T$ (a *model* of $T$).
 
 In propositional logic we defined tautologies, which are analogous to valid sentences. In fact, they are a special case. If $\alpha$ is a propositional tautology in $n$ propositional variables, then we can make a signature $\mathcal L=\lbrace P_1,\ldots,P_n\rbrace$ where for all $n$, $P_n$ is a relation symbol of arity $0$. Then $\alpha$ is equally a sentence of first order logic, and it is clearly valid.
 
