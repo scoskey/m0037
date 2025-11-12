@@ -761,12 +761,15 @@ To explain the statement about additional universal quantifiers at the front, co
 
 It is easy to see that each of these logical axioms is a valid sentence. While there are vastly more valid sentences not included in the list, we will eventually show that they are all consequences of the ones in the list! Indeed, the list of axioms was selected with this result in mind.
 
-Recall we defined the trio of semantic validity, semantic implication, and semantic consistency using the concept of satisfaction. We have just defined syntactic implication using deductions, and the following completes the syntactic trio of concepts.
+In the following definition, we make syntactic analogs of the three semantic notions of validity, implication, and consistency:
 
 **Definition**
 
-* A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$
+* A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$.
+* A theory $T$ *semantically implies* a sentence $\sigma$ if $T\vdash\sigma$.
 * A theory $T$ is *syntactically consistent* if $T\not\vdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
+
+We now give examples of deductions and some methods of finding deductions.
 
 **Example** Let $\sigma$ be the sentence $(\forall x)(\exists y)x=y$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. 
 
@@ -918,7 +921,7 @@ The completeness theorem has many consequences, as we shall soon see. But the mo
 * Semantic implication is equivalent to syntactic implication.
 * Semantic consistency is equivalent to syntactic consistency.
 
-As a result we rarely need to discern between the semantic and syntactic notions.
+As a result we rarely need to discern between the semantic and syntactic concepts.
 
 #### Compactness
 
