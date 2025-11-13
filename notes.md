@@ -852,7 +852,7 @@ In order to make examples like this one work, we will have to use terms of an *e
 
 **Definition** A theory $T$ is said to have *witnessing terms* if whenever $\phi(x)$ is a formula with one free variable $x$ there exists a term $\tau$ such that $T\vdash\exists x\phi(x)\to\phi(\tau)$.
 
-For example consider the field of real numbers $\mathbb R$. If $\phi(x)$ is $\forall y xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the next key to Henkin/Herbrand construction.
+For example consider the structure $(\mathbb R;+,\cdot,0,1,<)$. If $\phi(x)$ is $\forall y xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the next key to Henkin/Herbrand construction.
 
 **Lemma** If $T$ is a syntactically consistent theory, then there exists a syntactially consistent theory $T'$ in an expanded language such that $T\subset T'$ and $T'$ has witnessing terms.
 
@@ -864,7 +864,7 @@ Now to add witnessing terms for all formulas, we inductively define $\mathcal L^
 
 In the last example with $0$ in the language but not $1$, the theory $T_2$ proves that there exists a least element greater than $0$, so when we go to $T_2'$ we will get a new constant symbol for $1$. For that matter we will get constant symbols for $2$, $3$, etc. When we construct $\mathcal H(T_2')$ we will indeed get a model of $T_2$.
 
-But the next and final example shows there is one more issue to consider.
+But the next motivating example shows that there is still one last issue to consider.
 
 **Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the trichotomy axiom.
 
@@ -876,7 +876,7 @@ The next result says that an incomplete theory can always be *extended* to a com
 
 **Lemma** If $T$ is a syntactically consistent theory, there exists a complete syntactically consistent theory $\bar T$ such that $T\subset\bar T$.
 
-*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\lbrace\sigma\rbrace$ is clearly consistent. If $T\not\vdash\sigma$, then $T\cup\lbrace\neg\sigma\rbrace$ will be consistent (check this!).
+*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\lbrace\sigma\rbrace$ is clearly syntactically consistent. If $T\not\vdash\sigma$, then $T\cup\lbrace\neg\sigma\rbrace$ will be syntactically consistent (check this!).
 
 Now iterate the procedure until there are no more sentences $\sigma$ such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. The resulting theory $\bar T$ will be consistent and complete. $\blacksquare$
 
@@ -892,23 +892,25 @@ We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only 
 
 First assume $\sigma$ is an atomic sentence $R\tau_1\cdots\tau_n$. Then the desired result follows from the definition of the relations of $\mathcal H$. (There is actually a subtle point that we must check $\tau^{\mathcal H}=[\tau]$ for all terms $\tau$. This is an induction on the construction of $\tau$ using the definition of $\mathcal H$ for the base case.)
 
-Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\sigma\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\sigma$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$.
+Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\neg\alpha\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\neg\alpha$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$. (Check it!)
 
 Finally if $\sigma$ is of the form $\exists x\phi(x)$ then since $T^\ast$ has witnessing terms there is a term $\tau$ in the expanded language such that the sentence $\exists x\phi(x)\to\phi(\tau)$ is in $T^\ast$. Now:
 
 $$\begin{aligned}
-  \sigma\in T^\ast &\implies \phi(\tau)\in T^\ast & \text{completeness of $T^\ast$}\\
+  \exists x\phi(x)\in T^\ast
+  &\implies \phi(\tau)\in T^\ast        & \text{completeness of $T^\ast$}\\
   &\implies \mathcal H\models\phi(\tau) & \text{inductive hypothesis}\\
-  &\implies \mathcal H\models\sigma
+  &\implies \mathcal H\models\exists x\phi(x)
 \end{aligned}$$
 
 And conversely:
 
 $$\begin{aligned}
-  \mathcal H\models\sigma &\implies \mathcal H\models\phi(\tau) &\text{for some term $\tau$ :)}\\
-  &\implies \phi(\tau)\in T^\ast &\text{inductive hypothesis}\\
-  &\implies T^\ast\vdash\sigma &\text{EG}\\
-  &\implies \sigma\in T^\ast &\text{completeness of $T^\ast$}
+  \mathcal H\models\exists x\phi(x)
+  &\implies \mathcal H\models\phi(\tau)  &\text{for some term $\tau$ :)}\\
+  &\implies \phi(\tau)\in T^\ast         &\text{inductive hypothesis}\\
+  &\implies T^\ast\vdash\exists x\phi(x) &\text{EG}\\
+  &\implies \exists x\phi(x)\in T^\ast   &\text{completeness of $T^\ast$}
 \end{aligned}$$
 
 This completes the proof. $\blacksquare$.
@@ -931,7 +933,7 @@ To further explore the consequences of the completeness theorem, we now introduc
 
 We invite the reader to verify that similarly to the propositional completeness and compactness theorems, the first order completeness and compactness theorems are equivalent to each other in the sense that there exist short proofs in both directions.
 
-As we have seen, the propositional compactness theorem is useful in taking statements about finite objects which are arbitrarily large to statements about infinite objects. The first order compactness theorem has a similar set of applications. The following corollary was stated in Section 1; here we give a first order version of the same argument.
+As we have seen, the propositional compactness theorem is useful for passing from statements about finite objects which are arbitrarily large, to statements about infinite objects. The first order compactness theorem has applications of a similar nature. The following corollary was stated in Section 1; here we give a first order version of the same argument.
 
 **Corollary** Let $G$ be a combinatorial graph with adjacency relation $\sim$. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring with $n$ colors. Then $G$ has a proper coloring with $n$ colors.
 
@@ -941,8 +943,8 @@ As we have seen, the propositional compactness theorem is useful in taking state
 * $c_v\sim c_{v'}$ whenever $v\sim v'$
 * $c_v\not\sim c_{v'}$ whenever $v\not\sim v'$
 * $\forall x P_1(x)\vee\cdots\vee P_n(x)$
-* $\forall x \bigwedge_{i\neq j} \neg P_i(x)\wedge P_j(x)$
-* $\forall x\forall y x\sim y\to \bigwedge_i\neg P_i(x)\wedge P_i(y)$
+* $\forall x \bigwedge_{i\neq j} \neg (P_i(x)\wedge P_j(x))$
+* $\forall x\forall y x\sim y\to \bigwedge_i\neg (P_i(x)\wedge P_i(y))$
 
 Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subset of $T$, then $T_0$ mentions a certain subset $G_0\subset G$. The induced subgraph corresponding to $G_0$ is bipartite and thus gives rise to a model of $T_0$.
 
