@@ -946,9 +946,9 @@ As we have seen, the propositional compactness theorem is useful for passing fro
 * $\forall x \bigwedge_{i\neq j} \neg (P_i(x)\wedge P_j(x))$
 * $\forall x\forall y x\sim y\to \bigwedge_i\neg (P_i(x)\wedge P_i(y))$
 
-Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subset of $T$, then $T_0$ mentions a certain subset $G_0\subset G$. The induced subgraph corresponding to $G_0$ is bipartite and thus gives rise to a model of $T_0$.
+Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subset of $T$, then $T_0$ mentions a certain subset $G_0\subset G$. The induced subgraph corresponding to $G_0$ has a proper coloring with $n$ colors, and thus gives rise to a model of $T_0$.
 
-By the compactness theorem, $T$ has a model, $G'$. Observe that $G$ is a subgraph of $G'$ via the function which sends any $v\in G$ to the interpretation of $c_v$ in $G'$. Since $G'$ is bipartite, it follows that $G$ is bipartite. $\blacksquare$
+By the compactness theorem, $T$ has a model, $G'$. Observe that $G$ is a subgraph of $G'$ via the function which sends any $v\in G$ to the interpretation of $c_v$ in $G'$. Since $G'$ has a proper coloring with $n$ colors, it follows that $G$ has a proper coloring with $n$ colors. $\blacksquare$
 
 ### 7. Applications of compactness, more about theories
 
@@ -966,13 +966,17 @@ This simple idea can also be used to derive many further consequences. The first
 
 We invite the reader to fill in the proofs of these results.
 
-For each theory $T$ there is a corresponding class of models of $T$. We will say that a class $\mathcal C$ of structures is *axiomatizable* if there exists a theory $T$ such that the models of $T$ are precisely the elements of $\mathcal C$. It is natural to ask whether every (reasonable) class of srtuctures is axiomatizable. Our next result says that the answer is no.
+For each theory $T$ there is a corresponding class of models of $T$. We will say that a class $\mathcal C$ of structures is *axiomatizable* if there exists a theory $T$ such that the models of $T$ are precisely the elements of $\mathcal C$. It is natural to ask whether every (reasonable) class of srtuctures is axiomatizable. 
+
+The answer is no, for instance, our result above about theories with arbitrary large finite models shows that the calss of finite structures is not axiomatizable. We next present several similar examples.
 
 Recall that a graph is *connected* if for any two vertices $x,y$, there exists a path from $x$ to $y$. That is, for any $x,y$ there is a sequence of vertics $x_1,\ldots,x_n$ such that $x\sim x_1\sim x_2\sim\cdots\sim x_n=y$.
 
 **Corollary** The class of connected graphs is not axiomatizable.
 
 *Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the connected graphs. Expand the language with two new constant symbols $a,b$. Let $\sigma_n$ be the sentence which says there is no path from $a$ to $b$ of length $n$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then a graph consisting of a single path of length $N+1$ from $a$ to $b$ gives a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is disconnected, because there cannot be a path from $a$ to $b$. Hence we have shown that there is a disconnected model of $T$, a contradiction. $\blacksquare$
+
+Next recall that a linear order $L$ is called a *well-order* if there is no infinite descending sequence in $L$.
 
 **Corollary** The class of well-orders is not axiomatizable.
 
@@ -998,7 +1002,7 @@ Returning to theories in logic, we have shown above that theories with arbitrar
 
 *Proof*. Assume $T$ has an infinite model and let $\kappa$ be given. Expand the signature to include $\kappa$ many constant symbols $c_\alpha$ for $\alpha<\kappa$. Let $T'=T\cup\set{c_\alpha\neq c_\beta:\alpha\neq\beta}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, $T_0$ mentions just finitely many of the constant symbols $c_\alpha$, and we can intrepret them as arbitrary elements of the given model of $T$. It follows that $T'$ is consistent, and therefore by the compactness theorem $T'$ has a model. Clearly this model will have size at least $\kappa$.
 
-But we want it to have size exactly $\kappa$. Instead of using compactness, use the proof of the completeness theorem to build the Henkin structure $\mathcal H$ in the expanded language. The expanded language has $\kappa$ many terms, and since the $c_\alpha$ will be in distinct equivalence classes, it has exactly $\kappa$ many terms. Thus $\mathcal H$ is a model of $T$ of size $\kappa$. $\blacksquare$
+But we want it to have size exactly $\kappa$. Now that we know $T'$ is consistent, build its Henkin structure $\mathcal H$. With the constant terms $c_\alpha$, there will be exactly $\kappa$ many terms. Since the $c_\alpha$ will be in distinct equivalence classes, the structure has exactly $\kappa$ many elements. Thus $\mathcal H$ is a model of $T$ of cardinality $\kappa$. $\blacksquare$
 
 The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is consistent, then ZFC has a countable model. Since we know that ZFC implies there exist uncountable sets, we appear to have reached a paradox: an uncountable object is contained in a countable object. The resolution to this apparent contradiction is that the countable model only believes its sets are uncountable because it lacks the bijections to prove they are countable. These bijections do exist but externally to the model.
 
