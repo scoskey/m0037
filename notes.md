@@ -1096,15 +1096,21 @@ In the rest of this section we study definability in models of set theory. That 
 
 **Definition** Let $A$ be any set. Then $A$ gives rise to a *set model* $(A;\epsilon)$ with domain $A$ and binary relation $\epsilon$.
 
-When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all of ZFC, but some sub-theory of ZFC. For instance, every set model satisfies Extensionality. The set $\mathbb N$ doesn't satisfy pairing because for instance $(0,1)=\lbrace1,2\rbrace$ isn't a natural number.
+When we work with set models, we skip the structure notation $\mathcal A=(A;\epsilon)$ and simply write $A$. Of course most set models will not satisfy all of ZFC, but some sub-theory of ZFC. As Extensionality is perhaps the most important axiom of ZFC, we would like our set models to satisfy Extensionality.
 
-One of the most useful set models is HF, the set of hereditarily finite sets. (In references, this may also be denoted as $V_\omega$ or $\mathcal R_\omega$.) It is an exercise to check that HF satisfies all of ZFC except Infinity. Similarly the set model HC consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
+**Definition** A set $A$ is said to be *transitive* if whenever $x\in y\in A$ we have $x\in A$.
+
+We invite the reader to verify that if $A$ is a transitive set, then $A$ satisfies Extensionality. Note that the term "transitive" is used a little bit differently for sets than for linear orders.
+
+Other axioms of ZFC are still far from guaranteed. For instance the transitive set $\omega$ doesn't satisfy Pairing, because for instance the pair $\lbrace1,2\rbrace$ isn't in $\omega$.
+
+One of the most useful set models is HF, the set of hereditarily finite sets. (In references, this may also be denoted as $V_\omega$ or $\mathcal R_\omega$.) It is an exercise to check that HF satisfies all axioms of ZFC, except Infinity. Similarly the set model HC consisting of the hereditarily countable sets satisfies all of ZFC except Power Set.
 
 When $A,B$ are set models and $A\subset B$, both models believe they are talking about some of the same objects (they share the elements of $A$ in common), but they may disagree about properties of these objects. For example consider $\mathbb N$ and HF. We have $\mathbb N\subset HF$. Both these set models agree on which object is the empty set, but they disagree on whether $\epsilon$ is a linear order or not. An even worse example is $\set{3,4,5,\ldots}$, which disagrees with $\mathbb N$ and HF about which object is the empty set!
 
 **Definition** Let $A,B$ be sets such that $A\subset B$. A formula $\phi(x_1,\ldots,x_n)$ is *absolute* between $A$ and $B$ if for all substitution functions $s\colon\lbrace x_1,x_2,\ldots\rbrace\to A$ we have $A\models\phi[s]\iff B\models\phi[s]$.
 
-Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive. Recall that a set $A$ is *transitive* if $b\in a\in A$ implies $b\in A$.
+Which formulas are absolute between which set models? This is a complicated question in general, but there is a large class of formulas that is absolute between any two set models which are transitive.
 
 **Definition** A formula $\phi$ is called a *$\Delta_0$-formula* if its quantifiers are bounded, that is, every occurrence of $\exists$ is of the form $\exists y\in z$ and every occurrence of $\forall$ is of the form $\forall y\in z$.
 
@@ -1143,7 +1149,7 @@ On the other hand, there are sets that are intuitively decidable but not $\Delta
 
 But this is impossible. We have seen using compactness that $\mathrm{Th}(\mathbb N)$ has a model $\mathcal N$ with "nonstandard" elements. In such a model, $A^{\mathcal N}$ still occupies "every other" standard and nonstandard element. But the model has an automorphism $f$ that shifts every non-standard element one unit to the right. Since $f(A^{\mathcal N})\neq A^{\mathcal N}$, we must have that $A^{\mathcal N}$ is not definable and finally that $A$ is not definable.
 
-The next definition helps us go beyong $\Delta_0$ to further levels of definability.
+The next definition helps us go beyond $\Delta_0$ to further levels of definability.
 
 **Definition** A formula $\phi$ is $\Sigma_1$ if it is of the form $\exists y\alpha$, where $\alpha$ is $\Delta_0$. A formula $\phi$ is $\Pi_1$ if it is of the form $\forall y\alpha$, where $\alpha$ is $\Delta_0$.
 
