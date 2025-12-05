@@ -1157,7 +1157,7 @@ We remark that it is also permitted to use several quantifiers of the same type,
 
 **Definition** A subset $A$ of HF is *$\Delta_1$-definable* if it is both $\Sigma_1$-definable and $\Pi_1$-definable.
 
-In fact there is a whole hierarchy of Sigma, Pi, and Delta definability called the arithmetical hierarchy, but we don't need to pursue this any further.
+In fact there is a whole hierarchy of $\Sigma_n$, $\Pi_n$, and $\Delta_n$ definability called the arithmetical hierarchy, but we don't need to pursue this any further.
 
 **Example** Let $E$ be the set of even natural numbers. Then $E$ is a $\Delta_1$-definable subset of HF. To see this, first we have already said that the property of being a natural number is $\Delta_0$-definable in HF. Then $E$ is $\Sigma_1$-definable since $n\in E$ iff there exists an equivalence relation on $n$ such that every class has cardinality $2$. Furthermore the set of odd natural numbers $O$ is $\Sigma_1$-definable using a similar technique. It follows using complements that $E$ is $\Pi_1$-definable, and therefore $\Delta_1$-definable.
 
@@ -1167,17 +1167,17 @@ Like the $\Delta_0$-formulas, the $\Delta_1$-definable formulas enjoy a degree o
 
 We invite the reader to complete the details of this proposition.
 
-Like the $\Delta_0$-definable sets, the $\Delta_1$-definable sets are decidable in the informal sense, but using the following more complex procedure. Suppose that $A$ is defined both by $\exists y\alpha$ and by $\forall y\beta$, where $\alpha,\beta$ are $\Delta_0$-formulas. The second definition means that $A^c$ is defined by $\exists y\neg\beta$. Our procedure takes an input element $a\in HF$, and runs through all possible values of $b$. Each time it uses the procedure for $\Delta_0$-formulas to check whether $HF\models\alpha[x\mapsto a,y\mapsto b]$ and whether $HF\models\neg\beta[x\mapsto a,y\mapsto b]$. Since $A$ and $A^c$ are complementary, one of these possibilities must eventually be true, at which point we can halt and output Yes or No depending on whether it was $\alpha$ or $\neg\beta$. Note that this procedure will have to terminate, but our description provides no insight as to when it will do so.
+Like the $\Delta_0$-definable sets, the $\Delta_1$-definable sets are decidable in the informal sense, but using the following more complex procedure. Suppose that $A$ is defined both by $\exists y\alpha(x,y)$ and by $\forall y\beta(x,y)$, where $\alpha,\beta$ are $\Delta_0$-formulas. The second definition means that $A^c$ is defined by $\exists y\neg\beta(x,y)$. Our procedure takes an input element $a\in HF$, and runs through all possible values of $b$. Each time it uses the procedure for $\Delta_0$-formulas to check whether $HF\models\alpha(a,b)$ and whether $HF\models\neg\beta(a,b)$. Since $A$ and $A^c$ are complementary, one of these possibilities must eventually be true, at which point we can halt and output Yes or No depending on whether it was $\alpha$ or $\neg\beta$. Note that this procedure will have to terminate, but our description provides no insight as to when it will do so.
 
 Conversely, if a set $A$ is decidable by some procedure, then $A$ should be $\Delta_1$-definable. To see this, we observe that any run of the procedure should leave a finite record of its steps and its state at every step. Such a record can be coded as an element of HF. Thus we can say that $a\in A$ iff there exists a code for a run of the procedure such that the input was $a$ and the output was Yes. And we can say that $a\in A$ iff for all codes for a run of the procedure, if the input was $a$, then the output was Yes.
 
 This informal argument leads to the following historical statement.
 
-**Church–Turing Thesis** A set is decidable by a finitary procedure if and only if it is $\Delta_1$-definable.
+**Church–Turing Thesis** A subset of the natural numbers (or for us, HF) is decidable by a finitary procedure if and only if it is $\Delta_1$-definable.
 
 In other words, all "reasonable" notions of a finitary procedure should be equivalent to one another. The list of equivalent notions is long and includes: decidable by a Turing machine, decidable by a python program, definable by recursion, and $\Delta_1$-definability. Since all these choices lead to the same concept, the notion of decidable must be very important!
 
-For this class we make the thesis into our formal definition:
+For this class we make the thesis into our formal definition.
 
 **Definition** A subset $A$ of HF is *decidable* if it is $\Delta_1$-definable.
 
@@ -1201,9 +1201,9 @@ In practice the terms decidable and computable are often interchanged, but we wi
 
 This may lead one to ask whether studying computable functions is any different from studying decidable sets. The following shows computable functions are a nice special case.
 
-**Proposition** If $f$ is a $\Sigma_1$ definable function with domain HF, then $f$ is computable.
+**Proposition** If $f$ is a $\Sigma_1$-definable function with domain HF, then $f$ is computable.
 
-*Proof*: Suppose $f$ is $\Sigma_1$ definable. Then there exists a $\Delta_0$-formula $\alpha$ such that $f(a)=b$ iff $HF\models(\exists z)\alpha[x\mapsto a,y\mapsto b]$. Then using the property that on any input $a$, a function always has a unique output $b$, we also have $f(a)=b$ iff $HF\models(\forall y)(\forall z)\alpha(x,y,z)\to y=w[x\mapsto a,w\mapsto b]$. $\blacksquare$
+*Proof*: Suppose $f$ is $\Sigma_1$ definable. Then there exists a $\Delta_0$-formula $\alpha(x,y,z)$ such that $f(a)=b$ iff $HF\models(\exists z)\alpha(a,b,z)$. Then using the property that on any input $a$, a function always has a unique output $b$, we also have $f(a)=b$ iff $HF\models(\forall z)(\forall y)(\alpha(a,y,z)\to y=b)$. $\blacksquare$
 
 We have studied the informal statement that the decidable sets are those $A$ such that there exists a procedure which on input $a$ decides whether $a\in A$. We now make the informal statement that the computable functions are those $f$ such that there exists a procedure which on input $a$ outputs $f(a)$.
 
@@ -1215,7 +1215,7 @@ Conversely, suppose there is a procedure for evaluating $f(a)$. Then $f$ is $\Si
 
 We invite the reader to check that the converse is true, that is, if some characteristic function $\chi_A$ is computable then $A$ is decidable.
 
-**Example** Let $f$ be the cardinality function $f(x)=\vert x\vert$. Then $f$ is $\Delta_1$ and so computable. Indeed, $f$ is $\Sigma_1$ because $\vert x\vert=y$ iff $y\in\omega$ and there exists a bijection between $x$ and $y$, and $f$ is $\Pi_1$ because $\vert x\vert=y$ iff $y\in\omega$ and every injection from $x$ to $y$ is a surjection.
+**Example** Let $f$ be the cardinality function $f(x)=\vert x\vert$. Then $f$ is computable. Indeed, $f$ is $\Sigma_1$-definable because $\vert a\vert=n$ iff $n\in\omega$ and there exists a bijection between $a$ and $n$. We invite to the reader to check that these statements can be formalised in a $\Sigma_1$ fashion. Since $f$ is a function, it is automatically $\Pi_1$-definable, and thus $\Delta_1$-definable.
 
 More substantial examples of computable functions are usually defined by recursion. For instance, we have seen how $+$ can be defined by iteratively adding $1$, and $\times$ can be defined by iteratively adding. The classical recursion theorem is a consequence of ZFC which states that these functions exist. The recursion theorem in computability theory says that if the recursive definition is computable, then the result is computable too.
 
@@ -1247,13 +1247,13 @@ This of course justifies giving different names to $\Delta_1$ and $\Sigma_1$ in 
 
 **Lemma** There exists a $\Sigma_1$-definable set $U\subset HF\times HF$ such that for every $\Sigma_1$-definable set $A\subset HF$ there exists $r\in HF$ such that $A=\set{a:(r,a)\in U}$.
 
-*Proof of Lemma*: Let $V$ be the set of all triples $(p,a,b)$ such that $p$ is a code for a $\Delta_0$-formula $\phi$ and $HF\models\phi[x\mapsto a,y\mapsto b]$. Then we have argued using recursion that $V$ is $\Delta_1$-definable. Next let $U$ be the set of all pairs $(p,a)$ such that $(\exists b)(p,a,b)\in V$. Then $U$ is clearly $\Sigma_1$-definable.
+*Proof of Lemma*: Let $V$ be the set of all triples $(p,a,b)$ such that $p$ is a code for a $\Delta_0$-formula $\phi$ and $HF\models\phi(a,b)$. Then we have argued using recursion that $V$ is $\Delta_1$-definable. Next let $U$ be the set of all pairs $(p,a)$ such that $(\exists b)(p,a,b)\in V$. Then $U$ is clearly $\Sigma_1$-definable.
 
-Now if $A$ is any $\Sigma_1$-definable set, then $A$ is definable by some formula $\exists y\phi$ where $\phi$ is a $\Delta_0$-formula. Letting $p$ be a code for $\phi$, we have that $A$ is precisely equal to $\set{a:(p,a)\in U}$, as desired. $\blacksquare$
+Now if $A$ is any $\Sigma_1$-definable set, then $A$ is definable by some formula $\exists y\phi(x,y)$ where $\phi$ is a $\Delta_0$-formula. Letting $p$ be a code for $\phi$, we have that $A$ is precisely equal to $\set{a:(p,a)\in U}$, as desired. $\blacksquare$
 
 Intuitively, we can think of $U$ as a $2$-dimensional set where the $\Sigma_1$-definable sets make up the columns of $U$.
 
-To prove the theorem, we once again return to the diagonalization idea of Cantor and Russell.
+To prove the theorem, we once again return to the diagonalization idea of Russell and Cantor.
 
 *Proof of Theorem*. Let $U$ be the universal $\Sigma_1$ set constructed in the Lemma. Let $D=\set{a\in HF:(a,a)\notin U}$. Then the definition of $D$ is clearly $\Pi_1$-definable, due to the negation and the $U$. On the other hand, due to its definition, $D$ cannot not appear as a column of $U$. Since all the $\Sigma_1$-definable sets appear as columns of $U$, we must conclude that $D$ is not $\Sigma_1$-definable.
 
@@ -1265,9 +1265,9 @@ In the following result, fix any model of computation you prefer, and fix some w
 
 **Theorem** The set $H$ of codes for halting programs is undecidable.
 
-*Proof*: Let $A$ be a $\Sigma_1$ set which is not $\Delta_1$. Let $\phi$ be a $\Delta_0$-formula such that $a\in A$ iff $\exists y\phi(x,y)[x\mapsto a,y\mapsto b]$. For each $a$ let $h_a$ be a code for the program which searches through all possible $b\in HF$ until it finds one such that $HF\models\phi(a,b)$. Then the function $a\mapsto h_a$ is computable, since we can write general such program $h_x$, and given any $a$, subsitute $a$ for $x$ in the program code. Now we have $a\in A$ iff $h_a\in H$. Thus if $H$ were $\Delta_1$ then so would $A$ be $\Delta_1$, a contradicton. $\blacksquare$
+*Proof*: Let $A$ be a $\Sigma_1$-definable set which is not $\Delta_1$-definable. Let $\alpha$ be a $\Delta_0$-formula such that $a\in A$ iff $\exists y\phi(a,y)$. For each $a$ let $h_a$ be a code for the program which searches through all possible $b\in HF$ until it finds one such that $HF\models\phi(a,b)$. Then the function $a\mapsto h_a$ is computable, since we can write general such program $h_x$, and given any $a$, subsitute $a$ for $x$ in the program code. Now we have $a\in A$ iff $h_a\in H$. Thus if $H$ were $\Delta_1$ then so would $A$ be $\Delta_1$, a contradicton. $\blacksquare$
 
-In this proof, we defined a function $r\colon HF\to HF$ with the property that $a\in A\iff a(x)\in H$. Such a funcion is called a *reduction* from $A$ to $H$. When there exists a computable reduction from $A$ to $B$ we sometimes write $A\leq B$ because it says in some sense that the complexity of $B$ is no simpler than that of $A$. In general, if one wishes to prove that a given set $B$ is undecidable, the most common technique is to find a computable reduction function from some known undecidable set $A$ to $B$.
+In this proof, we defined a function $r\colon HF\to HF$ with the property that $a\in A\iff r(a)\in H$. Such a funcion is called a *reduction* from $A$ to $H$. When there exists a computable reduction from $A$ to $B$ we sometimes write $A\leq B$ because it says in some sense that the complexity of $B$ is no simpler than that of $A$. In general, if one wishes to prove that a given set $B$ is undecidable, the most common technique is to find a computable reduction function from some known undecidable set $A$ to $B$.
 
 ### 10. Decidability in logic and incompleteness
 
@@ -1277,17 +1277,17 @@ We have said that if $\phi$ is a well-formed formula we can view it as an elemen
 
 **Definition** For any theory $T$ we let $T^\vdash=\set{\sigma:T\vdash\sigma}$. We say $T^\vdash$ is the *deductive closure* of $T$.
 
-If $T$ is decidable, we can still consider the question of whether $T^\vdash$ is decidable or not. We will always have that $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a deduction from $T$ of $\sigma$. We invite the reader to carry out the details of this justification.
+If $T$ is decidable, then $T^\vdash$ is $\Sigma_1$, because $\sigma\in T^\vdash$ iff there exists a code for a deduction from $T$ of $\sigma$. We invite the reader to carry out the details of this justification. However in general it is a question whether $T^\vdash$ is decidable.
 
-For example, ZFC is a decidable theory. Most of the axioms of ZFC are specific well-formed sentences. The Separation and Replacement axioms are actually axiom schemes, which say that for any formula $\phi$ a certain sentence involving $\phi$ is true. Nevertheless these axiom schemes are templates that are easy to recognise. That is, given a sentence $\sigma$, we can imagine a simple condition or procedure to decide whether $\sigma$ is an instance of the Separation or Replacement axiom or not.
+For example, ZFC is a decidable theory. Most of the axioms of ZFC are single sentences. The Separation and Replacement axioms are axiom schemes, which say that for any formula $\phi$ a certain sentence involving $\phi$ is true. Nevertheless these axiom schemes are templates that are easy to recognise. That is, given a sentence $\sigma$, we can imagine a simple procedure to decide whether $\sigma$ is an instance of the Separation or Replacement axiom or not.
 
-But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search over all possible deductions. We will see that $\mathrm{ZFC}^\vdash$ turns out to be *undecidable*. Whether that's surprising or not depends on your point of view. ZFC is powerful enough to settle many if not most open problems in mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, then contemporary and future humans and automated theorem provers should be able to settle most open problems in mathematics.
+But it is much more difficult to decide whether $\sigma$ is in $\mathrm{ZFC}^\vdash$ (that is, $\sigma$ is a *theorem* of ZFC), because this appears to require an unbounded search over all possible deductions. In fact, we will show that $\mathrm{ZFC}^\vdash$ is *undecidable*. Whether that's surprising to you or not depends on your point of view. ZFC is powerful enough to settle nearly all open problems in classical mathematics. Thus if $\mathrm{ZFC}^\vdash$ were decidable, that would mean humans and our automated theorem provers should be able to settle nearly all open problems in mathematics.
 
-Of course you may feel that studying ZFC is rather specific, since we could always debate, add, and subtract some of the axioms. In the rest of the section, it will be sufficient to work with the following theory which is much more basic.
+Of course you may feel that studying ZFC is rather specific, since we could always debate, add, and subtract some of the axioms. In the rest of the section, it will be sufficient to work with the following much more basic theory.
 
 **Definition** The theory CST, or *core set theory*, consists of Extensionality, Pairing, Union, Separation, and Foundation.
 
-This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including many properties of HF and natural numbers, including induction. It has a similar strength to Peano Arithmetic, the usual axioms of the natural numbers with $+,\cdot$.
+This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including establishing most properties of HF and of the natural numbers. The strength of CST is similar to that of Peano Arithmetic, which we recall is the usual axioms of the natural numbers with $+,\cdot$ including induction.
 
 **Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
 
@@ -1295,7 +1295,7 @@ In our proof of the first incompleteness theorem, we will use a diagonalization 
 
 We begin by showing we can "represent" subsets of HF inside the theory $CST$ itself.
 
-**Proposition** Every element of HF is $\Delta_0$-definable. That is, for all $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(x)[x\mapsto b]$.
+**Proposition** Every element of HF is $\Delta_0$-definable. That is, for all $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(b)$.
 
 The propostion says that in logical formulas, we can reference every single element of HF without needing to expand the signature or theory CST with new constant symbols. It's similar to the situation in arithmetic where we can refer to $n\in\mathrm N$ as the $n$-th least element. We invite the reader to carry out the proof of the result.
 
@@ -1305,19 +1305,19 @@ The propostion says that in logical formulas, we can reference every single elem
 
 **Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_0$-definable set is representable in $T$.
 
-*Proof*: We will prove that for any $\Delta_0$-formula $\phi(x)$, we have $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi[x\mapsto a]$. For atomic and negated atomic formulas $x\in y$, $x\notin y$, $x=y$, and $x\neq y$ are proved by induction on the rank of the elements $a,b$ that are plugged in for $x,y$. For general $\Delta_0$-formulas $\phi$ we use induction on the complexity of $\phi$. The boundedness of quantifiers is key because they reduce to conjuctions or disjunctions of atomics. $\blacksquare$
+*Proof*: We will prove that for any $\Delta_0$-formula $\phi(x)$, we have $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi(a)$. For atomic and negated atomic formulas $x\in y$, $x\notin y$, $x=y$, and $x\neq y$ are proved by induction on the rank of the elements $a,b$ that are plugged in for $x,y$. For general $\Delta_0$-formulas $\phi$ we use induction on the complexity of $\phi$. The boundedness of quantifiers is key because they reduce to conjuctions or disjunctions of atomics. $\blacksquare$
 
 Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST.
 
 **Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_1$-definable set is representable in $T$.
 
-*Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha[x\mapsto a]$, and $a\in A$ iff $HF\models\forall z\beta[x\mapsto a]$.
+*Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha(a,y)$, and $a\in A$ iff $HF\models\forall z\beta(a,z)$.
 
 Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula:
 
 $$\exists y\left[\alpha(x,y)\wedge\forall z((\mathrm{rk}(z)<\mathrm{rk}(y))\rightarrow\beta(x,z))\right].$$
 
-We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $b\in HF$ such that $HF\models\alpha(x,y)[x\mapsto a,y\mapsto b]$, and for all $c\in HF$ we have $HF\models\beta(x,z)[x\mapsto a,z\mapsto c]$. Since $\alpha,\beta$ are $\Delta_0$, the previous proposition implies $CST\vdash\alpha(\langle a\rangle,\langle b\rangle)$ and $CST\vdash\beta(\langle a\rangle,\langle c\rangle)$. The requirement that $\mathrm{rk}(z)<\mathrm{rk}(y)$ amounts to a finite disjunction over all $c$ of rank less than that of $b$. Thus $CST\vdash\psi(\langle a\rangle)$, and so $T\vdash\psi(\langle a\rangle)$.
+We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $b\in HF$ such that $HF\models\alpha(a,b)$, and for all $c\in HF$ we have $HF\models\beta(a,c)$. Since $\alpha,\beta$ are $\Delta_0$, the previous proposition implies $CST\vdash\alpha(\langle a\rangle,\langle b\rangle)$ and $CST\vdash\beta(\langle a\rangle,\langle c\rangle)$. The requirement that $\mathrm{rk}(z)<\mathrm{rk}(y)$ amounts to a finite disjunction over all $c$ of rank less than that of $b$. Thus $CST\vdash\psi(\langle a\rangle)$, and so $T\vdash\psi(\langle a\rangle)$.
 
 Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\rangle)$, that is:
 
@@ -1333,7 +1333,7 @@ We are now ready to prove the final step of the first incompleteness theorem.
 
 $$U=\set{(p,a):p\text{ is a code for a formula }\phi\text{ and }T\vdash\phi(\langle a\rangle)}.$$
 
-Then $U$ is decidable, and since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set appears as a column of $U$. We say that $U$ is universal for $\Delta_1$-definable sets. Let $D$ be the diagonal set:
+Then $U$ is decidable, and since every $\Delta_1$-definable set is representable in $T$, every $\Delta_1$-definable set appears as a column of $U$. (We may say that $U$ is universal for $\Delta_1$-definable sets.) Let $D$ be the diagonal set:
 
 $$D=\set{p:(p,p)\notin U}$$
 
