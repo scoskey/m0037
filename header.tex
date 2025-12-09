@@ -1,6 +1,6 @@
-% pandoc --from=markdown-markdown_in_html_blocks-native_divs -H header.tex -V documentclass=amsbook -V fontsize=11pt -V classoption=oneside --top-level-division=chapter --shift-heading-level-by=-1 --toc --toc-depth=2 notes.md -o notes.pdf
+% pandoc --from=markdown-markdown_in_html_blocks-native_divs -H header.tex -V documentclass=amsbook -V classoption=11pt,oneside,a4paper --top-level-division=chapter --shift-heading-level-by=-1 --toc --toc-depth=2 notes.md -o notes.pdf
 
-\usepackage[paper=a4paper,vscale=.8,hmarginratio=1:1,vmarginratio=4:3]{geometry}
+\usepackage[vscale=.8,vmarginratio=4:3]{geometry}
 \usepackage{lmodern,newpxtext,newpxmath}
 \usepackage{setspace}\onehalfspacing\raggedbottom
 \usepackage{hyperref}
