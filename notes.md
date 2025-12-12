@@ -767,7 +767,7 @@ In the following definition, we make syntactic analogs of the three semantic not
 
 * A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$.
 * A theory $T$ *semantically implies* a sentence $\sigma$ if $T\vdash\sigma$.
-* A theory $T$ is *syntactically consistent* if $T\not\vdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
+* A theory $T$ is *syntactically consistent* if $T\nvdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
 
 We now give examples of deductions and some methods of finding deductions.
 
@@ -818,7 +818,7 @@ Recall from propositional logic the soundness and completeness theorems, which l
 
 The right-to-left implication is the soundness theorem and says anything we can deduce is true, meaning deductions are *sound* reasoning. The proof is just the same as the proof in the case of propositional logic, and simply involves checking that the logical axioms and modus ponens are semantically valid. The left-to-right implication is the completeness theorem.
 
-We will actually study the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\not\vdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
+We will actually study the completeness theorem in another form. Recall that a theory $T$ is syntactically consistent if $T\nvdash\sigma\wedge\neg\sigma$. Recall also that $T$ is semantically consistent if there exists a model of $T$. 
 
 **Theorem** (Soundness and completeness theorems, version II) $T$ is syntactically consistent if and only if $T$ is semantically consistent.
 
@@ -876,7 +876,7 @@ The next result says that an incomplete theory can always be *extended* to a com
 
 **Lemma** If $T$ is a syntactically consistent theory, there exists a complete syntactically consistent theory $\bar T$ such that $T\subset\bar T$.
 
-*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\lbrace\sigma\rbrace$ is clearly syntactically consistent. If $T\not\vdash\sigma$, then $T\cup\lbrace\neg\sigma\rbrace$ will be syntactically consistent (check this!).
+*Proof*: We first say how to extend $T$ by one more sentence. Let $\sigma$ be a sentence such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. If $T\vdash\sigma$, then $T\cup\lbrace\sigma\rbrace$ is clearly syntactically consistent. If $T\nvdash\sigma$, then $T\cup\lbrace\neg\sigma\rbrace$ will be syntactically consistent (check this!).
 
 Now iterate the procedure until there are no more sentences $\sigma$ such that both $\sigma$ and $\neg\sigma$ are not elements of $T$. The resulting theory $\bar T$ will be consistent and complete. $\blacksquare$
 
@@ -1289,31 +1289,38 @@ Of course you may feel that studying ZFC is rather specific, since we could alwa
 
 This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including establishing most properties of HF and of the natural numbers. The strength of CST is similar to that of Peano Arithmetic, which we recall is the usual axioms of the natural numbers with $+,\cdot$ including induction.
 
-**Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
+**Theorem** (First incompleteness theorem) Let $T$ be a consistent extension of CST. Then $T^\vdash$ is undecidable.
 
-In our proof of the first incompleteness theorem, we will use a diagonalization argument similar to that used in Russell's paradox, Cantor's uncountability theorem, and the undecidability of the halting problem.
+The proof of the first incompleteness theorem consists of two lemmas. The first lemma will show that we can "represent" decidable subsets of HF inside the theory $T$ itself. The second lemma will use a diagonalization argument similar to the ones used in Russell's paradox, Cantor's uncountability theorem, and the undecidability of the halting problem.
 
-We begin by showing we can "represent" subsets of HF inside the theory $CST$ itself.
+To begin with the first part, we first recall that every element $a\in HF$ is $\Delta_0$-definable. That is, for any $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(b)$. This may be proved by induction on the construction of $a$, and we invite the reader to carry out the details.
 
-**Proposition** Every element of HF is $\Delta_0$-definable. That is, for all $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(b)$.
+Thus we can write formulas about elements of HF without needing to add constant symbols to our theory. The situation is similar to the that of arithmetic where we can write formulas about natural numbers by referring to $n$ as the $n$th least element of the structure.
 
-The propostion says that in logical formulas, we can reference every single element of HF without needing to expand the signature or theory CST with new constant symbols. It's similar to the situation in arithmetic where we can refer to $n\in\mathrm N$ as the $n$-th least element. We invite the reader to carry out the proof of the result.
+**Definition** Let $T$ be a theory as above.
 
-**Definition** Let $\mathcal L=\lbrace\in\rbrace$ and $T$ be an $\mathcal L$-theory. Given a formula $\phi(x)$, and an element $a\in HF$, we will say that $T\vdash\phi(\langle a\rangle)$ if and only if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
+* Given a formula $\phi(x)$, and an element $a\in HF$, we write $T\vdash\phi(\langle a\rangle)$ if $T\vdash\exists x\delta_a(x)\wedge\phi(x)$.
 
-**Definition** With $T$ as above, a subset $A\subset HF$ is *representable* in $T$ if there is a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(\langle a\rangle)$.
+* Given a subset $A\subset HF$, we say $A$ is *representable* in $T$ if there exists a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(\langle a\rangle)$.
 
-**Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_0$-definable set is representable in $T$.
+We are now ready to state the first lemma.
 
-*Proof*: We will prove that for any $\Delta_0$-formula $\phi(x)$, we have $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi(a)$. For atomic and negated atomic formulas $x\in y$, $x\notin y$, $x=y$, and $x\neq y$ are proved by induction on the rank of the elements $a,b$ that are plugged in for $x,y$. For general $\Delta_0$-formulas $\phi$ we use induction on the complexity of $\phi$. The boundedness of quantifiers is key because they reduce to conjuctions or disjunctions of atomics. $\blacksquare$
+**Lemma** Let $T$ be a consistent extension of CST. Then every $\Delta_1$-definable set is representable in $T$.
 
-Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST.
+*Proof*: We start with the $\Delta_0$-definable sets. Let $A$ be a $\Delta_0$-definable set and let $\alpha(x)$ be a $\Delta_0$-formula such that $a\in A$ iff $HF\models\phi(a)$. We claim that $HF\models\phi(a)$ iff $CST\vdash\phi(\langle a\rangle)$. (This means $A$ is represented in any such theory $T$ by the same formula $\alpha$ that was used to define it.)
 
-**Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_1$-definable set is representable in $T$.
+To prove this claim we begin with the atomic and negated atomic formulas. The following four statements may be proved by simultaneous induction on the construction of $a,b$:
 
-*Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha(a,y)$, and $a\in A$ iff $HF\models\forall z\beta(a,z)$.
+* $a\in b$ iff $CST\vdash\langle a\rangle\in\langle b\rangle$
+* $\neg a\in b$ iff $CST\vdash\neg\langle a\rangle\in\langle b\rangle$
+* $a=b$ iff $CST\vdash\langle a\rangle=\langle b\rangle$
+* $\neg a=b$ iff $CST\vdash\neg\langle a\rangle=\langle b\rangle$
 
-Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula below:
+For a general $\Delta_0$-formula $\alpha$ we use induction on the complexity of $\alpha$. The boolean combinations are not a problem. The bounded quantifiers $\forall x\in\langle a\rangle$ and $\exists x\in\langle a\rangle$ are also not difficult because for specific $a,b\in HF$, these always reduce to finite conjunctions and disjunctions.
+
+<!-- Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST. -->
+
+Now let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha(a,y)$, and $a\in A$ iff $HF\models\forall z\beta(a,z)$. To represent $A$ in $T$, we cannot directly use either of the two formulas $\alpha,\beta$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula below:
 
 $$\exists y\left[\alpha(x,y)\wedge\forall z((\mathrm{rk}(z)<\mathrm{rk}(y))\rightarrow\beta(x,z))\right].$$
 
@@ -1325,13 +1332,13 @@ Conversely assume that $a\notin A$. We claim that $CST\vdash\neg\psi(\langle a\r
 
 $$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z((\mathrm{rk}(z)<\mathrm{rk}(y))\wedge\neg\beta(\langle a\rangle,z))\right].$$
 
-For this, first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next for any $y$, if $y=b\in HF$ then the first clause holds for $y$, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
+For this, first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next for any $y$, if $y=b\in HF$ then the first clause holds for $y$, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\nvdash\psi(\langle a\rangle)$. $\blacksquare$
 
-We are now ready to prove the final step of the first incompleteness theorem.
+We now continue to the second lemma.
 
-**Theorem** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
+**Lemma** Let $T$ be a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
 
-*Proof*: Assume $T^\vdash$ is decidable and consider the set:
+*Proof*: Assume towards a contradictoin that $T^\vdash$ is decidable. Consider the set:
 
 $$U=\set{(p,a):p\text{ is a code for a formula }\phi\text{ and }T\vdash\phi(\langle a\rangle)}.$$
 
@@ -1341,11 +1348,11 @@ $$D=\set{p:(p,p)\notin U}$$
 
 Then due to its definition, $D$ cannot appear as a column of $U$. But  $D$ is also decidable, i.e., $D$ is $\Delta_1$-definable, and so it must appear as a column of $U$. This is a contradiction! $\blacksquare$
 
-The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
+The two lemmas together complete the proof of the first incompleteness theorem. The following is an immediate consequence of the first incopleteness theorem, and it helps explain the name of the theorem.
 
-**Corollary** If $T$ is any consistent, decidable extension of CST then $T^\vdash$ is incomplete.
+**Corollary** Let $T$ be a consistent extension of CST, and assume $T$ is decidable. Then $T^\vdash$ is incomplete.
 
-*Proof*: Since $T$ is decidable, $T^\vdash$ is $\Sigma_1$-definable, because $\sigma\in T^\vdash$ iff there exists a deduction etc. If $T^\vdash$ is complete, we have $T\vdash\sigma$ iff $T\not\vdash\neg\sigma$, which shows $T^\vdash$ is $\Pi_1$-definable as well. It follows that $T^\vdash$ is decidable, but this contradicts the first incompleteness theorem. $\blacksquare$
+*Proof*: Since $T$ is decidable, $T^\vdash$ is $\Sigma_1$-definable, because $\sigma\in T^\vdash$ iff there exists a deduction etc. If $T^\vdash$ is complete, we have $T\vdash\sigma$ iff $T\nvdash\neg\sigma$, which shows $T^\vdash$ is $\Pi_1$-definable as well. It follows that $T^\vdash$ is decidable, but this contradicts the first incompleteness theorem. $\blacksquare$
 
 The corollary is rather stunning, since it implies mathematicians and humanity will never know all the theorems about sets, about arithmetic or about mathematics generally. We can't simply add axioms to ZFC (such as CH etc) to obtain a decidable collection of axioms that is strong enough to prove or disprove everything.
 
@@ -1357,19 +1364,19 @@ Note that we haven't yet said whether ZFC is consistent or not. We said it is an
 
 Maybe we can prove that ZFC is consistent. In fact for any theory $T$ which is decidable, $T$ is coded as a $\Delta_1$-definable subset of HF, and it is possible to construct a sentence $\mathrm{con}_T$ which asserts that there does not exist a deduction from $T$ of $\alpha\wedge\neg\alpha$. Then $\mathrm{con}_T$ asserts that $T$ is consistent.
 
-**Theorem** (Second incompleteness theorem) If $T$ is any consistent, decidable extension of CST, and $\mathrm{con}_T$ is the sentence which asserts that $T$ is consistent, then $T\mathbin{\not\vdash}\mathrm{con}_T$.
+**Theorem** (Second incompleteness theorem) Let $T$ be a consistent extension of CST, and assume $T$ is  decidable. Then $T\mathbin{\nvdash}\mathrm{con}_T$.
 
 The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$. We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
 
 The key to the proof of the second incompleteness theorem is once again a diagonalisation lemma.
 
-**Lemma** There exists a "diagonal" sentence $\gamma$ which asserts that "there does not exist a deduction from $T$ of $\gamma$".
+**Lemma** There exists a "diagonal" sentence $\gamma$ which is equivalent to the assertion, "there does not exist a deduction from $T$ of $\gamma$".
 
 That is, $\gamma$ says in a self-referential way, "this sentence is not provable". It is similar the so-called liar paradox sentence, "this sentence is false", but with truth replaced by provability. Truth is usually not definable, but provability is definable using deductions.
 
-*Proof sketch of lemma*: We will be a little bit informal here, but give the general idea. Let $\sigma(p,x)$ be a formula which says "$p$ is a code for a formula $\phi$, and there exists a deduction from $T$ of $\phi(x)$".
+*Proof sketch of lemma*: We will be a little bit informal here, but give the general idea. Let $\sigma(p,x)$ be a formula which says "$p$ is a code for a formula $\phi$, and there exists a deduction from $T$ of $\phi(x)$."
 
-Let $\psi(x)$ be the formula $\neg\sigma(x,x)$, so like in the diagonal arguments, $\psi$ does not appear as a "column" of $\sigma$. Then we have:
+Let $\psi(x)$ be the formula $\neg\sigma(x,x)$, so like in the diagonal arguments, $\psi$ does not appear as a "vertical section" of $\sigma$. Then we have:
 
 $$\begin{aligned}
   \psi(\langle\psi\rangle)
@@ -1377,15 +1384,17 @@ $$\begin{aligned}
   &\iff\text{there does not exist a deduction from $T$ of $\psi(\langle\psi\rangle)$}.
 \end{aligned}$$
 
-Letting $\gamma$ be $\psi(\langle\psi\rangle)$, we have $\gamma$ is as desired. $\blacksquare$
+Letting $\gamma$ be $\psi(\langle\psi\rangle)$, we have $\gamma$ satisfies the desired property. $\blacksquare$
 
-Due to its contrary nature, it should not be hard to believe that $\gamma$ is correct about itself. That is, so long as $T$ is consistent, we have $T\not\vdash\gamma$. To see this, if $T\vdash\gamma$ then there exists a deduction from $T$ of $\gamma$. Formalising the deduction in CST, we would have "$T\vdash$ there exists a deduction from $T$ of $\gamma$", and hence $T\vdash\neg\gamma$. (This isn't quite a contradiction, it just means $T$ has to be inconsistent in this case.)
+*Proof of Theorem* Assume towards a contradiction that $T\vdash\mathrm{con}_T$. Let $\gamma$ be the diagonal sentence from the lemma.
 
-*Proof of Theorem*: Assume towards a contradiction that $T\vdash\mathrm{con}_T$. Let $\gamma$ be the diagonal sentence from the lemma.
+We first claim that the following conditional statement is true: If $T$ is consistent, then $T\nvdash\gamma$. (That is, $\gamma$ is correct about itself!) We work with its contrapositive: If $T\vdash\gamma$, then $T$ is inconsistent. Suppose $T\vdash\gamma$, that is, there exists a deduction from $T$ of $\gamma$. Then this fact can be formalised in CST, in other words, we can formulate the statement in logic that the deduction exists and is correct, and CST is strong enough to prove this statement. Therefore $CST\vdash$ "there exists a deduction from $T$ of $\gamma$". But this means precisely that $CST\vdash\neg\gamma$. Since $T$ extends CST, we conclude that $T$ is inconsistent, as desired.
 
-We have seen that if $T$ is consistent, then $T\not\vdash\gamma$. Formalising this conditional in CST, we have that $T\vdash\mathrm{con}_T\rightarrow$ "there does not exist a deduction from $T$ of $\gamma$". But this says precisely that $T\vdash\mathrm{con}_T\rightarrow\gamma$.
+Now the entire conditional from the previous paragraph (if $T$ is consistent, then $T\nvdash\gamma$) can be formalised in CST. That is, we can write a first order sentence which asserts this, and CST is strong enough to prove it. Thus $CST\vdash\mathrm{con}_T\rightarrow$ "there does not exist a deduction from $T$ of $\gamma$". This says precisely that $CST\vdash\mathrm{con}_T\rightarrow\gamma$.
 
-Since we are assuming $T\vdash\mathrm{con}_T$, we can conclude $T\vdash\gamma$. We have seen this implies $T$ is inconsistent, which contradicts our hypothesis, and completes the proof. $\blacksquare$
+Since we are assuming $T\vdash\mathrm{con}_T$, we can use modus ponens to conclude $T\vdash\gamma$. But again using the conditional from the second paragraph, this implies $T$ is inconsistent. This contradicts our hypothesis, and completes the proof. $\blacksquare$
+
+The proof of the second incompleteness theorem gives us another method to prove the corollary to the first incompleteness theorem. If $T$ is a consistent extension of CST, and $T$ is decidable, then $\mathrm{con}_T$ is an example of a statement such that $T\nvdash\mathrm{con}_T$ and $T\nvdash\neg\mathrm{con}_T$. Thus $T^\vdash$ is incomplete.
 
 <script>
   MathJax = {
