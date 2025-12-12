@@ -1289,11 +1289,11 @@ Of course you may feel that studying ZFC is rather specific, since we could alwa
 
 This theory is weak compared with ZFC, particularly because it doesn't imply the existence of infinite sets. CST is strong enough to do finite set theory, including establishing most properties of HF and of the natural numbers. The strength of CST is similar to that of Peano Arithmetic, which we recall is the usual axioms of the natural numbers with $+,\cdot$ including induction.
 
-**Theorem** (First incompleteness theorem) Let $T$ be a theory which is consistent and extends CST. Then $T^\vdash$ is undecidable.
+**Theorem** (First incompleteness theorem) If $T$ is any consistent extension of CST, then $T^\vdash$ is undecidable.
 
 In our proof of the first incompleteness theorem, we will use a diagonalization argument similar to that used in Russell's paradox, Cantor's uncountability theorem, and the undecidability of the halting problem.
 
-The incompleteness theorem follows from two lemmas. The first of these states that we can "represent" subsets of HF inside a theory $T$. Intuitively, a set $A$ is representable in a theory $T$ if there is a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(a)$. That is, if the deductive consequences of $T$ "know" about $A$. But this doesn't immediately make sense as a definition because $a$ is not in our language! To help get around this, we use the following.
+We begin by showing we can "represent" subsets of HF inside the theory $CST$ itself.
 
 **Proposition** Every element of HF is $\Delta_0$-definable. That is, for all $a\in HF$ there exists a $\Delta_0$-formula $\delta_a(x)$ such that $b=a$ iff $HF\models\delta_a(b)$.
 
@@ -1303,28 +1303,21 @@ The propostion says that in logical formulas, we can reference every single elem
 
 **Definition** With $T$ as above, a subset $A\subset HF$ is *representable* in $T$ if there is a formula $\phi$ such that $a\in A$ if and only if $T\vdash\phi(\langle a\rangle)$.
 
-We are now ready to state the first lemma.
+**Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_0$-definable set is representable in $T$.
 
-**Lemma** Let $T$ be a theory which is consistent and extends CST. Then every $\Delta_1$-definable set is representable in $T$.
+*Proof*: We will prove that for any $\Delta_0$-formula $\phi(x)$, we have $CST\vdash\phi(\langle a\rangle)$ if and only if $HF\models\phi(a)$. For atomic and negated atomic formulas $x\in y$, $x\notin y$, $x=y$, and $x\neq y$ are proved by induction on the rank of the elements $a,b$ that are plugged in for $x,y$. For general $\Delta_0$-formulas $\phi$ we use induction on the complexity of $\phi$. The boundedness of quantifiers is key because they reduce to conjuctions or disjunctions of atomics. $\blacksquare$
 
-*Proof*: For the proof, we first begin with the $\Delta_0$-definable sets. That is, if $A\subset HF$ is defined by the $\Delta_0$-formula $\alpha(x)$, we want to show that $a\in A$ iff $T\vdash\alpha(\langle a\rangle)$. To do this, we first claim that the following atomic and negated atomic formulas satisfy the same property:
+Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST.
 
-* $a\in b$ iff $T\vdash\langle a\rangle\in\langle b\rangle$
-* $\neg a\in b$ iff $T\vdash\neg\langle a\rangle\in\langle b\rangle$
-* $a=b$ iff $T\vdash\langle a\rangle=\langle b\rangle$
-* $\neg a=b$ iff $T\vdash\neg\langle a\rangle=\langle b\rangle$
+**Proposition** Let $T$ be a consistent extension of CST. Then every $\Delta_1$-definable set is representable in $T$.
 
-These four statements may be proved simultaneously on the construction of the elements $a,b\in HF$. It is then straightforward to generalise the property to boolean combinations of these atomics. Lastly we can generalise to $\Delta_0$-formulas, because a bounded quantifier $\forall x\in\langle a\rangle$ or $\exists x\in\langle a\rangle$ simply reduces to a finite conjuction or disjunction.
+*Proof*: Let $A$ be a $\Delta_1$-definable subset of HF, and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha(a,y)$, and $a\in A$ iff $HF\models\forall z\beta(a,z)$.
 
-<!-- Note that the equivalence $CST\vdash\sigma$ if and only if $HF\models\sigma$ is not true in general! For example, let $\sigma$ be the negation of the axiom of Infinity. Then $\sigma$ is true in HF, but CST has models of $\sigma$ and of $\neg\sigma$, so $\sigma$ is not provable from CST. -->
-
-Condinuing on to $\Delta_1$-definable sets, let $A\subset HF$ and let $\alpha,\beta$ be $\Delta_0$-formulas such that $a\in A$ iff $HF\models\exists y\alpha(a,y)$, and $a\in A$ iff $HF\models\forall z\beta(a,z)$.
-
-Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$ in $T$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula below:
+Note that we cannot directly use either of the two formulas $\alpha,\beta$ to represent $A$, because they may be consequences of $T$ without being witnessed in HF. (Another way to think of this is that they may be witnessed by nonstandard elements.) Instead we let $\psi(x)$ be the formula below:
 
 $$\exists y\left[\alpha(x,y)\wedge\forall z((\mathrm{rk}(z)<\mathrm{rk}(y))\rightarrow\beta(x,z))\right].$$
 
-Here we recall that the rank is defined by $\mathrm{rk}(x)=\max_{y\in x}\mathrm{rk}(y)+1$; it is a measure of the complexity of the element of HF.
+Here we recall that the rank is defined by $\mathrm{rk}(x)=\max_{y\in x}\mathrm{rk}(y)+1$; thus $\mathrm{rk}(a)$ is a measure of the depth of the $\{\}$ symbols in $a$.
 
 We claim that $a\in A$ iff $T\vdash\psi(\langle a\rangle)$. First assume that $a\in A$. Then there is $b\in HF$ such that $HF\models\alpha(a,b)$, and for all $c\in HF$ we have $HF\models\beta(a,c)$. Since $\alpha,\beta$ are $\Delta_0$, the previous proposition implies $CST\vdash\alpha(\langle a\rangle,\langle b\rangle)$ and $CST\vdash\beta(\langle a\rangle,\langle c\rangle)$. The requirement that $\mathrm{rk}(z)<\mathrm{rk}(y)$ amounts to a finite disjunction over all $c$ of rank less than that of $b$. Thus $CST\vdash\psi(\langle a\rangle)$, and so $T\vdash\psi(\langle a\rangle)$.
 
@@ -1334,7 +1327,9 @@ $$\forall y\left[\neg\alpha(\langle a\rangle,y)\vee\exists z((\mathrm{rk}(z)<\ma
 
 For this, first find $c\in HF$ such that $CST\vdash\neg\beta(\langle a\rangle,\langle c\rangle)$. Next for any $y$, if $y=b\in HF$ then the first clause holds for $y$, and if not then the second clause holds with $z=c$. Now since $T$ is a consistent extension of CST, we conclude $T\not\vdash\psi(\langle a\rangle)$. $\blacksquare$
 
-**Lemma** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
+We are now ready to prove the final step of the first incompleteness theorem.
+
+**Theorem** Suppose $T$ is a theory such that every $\Delta_1$-definable subset of HF is representable in $T$. Then $T^\vdash$ is undecidable.
 
 *Proof*: Assume $T^\vdash$ is decidable and consider the set:
 
@@ -1346,9 +1341,9 @@ $$D=\set{p:(p,p)\notin U}$$
 
 Then due to its definition, $D$ cannot appear as a column of $U$. But  $D$ is also decidable, i.e., $D$ is $\Delta_1$-definable, and so it must appear as a column of $U$. This is a contradiction! $\blacksquare$
 
-Putting the two lemmas together, we have completed the proof of the first incompleteness theorem. The following immediate consequence helps explain the name of the theorem.
+The last two results together complete the proof of the first incompleteness theorem. We can also rephrase the first incompleteness theorem as follows.
 
-**Corollary** Let $T$ be a theory which is consistent, extends CST, and is decidable. Then $T^\vdash$ is incomplete.
+**Corollary** If $T$ is any consistent, decidable extension of CST then $T^\vdash$ is incomplete.
 
 *Proof*: Since $T$ is decidable, $T^\vdash$ is $\Sigma_1$-definable, because $\sigma\in T^\vdash$ iff there exists a deduction etc. If $T^\vdash$ is complete, we have $T\vdash\sigma$ iff $T\not\vdash\neg\sigma$, which shows $T^\vdash$ is $\Pi_1$-definable as well. It follows that $T^\vdash$ is decidable, but this contradicts the first incompleteness theorem. $\blacksquare$
 
