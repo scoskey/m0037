@@ -302,6 +302,8 @@ When the exponent set is finite, we can think of $B^A$ as tuples of elements of 
 
 For example, if $G$ is a group then it possesses a multiplication operation $g\cdot h$. We can think of $\cdot$ as a function $G\times G\to G$. We can also think of $\cdot$ as the ternary relation $R\subset G^3$ consisting of all triples $(g,h,j)\in R$ such that $g\cdot h=j$.
 
+Our definitions have the funny effect that $X\times X$ and $X^2$ are not exactly the same object. However, we invite the reader to define an obvious bijection between these two sets, showing that we can identify them with each other without much worry.
+
 #### Cardinality
 
 Informally, cardinality means the size of a set. If $A$ is finite, then there exists a unique natural number $n$ such that $A$ has exactly $n$ elements, and we usually write $\vert A\vert=n$. But if $A$ is infinite, how should $\vert A\vert$ be defined? In naive set theory, we do not define $\vert A\vert$ itself, but instead we define how it works.
@@ -334,8 +336,8 @@ Konig's lemma makes a good example of an application of the compactness theorem,
 
 *Proof*: They key is that the existence of a branch can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_t$, where $t$ ranges over the elements of $T$. We then let $\Sigma$ consist of the following axioms:
 
-> * $P_{t_1}\vee\cdots\vee P_{t_k}$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of level $n$, for each $n$;
-> * $\neg(P_{t_i}\wedge P_{t_j})$ where $t_1,\ldots,t_k$ is the list of elements of $T$ of level $n$, for each $n$ and each $i\neq j$;
+> * $P_{t_1^n}\vee\cdots\vee P_{t_k^n}$ where $t_1^n,\ldots,t_k^n$ is the list of elements of $T$ of level $n$, for each $n$;
+> * $\neg(P_{t_i^n}\wedge P_{t_j^n})$ where $t_1^n,\ldots,t_k^n$ is the list of elements of $T$ of level $n$, for each $n$ and each $i\neq j$;
 > * $P_t\rightarrow P_s$ where $s,t\in T$ and $s\prec t$.
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a branch through $T$.
