@@ -4,6 +4,7 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
+<!--
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
@@ -21,6 +22,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 - [8. Definability, absoluteness, and decidability](#8-definability-absoluteness-and-decidability)
 - [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
 - [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
+-->
 
 ## Part I: Introduction to logic and set theory
 
@@ -768,7 +770,7 @@ In the following definition, we make syntactic analogs of the three semantic not
 **Definition**
 
 * A sentence $\sigma$ is *syntactically valid* if $\emptyset\vdash\sigma$.
-* A theory $T$ *semantically implies* a sentence $\sigma$ if $T\vdash\sigma$.
+* A theory $T$ *syntactically implies* a sentence $\sigma$ if $T\vdash\sigma$.
 * A theory $T$ is *syntactically consistent* if $T\nvdash\sigma\wedge\neg\sigma$. (Any tautological faleshood may be used here.)
 
 We now give examples of deductions and some methods of finding deductions.
@@ -933,7 +935,7 @@ To further explore the consequences of the completeness theorem, we now introduc
 
 **Theorem** (Compactness theorem) If every finite subset of $T$ has a model, then $T$ has a model.
 
-We invite the reader to verify that similarly to the propositional completeness and compactness theorems, the first order completeness and compactness theorems are equivalent to each other in the sense that there exist short proofs in both directions.
+We invite the reader to verify that the completeness theorem implies the compactness theorem. The proof is short and identical to the proof that the propositional completeness theorem implies the propositional compactness theorem.
 
 As we have seen, the propositional compactness theorem is useful for passing from statements about finite objects which are arbitrarily large, to statements about infinite objects. The first order compactness theorem has applications of a similar nature. The following corollary was stated in Section 1; here we give a first order version of the same argument.
 
@@ -1010,15 +1012,13 @@ The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is c
 
 #### Complete theories
 
-Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$. We sometimes abuse the term and say that $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
+Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$. We sometimes abuse the word complete, and say that $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
+
+For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
 
 **Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
 
 It follows from the definition of satisfaction that $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times)$ are complete theories.
-
-In accordance with common practice, we usually say that $T$ is complete if the set of logical consequences of $T$ is complete. That is, $T$ is *complete* if it is consistent and for every sentence $\sigma$ either $T\models\sigma$ or $T\not\models\sigma$.
-
-For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
 
 On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.) These theories are not meant to be complete because the point is to study the diversity of models.
 
@@ -1368,7 +1368,8 @@ Maybe we can prove that ZFC is consistent. In fact for any theory $T$ which is d
 
 **Theorem** (Second incompleteness theorem) Let $T$ be a consistent extension of CST, and assume $T$ is  decidable. Then $T\mathbin{\nvdash}\mathrm{con}_T$.
 
-The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$. We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
+The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$.
+We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
 
 The key to the proof of the second incompleteness theorem is once again a diagonalisation lemma.
 
