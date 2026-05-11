@@ -4,7 +4,6 @@ By Samuel Coskey
 
 Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and others.
 
-<!--
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
@@ -22,7 +21,6 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 - [8. Definability, absoluteness, and decidability](#8-definability-absoluteness-and-decidability)
 - [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
 - [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
--->
 
 ## Part I: Introduction to logic and set theory
 
@@ -811,7 +809,7 @@ The UG rule is for proofs that end "... since $c$ was arbitrary, the result hold
     c. $P(c)\wedge Q(c)$ — (UI)  
     d. $P(c)\wedge Q(c)\to P(c)$ — (Tautology)  
     e. $P(c)$ — (MP c,d)  
-    g. $\forall y P(y)$ — (UG)  
+    f. $\forall y P(y)$ — (UG)  
 2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ — (Deduction, 1)
 
 ### 6. Completeness and compactness
@@ -1368,8 +1366,7 @@ Maybe we can prove that ZFC is consistent. In fact for any theory $T$ which is d
 
 **Theorem** (Second incompleteness theorem) Let $T$ be a consistent extension of CST, and assume $T$ is  decidable. Then $T\mathbin{\nvdash}\mathrm{con}_T$.
 
-The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$.
-We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
+The theorem thus implies that if ZFC is consistent, it is not possible for ZFC to prove the sentence $\mathrm{con}_{ZFC}$. We can consider proving $\mathrm{con}_{ZFC}$ from some stronger theory $ZFC^+$, but this theory would not be able to prove $\mathrm{con}_{ZFC^+}$. Essentially, we will have to accept that we can never satisfyingly prove that our foundational theory is consistent. Even though we have used ZFC as a foundation for 100 years without encountering a contradiction, one may yet be found!
 
 The key to the proof of the second incompleteness theorem is once again a diagonalisation lemma.
 
