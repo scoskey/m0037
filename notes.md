@@ -1409,5 +1409,5 @@ The proof of the second incompleteness theorem gives us another method to prove 
   };
 </script>
 <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js">
 </script>
