@@ -30,11 +30,13 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 
 In this module we will study *mathematical logic*, which has been studied since the late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
 
-Mathematical logic helps us understand what language we can use when discussing mathematics, what makes theorem statements meaningful, and what forms of reasoning are appropriate to use in proofs. It also helps us build and study mathematical structures like number systems, functions, graphs, groups, rings, topological spaces, and so on.
+Mathematical logic helps us understand what language we can use when discussing mathematics. For example, consider the classic statement ``This sentence is false.'' It quickly leads to a contradiction, and we call it the *liar paradox*. The conclusion from this is that this type of language should not be used in mathematics. Instead we introduce logical language, which will ensure our statements are not paradoxical.
 
-The modern field of mathematical logic now consists of three interconnected subfields: first order logic and model theory, set theory, and computability theory.
+Logical language has many other benefits as well. It allows us to build theorem statements, and to prove them using appropriate methods of reasoning. It furthermore provides a foundation for rigourously defining and studying mathematical structures like number systems, functions, graphs, groups, rings, topological spaces, and so on.
 
-In this module we will focus primarily on first order logic. However we will begin our study with the much simpler propositional logic, along with some elementary set theory to support our studies. We will conclude with an introduction to computability theory and the incompleteness phenomenon.
+The modern field of mathematical logic now consists of three interconnected subfields: set theory, first order logic and model theory, and computability theory.
+
+In these notes we will start with propositional logic, because it is simple and helps motivate firt order logic. Then we will introduce the three subfields in their turn, with the largest amount of time spent on first order logic.
 
 ### 1. Propositional logic
 
@@ -1400,6 +1402,9 @@ The proof of the second incompleteness theorem gives us another method to prove 
   MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+    macros: {
+      set: ["\\{\\,#1\\,\\}",1]
     }
   };
 </script>
