@@ -1402,7 +1402,7 @@ The proof of the second incompleteness theorem gives us another method to prove 
   MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
+    },
     macros: {
       set: ["\\{\\,#1\\,\\}",1]
     }
