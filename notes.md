@@ -7,17 +7,20 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 #### Table of contents
 
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
+
 - [1. Propositional logic](#1-propositional-logic)
 - [2. More about compactness, introductory set theory](#2-more-about-compactness-introductory-set-theory)
 - [3. Axiomatic set theory and foundations](#3-axiomatic-set-theory-and-foundations)
 
 [Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
+
 - [4. First order syntax, models](#4-first-order-syntax-models)
 - [5. First order semantics, deductions](#5-first-order-semantics-deductions)
 - [6. Compactness and completeness](#6-completeness-and-compactness)
 - [7. Applications of compactness, more about theories](#7-applications-of-compactness-more-about-theories)
 
 [Part III: Computability theory and incompleteness](#part-iii-computability-theory-and-incompleteness)
+
 - [8. Definability, absoluteness, and decidability](#8-definability-absoluteness-and-decidability)
 - [9. Computable functions, recursion, and undecidable sets](#9-computable-functions-recursion-and-undecidable-sets)
 - [10. Decidability in logic and incompleteness](#10-decidability-in-logic-and-incompleteness)
@@ -28,27 +31,23 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 
 *Logic* is the area of study that concerns reasoning. It has of course been studied by both philosophers and mathematicians for several millennia.
 
-In this module we will study *mathematical logic*, which has been studied since the late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed to help provide a rigorous foundation for contemporary mathematics.
+In this module we will study *mathematical logic*, which has been studied since the late 1800s. During that period mathematics itself was rapidly evolving and modernising, and mathematical logic was developed as the foundation for contemporary mathematics.
 
-Mathematical logic helps us understand what language we can use when discussing mathematics. For example, consider the classic statement ``This sentence is false.'' It quickly leads to a contradiction, and we call it the *liar paradox*. The conclusion from this is that this type of language should not be used in mathematics. Instead we introduce logical language, which will ensure our statements are not paradoxical.
+At its most basic level, mathematical logic provides a language we can use when discussing mathematics. To see why this is necessary, consider the classic statement: ``This sentence is false.'' This statement can't be true and it can't be false, because both options lead to a contradiction; this is called the *liar paradox*. When we use logical language, we ensure that any statement we express may be assigned a truth value without encountering a contradiction.
 
-Logical language has many other benefits as well. It allows us to build theorem statements, and to prove them using appropriate methods of reasoning. It furthermore provides a foundation for rigourously defining and studying mathematical structures like number systems, functions, graphs, groups, rings, topological spaces, and so on.
+Logical language provides a foundation for rigorously defining mathematical structures like number systems, functions, graphs, groups, rings, topological spaces, and so on. It allows us to express theorems and conjectures about mathematical structures, and to prove or disprove such statements.
 
-The modern field of mathematical logic now consists of three interconnected subfields: set theory, first order logic and model theory, and computability theory.
-
-In these notes we will start with propositional logic, because it is simple and helps motivate firt order logic. Then we will introduce the three subfields in their turn, with the largest amount of time spent on first order logic.
+The modern field of mathematical logic consists of three interconnected subfields: set theory, first order logic and model theory, and computability theory. In these notes we will introduce the three subfields in their turn, with the largest amount of time spent on first order logic. First however we introduce propositional logic, because it is simple and helps motivate the modern logic.
 
 ### 1. Propositional logic
 
-We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists).
+We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists). In the next part we will study first order logic, which adds in the quantifiers.
 
-In the next part we will study first order logic, which adds in the quantifiers. While propositional logic is thus much simpler than first order logic, it nonetheless has many uses and applications. Moreover, familiarity with propositional logic will help us when we approach first order logic.
-
-We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols we may write. The alphabet of propositional logic includes:
+We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols available. The alphabet of propositional logic includes:
 
 * the boolean connective symbols: $\neg$, $\wedge$, $\vee$, $\rightarrow$, $\leftrightarrow$
 * propositional variable symbols: $P_1,P_2,P_3,\ldots$ (or sometimes $P,Q,R,\ldots$, $A,B,C,\ldots$, etc)
-* brackets, also called parentheses: '$($', '$)$'
+* brackets, also called parentheses: $($, $)$
 
 We will see later on that the connective symbols $\vee,\rightarrow,\leftrightarrow$ may all be avoided. Moreover, even the brackets may be avoided if one uses prefix notation instead of infix notation. (That is, if one writes $\mathord{\wedge}PQ$ instead of $(P\wedge Q)$.) For the moment we will continue with the more familiar infix notation.
 
@@ -94,11 +93,11 @@ The boolean conditional connective $\rightarrow$ always sparks a little bit of d
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$$
 
-This truth table attempts to capture the logic of "P implies Q", but it doesn't capture the causation we normally understand from natural language. It is sometimes called the *material conditional*. We can think of $\alpha\rightarrow\beta$ as a promise: if you know $\alpha$ is true then it promises $\beta$ is also true. Thus if $\alpha$ is not true, then no promise is made, and so the conditional is "vacuously true". We will see soon that this definition is the most useful way to study deductions in mathematics.
+This truth table attempts to capture the truth logic of implication without any causation. (This is sometimes called the *material conditional*.) We can think of $\alpha\rightarrow\beta$ like a promise: if $\alpha$ is true then $\to$ promises that $\beta$ is also true. If $\alpha$ is not true, then $\to$ doesn't promise anything, so $\alpha\to\beta$ is "vacuously true". We will see soon that this definition is useful because it forms a key part of the logic of deduction.
 
 We invite the reader to fill in truth tables for the rest of the boolean connectives.
 
-While these truth tables are certainly familiar, we still need to describe how they are used. We will say the set of *truth values* is $\set{T,F}$.
+We now show how the truth tables are used. We say the set of *truth values* is $\set{T,F}$.
 
 **Definition** A *truth assignment* or *valuation* is a function $v$ from the set of propositional symbols to the set of truth values. That is, $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$.
 
@@ -111,23 +110,23 @@ In other words, a truth assignment $v$ says whether each propositional symbol is
 * If $\alpha=\beta\wedge\gamma$ and $v\models\beta$ and $v\models\gamma$ then let $v\models\alpha$; otherwise let $v\not\models\alpha$.
 * We invite the reader to add an additional recursive rule for each boolean connective using your truth tables as guides.
 
-For the record, we state that the above definition is *well-defined*, meaning that for any $v$ and $\alpha$ it follows from these rules that either $v\models\alpha$ or $v\not\models\alpha$, and not both. While this assertion may seem intuitively true or unnecessary, it should be proved, and we will postpone the proof until the next part.
+For the record, we state that the above definition is *well-defined*, meaning that for any $v$ and $\alpha$ it follows from these rules that either $v\models\alpha$ or $v\not\models\alpha$, and not both. While this assertion may seem intuitively true or unnecessary, it can be proved by a simple induction (we will do this in the next part).
 
-When $v\models\alpha$ we think to ourselves that $\alpha$ is true under the assumptions contained within $v$. This is the semantic meaning of a well-formed formula $\alpha$: if we know the truth values of the propositional symbols then we can use the structure of $\alpha$ to derive the truth value of $\alpha$.
+When $v\models\alpha$ we think to ourselves that $\alpha$ is true under the assumptions contained within $v$. This is the real meaning of a well-formed formula $\alpha$: if we know the truth values of the propositional symbols then we can use the structure of $\alpha$ to derive the truth value of $\alpha$.
 
 **Example** Let $\alpha$ be the well-formed formula $((P\leftrightarrow Q)\wedge(Q\rightarrow R))\rightarrow P$. In lecture we will consider several truth assignments $v$ and analyse in each case whether $v\models\alpha$.
 
-Typically, different truth assignments will give rise to different truth values for $\alpha$. However for some very special formulas $\alpha$, the truth assignment may have no impact on the outcome. For instance, if $\alpha$ is the formula $P\vee\neg P$, then it is easy to check that every truth assignment $v$ results in $v\models\alpha$.
+Typically, some truth assignments will make $\alpha$ true, and others will make $\alpha$ false. However for some very special formulas $\alpha$, the truth assignment may have no impact on the truth value of $\alpha$. For instance, if $\alpha$ is the formula $P\vee\neg P$, then clearly all truth assignments $v$ make $\alpha$ true.
 
 **Definition** A well-formed formula $\alpha$ is a *tautology* if for every truth assignment $v$ we have $v\models\alpha$.
 
 The tautologies are thus little bits of reasoning that are always true, regardless of the truth values of the propositional variables. Another example of a tautology is $(P\wedge Q)\rightarrow P$. This is because any truth assignment that makes $P\wedge Q$ true must also make $P$ true.
 
-**Definition** We say that $\alpha\models\beta$, said aloud "$\alpha$ semantically implies $\beta$", if for every truth assignment $v$, if $v\models\alpha$ then $v\models\beta$.
+**Definition** We say that $\alpha\vDash\beta$, said aloud "$\alpha$ semantically implies $\beta$", if for every truth assignment $v$, if $v\models\alpha$ then $v\models\beta$.
 
-Semantic implication in propositional logic is sometimes also called "tautological implication". We invite the reader to verify that $\alpha\models\beta$ if and only if $\alpha\to\beta$ is a tautology.
+Semantic implication in propositional logic is sometimes also called "tautological implication". We invite the reader to verify that $\alpha\vDash\beta$ if and only if $\alpha\to\beta$ is a tautology.
 
-**Example** Let $\alpha=(P\leftrightarrow Q)\wedge(Q\rightarrow R)$ and $\beta=P\rightarrow R$. In lecture we will run through the possibilities for $v$ and thereby conclude that $\alpha\models\beta$.
+**Example** Let $\alpha=(P\leftrightarrow Q)\wedge(Q\rightarrow R)$ and $\beta=P\rightarrow R$. In lecture we will run through the possibilities for $v$ and thereby conclude that $\alpha\vDash\beta$.
 
 We next generalise the $\models$ notation once more to allow sets of formulas to be used.
 
