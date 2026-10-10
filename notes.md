@@ -43,15 +43,15 @@ The modern field of mathematical logic consists of three interconnected subfield
 
 We begin our study of mathematical logic with *propositional logic*. Propositional logic deals with the boolean connectives (P implies Q, and so forth) but excludes quantifiers (for all, there exists). In the next part we will study first order logic, which adds in the quantifiers.
 
-We begin by introducing the *language* of propositional logic. Every language has an *alphabet*, or set of symbols available. The alphabet of propositional logic includes:
+In logic we often distinguish between *syntax* and *semantics*. Syntax is like spelling and grammar, for example, deciding what symbols we will use and how we can put them together to make statements. Semantics gives the statements meaning, for example, deciding which statements are true under various assumptions.
+
+We begin by introducing the syntax of propositional logic.
+
+**Definition** The *alphabet* of propositional logic consists of the following symbols:
 
 * the boolean connective symbols: $\neg$, $\wedge$, $\vee$, $\rightarrow$, $\leftrightarrow$
 * propositional variable symbols: $P_1,P_2,P_3,\ldots$ (or sometimes $P,Q,R,\ldots$, $A,B,C,\ldots$, etc)
 * brackets, also called parentheses: $($, $)$
-
-We will see later on that the connective symbols $\vee,\rightarrow,\leftrightarrow$ may all be avoided. Moreover, even the brackets may be avoided if one uses prefix notation instead of infix notation. (That is, if one writes $\mathord{\wedge}PQ$ instead of $(P\wedge Q)$.) For the moment we will continue with the more familiar infix notation.
-
-Next, a language should tell us how to put symbols from the alphabet together.
 
 **Definition** An *expression* is any finite sequence of symbols using the alphabet of propositional logic.
 
@@ -60,7 +60,7 @@ For example, both of the following are expressions:
 * $(P\wedge Q)\vee R$
 * $((P\rightarrow($
 
-Clearly some expressions are more useful than others! The following definition helps us pick out the expressions that are more likely to have a useful meaning.
+Clearly some expressions are more useful than others! The next key definition helps us pick out the expressions that are more likely to have a useful meaning.
 
 **Definition** An expression is called a *well-formed formula* (or *wff*, or simply *formula*) if it can be constructed using the following base case and recursive rule:
 
@@ -77,19 +77,19 @@ The following are not well-formed formulas:
 * $((P\rightarrow)$
 * $P\wedge Q\mathbin{\neg} R$
 
-The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well-formed formula because it has too few brackets. As humans we can infer it intends to mean the same as $((P\wedge Q)\vee R)$. When there is no cause for confusion we will sometimes write such incorrect expressions, and ask the reader to mentally insert the needed brackets.
+The expression $(P\wedge Q)\vee R$ mentioned above technically **is not** a well-formed formula because it has too few brackets. As humans we can see it should be interpreted as $((P\wedge Q)\vee R)$. When there is no cause for confusion we will sometimes write such incorrect expressions, and ask the reader to mentally insert the needed brackets.
 
-Many authors introduce an order of operations. For example if we state that $\wedge$ takes precedence over $\vee$ (which is standard for many authors), then $P\wedge Q\vee R$ may again be interpreted as $((P\wedge Q)\vee R)$. We will try to avoid this by including enough brackets to make it clear .
+In fact, the brackets could be completely eliminated by introducing an order of operations. For example, many authors declare that $\wedge$ should be applied before $\vee$. Thus the expression $P\wedge Q\vee R$ could be uniquely interpreted as $((P\wedge Q)\vee R)$. In these notes we will not assume any precedence order.
 
-In logic we often separate the *syntax* and the *semantics* of formulas. Syntax is much like grammar rules, for example, deciding which expressions are well-formed and which are not. Semantics is like meaning, for example, deciding which formulas are true and which are not.
+Another way to eliminate the brackets would be to use prefix notation instaed of infix notation. In prefix notation we write $\mathord{\wedge}PQ$ instead of $(P\wedge Q)$, and similarly for all the other connective symbols. For the moment we will continue with the more familiar infix notation and brackets, but in the future we will switch to prefix notation for greater generality.
 
-The semantics of propositional logic is governed by truth tables. In the following, let $\alpha$ and $\beta$ be well-formed formulas.
+We now introduce the semantics of propositional logic, which is governed by truth tables. In the following, let $\alpha$ and $\beta$ be well-formed formulas.
 
 $$\begin{array}{cc}\alpha&(\neg\alpha)\\\hline T&F\\F&T\end{array}$$
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\wedge\beta)\\\hline T&T&T\\T&F&F\\F&T&F\\F&F&F\end{array}$$
 
-The boolean conditional connective $\rightarrow$ always sparks a little bit of discussion.
+The boolean conditional connective $\rightarrow$ sometimes sparks a little bit of discussion.
 
 $$\begin{array}{ccc}\alpha&\beta&(\alpha\rightarrow\beta)\\\hline T&T&T\\T&F&F\\F&T&T\\F&F&T\end{array}$$
 
@@ -97,7 +97,7 @@ This truth table attempts to capture the truth logic of implication without any 
 
 We invite the reader to fill in truth tables for the rest of the boolean connectives.
 
-We now show how the truth tables are used. We say the set of *truth values* is $\set{T,F}$.
+We now show how the truth tables are used. In the following, we say the set of *truth values* is $\set{T,F}$.
 
 **Definition** A *truth assignment* or *valuation* is a function $v$ from the set of propositional symbols to the set of truth values. That is, $v\colon\set{P_1,P_2,\ldots}\to\set{T,F}$.
 
@@ -122,51 +122,49 @@ Typically, some truth assignments will make $\alpha$ true, and others will make 
 
 The tautologies are thus little bits of reasoning that are always true, regardless of the truth values of the propositional variables. Another example of a tautology is $(P\wedge Q)\rightarrow P$. This is because any truth assignment that makes $P\wedge Q$ true must also make $P$ true.
 
-**Definition** We say that $\alpha\vDash\beta$, said aloud "$\alpha$ semantically implies $\beta$", if for every truth assignment $v$, if $v\models\alpha$ then $v\models\beta$.
-
-Semantic implication in propositional logic is sometimes also called "tautological implication". We invite the reader to verify that $\alpha\vDash\beta$ if and only if $\alpha\to\beta$ is a tautology.
-
-**Example** Let $\alpha=(P\leftrightarrow Q)\wedge(Q\rightarrow R)$ and $\beta=P\rightarrow R$. In lecture we will run through the possibilities for $v$ and thereby conclude that $\alpha\vDash\beta$.
-
-We next generalise the $\models$ notation once more to allow sets of formulas to be used.
+The $\models$ notation may also be used for a set of formulas.
 
 **Definition** Let $v$ be a truth assignment and let $\Sigma$ be a set of well-formed formulas. We say $v\models\Sigma$, read "$v$ satisfies $\Sigma$", if for all $\sigma\in\Sigma$ we have $v\models\sigma$.
 
+We now introduce semantic implication.
+
 **Definition** Let $\Sigma$ be a set of well-formed formulas, and $\alpha$ be a well-formed formula. We say $\Sigma\models\alpha$ if for every truth assignment $v$, if $v\models\Sigma$ then $v\models\alpha$.
+
+Here $\Sigma$ acts like a theory or set of axioms, and $\alpha$ acts like a theorem or consequence of those axioms. It would also be possible to put a set of formulas on the right side, but we don't have any particular need to do so.
 
 **Example** Let $\Sigma=\set{(\neg S)\vee R, R\rightarrow P, S}$, and let $\alpha=P$. In lecture we will show that $\Sigma\models\alpha$.
 
-The semantic implication $\Sigma\models\alpha$ is more interesting when $\Sigma$ is infinite (why is this?). The next result states that even when $\Sigma$ is infinite, just a finite subset of $\Sigma$ is needed.
+Semantic implication is related to the $\to$ implication. For example, we invite the reader to verify that $\alpha\vDash\beta$ if and only if $\alpha\to\beta$ is a tautology. We further invite the reader to observe a similar equivalence holds when $\Sigma$ is finite. Therefore, semantic implication $\Sigma\models\alpha$ is more interesting when $\Sigma$ is infinite. The next result about semantic implication is the cornerstone of propositional logic.
 
 **Theorem** (Compactness theorem, version I). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma\models\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\models\alpha$.
 
-The compactness theorem for propositional logic is one of the cornerstones of the theory, as will be the more general compactness theorem for first order logic. The name of the compactness theorem is due to its relationship to the idea of compactness in analysis, something which we will explain later on.
+The name of the compactness theorem is due to its relationship to the idea of compactness in analysis, something which we will explain later on.
 
 The compactness theorem can be restated as a statement about consistency.
 
 **Definition** Let $\Sigma$ be a set of well-formed formulas. We say $\Sigma$ is *consistent* if there exists a truth assignment $v$ such that $v\models\Sigma$.
 
-We invite the reader to verify that $\Sigma$ is consistent if and only if $\Sigma\not\models (P\wedge(\neg P))$. Sometimes the symbol $\bot$ is used for a tautologically false formula such as $(P\wedge(\neg P))$. Thus we may say $\Sigma$ is consistent if and only if $\Sigma\not\models\bot$.
+We invite the reader to verify that $\Sigma$ is consistent if and only if $\Sigma\not\models(P\wedge(\neg P))$. Sometimes the symbol $\bot$ is used for a tautologically false formula such as $(P\wedge(\neg P))$. Thus we may say $\Sigma$ is consistent if and only if $\Sigma\not\models\bot$.
 
 **Theorem** (Compactness theorem, version II). Let $\Sigma$ be a set of well-formed formulas. If every finite subset of $\Sigma$ is consistent, then $\Sigma$ is consistent.
 
 We invite the reader to establish an equivalence between the two versions of the compactness theorem.
 
-The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G=(V,E)$ is a graph with vertex set $V$ and edge set $E$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon V\to\set{c_1,\ldots,c_n}$ such that whenever $(v,v')\in E$ we have $\chi(v)\neq\chi(v')$.
+The compactness theorem has many interesting applications, to give a taste of this we explore just one of them from combinatorial graph theory. Recall that if $G$ is a graph with edge relation $\sim$, then a *proper coloring* of $G$ with $n$ colors is a function $\chi\colon G\to\set{c_1,\ldots,c_n}$ such that for $a,b\in G$ we have $a\sim b$ implies $\chi(a)\neq\chi(b)$.
 
 **Corollary** Let $G$ be a combinatorial graph, finite or infinite. Suppose that every finite subgraph $G_0\subset G$ has a proper coloring with $n$ colors. Then $G$ has a proper coloring with $n$ colors.
 
-*Proof*: They key is that proper colorability can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_{v,i}$, where $v$ ranges over the vertices $V$ and $i\in 1,\ldots,n$. We then let $\Sigma$ consist of the following axioms:
+*Proof*: They key is that proper colorability can be encoded using well-formed formulas. For convenience we will use the propositional variable symbols $P_{a,i}$, where $a\in G$ and $i\in 1,\ldots,n$. We then let $\Sigma$ consist of the following axioms:
 
-> * $P_{v,1}\vee\cdots\vee P_{v,n}$ for each $v\in V$ and each $i$
-> * $\neg(P_{v,i}\wedge P_{v,j})$ for each $v\in V$ and each $i.j$ such that $i\neq j$
-> * $\neg(P_{v,i}\wedge P_{w,i})$ for each $v,w\in V$ such that $(v,w)\in E$ and each $i$
+> * $P_{a,1}\vee\cdots\vee P_{a,n}$ for each $a\in G$ and each $i$
+> * $\neg(P_{a,i}\wedge P_{a,j})$ for each $a\in G$ and each $i,j$ such that $i\neq j$
+> * $\neg(P_{a,i}\wedge P_{b,i})$ for each $a,b\in G$ such that $a\sim b$, and each $i$
 
 The reader should verify that there exists a truth assignment $v$ that satisfies $\Sigma$ if and only if there exists a proper coloring $\chi$ with $n$ colors.
 
-We claim $\Sigma$ is finitely satisfiable. To see this let $\Sigma_0\subset\Sigma$ be a finite subset. Note that since $\Sigma_0$ is finite and each sentence is finite in length, there exists a finite susbest $V_0\subset V$ of vertices appearing in the subscript of a propositional symbol in $\Sigma_0$. If we let $G_0$ be the subgraph of $G$ induced by $V_0$, then by hypothesis there exists a proper coloring $\chi_0$ of $G_0$ with $n$ colors. As observed in the previous paragraph, this implies that $\Sigma_0$ is consistent.
+We claim $\Sigma$ is finitely satisfiable. To see this let $\Sigma_0\subset\Sigma$ be a finite subset. Note that since $\Sigma_0$ is finite and each sentence is finite in length, there exists a finite susbest $G_0\subset G$ consisting just of the vertices of $G$ that appear in a subscript of a propositional symbol in $\Sigma_0$. By our hypothesis, there exists a proper coloring $\chi_0$ of $G_0$ with $n$ colors. Using the observation from the previous paragraph, this implies that $\Sigma_0$ is consistent.
 
-Therefore by the compactness theorem, $\Sigma$ is satisfiable. Again, as we have seen, this implies there exists a proper coloring of $G$ with $n$ colors. $\blacksquare$
+By the compactness theorem, we have that $\Sigma$ is consistent. Again, as we have seen, this implies there exists a proper coloring of $G$ with $n$ colors. $\blacksquare$
 
 This corollary itself has several important consequences. Recall that a bipartite graph is just another word for a graph with a proper coloring with $2$ colors. Thus if every finite subgraph of $G$ is bipartite, then $G$ is bipartite. Next recall the major theorem that every finite planar graph has a proper coloring with $4$ colors. Thus every planar graph (finite or infinite) has a proper coloring with $4$ colors.
 
@@ -174,7 +172,7 @@ This corollary itself has several important consequences. Recall that a bipartit
 
 The concept of $\Sigma\models\alpha$ is a kind of implication, that is, we understand it to mean that if the formulas in $\Sigma$ are taken as true, then $\alpha$ is true. But the "proof" of $\alpha$ is tedious and unenlightening: go through every prossible truth assignment $v$, check whether $v$ satisfies each of the well-formed formulas in $\Sigma$, and if so, check whether $v$ satisfies $\alpha$.
 
-How can we show that the truth of $\Sigma$ implies the truth of $\alpha$ using logical reasoning. The answer is a *deduction*, which is a sequence of steps, together with justification that each step follows from the previous ones. 
+How can we show that the truth of $\Sigma$ implies the truth of $\alpha$ using logical reasoning? The answer is a *deduction*, which is a sequence of steps, together with justification that each step follows from the previous ones. 
 
 **Definition** Let $\alpha,\beta$ be well-formed formulas. *Modus ponens* is the deductive rule that if $\alpha$ is true, and $\alpha\rightarrow\beta$ is true, then $\beta$ is true.
 
