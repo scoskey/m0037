@@ -170,13 +170,13 @@ This corollary itself has several important consequences. Recall that a bipartit
 
 #### Deductions
 
-The concept of $\Sigma\models\alpha$ is a kind of implication, that is, we understand it to mean that if the formulas in $\Sigma$ are taken as true, then $\alpha$ is true. But the "proof" of $\alpha$ is tedious and unenlightening: go through every prossible truth assignment $v$, check whether $v$ satisfies each of the well-formed formulas in $\Sigma$, and if so, check whether $v$ satisfies $\alpha$.
+The concept of $\Sigma\models\alpha$ is a kind of implication, that is, we understand it to mean that if the formulas in $\Sigma$ are taken as true, then $\alpha$ is true. But the "proof" of $\alpha$ is unenlightening: run through every prossible truth assignment $v$, check whether $v$ satisfies each of the well-formed formulas in $\Sigma$, and if so, check whether $v$ satisfies $\alpha$.
 
-How can we show that the truth of $\Sigma$ implies the truth of $\alpha$ using logical reasoning? The answer is a *deduction*, which is a sequence of steps, together with justification that each step follows from the previous ones. 
+How can we show that $\Sigma$ implies $\alpha$ using logical reasoning? The answer is with a *deduction*, which is a sequence of steps, together with justification that each step follows from the previous ones. 
 
-**Definition** Let $\alpha,\beta$ be well-formed formulas. *Modus ponens* is the deductive rule that if $\alpha$ is true, and $\alpha\rightarrow\beta$ is true, then $\beta$ is true.
+**Definition** Let $\alpha,\beta$ be well-formed formulas. *Modus ponens* is the deductive rule that says, if $\alpha$ is true, and $\alpha\rightarrow\beta$ is true, then $\beta$ is true.
 
-We leave it to the reader to verify that the modus ponens rule is true semantically, that is, $\set{\alpha,\alpha\rightarrow\beta}\models\beta$. This should help shed some light on the reasons for the truth table for the connective $\rightarrow$.
+We leave it to the reader to verify that modus ponens is semantically correct, that is, $\set{\alpha,\alpha\rightarrow\beta}\models\beta$. This exercise should also help shed some light on why we defined the truth table for $\rightarrow$ the way we did.
 
 **Definition** Let $\Sigma$ be a set of well-formed formulas, and let $\alpha$ be a well-formed formula. We define $\Sigma\vdash\alpha$, read "$\Sigma$ syntactically implies $\alpha$", if there exists a sequence of well-formed formulas $\alpha_1,\ldots,\alpha_n$ such that $\alpha_n=\alpha$, and for every $i\leq n$ at least one of the following is true:
 
@@ -222,15 +222,15 @@ For convenience, let's say that a set $\Sigma$ of well-formed formulas is *finit
 
 *Proof*: Let $\alpha_1$ be any well-formed formula. Then at least one of $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$ is finitely consistent. We invite the reader to verify this claim.
 
-We may let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$, whichever is finitely consistent. If both are finitely consistent, then we may choose either one; for definiteness we pick the first by default.
+We let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$, whichever is finitely consistent. If both are finitely consistent, then we may choose either one; for definiteness we pick the first by default.
 
-Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we may let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
+Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
 
 Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_\infty$, and not both.
 
 We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
 
-To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is already completed. Next if $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$, we have:
+To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is done. Next if $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$, we have:
 
 $$\begin{aligned}
   v\models\alpha
@@ -240,7 +240,7 @@ $$\begin{aligned}
   \iff&\alpha\in\Sigma_\infty
 \end{aligned}$$
 
-The third equivalence is a little bit subtle. If $\beta\in\Sigma_\infty$ and $\gamma\in\Sigma_\infty$ then we couldn't have $\neg(\beta\wedge\gamma)\in\Sigma_\infty$ because that wouldn't be finitely consistent. Since $\Sigma_\infty$ contains every formula or its neagation, we must have $\beta\wedge\gamma\in\Sigma_\infty$. Conversely if $\beta\wedge\gamma\in\Sigma_\infty$, then we couldn't have $\neg\beta\in\Sigma_\infty$, so we must have $\beta\in\Sigma_\infty$, and similarly for $\gamma$.
+The third equivalence is a little bit subtle. If $\beta\in\Sigma_\infty$ and $\gamma\in\Sigma_\infty$ then we couldn't have $\neg(\beta\wedge\gamma)\in\Sigma_\infty$ because that wouldn't be finitely consistent. Since $\Sigma_\infty$ contains every formula or its negation, we must have $\beta\wedge\gamma\in\Sigma_\infty$. Conversely if $\beta\wedge\gamma\in\Sigma_\infty$, then we couldn't have $\neg\beta\in\Sigma_\infty$, so we must have $\beta\in\Sigma_\infty$, and similarly for $\gamma$.
 
 We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma_\infty$ and so $\Sigma_\infty$ is consistent, and so $\Sigma$ is consistent. $\blacksquare$
 
@@ -252,13 +252,23 @@ In this subsection we take a short detour through set theory before returning to
 
 Beginning informally, a *set* is a collection of mathematical objects which we call *elements*. When $x$ is an element of the set $A$, we write $x\in A$. For instance $\mathbb Q$ is a set whose elements are the rational numbers, so for instance $\frac35\in\mathbb Q$ and $\sqrt2\notin\mathbb Q$.
 
-For finite sets we may use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We sometimes extend this to large sets and infinite sets using $\ldots$ notation, which means to continue a clear pattern. So for example $\mathbb N=\set{0,1,2,\ldots}$. We may also use the *set-builder* notation $A=\set{z:\text{some property of }z}$ to abbreviate that $A$ is the set of all elements $z$ that satisfy some property. For instance we may write $\mathbb N=\set{z:z\text{ is a natural number}}$.
+For finite sets we may use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We sometimes extend this to large sets and infinite sets using $\ldots$ notation, which means to continue a clear pattern. So for example $\mathbb N=\set{0,1,2,\ldots}$. We may also use the *set-builder* notation $A=\set{x:\text{some property of }x}$ to abbreviate that $A$ is the set of all elements $x$ that satisfy some property. For instance we may write $\mathbb N=\set{x:x\text{ is a natural number}}$.
 
-The foundation of set theory is the *extensionality axiom*, which states that two sets are equal if and only if they have the same elements. Formally, if $A,B$ are sets then $A=B$ if and only if for all $x$, we have $x\in A\leftrightarrow x\in B$. This axiom distinguishes sets from other similar mathematical objects such as lists and multisets, by enforcing that the order of elements and the repetition of elements do not matter. For instance, if $A=\set{1,2,3}$ and $B=\set{3,2,2,1}$ then $A=B$.
+It is also permitted to have sets of sets, such as $A=\set{x:x\text{ is a set of natural numbers containing a prime}}$. However a "naive" approach to sets of sets can lead to paradoxes. For example, if we let $y=\set{x:x\notin x}$, then both $y\in y$ and $y\notin y$ lead to a contradiction. This is called **Russell's paradox**, and it is a set theory version of the liar paradox. In this section we will proceed without worrying about it, but in the next section we will be more careful.
 
-You may be aware that this informal or "naive" approach is not entirely sound, as it can lead to falsehoods such as Russell's paradox. In this section no such paradoxes will arise, so we can proceed for now without worrying. In the next section, we will be more careful.
+<!-- The foundation of set theory is the *extensionality axiom*, which states that two sets are equal if and only if they have the same elements. Formally, if $A,B$ are sets then $A=B$ if and only if for all $x$, we have $x\in A\leftrightarrow x\in B$. This axiom distinguishes sets from other similar mathematical objects such as lists and multisets, by enforcing that the order of elements and the repetition of elements do not matter. For instance, if $A=\set{1,2,3}$ and $B=\set{3,2,2,1}$ then $A=B$. -->
 
-We now introduce some fundamental notation and key constructions using sets. We assume the reader is already familiar with the meaning of the subset relation $\subset$ and the boolean operations $\cap$, $\cup$, and $\triangle$. We note that "complement" $\bar{A}$ is not an operation because we are not working with a universal set in which to take the complement. We may however use the set difference $B\smallsetminus A$, which means all elements of $B$ which are not in $A$.
+We now introduce some fundamental notation and key constructions for sets. We assume the reader is already familiar with the following:
+
+> * the subset relation $X\subset Y$
+> * the boolean set operations $\cap$ and $\cup$
+> * the set difference operation $A\smallsetminus B$
+> * the symmetric difference operation $A\mathbin{\triangle}B$.
+> * the power set operation $\mathcal P(A)$
+
+In lectures, we will review each of these. Note that "complement" $\bar{A}$ is not an operation in pure set theory, because we are not working with a universal set in which to take the complement.
+
+We next introduce pairs, products, and relations.
 
 **Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
 
@@ -276,9 +286,9 @@ For instance, $\mathbb R\times\mathbb R$ is the Cartesian plane, and $\mathbb Z\
 
 For example, the $<$ relation on real numbers is a binary relation between $\mathbb R$ and itself. Formally, $<$ is the set of all pairs $(m,n)\in\mathbb R\times\mathbb R$ such that $m$ is less than $n$. Thus $<$ is "physically" a region in the plane.
 
-Many important types of mathematical objects are binary relations. All of the following are binary relations: partial orders, linear orders, equivalence relations, combinatorial graphs, and so on. The $<$ example above is a linear order.
+Many important types of mathematical objects are binary relations. All of the following are binary relations: partial orders, linear orders, equivalence relations, combinatorial graphs, and so on. In lectures, we will review the definitions of these mathematical concepts.
 
-Another special example of a binary relation is a functions. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
+Functions are also binary relations. In elementary mathematics, we often teach that a function is a formula or rule. But in formal mathematics, a function is "physically" its graph, which is the set of ordered pairs (input, output).
 
 **Definition** Let $A$ and $B$ be sets.
 
@@ -319,6 +329,16 @@ The simple notion of bijective cardinality allows us to define countable and unc
 
 Sometimes, we accept finite sets as countable, but a better term to include both the finite sets and countable infinite sets would be "at most countable".
 
+The set $\mathbb N$ is countable by definition, and it's not difficult to show that $\mathbb Z$ is countable too. It's a somewhat more interesting exercise to show that sets like $\mathbb N\times \mathbb N$ and $\mathbb Q$ are countable also. Are there any sets which are not countable?
+
+**Theorem** (Cantor). For any set $X$, $|X|<|\mathcal P(X)|$.
+
+*Proof*: We invite the reader to show that $|X|\leq|\mathcal P(X)|$, that is, there is an injective function from $X$ to $\mathcal P(X)$.
+
+Next, given any function $F\colon X\to\mathcal P(X)$, we let $Y=\set{x\in X\mid x\notin F(x)}$. Then for all $x\in X$, if $F(x)=Y$, then both $x\in Y$ and $x\notin Y$ lead to a contradiction. Thus $F$ is not surjective. $\square$
+
+Do you recognise the main idea in this proof? It's similar to the liar paradox and Russell's paradox. But instead of leading to a contradiction, it leads to new and larger infinities....
+
 #### Another application of compactness
 
 In combinatorics a tree is a special kind of combinatorial graph, one without cycles. In set theory we view trees slightly differently, with a distinguished root vertex on level $0$, labeled children on level $1$, and so on.
@@ -347,7 +367,7 @@ Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there
 
 We remark that it is also the case that Konig's lemma may be used to show that the compactness theorem is true. Thus there is a sense in which the (countable) propositional compactness theorem is *equivalent* to Konig's lemma.
 
-#### Why it's called compactness
+#### Why it's called compactness (not assessable)
 
 It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection.
 
@@ -381,7 +401,7 @@ The starting point for axiomatic set theory is the following big idea: *everythi
 
 What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* about sets, which govern what sets may be constructed and how they behave. Historically it took some time and debate for mathematicians to agree on the list of axioms. Here we elaborate the axioms of *Zermelo Fraenkel Choice* set theory, or ZFC, which is now the officially accepted list.
 
-We have already introduced the most basic axiom of ZFC, which explains the relationship between $\in$ and $=$.
+The following is the most basic axiom of ZFC, because it defines how sets "work".
 
 **Axiom** (Extensionality) $x=y$ iff for all $z$, $z\in x\iff z\in y$.
 
@@ -523,7 +543,7 @@ Each ordinal in the sequence falls into one of two types. The *successor* ordina
 
 (This last equation is a fact and not a definition or construction. It isn't suitable as a definition because it is circular with $\lambda$ on both sides. To construct ordinals properly, somewhat more work is needed: an ordinal is a transitive set whose elements are linearly ordered by the $\in$ relation.)
 
-With ordinals it is possible to count as far into the transfinite as we can imagine. It follows from the axioms (AC is necessary here) that every set $A$ can be enumerated using some ordinal $\alpha$ as the set of indices. That is, it is possible to write $A=\set{a_\beta:\beta<\alpha}$. When the set $A$ is countable, the ordinal $\alpha$ can simply be taken to be $\omega$. When $A$ is uncountable, a larger ordinal is needed. So for instance even though $\mathbb R$ is uncountable, there exists an ordinal $\alpha$ such that $\mathbb R=\set{r_\beta:\beta\in\alpha}$. The same is true of $\mathcal P(\mathbb R)$, though of course it requires an even larger ordinal!
+With ordinals it is possible to count as far into the transfinite as we can imagine. It follows from the axioms (AC is necessary here) that every set $A$ can be enumerated using some ordinal $\alpha$ as the set of indices. That is, it is possible to write $A=\set{a_\beta:\beta<\alpha}$. When the set $A$ is countable, the ordinal $\alpha$ can simply be taken to be $\omega$. When $A$ is uncountable, a larger ordinal is needed. So for instance even though $\mathcal P(\mathbb N)$ is uncountable, there exists an ordinal $\alpha$ (also uncountable) such that $\mathcal P(\mathbb N)$ can be enumerated $\set{x_\beta:\beta<\alpha}$.
 
 ## Part II: First order logic and completeness
 
