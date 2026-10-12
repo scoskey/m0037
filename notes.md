@@ -9,7 +9,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 [Part I: Introduction to logic and set theory](#part-i-introduction-to-logic-and-set-theory)
 
 - [1. Propositional logic](#1-propositional-logic)
-- [2. More about compactness, introductory set theory](#2-more-about-compactness-introductory-set-theory)
+- [2. More propositional logic, introductory set theory](#2-more-propositional-logic-introductory-set-theory)
 - [3. Axiomatic set theory and foundations](#3-axiomatic-set-theory-and-foundations)
 
 [Part II: First order logic and completeness](#part-ii-first-order-logic-and-completeness)
@@ -168,7 +168,42 @@ By the compactness theorem, we have that $\Sigma$ is consistent. Again, as we ha
 
 This corollary itself has several important consequences. Recall that a bipartite graph is just another word for a graph with a proper coloring with $2$ colors. Thus if every finite subgraph of $G$ is bipartite, then $G$ is bipartite. Next recall the major theorem that every finite planar graph has a proper coloring with $4$ colors. Thus every planar graph (finite or infinite) has a proper coloring with $4$ colors.
 
-#### Deductions
+
+### 2. More propositional logic, introductory set theory
+
+In the previous section we introduced the propositional compactness theorem, and we saw its power with some key applications. We are now ready to prove the compactsness theorem.
+
+For convenience, let's say that a set $\Sigma$ of well-formed formulas is *finitely consistent* if every finite subset of $\Sigma$ is consistent. We can restate the compactness theorem in these terms:
+
+**Theorem** (Compactness theorem, version II). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma$ is finitely consistent, then $\Sigma$ is consistent.
+
+*Proof*: Let $\alpha_1$ be any well-formed formula. Then at least one of $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$ is finitely consistent. We invite the reader to verify this claim.
+
+We let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$, whichever is finitely consistent. If both are finitely consistent, then we may choose either one; for definiteness we pick the first by default.
+
+Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
+
+Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_\infty$, and not both.
+
+We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
+
+To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is done. Next if $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$, we have:
+
+$$\begin{aligned}
+  v\models\alpha
+  \iff&v\models\beta\text{ and }v\models\gamma\\
+  \iff&\beta\in\Sigma_\infty\text{ and }\gamma\in\Sigma_\infty\\
+  \iff&\beta\wedge\gamma\in\Sigma_\infty\\
+  \iff&\alpha\in\Sigma_\infty
+\end{aligned}$$
+
+The third equivalence is a little bit subtle. If $\beta\in\Sigma_\infty$ and $\gamma\in\Sigma_\infty$ then we couldn't have $\neg(\beta\wedge\gamma)\in\Sigma_\infty$ because that wouldn't be finitely consistent. Since $\Sigma_\infty$ contains every formula or its negation, we must have $\beta\wedge\gamma\in\Sigma_\infty$. Conversely if $\beta\wedge\gamma\in\Sigma_\infty$, then we couldn't have $\neg\beta\in\Sigma_\infty$, so we must have $\beta\in\Sigma_\infty$, and similarly for $\gamma$.
+
+We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma_\infty$ and so $\Sigma_\infty$ is consistent, and so $\Sigma$ is consistent. $\blacksquare$
+
+We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
+
+#### Deductions, completeness
 
 The concept of $\Sigma\models\alpha$ is a kind of implication, that is, we understand it to mean that if the formulas in $\Sigma$ are taken as true, then $\alpha$ is true. But the "proof" of $\alpha$ is unenlightening: run through every prossible truth assignment $v$, check whether $v$ satisfies each of the well-formed formulas in $\Sigma$, and if so, check whether $v$ satisfies $\alpha$.
 
@@ -211,40 +246,6 @@ The completeness portion says that if $\Sigma\models\alpha$ then $\Sigma\vdash\a
 Since $\Sigma_0$ is finite, we may enumerate now the well-formed formulas in $\Sigma_0$ as $\sigma_1,\ldots,\sigma_n$. We leave it to the reader to show there is a deduction from $\Sigma_0$ of the well-formed formula $\sigma_1\wedge\cdots\wedge\sigma_n$ (insert brackets appropriately). Furthermore, it follows from $\Sigma_0\models\alpha$ that $(\sigma_1\wedge\cdots\wedge\sigma_n)\rightarrow\alpha$ is a tautology. The last two claims plus modus ponens show that $\Sigma_0\vdash\alpha$, and therefore that $\Sigma\vdash\alpha$. $\blacksquare$
 
 We see from the proof above that the compactness theorem implies the completeness theorem. We invite the reader to prove that the reverse is also true. The key is that $\vdash$ automatically satisfies the compactness-like property: if $\Sigma\vdash\alpha$, then there exists a finite subset $\Sigma_0\subset\Sigma$ such that $\Sigma_0\vdash\alpha$. This is true because any deduction of $\alpha$ from $\Sigma$ has finitely many steps, and therefore may only use finitely many of the well-formed formulas in $\Sigma$.
-
-### 2. More about compactness, introductory set theory
-
-In the previous section we introduced the propositional compactness theorem, and we saw its power with some key applications. We are now ready to prove it.
-
-For convenience, let's say that a set $\Sigma$ of well-formed formulas is *finitely consistent* if every finite subset of $\Sigma$ is consistent. Then the compactness theorem says:
-
-**Theorem** (Compactness theorem, version II). Let $\Sigma$ be a set of well-formed formulas. If $\Sigma$ is finitely consistent, then $\Sigma$ is consistent.
-
-*Proof*: Let $\alpha_1$ be any well-formed formula. Then at least one of $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$ is finitely consistent. We invite the reader to verify this claim.
-
-We let $\Sigma_1$ be either $\Sigma\cup\lbrace\alpha_1\rbrace$ or $\Sigma\cup\lbrace\neg\alpha_1\rbrace$, whichever is finitely consistent. If both are finitely consistent, then we may choose either one; for definiteness we pick the first by default.
-
-Now let $\alpha_n$ be an enumeration of all well-formed formulas. Assuming $\Sigma_n$ has been defined, we let $\Sigma_{n+1}$ be either $\Sigma_n\cup\lbrace\alpha_{n+1}\rbrace$ or $\Sigma_n\cup\lbrace\neg\alpha_{n+1}\rbrace$, whichever is finitely consistent. (With the same understanding as above.)
-
-Finally let $\Sigma_\infty=\bigcup_n\Sigma_n$. We invite the reader to confirm that $\Sigma_\infty$ is finitely consistent. Moreover, $\Sigma_\infty$ has the property that for any well-formed formula $\alpha$, either $\alpha\in\Sigma_\infty$ or $\neg\alpha\in\Sigma_\infty$, and not both.
-
-We now define a truth assignment $v$ by $v(P_n)=T$ iff $P_n\in\Sigma_\infty$. In other words we have $v\models P_n$ iff $P_n\in\Sigma_\infty$. We claim that for *any* well-formed formula $\alpha$, $v\models\alpha$ if and only if $\alpha\in\Sigma_\infty$.
-
-To prove this claim, we use induction on the recursive construction of $\alpha$. The base case $\alpha=P_n$ is done. Next if $\alpha=\beta\wedge\gamma$, and the result is true for $\beta$ and $\gamma$, we have:
-
-$$\begin{aligned}
-  v\models\alpha
-  \iff&v\models\beta\text{ and }v\models\gamma\\
-  \iff&\beta\in\Sigma_\infty\text{ and }\gamma\in\Sigma_\infty\\
-  \iff&\beta\wedge\gamma\in\Sigma_\infty\\
-  \iff&\alpha\in\Sigma_\infty
-\end{aligned}$$
-
-The third equivalence is a little bit subtle. If $\beta\in\Sigma_\infty$ and $\gamma\in\Sigma_\infty$ then we couldn't have $\neg(\beta\wedge\gamma)\in\Sigma_\infty$ because that wouldn't be finitely consistent. Since $\Sigma_\infty$ contains every formula or its negation, we must have $\beta\wedge\gamma\in\Sigma_\infty$. Conversely if $\beta\wedge\gamma\in\Sigma_\infty$, then we couldn't have $\neg\beta\in\Sigma_\infty$, so we must have $\beta\in\Sigma_\infty$, and similarly for $\gamma$.
-
-We invite the reader to confirm that a similar procedure works for the rest of the connectives $\neg,\vee,\rightarrow,\leftrightarrow$. It follows that $v\models\Sigma_\infty$ and so $\Sigma_\infty$ is consistent, and so $\Sigma$ is consistent. $\blacksquare$
-
-We should acknowledge that we have only proved the compactness theorem when there is a *countable* set of propositional variable symbols $P_1,P_2,\ldots$. The compactness theorem remains true when there is an uncountable set of propositional variable symbols. This statement is stronger, and some of the steps of the proof will be different.
 
 #### Introductory set theory
 
@@ -367,25 +368,6 @@ Therefore by the compactness theorem, $\Sigma$ is consistent. This implies there
 
 We remark that it is also the case that Konig's lemma may be used to show that the compactness theorem is true. Thus there is a sense in which the (countable) propositional compactness theorem is *equivalent* to Konig's lemma.
 
-#### Why it's called compactness (not assessable)
-
-It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection.
-
-To begin, let $V$ be the set of all truth assignments $v$. If $\alpha$ is a well-formed formula, we let $V_\alpha=\set{v\in V\mid v\models\alpha}$. We can define a topology on $V$ by declaring that $V_\alpha$ is *closed* for all $\alpha$. Thus a general closed subset of $V$ is defined to be an intersection of any number of sets of the form $V_\alpha$.
-
-Recall that a topological space is **compact** if the following holds: if $\mathcal F$ is a family of closed sets such that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then we have $\bigcap\mathcal F\neq\emptyset$. This definition is equivalent to the more commonly stated open subcover property, and for metric spaces it's equivalent to the convergent subsequences property.
-
-**Theorem** $V$ is a compact topological space.
-
-*Proof*: Let $\mathcal F$ be a family of closed subsets of $V$ with the property that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$.
-
-For each $A\in\mathcal F$, let $\Sigma_A=\set{\alpha\mid(\forall v\in A)v\models\alpha}$. We invite the reader to check that $v\in A$ if and only if $v\models\Sigma_A$.
-
-Let $\Sigma=\bigcup_{A\in\mathcal F}\Sigma_A$. We claim that $\Sigma$ is finitely consistent. Indeed if $\Sigma_0\subset\Sigma$ is finite, then there exist $A_1,\ldots,A_n\in\mathcal F$ such that $\Sigma_0\subset\Sigma_{A_1}\cup\cdots\cup\Sigma_{A_n}$. By our assumption about $\mathcal F$, there exists $v\in A_1\cap\cdots\cap A_n$. We then have $v\models\Sigma_{A_1}\cup\cdots\cup\Sigma_{A_n}$ and thus $v\models\Sigma_0$.
-
-By the compactness theorem, $\Sigma$ is consistent, that is, there exists $v\in V$ such that $v\models\Sigma$. Then for all $A\in\mathcal F$ we have $v\models\Sigma_A$. It follows that $v\in\bigcap_{A\in\mathcal F}A$, completing the proof. $\blacksquare$
-
-We remark that it is also true that the compactness of the topological space $V$ may be used to show that the compactness theorem is true. Thus there is a sense in which the propositional compactness theorem is *equivalent* to the compactness of $V$. We hope this helps shed some light on the reason the compactness theorem is so named.
 
 ### 3. Axiomatic set theory and foundations
 
