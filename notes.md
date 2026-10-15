@@ -332,9 +332,9 @@ Sometimes, we accept finite sets as countable, but a better term to include both
 
 The set $\mathbb N$ is countable by definition, and it's not difficult to show that $\mathbb Z$ is countable too. It's a somewhat more interesting exercise to show that sets like $\mathbb N\times \mathbb N$ and $\mathbb Q$ are countable also. Are there any sets which are not countable?
 
-**Theorem** (Cantor). For any set $X$, $|X|<|\mathcal P(X)|$.
+**Theorem** (Cantor). For any set $X$, $\vert X\vert<\vert\mathcal P(X)\vert$.
 
-*Proof*: We invite the reader to show that $|X|\leq|\mathcal P(X)|$, that is, there is an injective function from $X$ to $\mathcal P(X)$.
+*Proof*: We invite the reader to show that $\vert X\vert\leq\vert\mathcal P(X)\vert$, that is, there is an injective function from $X$ to $\mathcal P(X)$.
 
 Next, given any function $F\colon X\to\mathcal P(X)$, we let $Y=\set{x\in X\mid x\notin F(x)}$. Then for all $x\in X$, if $F(x)=Y$, then both $x\in Y$ and $x\notin Y$ lead to a contradiction. Thus $F$ is not surjective. $\square$
 
