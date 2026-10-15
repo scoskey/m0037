@@ -255,9 +255,9 @@ Beginning informally, a *set* is a collection of mathematical objects which we c
 
 For finite sets we may use the notation $x=\set{a_1,\ldots,a_n}$ to abbreviate that $x$ is a set and $a_1,\ldots,a_n$ are its only elements. We sometimes extend this to large sets and infinite sets using $\ldots$ notation, which means to continue a clear pattern. So for example $\mathbb N=\set{0,1,2,\ldots}$. We may also use the *set-builder* notation $A=\set{x:\text{some property of }x}$ to abbreviate that $A$ is the set of all elements $x$ that satisfy some property. For instance we may write $\mathbb N=\set{x:x\text{ is a natural number}}$.
 
-It is also permitted to have sets of sets, such as $A=\set{x:x\text{ is a set of natural numbers containing a prime}}$. However a "naive" approach to sets of sets can lead to paradoxes. For example, if we let $y=\set{x:x\notin x}$, then both $y\in y$ and $y\notin y$ lead to a contradiction. This is called **Russell's paradox**, and it is a set theory version of the liar paradox. In this section we will proceed without worrying about it, but in the next section we will be more careful.
+The basic rule of sets is that $A=B$ if and only if for all $x$, we have $x\in A\iff x\in B$. For instance, if $A=\set{1,2,3}$ and $B=\set{3,2,2,1}$ then $A=B$. This distinguishes sets from other similar mathematical objects. For example, recall that $(a,b)$ denotes an *ordered pair* or *tuple*, and that $(a,b)=(c,d)$ iff $a=b$ and $c=d$. We will use ordered pairs, but in the next section we'll see that ordered pairs can be constructed using sets only.
 
-<!-- The foundation of set theory is the *extensionality axiom*, which states that two sets are equal if and only if they have the same elements. Formally, if $A,B$ are sets then $A=B$ if and only if for all $x$, we have $x\in A\leftrightarrow x\in B$. This axiom distinguishes sets from other similar mathematical objects such as lists and multisets, by enforcing that the order of elements and the repetition of elements do not matter. For instance, if $A=\set{1,2,3}$ and $B=\set{3,2,2,1}$ then $A=B$. -->
+It is permitted to build sets of sets, such as $A=\set{x:x\text{ is a set of natural numbers containing a prime}}$. However a "naive" approach to sets of sets can lead to paradoxes. For example, if we let $y=\set{x:x\notin x}$, then both $y\in y$ and $y\notin y$ lead to a contradiction. This is called **Russell's paradox**, and it is a set theory version of the liar paradox. In this section we will proceed without worrying about it, but in the next section we will be more careful.
 
 We now introduce some fundamental notation and key constructions for sets. We assume the reader is already familiar with the following:
 
@@ -269,11 +269,11 @@ We now introduce some fundamental notation and key constructions for sets. We as
 
 In lectures, we will review each of these. Note that "complement" $\bar{A}$ is not an operation in pure set theory, because we are not working with a universal set in which to take the complement.
 
-We next introduce pairs, products, and relations.
+We next introduce products and relations.
 
-**Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$.
+<!-- **Definition** Given any two objects $a,b$, the *ordered pair* $(a,b)$ is defined to be the set $\set{\set{a},\set{a,b}}$. -->
 
-We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal.
+<!-- We invite the reader to check that this construction "works" in the sense that two ordered pairs are equal if and only if their left and right components are equal. -->
 
 **Definition** Let $A,B$ be sets. The *cartesian product* of $A$ and $B$ is defined as $A\times B=\set{(a,b):a\in A,\ b\in B}$.
 
@@ -281,7 +281,7 @@ For instance, $\mathbb R\times\mathbb R$ is the Cartesian plane, and $\mathbb Z\
 
 **Definition** Let $A,B$ be sets.
 
-* A *binary relation* between $A$ and $B$ is any subset $R\subset A\times B$. We sometimes write $aRb$ to mean that $(a,b)\in R$.
+* A *binary relation* between $A$ and $B$ is any subset $R\subset A\times B$. We sometimes use infixe notation $aRb$ to denote that $(a,b)\in R$.
 * The *domain* of $R$ is $\set{a\in A:(\exists b)(a,b)\in R}$
 * The *range* of $R$ is $\set{b\in B:(\exists a)(a,b)\in R}$
 
@@ -300,13 +300,13 @@ Functions are also binary relations. In elementary mathematics, we often teach t
 
 When $f$ is a function from $A$ to $B$ we may write $f\colon A\to B$, and when $(a,b)\in f$ we may write $f(a)=b$.
 
-**Example** In lectures we will give some examples of functions, their graphs, and their properties.
+In lectures we will give some examples of functions, their graphs, and their properties.
 
 **Definition** Let $A,B$ be sets. Then $B^A$ denotes the set of functions from $A$ to $B$.
 
-We note that in other resources the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
+We note that in other resources, the set $B^A$ may be written as ${}^AB$ or $\mathrm{Fun}(A,B)$ (because it is fun).
 
-When the exponent set is finite, we can think of $B^A$ as tuples of elements of $B$. In more detail, for each natural number $n$, let the symbol $n$ stand for the set $\set{0,\ldots,n-1}$. Then $B^n$ consists of all functions $f\colon\set{0,\ldots,n-1}\to B$. Given such a function $f$, we can think of it as an ordered $n$-tuple $(f(0),\ldots,f(n-1))$, which is a generalisation of an ordered pair.
+When the exponent set $A$ is finite, say it is of size $n$, we can think of $B^A$ as a generalisation of the Cartesian product to tuples of length $n$. In more detail, let the symbol $n$ stand for the set $\set{0,\ldots,n-1}$. Then $B^n$ consists of all functions $f\colon\set{0,\ldots,n-1}\to B$. Given such a function $f$, we can think of it as an ordered $n$-tuple $(f(0),\ldots,f(n-1))$.
 
 **Definition** Let $X$ be a set. Then An $n$-ary *relation* on $X$ is a subset $R\subset X^n$.
 

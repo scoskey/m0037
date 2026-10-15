@@ -1,4 +1,4 @@
-#### Why it's called compactness (not assessable)
+#### Why it's called compactness (Not assessable)
 
 It is natural to ask how the compactness theorem gets its name. It turns out that the compactness theorem is related to compactness in analysis. Briefly we present some of the results which demonstrate this connection.
 
@@ -16,8 +16,6 @@ Let $\Sigma=\bigcup_{A\in\mathcal F}\Sigma_A$. We claim that $\Sigma$ is finitel
 
 By the compactness theorem, $\Sigma$ is consistent, that is, there exists $v\in V$ such that $v\models\Sigma$. Then for all $A\in\mathcal F$ we have $v\models\Sigma_A$. It follows that $v\in\bigcap_{A\in\mathcal F}A$, completing the proof. $\blacksquare$
 
-We remark that it is also true that the compactness of the topological space $V$ may be used to show that the compactness theorem is true.
-
-Inded ...
+Conversely, the compactness of the topological space $V$ may be used to show that the compactness theorem is true. For this, assume $\Sigma$ is finitely consistent. Let $\mathcal F=\set{V_\alpha:\alpha\in\Sigma}$. Then the fact that $\Sigma$ is finitely consistent plus the compactness of $V$ implies that $\bigcap\mathcal F\neq\emptyset$. Letting $v\in\bigcap\mathcal F$, we have $v\models\Sigma$, so $\Sigma$ is consistent.
 
 Thus there is a sense in which the propositional compactness theorem is *equivalent* to the compactness of $V$. We hope this helps shed some light on the reason the compactness theorem is so named.
