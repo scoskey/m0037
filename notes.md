@@ -381,7 +381,7 @@ Lastly set theory is the key to studying the infinite. We will conclude the sect
 
 The starting point for axiomatic set theory is the following big idea: *everything is a set*. We have so far seen many examples of sets of sets, that is, sets whose elements are sets themselves. Are there any other types of elements, are there any objects that aren't themselves sets? To a modern set theorist, Everything. Is. A. Set.
 
-What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* about sets, which govern what sets may be constructed and how they behave. Historically it took some time and debate for mathematicians to agree on the list of axioms. Here we elaborate the axioms of *Zermelo Fraenkel Choice* set theory, or ZFC, which is now the officially accepted list.
+What is needed is therefore not a *definition* of set (everything is a set), but rather *axioms* about sets, which govern what sets may be constructed and how they behave. Historically it took some time and debate for mathematicians to agree on the list of axioms. Here we elaborate the axioms of *Zermelo Fraenkel Choice* set theory, or ZFC, which is now the official accepted list.
 
 The following is the most basic axiom of ZFC, because it defines how sets "work".
 
@@ -391,7 +391,7 @@ The next several axioms of set theory are construction axioms, that is, axioms t
 
 **Axiom** (Strong Pairing) If $a_1,\ldots,a_n$ are sets, then $\set{a_1,\ldots,a_n}$ is a set.
 
-For one thing, the Strong Pairing axiom implies that there exists a set. This is because we can apply it in the case when $n=0$ to obtain the set $\lbrace\rbrace$. This is called the *empty set* and given the special symbol $\emptyset$. We invite the reader to verify that the Strong Pairing axiom implies that ordered pairs may be constructed.
+For one thing, the Strong Pairing axiom implies that there exists a set. This is because we can apply it in the case when $n=0$ to obtain the set $\lbrace\rbrace$. This is called the *empty set* and given the special symbol $\emptyset$.
 
 We say that a set is *hereditarily finite* if it may be constructed using repeated applications of the Strong Pairing axiom and nothing else. We invite the reader to write out several dozen different hereditarily finite sets, and to make a diagram of how they are related to one another by the $\in$ relation. (For example, draw an upwards arrow from $x$ to $y$ whenever $x\in y$.)
 
@@ -431,7 +431,7 @@ There is one more construction axiom called the *Replacement* axiom, which we wi
 
 There are several more axioms which are not explicit constructions like those above, but which instead help define the structure of the sets. The first of these is the *Choice* axiom or *AC*, which states that if $\mathcal F$ is a set of nonempty, pairwise disjoint sets, then there exists a set $C$ which contains exactly one element from each $F\in\mathcal F$.
 
-AC is famously equivalent to a list of other nonconstructive statements which are widely used throughout mathematics: Zorn's lemma, every set can be well-ordered, every equivalence relation has a system of representatives, every vector space has a basis, and more. We will not cover these equivalences here, but we will use AC when necessary.
+AC is famously equivalent to a list of other nonconstructive statements which are widely used throughout mathematics: Zorn's lemma, every set can be well-ordered, every equivalence relation has a system of representatives, every vector space has a basis, and more. We will not cover all these equivalent statements here. Some authors refrain from using AC when it isn't necessary, but in these notes we will use AC.
 
 The last axiom is the *Regularity* axiom, which states that there does not exist an infinitely descending $\in$-sequence. That is, there does not exist a sequence of sets $x_1,x_2,x_3,\ldots$ such that $x_{n+1}\in x_n$ for all $n$. This axiom ensures, among other things, that circular relationships such as $x\in x$ or $x\in y\in x$ are never true.
 
@@ -463,11 +463,17 @@ From the above definition we see that natural numbers are all elements of HF. Th
 
 **Definition** $\mathbb N=\set{x\in HF:x\text{ is a von Neumann natural number}}$.
 
-We remark that because the definition of von Neumann natural number is recursive, some work is required to show that it is valid to use the property "$x$ is a von Neumann natural number" in the Separation axiom. We refer the interested reader to the *principle of recursive definitions*, which follows from the axioms.
+We remark that because the definition of von Neumann natural number is recursive, we have to be a little careful when we apply the Separation axiom to show $\mathbb N$ exists. We refer the interested reader to the *principle of recursive definitions*, which can be proved using the axioms.
 
-In order to complete the construction of $\mathbb N$, it is also necessary to define the functions $+$ and $\times$. We may think of these as ternary relations, so for instance $+$ is really the set of all ordered triples $(m,n,s)\in\mathbb N^3$ such that $m+n=s$. The definition of $+$ is again recursive: if $(m,n,s)\in+$ then $(m+1,n,s+1)\in +$ and $(m,n+1,s+1)\in +$. Once again the principle of recursion tells us $+$ exists.
+In order to continue defining number systems, it is necessary to define ordered pairs $(a,b)$. In the previous section we took ordered pairs as basic and used them to define relations and functions. Now that everything is a set, we will need ordered pairs to also be a set.
 
-Now that we have achieved the construction of $\mathbb N$ in set theory, it is possible to construct further number systems.
+**Definition** The ordered pair $(a,b)$ is defined as the set $\{\{a\},\{a,b\}\}$.
+
+We invite the reader to verify that with this defintion, $(a,b)=(c,d)$ if and only if $a=c$ and $b=d$. This allows the construction of Cartesian products $A\times A$ and powers $A^n$ as we did in the previous section.
+
+We may now construct the addition function $+$ on $\mathbb N$. We may think of $+$ as a ternary relation, that is, the set of ordered triples $(m,n,s)\in\mathbb N^3$ such that $m+n=s$. One definition of $+$ is recursive: if $(m,n,s)\in\mathord{+}$ then $(m\cup\{m\},n,s\cup\{s\})\in\mathord{+}$ and $(m,n\cup\{n\},s\cup\{s\})\in\mathord{+}$. Once again the principle of recursive definitions ensures that $+$ exists. We invite the reader to construct the multiplication function $\times$ on $\mathbb N$.
+
+Now that we have constructed $\mathbb N$ with $+$ and $\times$, it is possible to construct further number systems.
 
 **Definition** $\mathbb Q$ is the set of ordered triples $(i,m,n)$ in $2\times\mathbb N\times\mathbb N$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
 
@@ -475,9 +481,9 @@ Of course, we think of $(0,m,n)$ as representing $\frac mn$ and $(1,m,n)$ as rep
 
 **Definition** $\mathbb Z$ is the set of all $(i,m,n)\in\mathbb Q$ satisfying $n=1$.
 
-With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to write a bijection from $\mathbb N$ to a subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
+With these definitions, $\mathbb Z\subset\mathbb Q$ as one would expect, but unfortunately it is not technically the case that $\mathbb N\subset\mathbb Z$. We invite the reader to write a bijection from $\mathbb N$ to a corresponding subset of $\mathbb Z$, showing that we can think of $\mathbb N$ as a subset of $\mathbb Z$ if we wish.
 
-So far, all the numbers we have constructed are elements of HF and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct real numbers. Each real number will be a subset of HF, so the set of real numbers itself is an element of $\mathcal P(\mathcal P(HF))$.
+So far, all the numbers we have constructed are elements of HF and the number systems are elements of $\mathcal P(HF)$. We are now ready to construct the real numbers. Each real number will be a subset of HF, so the set of real numbers itself will be an element of $\mathcal P(\mathcal P(HF))$.
 
 **Definition** $\mathbb R$ is the set of *Dedekind cuts* of $\mathbb Q$. Here $C\subset\mathbb Q$ is a Dedekind cut if:
 
@@ -485,7 +491,7 @@ So far, all the numbers we have constructed are elements of HF and the number sy
 > * $C$ is closed downwards
 > * $C$ has no last element
 
-Once again, with these definitions $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
+Once again, with these definitions $\mathbb Q$ is not officially a subset of $\mathbb R$, but using a bijection we can identify $\mathbb Q$ with a corresponding subset of $\mathbb R$. We may also use our definition of $+,\times,<$ on $\mathbb Q$ to define $+,\times,<$ on $\mathbb R$. For instance, we can define $C+C'=\set{q+q':q\in C,q'\in C'}$.
 
 Having defined the real numbers, we can now continue to define nearly all familiar objects in mathematics.
 
@@ -497,7 +503,7 @@ Having defined the real numbers, we can now continue to define nearly all famili
 * $C(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are continuous (use the $\epsilon,\delta$ definition!)
 * $D(\mathbb R)$ is the subset of $\mathbb R^{\mathbb R}$ consisting of the functions which are differentiable (use the limit definition!)
 
-While it may appear that the definitions we have given are universal or absolute, in truth there are a wide variety of different approaches to carrying out these constructions. For instance it's possible to construct $\mathbb R$ using Cauchy sequences, or to construct $\mathbb C$ as the algebraic closure of $\mathbb R$. The key is to check that the construction satisfies the desired properties, and that any two such constructions are isomorphic.
+In our constructions, we have made a few arbitrary decisions. In fact there are a wide variety of approaches to constructing the number systems. For instance it's possible to construct $\mathbb R$ using Cauchy sequences, or to construct $\mathbb C$ as the algebraic closure of $\mathbb R$. The key is to check that the construction satisfies the desired properties, and that any two such constructions are isomorphic.
 
 Another area that can be formalised in set theory is logic itself. Indeed, we have said that mathematical logic is just another area of mathematics, so for set theory to be an appropriate foundation it should include logic too. Once again there is an initial portion of logic which can be carried out using the metatheory, but it will also be mirrored in the formal theory.
 

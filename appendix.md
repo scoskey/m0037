@@ -6,9 +6,11 @@ To begin, let $V$ be the set of all truth assignments $v$. If $\alpha$ is a well
 
 Recall that a topological space is **compact** if the following holds: if $\mathcal F$ is a family of closed sets such that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$, then we have $\bigcap\mathcal F\neq\emptyset$. This definition is equivalent to the more commonly stated open subcover property, and for metric spaces it's equivalent to the convergent subsequences property.
 
-**Theorem** $V$ is a compact topological space.
+The following results show that in some sense the propositional compactness theorem is *equivalent* to the compactness of the topological space $V$ of valuations. We hope this helps shed some light on the reason the compactness theorem is so named.
 
-*Proof*: Let $\mathcal F$ be a family of closed subsets of $V$ with the property that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$.
+**Lemma** The compactness theorem implies $V$ compact.
+
+*Proof*: Assume the propositional compactness theorem is true. Let $\mathcal F$ be a family of closed subsets of $V$ with the property that for all $A_1,\ldots A_n\in\mathcal F$ we have $A_1\cap\cdots\cap A_n\neq\emptyset$.
 
 For each $A\in\mathcal F$, let $\Sigma_A=\set{\alpha\mid(\forall v\in A)v\models\alpha}$. We invite the reader to check that $v\in A$ if and only if $v\models\Sigma_A$.
 
@@ -16,6 +18,11 @@ Let $\Sigma=\bigcup_{A\in\mathcal F}\Sigma_A$. We claim that $\Sigma$ is finitel
 
 By the compactness theorem, $\Sigma$ is consistent, that is, there exists $v\in V$ such that $v\models\Sigma$. Then for all $A\in\mathcal F$ we have $v\models\Sigma_A$. It follows that $v\in\bigcap_{A\in\mathcal F}A$, completing the proof. $\blacksquare$
 
-Conversely, the compactness of the topological space $V$ may be used to show that the compactness theorem is true. For this, assume $\Sigma$ is finitely consistent. Let $\mathcal F=\set{V_\alpha:\alpha\in\Sigma}$. Then the fact that $\Sigma$ is finitely consistent plus the compactness of $V$ implies that $\bigcap\mathcal F\neq\emptyset$. Letting $v\in\bigcap\mathcal F$, we have $v\models\Sigma$, so $\Sigma$ is consistent.
+**Lemma** The fact that $V$ is compact implies the compactness theorem.
 
-Thus there is a sense in which the propositional compactness theorem is *equivalent* to the compactness of $V$. We hope this helps shed some light on the reason the compactness theorem is so named.
+**Proof** Assume $V$ is compact. Let $\Sigma$ be a set of well-formed formulas which is finitely consistent. Let $\mathcal F=\set{V_\alpha:\alpha\in\Sigma}$.
+
+Let $V_{\alpha_1},\ldots,V_{\alpha_n}\in\mathcal F$ be given. Since $\Sigma$ is finitely consistent, there exists $v$ such that $v\models\{\alpha_1,\ldots,\alpha_n\}$. Thus $V_{\alpha_1}\cap\cdots\cap V_{\alpha_n}\neq\emptyset$. By the compactness of $V$, we have $\bigcap\mathcal F\neq\emptyset$.
+
+Letting $v\in\bigcap\mathcal F$, we have $v\models\Sigma$, so $\Sigma$ is consistent. $\blacksquare$
+
