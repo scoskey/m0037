@@ -417,8 +417,6 @@ The Separation axiom allows us to construct sets which are contained in a set we
 
 **Axiom** (Power Set) If $A$ is a set then there exists a set $\mathcal P(A)$ called the *power set* of $x$ which consists of all subsets of $A$.
 
-We invite the reader to verify that the Power Set axiom, together with the other axioms thus far, may also be used for other constructions such as $A\times B$ and $B^A$.
-
 One familiar operation on sets that we haven't mentioned so far is the union $A\cup B$. Although they are powerful, surprisingly, the axioms we have listed so far do not allow us to construct unions.
 
 **Axiom** (Union) If $\mathcal F$ is a set, then there exists a set $\bigcup\mathcal F$ called the *union* of $\mathcal F$, which consists of all $x$ such that $x\in F$ for some $F\in\mathcal F$.
@@ -457,23 +455,23 @@ In general, we recursively define:
 
 * $n+1=n\cup\lbrace n\rbrace$
 
-We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\set{0,\ldots,n-1}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition!
+We have already used this idea when we introduced $X^n$. At that time we said that we were using $n$ as a symbol representing the set $\set{0,\ldots,n-1}$. We now see that this was not an abuse of notation nor a convenience, it is actually von Neumann's true definition.
 
-From the above definition we see that natural numbers are all elements of HF. Thus we can use the Separation axiom to construct the set of natural numbers.
+From the above definition we see that natural numbers are all elements of HF.
 
-**Definition** $\mathbb N=\set{x\in HF:x\text{ is a von Neumann natural number}}$.
+**Definition** The set of von Neumann natural numbers $\mathbb N$ consists of all sets which can be constructed from the empty set and the operation $n\mapsto n\cup\{n\}$.
 
-We remark that because the definition of von Neumann natural number is recursive, we have to be a little careful when we apply the Separation axiom to show $\mathbb N$ exists. We refer the interested reader to the *principle of recursive definitions*, which can be proved using the axioms.
+We remark that because the definition of von Neumann natural number is recursive, we have to be a little careful when we apply the Separation axiom to show $\mathbb N$ exists. In the exercises we introduce the *principle of recursion*, which follows from the axioms, and allows definitions such as the one above.
 
 In order to continue defining number systems, it is necessary to define ordered pairs $(a,b)$. In the previous section we took ordered pairs as basic and used them to define relations and functions. Now that everything is a set, we will need ordered pairs to also be a set.
 
 **Definition** The ordered pair $(a,b)$ is defined as the set $\{\{a\},\{a,b\}\}$.
 
-We invite the reader to verify that with this defintion, $(a,b)=(c,d)$ if and only if $a=c$ and $b=d$. This allows the construction of Cartesian products $A\times A$ and powers $A^n$ as we did in the previous section.
+We invite the reader to verify that with this defintion, $(a,b)=(c,d)$ if and only if $a=c$ and $b=d$. This allows the construction of Cartesian products $A\times B$, binary relations, functions, powers $B^A$ and $B^n$, and $n$-ary relations, as we did in the previous section.
 
-We may now construct the addition function $+$ on $\mathbb N$. We may think of $+$ as a ternary relation, that is, the set of ordered triples $(m,n,s)\in\mathbb N^3$ such that $m+n=s$. One definition of $+$ is recursive: if $(m,n,s)\in\mathord{+}$ then $(m\cup\{m\},n,s\cup\{s\})\in\mathord{+}$ and $(m,n\cup\{n\},s\cup\{s\})\in\mathord{+}$. Once again the principle of recursive definitions ensures that $+$ exists. We invite the reader to construct the multiplication function $\times$ on $\mathbb N$.
+So far we have constructed the set $\mathbb N$, but not the number system $\mathbb N$, because we still need to define its arithmetic operations $+$ and $\times$. We can think of $+$ as a function from $\mathbb N\times\mathbb N\to\mathbb N$, or alternatively, as the set of ordered triples $(m,n,s)\in\mathbb N^3$ where $s$ is the sum of $m$ and $n$. It is again possible to construct $+$ using the principle of recursion. For instance, we can say that if $(m,n,s)\in\mathord{+}$ then $(m\cup\{m\},n,s\cup\{s\})\in\mathord{+}$ and $(m,n\cup\{n\},s\cup\{s\})\in\mathord{+}$. This is elaborated in the exercises. Once $+$ has been constructed, it is possible to construct $\times$ by a simple recursion as well.
 
-Now that we have constructed $\mathbb N$ with $+$ and $\times$, it is possible to construct further number systems.
+Now that we have constructed the number system $\mathbb N$ with $+$ and $\times$, it is possible to construct further number systems.
 
 **Definition** $\mathbb Q$ is the set of ordered triples $(i,m,n)$ in $2\times\mathbb N\times\mathbb N$ satisfying $n\neq0$ and $\mathrm{gcd}(m,n)=1$.
 
