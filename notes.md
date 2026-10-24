@@ -505,7 +505,7 @@ In our constructions, we have made a few arbitrary decisions. In fact there are 
 
 Another area that can be formalised in set theory is logic itself. Indeed, we have said that mathematical logic is just another area of mathematics, so for set theory to be an appropriate foundation it should include logic too. Once again there is an initial portion of logic which can be carried out using the metatheory, but it will also be mirrored in the formal theory.
 
-We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a proof using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a proof is an element of HF!
+We begin by encoding the alphabet of propositional logic $P_1,P_2,\ldots$ and $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$ as natural numbers. For example we can use even numbers $0,2,4,$ to represent propositional variable symbols $P_1,x_2,\ldots$, and odd numbers $1,3,5,7,9$ for the logical connectives. Next, we encode an expression as a finite sequence of natural numbers, or element of $\mathbb N^{<\mathbb N}$. The well-formed formulas correspond to a subset of $\mathbb N^{<\mathbb N}$ arising from our recursive definition. Finally, we encode a deduction using a sequence of logical expressions, and thus an element of $(\mathbb N^{<\mathbb N})^{<\mathbb N}$. Thus even a deduction is an element of HF!
 
 #### Infinity
 
@@ -535,9 +535,11 @@ With ordinals it is possible to count as far into the transfinite as we can imag
 
 #### Introduction
 
-The propositional logic we studied in the first part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. It captures the conditional $\rightarrow$ particularly well, and helped us with meaningful applications including graph coloring and Konig's lemma.
+The propositional logic we studied in the first part is a mathematical language that captures some portion of the reasoning that we do as mathematicians. It was enough reasoning to give meaningful applications including about graph colouring and Konig's lemma.
 
-However the propositional language with its boolean connectives still leaves much of mathematical reasoning out. For example it is impossible to imagine codifying real analysis or set theory using propositional logic alone. For example the definition of limit begins "for all $\epsilon$...". Similarly the axiom of Infinity begins "there exists a set HF such that...". The key concepts that we still need are the *quantifiers* "for all" and "there exists".
+However the propositional language with its boolean connectives still leaves much of mathematical reasoning out. For example it is hard to imagine capturing real analysis, abstract algebra, set theory, and so on using propositional logic alone.
+
+The key concepts that we still need are the *quantifiers* "for all" and "there exists". For example, the definition of limit begins "for all $\epsilon$...". Similarly the axiom of Infinity begins "there exists a set HF such that...". 
 
 In this part we introduce and elaborate on first order logic, which is logic with boolean connectives and quantifiers. The term "first order" means the quantifiers range over elements of a given universe. We will not study "second order" logic, but in case you're curious it means the quantifiers may range over sets and functions as well.
 
@@ -545,25 +547,27 @@ We will see that first order logic is powerful enough to express nearly all math
 
 ### 4. First order syntax, models
 
-In the first part of the first section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach. Rather than working with a fixed alphabet (boolean connectives, propositional logic), we simply define that an *alphabet* $A$ is any set of symbols.
+At the start of the course section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach.
 
-**Definition** An *expression* in the alphabet $A$ is a finite sequence of symbols of $A$.
+**Definition** 
+* An *alphabet* is a collection of symbols.
+* An *expression* in the alphabet $A$ is a finite sequence of symbols from $A$.
 
 Our intension is to let the alphabet include logical symbols as before, in addition to operation symbols (relations or functions) such as $+$, $\times$, and $<$.
 
-In mathematics there are several notations for expressing an operation with one or more inputs. In *prefix* notation, the operation goes first, for instance $\neg P$, $f(x)$, $-3$. In *infix* notation, the operation goes in the middle, for instance $P\rightarrow Q$, $x+y$, $x>y$. In *postfix* notation the operation goes at the end, for instance $n!$, $f'$, $x^\ast$. (There are more concepts such at $\bar x$, but let's leave it at that.)
+In mathematics there are several notations for expressing an operation with one or more inputs. In *prefix* notation, the operation goes first, for instance $\neg P$, $f(x)$, $-3$. In *infix* notation, the operation goes in the middle, for instance $P\rightarrow Q$, $x+y$, $x>y$. In *postfix* notation the operation goes at the end, for instance $n!$, $f'$, $x^\ast$. (There are of course other notations such as $\bar x$.)
 
-To avoid difficulties caused by parentheses, we officially adopt prefix notation for everything. For instance we can write $P\rightarrow (Q\rightarrow R)$ without parentheses as $\mathord{\rightarrow}P\mathord{\rightarrow}QR$. And we can write $(P\rightarrow Q)\rightarrow R$ without parentheses as $\mathord{\rightarrow}\mathord{\rightarrow}PQR$. It also eliminates the need for parentheses.
+To avoid difficulties caused by brackets, we officially adopt prefix notation for everything. For instance we can write $P\rightarrow (Q\rightarrow R)$ without brackets as $\mathord{\rightarrow}P\mathord{\rightarrow}QR$. And we can write $(P\rightarrow Q)\rightarrow R$ without brackets as $\mathord{\rightarrow}\mathord{\rightarrow}PQR$.
 
-It will be the same way with operations as well as logical symbols like $\rightarrow$. For example the expression $n!+n>5$ will be written $>+!nn5$. It is worth spending a minute think about this!
+We will also do this with operations and relations. For example, $n!+n>5$ will be written $\mathord{>}\mathord{+}!nn5$. It is worth spending a minute think about this!
 
-While prefix expressions are our official standard, we will often write infix expressions with the understanding that the reader may imagine them converted to prefix appropriately.
+While prefix expressions are the official language, we will often *write* infix expressions for readability, with the understanding that they can in principle be converted to prefix when necessary (such as in algorithms or proofs about expressions).
 
-In order to interpret prefix expressions, a person would need to know that the $!$ operation takes just one input, while $>$ and $+$ each take two inputs. The number of inputs for a given symbol is called its *arity*. The next definition incorporates arity into our language.
+In order to interpret prefix expressions, a person would need to know that the factorial operation $!$ takes just one input, while $>$ and $+$ each take two inputs. The number of inputs for a given symbol is called its *arity*. The next definition incorporates arity into our language.
 
 **Definition** A *lexicon* consists of an alphabet $A$ together with an arity function $a\colon A\to\mathbb N$.
 
-For example, a lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. (There are several other equivalent representations due to associativity and commutativity.)
+For example, a lexicon for expressing polynomials with coefficients $1$–$4$ consists of alphabet $\set{1,2,3,4,x,+,\cdot}$ with arity function $a(1),\ldots,a(4),a(x)=0$ and $a(+)=a(\cdot)=2$. Then the expression $\mathord{+}\mathord{\cdot}3\mathord{\cdot}xx\mathord{+}\mathord{\cdot}2x1$ is one way to represent the polynomial $3x^2+2x+1$. (There are several other representations which are equivalent because of associativity and commutativity.)
 
 **Definition** An expression is *well-formed* if it is of the form $s\tau_1\cdots\tau_n$ where $a(s)=n$ and $\tau_1,\ldots,\tau_n$ are well-formed expressions.
 
@@ -650,7 +654,7 @@ The formal definiton of $\models$ is somewhat involved, but it will work the way
 
 ### 5. First order semantics, deductions
 
-In this section will formally define of the satisfaction relation $\mathcal A\models\sigma$ for a $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
+In this section we will formally define the satisfaction relation $\mathcal A\models\sigma$ for an $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
 
 To get an idea of how this should work, let $\mathcal A$ be the structure $(\mathbb N;+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. We shouldn't define $\mathcal A\models\phi$ to be true or false, because it should depend on the unknown and unquantified value of $x$. We instead define the more complicated statement $\mathcal A\models\phi[x\mapsto a]$, for any $a\in A$. So for instance it should be true that $\mathcal A\models\phi[x\mapsto3]$, and $\mathcal A\not\models\phi[x\mapsto4]$.
 
@@ -686,11 +690,11 @@ We finally define satisfaction for general formulas.
 
 **Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be a well-formed formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
 
-* If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ is true if and only if $\mathcal A\not\models\alpha[s]$.
+* If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\not\models\alpha[s]$.
 * If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
 * Similarly, use the truth tables for $\vee,\to,\leftrightarrow$
-* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ that sets $x\mapsto a$.
-* If $\phi$ is $\forall x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if for all $a\in A$ we have $\mathcal A\models\alpha[t]$, where $t$ is the modification of $s$ that sets $x\mapsto a$.
+* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[s,x\mapsto a]$, with the understanding that $x\mapsto a$ overrides $s(x)$
+* If $\phi$ is $\forall x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if for all $a\in A$ we have $\mathcal A\models\alpha[s,x\mapsto a]$, with the same  understanding as above
 
 Observe that if $\sigma$ is a sentence, then no substitution function $s$ is needed. Indeed, anything $s$ specifies will eventually be overwritten by the quantifiers. Thus we can ask whether $\mathcal A\models\sigma$ or $\mathcal A\not\models\sigma$ without any $s$ provided.
 
