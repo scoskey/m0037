@@ -550,6 +550,7 @@ We will see that first order logic is powerful enough to express nearly all math
 At the start of the course section we introduced syntax suitable for propositional logic. In this section we will expand the syntax for first order logic. This time there are more kinds of symbols, so we will begin with a very general approach.
 
 **Definition** 
+
 * An *alphabet* is a collection of symbols.
 * An *expression* in the alphabet $A$ is a finite sequence of symbols from $A$.
 
@@ -656,49 +657,51 @@ The formal definiton of $\models$ is somewhat involved, but it will work the way
 
 In this section we will formally define the satisfaction relation $\mathcal A\models\sigma$ for an $\mathcal L$-structure $\mathcal A$ and a sentence $\sigma$. The definition will be done by induction on the subformulas of the sentence $\sigma$. Unfortunately the subformulas of $\sigma$ will not necessarily be sentences! So we will need to address $\mathcal A\models\phi$ in some way even when $\phi$ has free variables.
 
-To get an idea of how this should work, let $\mathcal A$ be the structure $(\mathbb N;+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. We shouldn't define $\mathcal A\models\phi$ to be true or false, because it should depend on the unknown and unquantified value of $x$. We instead define the more complicated statement $\mathcal A\models\phi[x\mapsto a]$, for any $a\in A$. So for instance it should be true that $\mathcal A\models\phi[x\mapsto3]$, and $\mathcal A\not\models\phi[x\mapsto4]$.
+To get an idea of how this should work, let $\mathcal A$ be the structure $(\mathbb N;+,\cdot,0,1)$ and let $\phi$ be the formula $x^2<10$. We shouldn't define $\mathcal A\models\phi$ to be true or false, because it should depend on the unknown and unquantified value of $x$. We instead define satisfcation with substitutions $\mathcal A\models\phi(a)$, for any $a\in A$. So for instance it should be true that $\mathcal A\models\phi(3)$, and $\mathcal A\not\models\phi(4)$.
 
-The first step in this process should be to deal with the term $x^2$. The definition should understand that $x^2$ evaluates to $9$ when $x\mapsto 3$, and $x^2$ evaluates to $16$ when $x\mapsto 4$. We now introduce notation for evaluating the terms and define how it works in general.
+To begin this formally, we first introduce notation for evaluating the terms with substitutions. If $\tau$ is a term whose variables are among $x_1,\ldots,x_n$, we will sometimes write $\tau$ as $\tau(x_1,\ldots,x_n)$. When the list of variables is clear, for brevity we may write $\tau$ as $\tau(\bar x)$. Here we are not adding brackets to our language, but instead using them informally to identify the names of the varialebs in $\tau$. If $\mathcal A$ is an $\mathcal L$-structure, a tuple of elements $(a_1,\ldots,a_n)\in A^n$ may be denoted $\bar a$.
 
-**Definition** Let $\mathcal L$ be a signature of first order logic. Let $\mathcal A$ be an $\mathcal L$-structure and $s$ be function from the variables to $A$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\tau(\bar x)$ be a term and let $\bar a\in A^n$. Then:
 
-* If $x$ is a variable, define $x^{\mathcal A}[s]=s(x)$
-* If $c$ is a constant symbol, define $c^{\mathcal A}[s]=c^{\mathcal A}$
-* If $\tau=f\tau_1,\ldots,\tau_n$ where $\tau_i$ are terms, define $\tau^{\mathcal A}[s]=f^{\mathcal A}(\tau_1^{\mathcal A}[s],\ldots,\tau_n^{\mathcal A}[s])$.
+* If $\tau(\bar x)$ is a variable $x_i$, define $\tau^{\mathcal A}(\bar a)=a_i$
+* If $\tau(\bar x)$ is a constant symbol $c$, define $\tau^{\mathcal A}(\bar a)=c^{\mathcal A}$
+* If $\tau=f\tau_1,\ldots,\tau_n$ where $\tau_i$ are terms, define $\tau^{\mathcal A}(\bar a)=f^{\mathcal A}(\tau_1^{\mathcal A}(\bar a),\ldots,\tau_n^{\mathcal A}(\bar a))$.
 
-**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau$ be the term $x\cdot y$. Let $s$ be the substitution function $x\mapsto 3,y\mapsto 4$. Then:
+**Example** Let $\mathcal A$ be the model $(\mathbb N,+,\cdot,0,1)$ and let $\tau(x,y)$ be the term $x\cdot y$. Then:
 
 $$\begin{aligned}
-  \tau^{\mathcal A}[s]
-  &=(x\cdot y)^{\mathcal A}[s]\\
-  &=x^{\mathcal A}[s]\cdot y^{\mathcal A}[s]\\
+  \tau^{\mathcal A}(3,4)
+  &=(x\cdot y)^{\mathcal A}(3,4)\\
+  &=x^{\mathcal A}(3,4)\cdot y^{\mathcal A}(3,4)\\
   &=3\cdot 4\\
   &=12
 \end{aligned}$$
 
-We next define satisfaction for atomic formulas.
+When $\phi$ is a formula whose variables are among $x_1,\ldots,x_n$, we may write $\phi$ as $\phi(x_1,\ldots,x_n)$. Again we may also write $\phi(\bar x)$ for brevity. We next define satisfaction with substitutions for atomic formulas.
 
-**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be an atomic formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi(\bar x)$ be an atomic formula and let $\bar a\in A^n$. Then:
 
-* If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi[s]$ if and only if $\tau_1^{\mathcal A}[s]=\tau_2^{\mathcal A}[s]$.
-* If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi[s]$ if and only if $P^{\mathcal A}=T$.
-* If $\phi$ is $R\tau_1\cdots\tau_n$, then $\mathcal A\models\phi[s]$ if and only if $(\tau_1^{\mathcal A}[s],\ldots,\tau_n^{\mathcal A}[s])\in R^{\mathcal A}$.
+* If $\phi$ is $\mathord{=}\tau_1\tau_2$ then let $\mathcal A\models\phi(\bar a)$ if and only if $\tau_1^{\mathcal A}(\bar a)=\tau_2^{\mathcal A}(\bar a)$.
+* If $\phi$ is $P$ (a relation symbol of arity $0$), then let $\mathcal A\models\phi(\bar a)$ if and only if $P^{\mathcal A}=T$.
+* If $\phi$ is $R\tau_1\cdots\tau_n$, then $\mathcal A\models\phi(\bar a)$ if and only if $(\tau_1^{\mathcal A}(\bar a),\ldots,\tau_n^{\mathcal A}(\bar a))\in R^{\mathcal A}$.
 
 Note that in this definition the equality relation is treated specially. This guarantees that the equality relation always represents true equality, and not some alternative model-defined notion of equality.
 
 We finally define satisfaction for general formulas.
 
-**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi$ be a well-formed formula and let $s$ be a substitution function whose domain includes the variables of $\phi$. Then:
+**Definition** Let $\mathcal L$ be a signature of first order logic and $\mathcal A$ be an $\mathcal L$-structure. Let $\phi(\bar x)$ be a well-formed formula and let $\bar a\in A^n$. Then:
 
-* If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\not\models\alpha[s]$.
-* If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
+* If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi(\bar a)$ if and only if $\mathcal A\not\models\alpha(\bar a)$
+* If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi(\bar a)$ if and only if $\mathcal A\models\alpha(\bar a)$ and $\mathcal A\models\beta(\bar a)$
 * Similarly, use the truth tables for $\vee,\to,\leftrightarrow$
-* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[s,x\mapsto a]$, with the understanding that $x\mapsto a$ overrides $s$
-* If $\phi$ is $\forall x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if for all $a\in A$ we have $\mathcal A\models\alpha[s,x\mapsto a]$, with the same  understanding as above
+* If $\phi$ is $\exists x_{n+1}\alpha$, then let $\mathcal A\models\phi(\bar a)$ if and only if there is some $b\in A$ such that $\mathcal A\models\alpha(\bar a,b)$
+* If $\phi$ is $\forall x_{n+1}\alpha$, then let $\mathcal A\models\phi(\bar a)$ if and only if for all $b\in A$ we have $\mathcal A\models\alpha(\bar a,b)$
 
-Observe that if $\sigma$ is a sentence, then no substitution function $s$ is needed. Indeed, anything $s$ specifies will eventually be overwritten by the quantifiers. Thus we can ask whether $\mathcal A\models\sigma$ or $\mathcal A\not\models\sigma$ without any $s$ provided.
+Special note must be taken if the formula quantifies over one of the variables being substituted: $\exists x_i$. In this case the $b$ should *replace* $a_i$.
 
-**Example** Let $\mathcal A$ be the structure $(\mathbb Q;<)$ and let $\sigma$ be the sentence $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$. Then the definition implies that $\mathcal A\models\sigma$ if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ we have that there exists $c\in\mathbb Q$ such that $\mathcal A\models x<y\rightarrow x<z<y[x\mapsto a,y\mapsto b,z\mapsto c]$. The definition further implies that this will be true if and only if for all $a,b\in\mathbb Q$ there exists $c\in\mathbb Q$ such that $a<b\implies a<c<b$. Finally, this is true since given $a,b$ we can always choose $c=(a+b)/2$.
+Observe that if $\sigma$ is a sentence, we do not need to start with any substitutions and can simply ask whether $\mathcal A\models\sigma$ or $\mathcal A\not\models\sigma$. Substitutions will only begin as we work through the quantifiers.
+
+**Example** Let $\mathcal A$ be the structure $(\mathbb Q;<)$ and let $\sigma$ be the sentence $(\forall x)(\forall y)(\exists z)x<y\rightarrow x<z<y$. We begin by letting $\phi(x,y,z)$ be the subformula $x<y\rightarrow x<z<y$. Then the definition of satisfaction gives that $\mathcal A\models\sigma$ if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ we have that there exists $c\in\mathbb Q$ such that $\mathcal A\models\phi(a,b,c)$. The definition further implies that this will be true if and only if for all $a\in\mathbb Q$ and for all $b\in\mathbb Q$ there exists $c\in\mathbb Q$ such that if $a<b$ then $a<c<b$. Finally, this is true since given $a,b$ we can always take $c$ to be $(a+b)/2$.
 
 We often apply the satisfaction relation to a set of sentences.
 
