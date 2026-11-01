@@ -640,7 +640,7 @@ In order to decide the truth value of a sentence, we still need to know the cont
 * For each $0$-ary function symbol $c$ an element $c^{\mathcal A}\in A$
 * For each $0$-ary relation symbol $P$ a truth value $P^{\mathcal A}\in\set{T,F}$
 
-Note that the $0$-ary function symbols are called *constants*, and the $0$-ary relation symbols are called *propositions*.
+Note that the $0$-ary function symbols are called *constant symbols*, and the $0$-ary relation symbols are called *proposition symbols*.
 
 **Example** Let $\mathcal L=\lbrace<\rbrace$ be the signature with one binary relation symbol. Then the rational ordering $(\mathbb Q;<)$ is an $\mathcal L$-structure.
 
@@ -693,7 +693,7 @@ We finally define satisfaction for general formulas.
 * If $\phi$ is $\neg\alpha$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\not\models\alpha[s]$.
 * If $\phi$ is $\alpha\wedge\beta$, then let $\mathcal A\models\phi[s]$ if and only if $\mathcal A\models\alpha[s]$ and $\mathcal A\models\beta[s]$
 * Similarly, use the truth tables for $\vee,\to,\leftrightarrow$
-* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[s,x\mapsto a]$, with the understanding that $x\mapsto a$ overrides $s(x)$
+* If $\phi$ is $\exists x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if there is some $a\in A$ such that $\mathcal A\models\alpha[s,x\mapsto a]$, with the understanding that $x\mapsto a$ overrides $s$
 * If $\phi$ is $\forall x\alpha$, then let $\mathcal A\models\phi[s]$ if and only if for all $a\in A$ we have $\mathcal A\models\alpha[s,x\mapsto a]$, with the same  understanding as above
 
 Observe that if $\sigma$ is a sentence, then no substitution function $s$ is needed. Indeed, anything $s$ specifies will eventually be overwritten by the quantifiers. Thus we can ask whether $\mathcal A\models\sigma$ or $\mathcal A\not\models\sigma$ without any $s$ provided.
