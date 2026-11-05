@@ -17,7 +17,7 @@ Based partially upon texts and notes by H Enderton, S Thomas, K Kunen, and other
 - [4. First order syntax, models](#4-first-order-syntax-models)
 - [5. First order semantics, deductions](#5-first-order-semantics-deductions)
 - [6. Compactness and completeness](#6-completeness-and-compactness)
-- [7. Applications of compactness, more about theories](#7-applications-of-compactness-more-about-theories)
+- [7. Applications of compactness, more about theories](#7-applications-of-compactness-model-theory)
 
 [Part III: Computability theory and incompleteness](#part-iii-computability-theory-and-incompleteness)
 
@@ -787,11 +787,11 @@ We now give examples of deductions and some methods of finding deductions.
 
 **Example** Let $\sigma$ be the sentence $(\forall x)(\exists y)x=y$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. 
 
-1. $(\forall x)x=x$ (Equality)
-2. $(\forall x)(x=x\to (\exists y)x=y)$ (EG)
-3. $[(\forall x)(x=x\to (\exists y)x=y)]\to [((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)]$ (Quantifier distribution)
-4. $((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)$ (Modus ponens 2,3)
-5. $(\forall x)(\exists y)x=y$ (Modus ponens 1,4)
+> 1. $(\forall x)x=x$ — (Equality)
+> 2. $(\forall x)(x=x\to (\exists y)x=y)$ — (EG)
+> 3. $[(\forall x)(x=x\to (\exists y)x=y)]\to [((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)]$ — (Quantifier distribution)
+> 4. $((\forall x) x=x)\rightarrow ((\forall x)(\exists y)x=y)$ — (MP 2,3)
+> 5. $(\forall x)(\exists y)x=y$ — (MP 1,4)
 
 The definition of deduction that we have given is of theoretical value, but not of great practical value. It can be very difficult to take substantial mathematical results and formalize them in this system. In the rest of the section we mention a few tactics for making the work of finding deductions at least somewhat more accessible.
 
@@ -964,7 +964,7 @@ Then every finite subset of $T$ is consistent. Indeed, if $T_0$ is a finite subs
 
 By the compactness theorem, $T$ has a model, $G'$. Observe that $G$ is a subgraph of $G'$ via the function which sends any $v\in G$ to the interpretation of $c_v$ in $G'$. Since $G'$ has a proper coloring with $n$ colors, it follows that $G$ has a proper coloring with $n$ colors. $\blacksquare$
 
-### 7. Applications of compactness, more about theories
+### 7. Applications of compactness, model theory
 
 We have just seen that the compactness theorem for first order logic has similar applications to the compactness theorem for propositional logic. In this section we begin by exploring some of the more distinctly first order applications of the first order compactness theorem.
 
