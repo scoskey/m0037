@@ -816,13 +816,13 @@ The UG rule is for proofs that end "... since $c$ was arbitrary, the result hold
 
 **Example** Let $\sigma$ be the sentence $\forall x P(x)\wedge Q(x)\to \forall y P(y)$. We will show that $\sigma$ is syntactically valid, that is, $\emptyset\vdash\sigma$. However rather than providing an explicit deduction, we will mix deduction steps with the results above to show that a deduction exists.
 
-1. We first prove that $\forall x P(x)\wedge Q(x)\vdash\forall y P(y)$.  
-    a. $\forall x P(x)\wedge Q(x)$ — (Given)  
-    c. $P(c)\wedge Q(c)$ — (UI)  
-    d. $P(c)\wedge Q(c)\to P(c)$ — (Tautology)  
-    e. $P(c)$ — (MP c,d)  
-    f. $\forall y P(y)$ — (UG)  
-2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ — (Deduction, 1)
+1. We first prove that $\forall x P(x)\wedge Q(x)\vdash\forall y P(y)$ — (Start of Deduction theorem)  
+    a. $\forall x P(x)\wedge Q(x)$ — (Hypothesis)  
+    b. $P(c)\wedge Q(c)$ — (UI)  
+    c. $P(c)\wedge Q(c)\to P(c)$ — (Tautology)  
+    d. $P(c)$ — (MP b,c)  
+    e. $\forall y P(y)$ — (UG)  
+2. $\forall x P(x)\wedge Q(x)\to \forall y P(y)$ — (Deduction theorem, 1)
 
 ### 6. Completeness and compactness
 
