@@ -842,9 +842,9 @@ Thus, proving the completeness theorem is really about building a model. If $T$ 
 
 Maybe this makes some intuitive sense to you, but at the same time it should seem like a challenging request. How will we begin to build the model of $T$? The BIG IDEA is to build the model using the terms of the language. In order to illustrate this consider the following.
 
-**Example** Let $\mathcal L=\set{+,0,1,<}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, identity, and so on). Our model will include the terms $0$, $1$, $1+1$, $1+1+1$, etc. These terms are pretty good substitutes for the genuine natural numbers $0$, $1$, $2$, $3$, etc!
+**Example** Let $\mathcal L=\set{+,<,0,1}$ and let $T$ be the standard axioms of arithmetic of the natural numbers (associativity, commutativity, identity, and so on). Our model will include the terms $0$, $1$, $1+1$, $(1+1)+1$, etc. These terms are pretty good substitutes for the genuine natural numbers $0$, $1$, $2$, $3$, etc!
 
-Of course there are many other terms such as $1+0+0+1$, should our model include these also? Yes and no. Our theory knows that $1+0+0+1$ is really equivalent to $1+1$. In other words, there is an equivalence relation on the terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$. We will need to work with *equivalence classes* of the terms.
+Of course there are many other terms such as $(1+1)+0$; should our model include these also? Yes and no. Our theory $T$ `knows' that $(1+1)+0$ is really equivalent to $1+1$. In other words, there is an equivalence relation on the terms given by $\tau_1\sim\tau_2$ if and only if $T\vdash\tau_1=\tau_2$. We will need to work with *equivalence classes* of the terms.
 
 This idea is called a *Henkin construction* or the *Herbrand construction*, named for two mathematicians who contributed to this strategy. In order to begin, we first make a structure from terms.
 
@@ -856,17 +856,17 @@ This idea is called a *Henkin construction* or the *Herbrand construction*, name
 
 We invite the reader to check that this definition is well-defined, that is, the function values and relation tuples are independent of the equivalence class representatives. This will use the logical proof axioms about equality. We remark that the Henkin structure could equally have been called the Herbrand structure.
 
-The Henkin structure works smoothly for the previous example. The universe will consist of $[0]$, $[1]$, $[1+1]$, etc. Each of these equivalence classes includes infinitely many terms that the theory knows are equal, for instance, $[1]$ includes $1$, $1+0$, $0+(1+0)$, etc. In the structure, $+$ and $\times$ behave as one would expect. So for instance $[1]+[1]=[1+1]$, and more generally all the axioms of $T$ will be true.
+The Henkin structure works smoothly for the previous example. The universe will consist of $[0]$, $[1]$, $[1+1]$, $[(1+1)+1]$, etc. Each of these equivalence classes includes infinitely many terms that the theory $T$ `knows' are equal to each other. For instance, $[1+1]$ includes $(1+1)+0$, $(1+0)+1$, etc. In the structure, $+$ and $\times$ behave as one would expect. So for instance $[1]+[1]=[1+1]$, and more generally all the axioms of $T$ will be true. Thus we have constructed a model of $T$ from the terms of the language.
 
 But the next example shows that things aren't always this successful.
 
-**Example** Let $\mathcal L_2=\set{+,0,<}$ and let $T_2$ be the standard axioms of arithmetic of the natural numbers. (Whenever an axiom of $T$ says something about the constant $1$, we can write an equivalent axiom of $T_2$ that says it about "the least natural number greater than $0$".) In this language the only terms are $0$, $0+0$, etc, so $\mathcal H$ consists of just one point $[0]$. Thus $\mathcal H(T_2)$ isn't a model of $T_2$.
+**Example** Let $\mathcal L_2=\set{+,<,0}$ and let $T_2$ be the standard axioms of arithmetic of the natural numbers. (Whenever an axiom of $T$ says something about the constant $1$, we can write an equivalent axiom of $T_2$ that says it about "the least natural number greater than $0$".) In this language the only terms are $0$, $0+0$, etc. These are all equivalent to each other, so $\mathcal H$ consists of just one element, which is $[0]$. Thus $\mathcal H(T_2)$ isn't a model of $T_2$.
 
 In order to make examples like this one work, we will have to use terms of an *expanded* language, where constant symbols have been added for every conceivable definition.
 
-**Definition** A theory $T$ is said to have *witnessing terms* if whenever $\phi(x)$ is a formula with one free variable $x$ there exists a term $\tau$ such that $T\vdash\exists x\phi(x)\to\phi(\tau)$.
+**Definition** A theory $T$ is said to have *witnessing terms* if whenever $\phi(x)$ is a formula with one free variable $x$, there exists a term $\tau$ such that $T\vdash\exists x\phi(x)\to\phi(\tau)$.
 
-For example consider the structure $(\mathbb R;+,\cdot,0,1,<)$. If $\phi(x)$ is $\forall y xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the next key to Henkin/Herbrand construction.
+For example consider the structure $(\mathbb R;+,\cdot,<,0,1)$. If $\phi(x)$ is $(\forall y) xy=y+y$ then a witnessing term would be $1+1$. If $\phi(x)$ is $x\cdot x=1+1$ then there is no witnessing term so we will need to add one. The following is the next key to Henkin/Herbrand construction.
 
 **Lemma** If $T$ is a syntactically consistent theory, then there exists a syntactially consistent theory $T'$ in an expanded language such that $T\subset T'$ and $T'$ has witnessing terms.
 
@@ -880,11 +880,13 @@ In the last example with $0$ in the language but not $1$, the theory $T_2$ prove
 
 But the next motivating example shows that there is still one last issue to consider.
 
-**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the trichotomy axiom.
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the axiom which says $\forall x\forall y\ x=y\vee x\lt y\vee y\lt x$.
 
 The problem in this example is that the theory $T$ doesn't say much about its terms. To fix this last issue, we will work with theories that say as much as they can.
 
 **Definition** A theory $T$ is *complete* if for every sentence $\sigma$ we have either $\sigma\in T$ or $\neg\sigma\in T$.
+
+A complete theory $T$ is maximal in the sense that if you add any more sentences to $T$ you will make it inconsisent.
 
 The next result says that an incomplete theory can always be *extended* to a complete theory. This is done by making a bunch of arbitrary decisions about what sentences to add, in a process similar to the proof of the propositional compactness theorem.
 
@@ -906,7 +908,7 @@ We claim that for all sentences $\sigma$ we have $\sigma\in T^\ast$ if and only 
 
 First assume $\sigma$ is an atomic sentence $R\tau_1\cdots\tau_n$. Then the desired result follows from the definition of the relations of $\mathcal H$. (There is actually a subtle point that we must check $\tau^{\mathcal H}=[\tau]$ for all terms $\tau$. This is an induction on the construction of $\tau$ using the definition of $\mathcal H$ for the base case.)
 
-Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\neg\alpha\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\neg\alpha$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$. (Check it!)
+Next if $\sigma$ is of the form $\neg\alpha$, then the result follows from the inductive hypothesis for $\alpha$ and the completeness of $T^\ast$. Indeed, we have $\neg\alpha\in T^\ast$ iff $\alpha\notin T^\ast$ iff $\mathcal H\not\models\alpha$ iff $\mathcal H\models\neg\alpha$. Similarly if $\sigma$ is of the form $\alpha\wedge\beta$ then the result is immediate from the inductive hypothesis for $\alpha$ and $\beta$ and the completness of $T^\ast$. (Check this!)
 
 Finally if $\sigma$ is of the form $\exists x\phi(x)$ then since $T^\ast$ has witnessing terms there is a term $\tau$ in the expanded language such that the sentence $\exists x\phi(x)\to\phi(\tau)$ is in $T^\ast$. Now:
 
