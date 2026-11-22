@@ -972,33 +972,47 @@ We have just seen that the compactness theorem for first order logic has similar
 
 **Corollary** Suppose $T$ has arbitrarily large finite models. Then $T$ has infinite models.
 
-*Proof*: Let $\sigma_n$ be the sentence which says that there exist $n$ distinct elements of the universe. That is, $\sigma_n$ says that $\exists x_1\cdots\exists x_n\bigwedge x_i\neq x_j$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\mathbb N}$. Then every finite subset of $T'$ is consistent by our hypothesis. As a consequence $T'$ is consistent. Any model of $T'$ is a model of $T$ and is infinite. $\blacksquare$
+*Proof*: Let $\sigma_n$ be the sentence which says that there exist $n$ distinct elements of the universe. That is, $\sigma_n$ says that $\exists x_1\cdots\exists x_n\bigwedge_{i\lt j\leq n} x_i\neq x_j$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\mathbb N}$. Then every finite subset of $T'$ is consistent by our hypothesis. As a consequence $T'$ is consistent. Any model of $T'$ is a model of $T$ and is infinite. $\blacksquare$
 
-This simple idea can also be used to derive many further consequences. The first is key in the theory of *nonstandard arithmetic*, where one studies models of number theory with infinite elements, and the second fact is key in *nonstandard analysis* where one studies models of analysis with infinitesimal elements.
+In other words, while there is a first order theory that says "my models are linear orders" and another theory that says "my models are groups", there is no first order theory that says "my models are finite".
 
-**Corollary** Let $T$ be the theory of the natural numbers, that is, the set of sentences true in the structure $(\mathbb N;+,\times,<,0,1)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
+We will say that a class $\mathcal C$ of structures is *axiomatisable* if there exists a first order theory $T$ such that the models of $T$ are precisely the elements of $\mathcal C$.
 
-**Corollary** Let $T$ be the theory of the real numbers, that is, the set of sentences true in the structure $(\mathbb R;+,\times,<,0,1)$. There is a model of $T$ which contains $\mathbb R$ and an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
-
-We invite the reader to fill in the proofs of these results.
-
-For each theory $T$ there is a corresponding class of models of $T$. We will say that a class $\mathcal C$ of structures is *axiomatizable* if there exists a theory $T$ such that the models of $T$ are precisely the elements of $\mathcal C$. It is natural to ask whether every (reasonable) class of srtuctures is axiomatizable. 
-
-The answer is no, for instance, our result above about theories with arbitrary large finite models shows that the calss of finite structures is not axiomatizable. We next present several similar examples.
+In this termonology, the class of linear orders is axiomatisable, as is the class of groups, the class of equivalence relations, etc. But the last result says that the class of finite structures is not axiomatisable. We next present several further examples.
 
 Recall that a graph is *connected* if for any two vertices $x,y$, there exists a path from $x$ to $y$. That is, for any $x,y$ there is a sequence of vertics $x_1,\ldots,x_n$ such that $x\sim x_1\sim x_2\sim\cdots\sim x_n=y$.
 
-**Corollary** The class of connected graphs is not axiomatizable.
+**Corollary** The class of connected graphs is not axiomatisable.
 
 *Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the connected graphs. Expand the language with two new constant symbols $a,b$. Let $\sigma_n$ be the sentence which says there is no path from $a$ to $b$ of length $n$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then a graph consisting of a single path of length $N+1$ from $a$ to $b$ gives a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is disconnected, because there cannot be a path from $a$ to $b$. Hence we have shown that there is a disconnected model of $T$, a contradiction. $\blacksquare$
 
 Next recall that a linear order $L$ is called a *well-order* if there is no infinite descending sequence in $L$.
 
-**Corollary** The class of well-orders is not axiomatizable.
+**Corollary** The class of well-orders is not axiomatisable.
 
 *Proof*: Suppose there exists a theory $T$ such that the models of $T$ are exactly the well-orders. Expand the language with new constant symbols $c_n$ for $n\in\omega$. Let $\sigma_n$ be the sentence which says that $c_n<\cdots<c_0$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\omega}$. Then any finite subset $T_0\subset T'$ is consistent. Indeed, if $N$ is the largest number such that $\sigma_N$ occurs in $T_0$, then the structure $(\omega,<)$ together with a decreasing sequence of interpretations of $c_0,\ldots,c_n$ is a model of $T_0$. It follows from the compactness theorem that $T'$ is consistent and hence has a model. But any model of $T'$ is ill-founded, because the interpretations of the $c_n$ form an infinite decreasing sequence. Hence we have shown that there is an ill-founded model of $T$, a contradiction. $\blacksquare$
 
-Before beginning the next series of results, we need a brief refresher on cardinality in set theory. Before starting in on cardinality, first recall that the von Neumann natural numbers $0,1,2,\ldots$ may be followed up by von Neumann ordinal numbers $\omega,\omega+1,\ldots,\omega+\omega,\omega+\omega+1,\ldots$.
+In all the results in this section, the proofs use compactness to show that if something continues unboundedly then it continues infinitely. This simple idea can be used to derive many further consequences. First we need the following.
+
+**Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
+
+For example, if $\mathcal A=(\mathbb N;+,\times,<,0,1)$, then $\mathrm{Th}(\mathcal A)$ is the set of all first order sentences about arithmetic which are true. (In other words, the number theorist's dream is to find what is in this theory and what is not.)
+
+Clearly $\mathrm{Th}(\mathcal{A})$ has one model, which is $\mathcal A$, but does it have any other models? Could there be a structure that isn't the natural numbers but shares all first order properties of the natural numbers? Intuitively, this should be quite unexpected. But the following result states that in fact there are "nonstandard" models of arithmetic with "infinite" elements.
+
+**Corollary** Let $T=\mathrm{Th}(\mathbb N;+,\times,<,0,1)$. There is a model of $T$ with an element $N$ such that $n<N$ for all $n\in\mathbb N$.
+
+The proof is a very simple application of the compactness theorem, and we invite the reader to provide it.
+
+Similarly, the next result states that there are "nonstandard" models of real analysis with "infinitesimal" elements.
+
+**Corollary** Let $T=\mathrm{Th}(\mathbb R;+,\times,<,0,1)$. There is a model of $T$ which contains $\mathbb R$ and an element $\epsilon$ such that for all $0<r\in\mathbb R$ we have $0<\epsilon<r$.
+
+Once again, we invite the reader to prove this result.
+
+#### Cardinalities of models
+
+For the next series of results, we need a brief refresher on cardinality from set theory. Before starting in on cardinality, first recall that the von Neumann natural numbers $0,1,2,\ldots$ may be followed up by von Neumann ordinal numbers $\omega,\omega+1,\ldots,\omega+\omega,\omega+\omega+1,\ldots$.
 
 The von Neumann natural numbers have the property that each $n$ is not in bijection with any $m<n$, that is, its cardinality is larger. However $\omega+1$ is in bijection with $\omega$, and so are many more ordinals after it. How long will the sequence of ordinals continue until we reach an ordinal so large that it isn't in bijection with $\omega$? It's unclear but it must happen.
 
@@ -1008,11 +1022,11 @@ It is not difficult to prove using AC that for any set $A$, there exists an ordi
 
 When talking about $\omega$ in the context of cardinality, we give it the special name $\aleph_0$, because it is the first in the sequence of infinite cardinals. We let $\aleph_1$ denote the second infinite cardinal, $\aleph_2$ the third, and so on.
 
-We say that a set $A$ is *countable* if its cardinality is $\leq\aleph_0$, and *uncountable* if its cardinality is $\geq\aleph_1$. (Sometimes people use the term countable to mean *countably infinite*, or cardinality exactly $\aleph_0$.)
+We say that a set $A$ is *countable* if $\vert A\vert\leq\aleph_0$, and *uncountable* if $\aleph_1\leq\vert A\vert$. (Sometimes people use the term countable to mean $\vert A\vert=\aleph_0$.)
 
-Cardinal numbers may be added using disjoint unions, and multiplied using cartesian products. For instance, if $\kappa$ and $\lambda$ are cardinals, then $\kappa\cdot\lambda$ is defined as the cardinality of the cartesian product $\vert\kappa\times\lambda\vert$. One should check that for finite cardinals (natural numbers), this gives the expected results. But if one of the two cardinals is infinite, $\kappa\cdot\lambda$ will always be $\max(\kappa,\lambda)$.
+Cardinal numbers $\kappa,\lambda$ may be added and multiplied: $\kappa+\lambda=\vert(\{0\}\times\kappa)\cup(\{1\}\times\lambda)\vert$ and $\kappa\cdot\lambda=\vert\kappa\times\lambda\vert$. One should check that for finite cardinals (natural numbers), these formulas give the expected results. But if one of the two cardinals is infinite, then $\kappa+\lambda$ and $\kappa\cdot\lambda$ will always be $\max(\kappa,\lambda)$.
 
-Returning to theories in logic, we have shown above that theories with arbitrarily large finite models have infinite models. Now it is natural to ask what cardinalities will occur. The next result addresses this question with the most expansive answer possible.
+Returning to theories in logic, we have already that theories with arbitrarily large finite models have infinite models. It is natural to ask what infinite cardinalities could occur. The next result addresses this question with a simple answer: all of them.
 
 **Theorem** (Lowenheim–Skolem thoerem) Suppose $\mathcal L$ is a finite or countable signature, $T$ is an $\mathcal L$-theory, and $T$ has an infinite model. Then for any infinite cardinal $\kappa$, $T$ has a model of cardinality $\kappa$.
 
@@ -1024,13 +1038,13 @@ The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is c
 
 #### Complete theories
 
-Previously we said that a theory $T$ is complete if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$. We sometimes abuse the word complete, and say that $T$ is complete if its deductive closure is complete, that is, if for all sentences $\alpha$, $T\vdash\alpha$ or $T\vdash\neg\alpha$.
+Recall that a theory $T$ is *complete* if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$.
 
-For example, if $T$ is the theory which says that $G$ is a group with exactly $7$ elements, then $T$ is complete. (One shows in a standard algebra class that there is only one such group.)
+For example, given any structure $\mathcal A$ the theory $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times,\lt,0,1)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times,\lt,0,1)$ are complete theories.
 
-**Definition**. Let $\mathcal A$ be any structure. The *theory* of $A$, written $\mathrm{Th}(\mathcal A)$, is the set of sentences $\sigma$ such that $\mathcal A\models\sigma$.
+We sometimes extend the definition of complete a little bit and say that $T$ is *complete* if for every sentence $\sigma$ either $T\vdash\sigma$ or $T\vdash\neg\sigma$. In other words, we sometimes say $T$ is complete if the deductive closure of $T$ is complete in the original sense.
 
-It follows from the definition of satisfaction that $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times)$ are complete theories.
+For example, if $T$ is the theory of linear orders with exactly $3$ elements, then $T$ is complete. This is because there is only one such linear order up to isomorphism $\mathcal A=(\{1,2,3\};\lt)$. Thus while $T$ isn't precisely $\mathrm{Th}(\mathcal A)$, it does entail $\mathrm{Th}(\mathcal A)$.
 
 On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.) These theories are not meant to be complete because the point is to study the diversity of models.
 
