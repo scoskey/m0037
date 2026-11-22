@@ -880,7 +880,7 @@ In the last example with $0$ in the language but not $1$, the theory $T_2$ prove
 
 But the next motivating example shows that there is still one last issue to consider.
 
-**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the axiom which says $\forall x\forall y\ x=y\vee x\lt y\vee y\lt x$.
+**Example** Let $\mathcal L=\set{<,a,b}$, where $a,b$ are constant symbols, and let $T$ be the theory of linear orders, together with the sentence $a\neq b$. Then $\mathcal H$ has domain $\set{a,b}$. The theory doesn't prove either $a<b$ or $b<a$, so $\mathcal H$ won't satisfy either of these. Thus $\mathcal H$ is not a model of $T$, because it doesn't satisfy the axiom which says $\forall x\forall y\ x=y\vee x<y\vee y<x$.
 
 The problem in this example is that the theory $T$ doesn't say much about its terms. To fix this last issue, we will work with theories that say as much as they can.
 
@@ -972,7 +972,7 @@ We have just seen that the compactness theorem for first order logic has similar
 
 **Corollary** Suppose $T$ has arbitrarily large finite models. Then $T$ has infinite models.
 
-*Proof*: Let $\sigma_n$ be the sentence which says that there exist $n$ distinct elements of the universe. That is, $\sigma_n$ says that $\exists x_1\cdots\exists x_n\bigwedge_{i\lt j\leq n} x_i\neq x_j$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\mathbb N}$. Then every finite subset of $T'$ is consistent by our hypothesis. As a consequence $T'$ is consistent. Any model of $T'$ is a model of $T$ and is infinite. $\blacksquare$
+*Proof*: Let $\sigma_n$ be the sentence which says that there exist $n$ distinct elements of the universe. That is, $\sigma_n$ says that $\exists x_1\cdots\exists x_n\bigwedge_{i<j\leq n} x_i\neq x_j$. Let $T'$ be the theory $T\cup\set{\sigma_n:n\in\mathbb N}$. Then every finite subset of $T'$ is consistent by our hypothesis. As a consequence $T'$ is consistent. Any model of $T'$ is a model of $T$ and is infinite. $\blacksquare$
 
 In other words, while there is a first order theory that says "my models are linear orders" and another theory that says "my models are groups", there is no first order theory that says "my models are finite".
 
@@ -1040,11 +1040,11 @@ The Lowenheim–Skolem theorem has the mind-bending consequence that if ZFC is c
 
 Recall that a theory $T$ is *complete* if it is consistent, and for every sentence $\sigma$ either $\sigma\in T$ or $\neg\sigma\in T$.
 
-For example, given any structure $\mathcal A$ the theory $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times,\lt,0,1)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times,\lt,0,1)$ are complete theories.
+For example, given any structure $\mathcal A$ the theory $\mathrm{Th}(\mathcal A)$ is always a complete theory. For instance the theory of natural numbers $\mathrm{Th}(\mathbb N;+,\times,<,0,1)$ and the theory of real numbers $\mathrm{Th}(\mathbb R;+,\times,<,0,1)$ are complete theories.
 
 We sometimes extend the definition of complete a little bit and say that $T$ is *complete* if for every sentence $\sigma$ either $T\vdash\sigma$ or $T\vdash\neg\sigma$. In other words, we sometimes say $T$ is complete if the deductive closure of $T$ is complete in the original sense.
 
-For example, if $T$ is the theory of linear orders with exactly $3$ elements, then $T$ is complete. This is because there is only one such linear order up to isomorphism $\mathcal A=(\{1,2,3\};\lt)$. Thus while $T$ isn't precisely $\mathrm{Th}(\mathcal A)$, it does entail $\mathrm{Th}(\mathcal A)$.
+For example, if $T$ is the theory of linear orders with exactly $3$ elements, then $T$ is complete. This is because there is only one such linear order up to isomorphism $\mathcal A=(\{1,2,3\};<)$. Thus while $T$ isn't precisely $\mathrm{Th}(\mathcal A)$, it does entail $\mathrm{Th}(\mathcal A)$.
 
 On the other hand, most theories are not complete. For example, if $T$ is the theory of infinite linear orders then $T$ is not complete. (Is there a last element? Consider $(0,1)$ versus $(0,1]$.) For another example, if $T$ is the theory of infinite abelian groups then $T$ is not complete. (Are all elements of the group divisible by 2? consider $\mathbb Z$ versus $\mathbb Q$.) These theories are not meant to be complete because the point is to study the diversity of models.
 
