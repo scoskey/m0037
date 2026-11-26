@@ -1072,11 +1072,11 @@ But some theories are categorical in one cardinality or another. The following i
 
 Note that the theory of dense linear orders without endpoints is not $\kappa$-categorical for $\kappa=2^{\aleph_0}$. For example $\mathbb R$ and $\mathbb R\setminus\set{0}$ are dense linear orders without endpoints that are not isomorphic to one another.
 
-Next we describe an example of a theory that is $\kappa$-categorical for some uncountable $\kappa$. A group is called torsion-free if it satisfies $\forall x x\neq0\rightarrow nx\neq 0$. A group is called divisible if it satisfies $\forall x\exists y nx=y$. The torsion-free divisible abelian groups are simply direct sums of copies of $\mathbb Q$. 
+Next we describe an example of a theory that is $\kappa$-categorical for some uncountable $\kappa$. Let $\mathcal L$ be the signature of vector spaces over $\mathbb Q$. This consists of $+$, $0$, and unary functions $m_q$ for every $q\in\mathbb Q$. The unary functions represent scalar multiplication for every possible scalar. Let $T$ be the theory of vector spaces over $\mathbb Q$, that is, the familiar laws of vector spaces (commutativity, associativity, distributivity of scalar multiplication, etc).
 
-**Proposition.** The theory $T$ of torsion-free divisible abelian groups is $\aleph_1$-categorical.
+**Proposition.** The theory $T$ of vector spaces over $\mathbb Q$ is $\aleph_1$-categorical.
 
-*Proof*: Any torsion-free divisible abelian group $G$ can be made into a rational vector space by defining $\frac mng=h$ iff $mg=nh$. Note that divisibility is used to show there is such an $h$, and torsion-free is used to show that $h$ is unique. Now any two vector spaces of cardinality $\aleph_1$ over a field of cardinality $\aleph_0$ must have dimension $\aleph_1$, and therefore they are isomorphic to one another. $\blacksquare$
+*Proof*: Any two vector spaces of cardinality $\aleph_1$ over a field of cardinality $\aleph_0$ must have dimension $\aleph_1$, and therefore they are isomorphic to one another. $\blacksquare$
 
 The following result shows the connection between categorical and complete theories.
 
@@ -1086,7 +1086,7 @@ The following result shows the connection between categorical and complete theor
 
 **Corollary** The theory of dense linear orders without endpoints is complete. In particular, $(\mathbb Q,<)$ and $(\mathbb R,<)$ are elementarily equivalent.
 
-**Corollary** The theory of torsion-free divisible abelian groups is complete. In particular, $(\mathbb Q,+)$ and $(\mathbb R,+)$ are elementarily equivalent.
+**Corollary** The theory of $\mathbb Q$-vector spaces is complete. In particular, the abelian groups $(\mathbb Q,+)$ and $(\mathbb R,+)$ are elementarily equivalent.
 
 A famous theorem of Morley states that a theory $T$ is $\kappa$-categorical for some $\kappa\geq\aleph_1$ if and only if $T$ is $\aleph_1$-categorical. This means that there are just two types of categoricity, countable and uncountable.
 
